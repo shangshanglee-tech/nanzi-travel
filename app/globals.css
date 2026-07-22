@@ -321,17 +321,18 @@ textarea { width: 100%; min-height: 150px; padding: 15px; border: 1px solid var(
   left: 50%;
   bottom: 82px;
   display: grid;
-  grid-template-columns: 35px 1fr;
-  width: 144px;
-  min-height: 52px;
-  padding: 5px 12px 5px 7px;
+  grid-template-columns: 31px 1fr;
+  width: 118px !important;
+  max-width: 118px !important;
+  min-height: 46px;
+  padding: 4px 9px 4px 6px;
   transform: translateX(-50%);
   box-shadow: 0 12px 28px rgba(20, 63, 53, 0.28);
   transition: opacity 180ms ease, transform 220ms ease;
 }
-.floating-create .buddy-invite-mark { width: 35px; height: 35px; transform: scale(0.73); transform-origin: left center; }
+.floating-create .buddy-invite-mark { width: 31px; height: 31px; transform: scale(0.64); transform-origin: left center; }
 .floating-create .buddy-invite-copy { gap: 0; }
-.floating-create .buddy-invite-copy strong { font-size: 14px; white-space: nowrap; }
+.floating-create .buddy-invite-copy strong { font-size: 13px; white-space: nowrap; }
 .floating-create .buddy-invite-copy small, .floating-create .buddy-invite-arrow { display: none; }
 .floating-create.is-hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 22px); }
 .floating-create.is-visible { opacity: 1; transform: translate(-50%, 0); }

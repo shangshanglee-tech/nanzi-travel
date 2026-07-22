@@ -226,13 +226,18 @@ function BuddyInviteButton({
   onClick: () => void;
 }) {
   return (
-    <button className={`buddy-invite buddy-invite-${variant} ${className}`} onClick={onClick} aria-label="发起找搭子">
+    <button
+      className={`buddy-invite buddy-invite-${variant} ${className}`}
+      style={variant === "floating" ? { width: "118px", maxWidth: "118px" } : undefined}
+      onClick={onClick}
+      aria-label="发起找搭子"
+    >
       <span className="buddy-invite-mark" aria-hidden="true">
         <i>你</i><i>伴</i><b>＋</b>
       </span>
       <span className="buddy-invite-copy">
         <small>同行计划</small>
-        <strong>{variant === "route" ? "为这条路线找同行者" : "发起找搭子"}</strong>
+        <strong>{variant === "route" ? "为这条路线找同行者" : variant === "floating" ? "发起搭子" : "发起找搭子"}</strong>
       </span>
       <span className="buddy-invite-arrow" aria-hidden="true">↗</span>
     </button>
