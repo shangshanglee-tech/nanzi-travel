@@ -61,8 +61,6 @@ export default function Home() {
   const [searchMode, setSearchMode] = useState<"product" | "buddy">("product");
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
-  const [showCreateAction, setShowCreateAction] = useState(true);
-  const lastScrollY = useRef(0);
   const contentRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -73,29 +71,6 @@ export default function Home() {
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
-
-  useEffect(() => {
-    if (page !== "home") return;
-
-    setShowCreateAction(true);
-    const scrollContainer = contentRef.current;
-    if (!scrollContainer) return;
-    lastScrollY.current = scrollContainer.scrollTop;
-
-    const onScroll = () => {
-      const currentY = scrollContainer.scrollTop;
-      const distance = currentY - lastScrollY.current;
-
-      if (currentY < 48) setShowCreateAction(true);
-      else if (distance > 6) setShowCreateAction(false);
-      else if (distance < -6) setShowCreateAction(true);
-
-      lastScrollY.current = currentY;
-    };
-
-    scrollContainer.addEventListener("scroll", onScroll, { passive: true });
-    return () => scrollContainer.removeEventListener("scroll", onScroll);
-  }, [page]);
 
   const navigate = (next: Page) => {
     if (next === page) return;
@@ -162,14 +137,6 @@ export default function Home() {
         {page === "messages" ? <MessagesPage navigate={navigate} /> : null}
         {page === "profile" ? <ProfilePage /> : null}
       </section>
-
-      {page === "home" ? (
-        <BuddyInviteButton
-          variant="floating"
-          className={showCreateAction ? "is-visible" : "is-hidden"}
-          onClick={() => navigate("create")}
-        />
-      ) : null}
 
       <nav className="bottom-nav" aria-label="主导航">
         <NavButton
