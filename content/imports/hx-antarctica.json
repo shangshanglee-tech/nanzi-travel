@@ -1,0 +1,911 @@
+{
+  "importedAt": "2026-08-13T13:49:35.974Z",
+  "ships": [
+    {
+      "id": "fram",
+      "officialName": "MS Fram ",
+      "image": "https://images.eu.ctfassets.net/vy34d8u43l9r/7kx3sAd1iUzQJ9UH34nuzL/d99cd5f4f19b205e90632d1d4afae70f/MSFram_1920x1080_v2_1.jpg",
+      "capacity": 200,
+      "yearBuilt": 2007
+    },
+    {
+      "id": "roald-amundsen",
+      "officialName": "MS Roald Amundsen",
+      "image": "https://images.eu.ctfassets.net/vy34d8u43l9r/1hHlXyeYJ5vol3K9PEI17R/4072a38220da1a407500cf3708058eb7/Antarctica_MS_Roald_Amundsen_HX_28993_Photo_Dan_and_Zora_Avila__1_.jpg",
+      "capacity": 490,
+      "yearBuilt": 2019
+    },
+    {
+      "id": "fridtjof-nansen",
+      "officialName": "MS Fridtjof Nansen",
+      "image": "https://images.eu.ctfassets.net/vy34d8u43l9r/1gfWN67HOp4nAPspj3us1p/640094538a05a92c701cd1fa8ab51bba/.Antarctica_Lemaire_Channel_MS_Fridtjof_Nansen_HX_44945_Photo_Espen_Mills__1_.jpg",
+      "capacity": 490,
+      "yearBuilt": 2020
+    }
+  ],
+  "products": [
+    {
+      "id": "life-returns-springtime-expedition-to-antarctica",
+      "title": "23天南极春季探险",
+      "officialTitle": "Life Returns | Springtime Expedition to Antarctica",
+      "group": "深度南极",
+      "operator": "HX Expeditions",
+      "durationDays": 23,
+      "summary": "The late spring expedition gives you five days in Antarctica during the latter part of the season, when the glaciers and icebergs are at their most sparkly and pristine. Visit the beautiful, windswept Falkland Islands and South Georgia—the “Serengeti of the Southern Ocean”—at the height of mating season. You’ll spend more than three weeks exploring some of the most remote and beautiful places on Earth, along with their abundant wildlife.",
+      "routeSummary": "23-day all-inclusive Antarctica expedition cruise from Buenos Aires to Santiago de Chile",
+      "shipIds": [
+        "fram"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2026-10-16"
+      ],
+      "highlights": [
+        "See the untouched icescapes of Antarctica in its late spring, when the glaciers and icebergs are at their most sparkly and pristine.",
+        "Visit the beautiful, windswept Falkland Islands and South Georgia at the height of mating season. Go ice-cruising in small boats (RIBs) and join landings with your expert Expedition Team."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The Beat of Buenos Aires",
+          "description": "Feel the rhythm of bustling Buenos Aires Home to a proud and diverse community of porteños, or “people of the port,” Buenos Aires is a sensuous fusion of faded European splendor and Latin American panache. There are plenty of places to explore, including many "
+        },
+        {
+          "day": "Days 2-4",
+          "title": "Preparing for Adventure",
+          "description": "Get into expedition mode Over the next few days at sea, you'll learn more about the wonders we'll encounter during our trip. Members of the Expedition Team will start their lecture series on topics like oceanography, geology, ornithology, and history. Pop into"
+        },
+        {
+          "day": "Days 5-7",
+          "title": "Wildlife of the Falklands",
+          "description": "Enjoy birding and hiking on these green islands The Falkland archipelago is filled with seamless horizons and white sand beaches teeming with birdlife. Only the occasional farm dots the landscape amid grassy hills and wildflowers. Enjoy a community walk around"
+        },
+        {
+          "day": "Days 8-9",
+          "title": "Adventure Lies Ahead",
+          "description": "Cruising the South Atlantic After the Falkland Islands, we’ll spend two days cruising toward beautiful South Georgia. You can look forward to seeing an archipelago filled with diverse wildlife. Meet up with the Expedition Team as they prepare you for what lies"
+        },
+        {
+          "day": "Days 10-12",
+          "title": "The Southern Serengeti",
+          "description": "Visit a wildlife watcher’s paradise South Georgia’s abundant wildlife has earned it the nickname “Serengeti of the Southern Ocean.” Its unique position free from sea ice makes the island a breeding site for large colonies of penguins, other seabirds, and seals"
+        },
+        {
+          "day": "Days 13-14",
+          "title": "Antarctica Bound",
+          "description": "Time to relax and reflect After visiting the Falklands and South Georgia, take some time while we head toward Antarctica to relax and reflect on your journey so far. Antarctica is a symbol of global cooperation, dedicated to peace, science, and wildlife conser"
+        },
+        {
+          "day": "Days 15-19",
+          "title": "Antarctica Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing prepares you for your first sight of Antarctica’s immense, frozen beauty. Icebergs, sculpted by nature, float in the straits. Gentoo, chinstrap and Adélie penguins stand erect as they watch from the shor"
+        },
+        {
+          "day": "Days 20-22",
+          "title": "The Passage Back",
+          "description": "Looking for land ahead Five unforgettable days in Antarctica are over, and your ship will now embark upon our final adventure together: the Drake Passage. Known for its potentially high winds and strong currents, the passage can also be silent and still, inspi"
+        },
+        {
+          "day": "Day 23",
+          "title": "Arrival in Punta Arenas",
+          "description": "Onward from Punta Arenas Your Antarctica and Patagonia expedition cruise comes to an end in Punta Arenas. From here, you'll catch a flight to Santiago de Chile and then your connecting flight home, taking with you a wealth of fantastic memories. If you're not "
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/118914/65d3f406fa47a44d1c8a67ea0fc827aa/birds-the-drake-passage-hgr-141417-photo_andrea_klaussner_3000x1688.jpg",
+      "hero": "/products/hx/life-returns-springtime-expedition-to-antarctica/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118915/482406c0043aa7a154688a423e507d24/damoy_point_antarctica_hgr_160620_photo_yuri_matisse_choufour_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118916/9592d2a0432c97be302d5617ecf2816e/drake-passage-antarctica-hgr-153540-photo_yuri_matisse_choufour_3000x1688px.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118918/fd5e3bb4ef548958e93ea4a1ab9be838/orne-harbour-antarctica-hgr-152327-photo_oscar_farrera_3000x1688px.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118914/65d3f406fa47a44d1c8a67ea0fc827aa/birds-the-drake-passage-hgr-141417-photo_andrea_klaussner_3000x1688.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/life-returns-springtime-expedition-to-antarctica/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "highlights-of-antarctica",
+      "title": "12天南极半岛精华",
+      "officialTitle": "Highlights of Antarctica",
+      "group": "经典南极",
+      "operator": "HX Expeditions",
+      "durationDays": 12,
+      "summary": "One of our most popular expeditions that gives you the ideal Antarctica experience – powerful, purposeful and packed with discovery. Witness incredible wildlife scenes as we spot seals, penguin colonies and whales against a backdrop of staggering natural beauty. Join the Expedition Team as they lead you on a journey of learning and adventure.",
+      "routeSummary": "12-day all-inclusive Antarctica Expedition Cruise with round-trip flights from Buenos Aires ",
+      "shipIds": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "33 个可查询出发日",
+      "departures": [
+        "2026-10-30",
+        "2026-11-09",
+        "2026-11-19",
+        "2026-11-29",
+        "2026-12-09",
+        "2026-12-19",
+        "2026-12-29",
+        "2027-01-08",
+        "2027-01-18",
+        "2027-01-28",
+        "2027-02-07",
+        "2027-02-17"
+      ],
+      "highlights": [
+        "One of our most popular expeditions that gives a streamlined Antarctica experience – powerful, purposeful and packed with discovery.",
+        "Witness incredible wildlife scenes as we spot seals, penguin colonies and whales against a backdrop of staggering natural beauty. ",
+        "Join the Expedition Team as they lead you on a journey of learning and adventure."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The beat of Buenos Aires ",
+          "description": "Feel the rhythm of bustling Buenos Aires Home to a proud and diverse community of porteños, or ‘people of the port’, Buenos Aires is a sensuous fusion of faded European splendour and Latin American panache. An overnight stay here is the ideal way to start your"
+        },
+        {
+          "day": "Day 2",
+          "title": "Early start in Ushuaia ",
+          "description": "Setting off from the bottom of the world Your adventure begins with an early morning flight to Ushuaia, where you’ll meet our hybrid electric-powered expedition ship, specially designed for sustainable cruising in polar waters. This bustling port is the capita"
+        },
+        {
+          "day": "Day 3-4",
+          "title": "Get ready for Antarctica ",
+          "description": "Cross the Drake Passage On the two-day crossing through the Drake Passage, the Expedition Team will equip you with everything you need to make the most of your polar expedition. Visit the onboard Science Center and find out what lies ahead. Listen as experts t"
+        },
+        {
+          "day": "Day 5-9",
+          "title": "Antarctica: another world ",
+          "description": "Experience Antarctica in all its natural majesty Nothing prepares you for your first sight of Antarctica’s immense, frozen beauty. Antarctica will fill you with wonder, surrounded by looming glaciers and icebergs the size of floating cathedrals. Perhaps the mo"
+        },
+        {
+          "day": "Day 10-11",
+          "title": "Returning to warmer waters ",
+          "description": "Heading back north across the Drake Passage After five incredible days, you’ll have experienced so much in Antarctica. Your head will likely be filled with a swirling kaleidoscope of special memories and impressions. The next couple of days will be a chance to"
+        },
+        {
+          "day": "Day 12",
+          "title": "Ushuaia and Buenos Aires ",
+          "description": "From Ushuaia to Buenos Aires Your expedition cruise ends in Ushuaia, the main city in Tierra del Fuego, Argentina’s southernmost province. From here, you’ll take a flight back to Buenos Aires, but it doesn’t have to be the end of your adventure. Why not join o"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/6PfhJt6Od3iZ2UORTrf6bj/343046f16cdc7e5f480b9a13aa54e327/Antarctica_Neko_Harbour_HX_45008_Photo_Kay_Fochtmann.jpg",
+      "hero": "/products/hx/highlights-of-antarctica/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/6PfhJt6Od3iZ2UORTrf6bj/343046f16cdc7e5f480b9a13aa54e327/Antarctica_Neko_Harbour_HX_45008_Photo_Kay_Fochtmann.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/5J0xENOHKf1eFr1ZELNDo4/9d94301674dcdf1f2da754822b2477e2/Cuverville-Island-Antarctica-HGR-151216-_Photo_Espen_Mills_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/4IA33012CVy8eSpOF76uEI/65b7b9a5a63d604a44f5a244130c34b0/Orne_Harbour_Antarctica_HX_28520.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/YaJLvtDbYpjYSgZFcFkve/100a4bc2473433843522fe92192d91eb/Antarctica_Fournier_Bay_HX_45976_Photo_Ted_Gatlin.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/highlights-of-antarctica/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "iconic-antarctica-the-explorers-route",
+      "title": "16天经典南极之旅",
+      "officialTitle": "Iconic Antarctica – The Explorer’s Route",
+      "group": "经典南极",
+      "operator": "HX Expeditions",
+      "durationDays": 16,
+      "summary": "Spend nine days exploring Antarctica, visiting the South Shetland Islands, Antarctic Sound, Weddell Sea, Gerlache Strait and Penola Strait, beginning and ending in Buenos Aires. Travel beyond the ordinary routes and visit exclusive and secluded areas. Experience every facet of Antarctica and have enough time to savor every unforgettable moment. Learn all about the splendors of the Antarctic Peninsula with more exploration than any other Antarctic Peninsula voyage.",
+      "routeSummary": "16-day all-inclusive Antarctica Expedition Cruise with round-trip flights from Buenos Aires",
+      "shipIds": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "9 个可查询出发日",
+      "departures": [
+        "2026-10-31",
+        "2026-11-14",
+        "2026-12-12",
+        "2027-11-21",
+        "2027-12-19",
+        "2027-03-04",
+        "2027-11-08",
+        "2027-12-02",
+        "2027-12-26"
+      ],
+      "highlights": [
+        "Spend nine days exploring Antarctica, visiting the South Shetland Islands, Antarctic Sound, Weddell Sea, Gerlache Strait and Penola Strait, beginning and ending in Buenos Aires. ",
+        "Travel beyond the ordinary routes and visit exclusive and secluded areas. Experience every facet of Antarctica and have enough time to savor every unforgettable moment.  ",
+        "Learn all about the splendors of the Antarctic Peninsula with more exploration than any other Antarctic Peninsula voyage. "
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The beat of Buenos Aires",
+          "description": "Feel the rhythm of Buenos Aires and get into the spirit of adventure An overnight stay in Buenos Aires is the ideal way to start your Antarctic voyage. Home to a proud and diverse community of porteños, or ‘people of the port’, the city is a sensuous fusion of"
+        },
+        {
+          "day": "Day 2",
+          "title": "Heading south",
+          "description": "Set sail from the capital of Tierra del Fuego The morning begins with an early morning flight to Ushuaia. This port city is the capital of Argentina’s Tierra del Fuego Province, and it’s set against the magnificently rugged backdrop of the Andes mountains. Ush"
+        },
+        {
+          "day": "Day 3-4",
+          "title": "Crossing the Drake Passage",
+          "description": "Get into adventure mode and learn about the nature and science of Antarctica On the two-day crossing over the Drake Passage, the Expedition Team will equip you with all you need to make the most of your upcoming adventure. Visit the onboard Science Center and "
+        },
+        {
+          "day": "Day 5-13",
+          "title": "Antarctica: another world",
+          "description": "Experience all the wonders of the Antarctic Peninsula as we enter expedition mode Nothing quite prepares you for it. Silence and serenity infuse your soul as we sail through the deep blue waters past looming glaciers and cathedral-sized icebergs. Every moment "
+        },
+        {
+          "day": "Day 14-15",
+          "title": "Back through the Drake Passage",
+          "description": "Reflect on your adventure Today, our ship begins to head back north after our exhilarating time in Antarctica. As we make the return trip across the Drake Passage to Ushuaia, you’ll have plenty of opportunities to enjoy this time at sea. Join the Expedition Te"
+        },
+        {
+          "day": "Day 16",
+          "title": "Ushuaia and Buenos Aires",
+          "description": "Enjoy an expedition finale in Buenos Aires Your expedition cruise ends back where we set out from in Ushuaia, the main city in Tierra del Fuego. From here, you’ll take a flight back to Buenos Aires, but if you’re still in the mood for some more experiences it "
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/111258/a7c56ba53bb0056681c4af50f565fc4e/orne-harbour-antarctica-hgr-152327-_photo_oscar_farrera_web1.jpg",
+      "hero": "/products/hx/iconic-antarctica-the-explorers-route/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/6XL5mByqV1McOZDQ3UFxJd/bfd842e46f37610784712fc722efc1e2/Wildlife-Antarctica-HGR-153303-_Photo_Getty_Images.JPG",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/4SvYJ4Jy2OQ4ymActsQD7Z/c22e43ad6fb8ceebeda5ec2f228cdb97/Antarctica_Paradise_Bay_Humpback_Whales_HX_30821_Photo_Chelsea_Claus.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/1mvIiGXJMmfGNzpARuO2zc/1629dc7e2407620e74dd1354f821aa49/Antarctica_Weddell_Sea_MS_Roald_Amundsen_HX_46046_Photo_Kay_Fochtmann__1_.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118918/fd5e3bb4ef548958e93ea4a1ab9be838/orne-harbour-antarctica-hgr-152327-photo_oscar_farrera_3000x1688px.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/iconic-antarctica-the-explorers-route/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "in-depth-antarctica-falklands-south-georgia-expedition",
+      "title": "23天南极三岛深度探险",
+      "officialTitle": "In-Depth Antarctica, Falklands & South Georgia Expedition  ",
+      "group": "三岛与远征",
+      "operator": "HX Expeditions",
+      "durationDays": 23,
+      "summary": "Three distinct destination all in one: South Georgia, the Falkland Islands and Antarctica - with four days in the White Continent. Witness a wide variety of iconic wildlife species, including nesting penguins, fur seals and whales. Explore the lush green hills of the Falklands and the alpine landscapes of South Georgia, as well as the iceberg-studded seas of Antarctica.",
+      "routeSummary": "23-day all-inclusive Antarctica Expedition Cruise with round-trip flights from Santiago de Chile",
+      "shipIds": [
+        "fram"
+      ],
+      "departureSummary": "12 个可查询出发日",
+      "departures": [
+        "2026-11-06",
+        "2026-11-27",
+        "2026-12-18",
+        "2027-01-08",
+        "2027-01-29",
+        "2027-02-19",
+        "2027-11-13",
+        "2027-12-04",
+        "2027-12-25",
+        "2028-01-15",
+        "2028-02-05",
+        "2028-02-26"
+      ],
+      "highlights": [
+        "Discover the incredible wildlife and beautiful wilderness landscapes of the Falkland Islands, South Georgia and Antarctica ",
+        "See a wide variety of iconic wildlife across the three distinct habitats, including nesting penguins, fur seals and whales  ",
+        "Be immersed in diverse landscapes, from the lush green hills of the Falklands and the alpine landscapes of South Georgia, to the to the iceberg-studded seas of Antarctica "
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "Santiago, Chile’s capital",
+          "description": "The sights of Santiago de Chile Welcome to Santiago, Chile’s bustling capital. With its colonial-era architecture, award-winning restaurants, and fascinating museums, it’s the perfect place to start your expedition cruise. There’s a lot to see, from the Mercad"
+        },
+        {
+          "day": "Day 2",
+          "title": "Depart from Punta Arenas ",
+          "description": "Board your expedition cruise in Punta Arenas You’ll have an early start today, as we depart Santiago and fly to Punta Arenas, Chile’s southernmost port. Your expedition ship awaits. Once on board, get settled in, explore the ship, and meet your Expedition Team"
+        },
+        {
+          "day": "Day 3",
+          "title": "Preparing for more adventure ",
+          "description": "Through the Strait of Magellan With our course set for the Falkland Islands, soak up the mesmerising views all around you as you cruise through the Strait of Magellan. You can take in the scenery from the deck, the outdoor hot tub or the panoramic Explorer Lou"
+        },
+        {
+          "day": "Day 4-6",
+          "title": "The many charms of island life ",
+          "description": "Enjoy birding and hiking in these green islands The Falkland archipelago is filled with seamless horizons and white sands teeming with birdlife. Only the occasional farm dots the landscape. You’ll find grassy hills and wildflowers, in contrast to the vast whit"
+        },
+        {
+          "day": "Day 7-8",
+          "title": "Adventure lies ahead ",
+          "description": "Cruising the South Atlantic Sailing from the Falklands, we spend two days cruising towards beautiful South Georgia. You can look forward to seeing an archipelago filled with diverse wildlife. Meet up with the Expedition Team as they prepare you for what lies a"
+        },
+        {
+          "day": "Day 9-12",
+          "title": "The ‘Serengeti of the Southern Ocean’",
+          "description": "Visit a wildlife watcher’s paradise South Georgia’s abundant wildlife has earned it the nickname ‘Serengeti of the Southern Ocean’. Its unique position free from sea ice makes the island a breeding site for large colonies of penguins, other seabirds and seals."
+        },
+        {
+          "day": "Day 13-15",
+          "title": "Towards Antarctica ",
+          "description": "Time to relax and reflect After visiting the Falklands and South Georgia, take some time while we head towards Antarctica to relax and reflect on your journey so far. Antarctica is a symbol of global cooperation, dedicated to peace, science and wildlife conser"
+        },
+        {
+          "day": "Day 16-19",
+          "title": "A world of ice and wonder ",
+          "description": "Experience Antarctica in all its majesty Nothing prepares you for your first sight of Antarctica’s immense, frozen beauty. Icebergs, sculpted by nature, float in the straits. Gentoo, Chinstrap and Adélie Penguins watch erect from the shores. Countless seabirds"
+        },
+        {
+          "day": "Day 20-22",
+          "title": "Relax and unwind at sea",
+          "description": "Looking for land ahead As we say goodbye to the frozen continent, MS Fram turns to take you north over the Drake Passage and towards Punta Arenas. This is the perfect time to go through your pictures and relive your experiences in the Falklands, South Georgia,"
+        },
+        {
+          "day": "Day 23",
+          "title": "Arrival in Punta Arenas",
+          "description": "Onward from Punta Arenas Your Antarctica and Patagonia expedition cruise comes to an end in Punta Arenas. From here, you'll catch a flight to Santiago de Chile and then your connecting flight home, taking with you a wealth of fantastic memories. If you're not "
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/4Mu9nm9TWT3psLoMJyM2pZ/b222804f767c2db60d97c3ccb48f2fa9/YURI_CHOUFOUR_-_20220215_STANDREWS_YURICHOUFOUR-72345.jpg",
+      "hero": "/products/hx/in-depth-antarctica-falklands-south-georgia-expedition/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/4Mu9nm9TWT3psLoMJyM2pZ/b222804f767c2db60d97c3ccb48f2fa9/YURI_CHOUFOUR_-_20220215_STANDREWS_YURICHOUFOUR-72345.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/2qpdFn14IbXdrtGp242KDY/864604d3c1bc76567ffe30b038301161/South_Georgia_At_Sea_HX_44467_Photo_Yuri_Choufour__1_.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/jVAeLjZKdXELvlNd4THTE/d9b6c1b5f8c92837750e320f535822ef/YURI_CHOUFOUR_-_20220309_JASONHARBOUR_YURICHOUFOUR-03164.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111270/dec3e1987a595cbf0c3e72b7ef35b8fc/punta-arenas-chile-hgr-155048-photo_yuri_matisse_choufour_3000x1688px.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/in-depth-antarctica-falklands-south-georgia-expedition/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "antarctica-falklands-expedition",
+      "title": "16天南极与福克兰探险",
+      "officialTitle": "Antarctica & Falkland Expedition",
+      "group": "深度南极",
+      "operator": "HX Expeditions",
+      "durationDays": 16,
+      "summary": "Explore the frozen beauty of Antarctica before heading north to discover the windswept shores of the Falklands. From December’s down-covered penguin chicks to March’s more independent youngsters – each stage reveals the remarkable cycle of life in Antarctica. Active adventure brings you close to icebergs, with opportunities to go hiking, kayaking, and even camping on the Antarctic ice. In the Falklands, land on scenic beaches and follow grassland trails to get close to the wildlife. You’ll also visit the capital, Stanley.",
+      "routeSummary": "16-day all-inclusive Antarctica Expedition Cruise with round-trip flights from Buenos Aires",
+      "shipIds": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "4 个可查询出发日",
+      "departures": [
+        "2026-11-28",
+        "2027-03-18",
+        "2027-12-05",
+        "2028-03-07"
+      ],
+      "highlights": [
+        "Spend five days exploring the frozen beauty of Antarctica  ",
+        "Get close to icebergs, see whales and penguins, with chances to go hiking, kayaking, ice-cruising and even camping on the Antarctic ice ",
+        "Land on scenic beaches and follow grassland trails to get close to the wildlife of the Falkland Islands and visit the charming capital Stanley "
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "City of Many Passions",
+          "description": "Feel the rhythm of bustling Buenos Aires An overnight stay in Buenos Aires is the ideal way to start your Antarctic adventure. Home to a proud and diverse community of porteños, or “people of the port,” this city is a sensuous fusion of faded European splendor"
+        },
+        {
+          "day": "Day 2",
+          "title": "Setting Sail from Ushuaia",
+          "description": "Flying south to Ushuaia where you'll board your ship Your adventure begins with an early morning flight to Ushuaia, where we'll meet your hybrid-powered expedition ship that is specially designed for sustainable cruising in polar waters. This bustling port is "
+        },
+        {
+          "day": "Days 3-4",
+          "title": "Get Ready for Antarctica",
+          "description": "Center on science before your Antarctic adventure On the two-day crossing through the Drake Passage, the Expedition Team will equip you with all you need to make the most of your expedition cruise. Visit the onboard Science Center and find out what lies ahead."
+        },
+        {
+          "day": "Days 5-9",
+          "title": "Antarctica: Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing can quite prepare you for it. Antarctica will fill you with wonder when you see its looming glaciers and icebergs the size of cathedrals. Perhaps the most surprising part of Antarctica is the silence. It"
+        },
+        {
+          "day": "Days 10-11",
+          "title": "The Drake Passage",
+          "description": "Discover more about the Falkland Islands As you savor your Antarctic experiences, prepare for more adventures ahead as we cruise toward the Falkland Islands. Your Expedition Team will brief you about the history and biology of the islands. In the Science Cente"
+        },
+        {
+          "day": "Days 12-14",
+          "title": "Wildlife of the Falklands",
+          "description": "Enjoy birding and hiking on these green islands The Falkland archipelago is filled with seamless horizons and white sand beaches teeming with birdlife. Only the occasional farm dots the landscape. You’ll find grassy hills and wildflowers, in contrast to the va"
+        },
+        {
+          "day": "Day 15",
+          "title": "Our Last Day at Sea",
+          "description": "A relaxing day at sea with time to reflect Your expedition cruise, taking in the wonders of Antarctica and the wildlife of the Falkland Islands, is nearing its end. As we sail the final leg to Ushuaia, enjoy your final day at sea. Join the Expedition Team in t"
+        },
+        {
+          "day": "Day 16",
+          "title": "Ushuaia and Buenos Aires",
+          "description": "From Ushuaia to Buenos Aires Your expedition cruise ends in Ushuaia, the main city in Tierra del Fuego, Argentina’s southernmost province. From here, you’ll take a flight back to Buenos Aires, but it doesn’t have to be the end of your adventure. Consider joini"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/1y14ziYFu1HWiDuG3aqawz/f1859f31644632da99aada6e1cbaa202/Antarctica-DamoyPoint-MS-Fram_3000x1688.jpg",
+      "hero": "/products/hx/antarctica-falklands-expedition/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/1y14ziYFu1HWiDuG3aqawz/f1859f31644632da99aada6e1cbaa202/Antarctica-DamoyPoint-MS-Fram_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/2ml8aqI3XinyE6XPuHqesX/281f63bf562207d8b9ba78fd3f46f89c/20260211_Prospect-Point_DSC05953_byTimoHeinz_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/46XpDI3qCz5bupWwIUnPNW/394afa02a55061fd0b4d146d356b4cd3/20260327_0126_RedRockRidge_JanHvizdal_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/752BqYVG40ps3S7ZTrtoAC/058d32914859662aef16b3657cc0f36c/Antarctica-FrenchPassage_3000x1688.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/antarctica-falklands-expedition/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "antarctic-circle-expedition",
+      "title": "16天南极圈探险",
+      "officialTitle": "Antarctic Circle Expedition",
+      "group": "深度南极",
+      "operator": "HX Expeditions",
+      "durationDays": 16,
+      "summary": "Join us as we attempt to navigate through the sea ice and below the Antarctic Circle to reveal the seventh continent's secret realm. Milder summer weather means we'll aim to journey below the Antarctic Circle to the secluded and magnificent Marguerite Bay. Enjoy whale spotting, seeing young penguins, hiking, kayaking, ice-cruising, and even camping on the Antarctic snow.",
+      "routeSummary": "16-day all-inclusive Antarctica Expedition Cruise with round-trip flights from Buenos Aires",
+      "shipIds": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "5 个可查询出发日",
+      "departures": [
+        "2026-12-26",
+        "2027-02-18",
+        "2028-01-29",
+        "2028-02-11",
+        "2028-02-12"
+      ],
+      "highlights": [
+        "Join us as we attempt to navigate through the sea ice and below the Antarctic Circle to reveal the seventh continent's secret realm.",
+        "Milder summer weather means we'll aim to journey below the Antarctic Circle to the secluded and magnificent Marguerite Bay.  ",
+        "Enjoy whale spotting, seeing young penguins, hiking, kayaking, ice-cruising, and even camping on the Antarctic snow. "
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The Beat of Buenos Aires",
+          "description": "Feel the rhythm of bustling Buenos Aires Home to a proud and diverse community of porteños, or ‘people of the port’, Buenos Aires is a sensuous fusion of faded European splendour and Latin American panache. An overnight stay in Buenos Aires is the ideal way to"
+        },
+        {
+          "day": "Day 2",
+          "title": "Setting Sail from Ushuaia",
+          "description": "Fly to Ushuaia and start your adventure Your adventure begins with an early morning flight to Ushuaia, where we'll meet your hybrid-powered expedition ship, specially designed for exploring polar waters. This bustling port is the capital of Argentina’s Tierra "
+        },
+        {
+          "day": "Days 3-4",
+          "title": "Get set for Antarctica",
+          "description": "Center on science and learning before your Antarctic adventure On the two-day crossing through the Drake Passage, the Expedition Team will equip you with all you need to make the most of your polar expedition cruise. Visit the onboard Science Center and find o"
+        },
+        {
+          "day": "Days 5-13",
+          "title": "Antarctica: Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing quite prepares you for it. Surrounded by looming glaciers, and icebergs the size of floating cathedrals, Antarctica will fill you with wonder. Large groups of penguins huddle on the ice floes to avoid th"
+        },
+        {
+          "day": "Days 14-15",
+          "title": "Back through Drake Passage",
+          "description": "Reflect on your adventure After 9 days of exhilarating exploration taking in the wonders and wildlife of Antarctica, your expedition cruise nears its end. As we make the return trip to Ushuaia, enjoy this time at sea. Join the Expedition Team in the Science Ce"
+        },
+        {
+          "day": "Day 16",
+          "title": "Ushuaia and Buenos Aires",
+          "description": "Enjoy an expedition finale in Buenos Aires Your expedition cruise ends in Ushuaia, the main city in Tierra del Fuego, Argentina’s southernmost province. From here, you’ll take a flight back to Buenos Aires, but it doesn’t have to be the end of your adventure. "
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/X7cSyC01B4t0KsQDclUU3/4335bdcbd3a35958ba9a10fa697f0861/AntarcticaDamoyPoint-MSFridtjofNansen_3000x1688.jpg",
+      "hero": "/products/hx/antarctic-circle-expedition/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/X7cSyC01B4t0KsQDclUU3/4335bdcbd3a35958ba9a10fa697f0861/AntarcticaDamoyPoint-MSFridtjofNansen_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/5DAkw2EmKs1wIJQ8XqqgF0/02715d2058ba0614292dc4c4256cbdab/Antarctica-HumpbackWhale_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/23zLW7pO36HllOFOyBJ7TI/d130081b329353b1a3d1cc920ca7a80c/Antarctica-OrneIslands-MSFridtjofNansen_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/4RHwVdAbYVQ8qB2viw2xwH/7cbad80e178bf037424971d7a57caacc/AntarcticaFournierBay-CrabeaterSeal_3000x1688.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/antarctic-circle-expedition/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "south-georgia-and-falklands-from-punta-arenas-to-montevideo",
+      "title": "18天南乔治亚与福克兰",
+      "officialTitle": "South Georgia & Falklands",
+      "group": "三岛与远征",
+      "operator": "HX Expeditions",
+      "durationDays": 18,
+      "summary": "Excellent chances of seeing whales, from humpbacks and orcas in South Georgia to sei, minke, and southern right whales in the Falklands. Explore wildlife-packed shores with moulting king penguins, fully grown chicks, and elephant and fur seals jostling for space. This end-of-season adventure offers low snow, dramatic landscapes, and a front-row seat to nature’s great south-to-north migration spectacle.",
+      "routeSummary": "18-day all-inclusive South Georgia and Falkland Islands expedition cruise from Santiago de Chile to Montevideo",
+      "shipIds": [
+        "fram"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2027-03-12"
+      ],
+      "highlights": [
+        "Excellent chances of seeing whales, from humpbacks and orcas in South Georgia to sei, minke, and southern right whales in the Falklands.",
+        "Explore wildlife-packed shores with moulting king penguins, fully grown chicks, and elephant and fur seals jostling for space.",
+        "This end-of-season adventure offers low snow, dramatic landscapes, and a front-row seat to nature’s great south-to-north migration spectacle."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "Santiago, Chile's capital",
+          "description": "The sights of Santiago de Chile Welcome to Santiago, Chile’s bustling capital. With its colonial-era architecture, award-winning restaurants and fascinating museums, it’s the perfect place to start your expedition cruise. There’s a lot to see, from the Mercado"
+        },
+        {
+          "day": "Day 2",
+          "title": "Depart from Punta Arenas",
+          "description": "Begin your expedition cruise in Punta Arenas You'll have an early start today as we depart Santiago and fly to Punta Arenas, Chile’s southernmost port, where your expedition ship awaits. Once you’ve boarded the ship, get settled in, explore, and meet your Expe"
+        },
+        {
+          "day": "Day 3",
+          "title": "Get set for adventure",
+          "description": "Et indblik i videnskaben inden dit eventyr På dagen for overfarten til Falklandsøerne vil ekspeditionsteamet udstyre dig med alt det, du har brug for, for at få det bedste ud af dit ekspeditionskrydstogt. Visit the onboard Science Center and find out what lies"
+        },
+        {
+          "day": "Day 4",
+          "title": "Southeast coast of East Falkland",
+          "description": "Southeast coast of East Falkland Bleaker Island was first known as Long Island. It subsequently became Bleaker Island after the large waves that crash against it, but since at least 1857 it has been called Bleaker Island. Forty different breeding birds have be"
+        },
+        {
+          "day": "Day 5-6",
+          "title": "Heading to South Georgia ",
+          "description": "Relax and prepare for more adventures ahead As you savour your sailing, prepare for more adventures ahead as we cruise towards the South Georgia. Your Expedition Team will brief you about the history and biology of the islands. In the Science Centre, you can l"
+        },
+        {
+          "day": "Day 7-10",
+          "title": "The ‘Serengeti of the Southern Ocean’  ",
+          "description": "Visit a wildlife watcher’s paradise South Georgia’s abundant wildlife has earned it the nickname ‘Serengeti of the Southern Ocean’. Its unique position free from sea ice makes the island a breeding site for large colonies of penguins, other seabirds and seals."
+        },
+        {
+          "day": "Day 11-12",
+          "title": "Adventure lies ahead",
+          "description": "Cruising the South Atlantic Sailing from South Georgia, we’ll spend two days cruising towards the beautiful Falkland Islands. Look forward to seeing an archipelago filled with diverse wildlife. The Expedition Team will prepare you for what lies ahead with lect"
+        },
+        {
+          "day": "Day 13-14",
+          "title": "Wildlife of the Falklands ",
+          "description": "Enjoy birding and hiking in these green islands The Falkland archipelago is filled with vast horizons and white sands teeming with birdlife. Only the occasional farm dots the landscape of grassy hills and wildflowers. In Stanley, you can stroll at your own pac"
+        },
+        {
+          "day": "Day 15-17",
+          "title": "Cruise the Atlantic Ocean  ",
+          "description": "Time at sea to rest and reflect On our sea days between the Falklands and Montevideo, our ship becomes a moving wildlife observatory. As we head north at the end of the season, we’ll be sailing alongside nature’s great migration– whales beginning their journey"
+        },
+        {
+          "day": "Day 18",
+          "title": "Visit Montevideo ",
+          "description": "Disembark the ship and explore the vibrant city Disembark the ship in the morning and enjoy time to explore Uruguay’s interesting capital at your leisure. You might stroll along the Rambla of Montevideo, a picturesque waterfront promenade stretching over 13 mi"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/5nYRvE1PWy9LJIxaCN0ApV/787dbe7f9a2a561c334e8eb7d9d2fc9c/20220215_GOLDHARBOUR_YURICHOUFOUR-72019_YURI_CHOUFOUR_1200x675.jpg",
+      "hero": "/products/hx/south-georgia-and-falklands-from-punta-arenas-to-montevideo/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/1XKZ15cqYuIhML0fkdi1Nv/46e091d5dcfe94cf377df369a79c3cea/kongepingviner-south-georgia-antarktis-hgr-139084-_foto_shutters.ae17f67d399a.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/7GjMmKczcMdaPPUnPmyLN8/f65bda3063015e0c83d44c8598b42725/FALKLAND_ISLES_STANLEY-FRANZ_GINGELE_1200X600.JPG",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/48589/a510820a366cc03f618fcaee5a0ba8ea/stanley-falklandsoyene-andreas-kalvig-anderson_2500x1250.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/6spa8TcQBHTW8TAae5gyzR/a46bb7bd14a9ddba784faeb96ed228c2/West_Point_Island_Falkland_Islands_HX_28956.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/south-georgia-and-falklands-from-punta-arenas-to-montevideo/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "antarctica-and-falklands-expedition-2027",
+      "title": "19天南极与福克兰北向航线",
+      "officialTitle": "Antarctica & Falklands Expedition",
+      "group": "三岛与远征",
+      "operator": "HX Expeditions",
+      "durationDays": 19,
+      "summary": "Embark on a late-summer Antarctic expedition, marveling at its stunning wildlife and breathtaking sunsets, before sailing north to the Falkland Islands. Get close to icebergs, spot whales and penguins and join the Expedition Team hiking, kayaking, ice-cruising, and perhaps even camping overnight in Antarctica. Explore the remote Falkland Islands and see the rich wildlife there before heading to Puerto Madryn in Patagonia.",
+      "routeSummary": "19-day all-inclusive Antarctica expedition cruise from Buenos Aires",
+      "shipIds": [
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2027-03-19"
+      ],
+      "highlights": [
+        "Embark on a late-summer Antarctic expedition, marveling at its stunning wildlife and breathtaking sunsets, before sailing north to the Falkland Islands.",
+        "Get close to icebergs, spot whales and penguins and join the Expedition Team hiking, kayaking, ice-cruising, and perhaps even camping overnight in Antarctica.",
+        "Explore the remote Falkland Islands and see the rich wildlife there before heading to Puerto Madryn in Patagonia."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The Beat of Buenos Aires",
+          "description": "Feel the rhythm of bustling Buenos Aires An overnight stay in Buenos Aires is the ideal way to start your Antarctic adventure. Home to a proud and diverse community of porteños , or “people of the port,” this city is a sensuous fusion of faded European splendo"
+        },
+        {
+          "day": "Day 2",
+          "title": "Early Start in Ushuaia",
+          "description": "Fly to Ushuaia and start your adventure Your adventure begins with an early morning flight to Ushuaia, where we'll meet your hybrid-powered expedition ship that is specially designed for sustainable cruising in polar waters. This bustling port is the capital o"
+        },
+        {
+          "day": "Days 3-4",
+          "title": "Get Ready for Antarctica",
+          "description": "Center on science before your Antarctic adventure On the two-day crossing through the Drake Passage, the Expedition Team will equip you with all you need to make the most of your polar expedition cruise. Visit the onboard Science Center and find out what lies "
+        },
+        {
+          "day": "Days 5-9",
+          "title": "Antarctica: Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing quite prepares you for the awe of Antarctica. Surrounded by towering glaciers, the continent will fill you with wonder as you spend five magical days exploring its frozen landscape. The Antarctic summer "
+        },
+        {
+          "day": "Days 10-11",
+          "title": "The Drake Passage",
+          "description": "Discover more about the Falkland Islands As you savor your Antarctic experiences, prepare for more adventures ahead as we cruise toward the Falkland Islands. Your Expedition Team will brief you about the history and biology of the islands. In the Science Cente"
+        },
+        {
+          "day": "Days 12-14",
+          "title": "Wildlife of the Falklands",
+          "description": "Enjoy birding and hiking in these green islands The Falkland archipelago is filled with seamless horizons and white sand beaches teeming with birdlife. Only the occasional farm dots the landscape. You’ll find grassy hills and wildflowers, in contrast to the va"
+        },
+        {
+          "day": "Day 15",
+          "title": "A Relaxing Day at Sea",
+          "description": "Relax and get ready for Puerto Madryn Enjoy a relaxing day at sea as we sail toward Puerto Madryn. You’ll have experienced so much in Antarctica and the Falklands. Savor the swirling kaleidoscope of special memories and new knowledge. Join the Expedition Team "
+        },
+        {
+          "day": "Day 16",
+          "title": "Puerto Madryn",
+          "description": "Visit a UNESCO wildlife haven Puerto Madryn boasts warm temperatures and beautiful beaches. It’s also the gateway to the dramatic Valdes Peninsula, and while we’re here, you can explore a stunning nature reserve and UNESCO World Heritage Site. You might get th"
+        },
+        {
+          "day": "Days 17-18",
+          "title": "Final Days at Sea",
+          "description": "Time at sea to rest and reflect As we sail the final leg from Puerto Madryn to Buenos Aires, enjoy your final day at sea. Join the Expedition Team in the Science Center to examine special interests in greater depth. Learn more about photography, or simply rela"
+        },
+        {
+          "day": "Day 19",
+          "title": "Visit Montevideo",
+          "description": "Disembark the ship and explore the vibrant city Disembark the ship in the morning and enjoy time to explore Uruguay’s interesting capital at your leisure. You might stroll along the Rambla of Montevideo, a picturesque waterfront promenade stretching over 13 mi"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/111392/d88536ee5989378879864d9b4c293df0/wildlife-antarctica-hgr-152935-photo_roger_brendhagen_3000x1688px.jpg",
+      "hero": "/products/hx/antarctica-and-falklands-expedition-2027/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/5IdI9Fr2E2epI8SuknuL0L/96d8e847fba0f79e9ec7822c16a7359f/Falkland_Islands_Saunders_Island_HX_44453_Photo_Yuri_Choufour.JPG",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/xW6A2fholb1FdofihoPck/88b0d882b091e455f59381b2e58b4133/Stanley_The_Falkland_Islands_HX_30569.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111261/951ce903618f63b3ad4f6c9ab4be9ec6/wildlife-antarctica-hgr-153303-photo_getty_images_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111392/d88536ee5989378879864d9b4c293df0/wildlife-antarctica-hgr-152935-photo_roger_brendhagen_3000x1688px.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/antarctica-and-falklands-expedition-2027/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "life-returns-springtime-expedition-to-antarctica-2027",
+      "title": "23天南极春季探险（2027）",
+      "officialTitle": "Life Returns | Springtime Expedition to Antarctica",
+      "group": "深度南极",
+      "operator": "HX Expeditions",
+      "durationDays": 23,
+      "summary": "The late spring expedition gives you five days in Antarctica during the latter part of the season, when the glaciers and icebergs are at their most sparkly and pristine. Visit the beautiful, windswept Falkland Islands and South Georgia—the “Serengeti of the Southern Ocean”—at the height of mating season. You’ll spend more than three weeks exploring some of the most remote and beautiful places on Earth, along with their abundant wildlife.",
+      "routeSummary": "23-day all-inclusive Antarctica expedition cruise from Buenos Aires to Santiago de Chile",
+      "shipIds": [
+        "fram"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2027-10-23"
+      ],
+      "highlights": [
+        "See the untouched icescapes of Antarctica in its late spring, when the glaciers and icebergs are at their most sparkly and pristine.",
+        "Visit the beautiful, windswept Falkland Islands and South Georgia at the height of mating season. Go ice-cruising in small boats (RIBs) and join landings with your expert Expedition Team."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "Visit Montevideo",
+          "description": "Explore the vibrant city and embark the ship Welcome to Montevideo, Uruguay’s interesting capital. Before embarkation, you might stroll along the Rambla of Montevideo, a picturesque waterfront promenade stretching over 13 miles, or wander through Ciudad Vieja,"
+        },
+        {
+          "day": "Days 2-4",
+          "title": "Preparing for Adventure",
+          "description": "Get into expedition mode Over the next few days at sea, you'll learn more about the wonders we'll encounter during our trip. Members of the Expedition Team will start their lecture series on topics like oceanography, geology, ornithology, and history. Pop into"
+        },
+        {
+          "day": "Days 5-7",
+          "title": "Wildlife of the Falklands",
+          "description": "Enjoy birding and hiking on these green islands The Falkland archipelago is filled with seamless horizons and white sand beaches teeming with birdlife. Only the occasional farm dots the landscape amid grassy hills and wildflowers. Enjoy a community walk around"
+        },
+        {
+          "day": "Days 8-9",
+          "title": "Adventure Lies Ahead",
+          "description": "Cruising the South Atlantic After the Falkland Islands, we’ll spend two days cruising toward beautiful South Georgia. You can look forward to seeing an archipelago filled with diverse wildlife. Meet up with the Expedition Team as they prepare you for what lies"
+        },
+        {
+          "day": "Days 10-12",
+          "title": "The Southern Serengeti",
+          "description": "Visit a wildlife watcher’s paradise South Georgia’s abundant wildlife has earned it the nickname “Serengeti of the Southern Ocean.” Its unique position free from sea ice makes the island a breeding site for large colonies of penguins, other seabirds, and seals"
+        },
+        {
+          "day": "Days 13-14",
+          "title": "Antarctica Bound",
+          "description": "Time to relax and reflect After visiting the Falklands and South Georgia, take some time while we head toward Antarctica to relax and reflect on your journey so far. Antarctica is a symbol of global cooperation, dedicated to peace, science, and wildlife conser"
+        },
+        {
+          "day": "Days 15-19",
+          "title": "Antarctica Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing prepares you for your first sight of Antarctica’s immense, frozen beauty. Icebergs, sculpted by nature, float in the straits. Gentoo, chinstrap and Adélie penguins stand erect as they watch from the shor"
+        },
+        {
+          "day": "Days 20-22",
+          "title": "The Passage Back",
+          "description": "Looking for land ahead Five unforgettable days in Antarctica are over, and your ship will now embark upon our final adventure together: the Drake Passage. Known for its potentially high winds and strong currents, the passage can also be silent and still, inspi"
+        },
+        {
+          "day": "Day 23",
+          "title": "Arrival in Punta Arenas",
+          "description": "Onward from Punta Arenas Your Antarctica and Patagonia expedition cruise comes to an end in Punta Arenas. From here, you'll catch a flight to Santiago de Chile and then your connecting flight home, taking with you a wealth of fantastic memories. If you're not "
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/118914/65d3f406fa47a44d1c8a67ea0fc827aa/birds-the-drake-passage-hgr-141417-photo_andrea_klaussner_3000x1688.jpg",
+      "hero": "/products/hx/life-returns-springtime-expedition-to-antarctica-2027/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118915/482406c0043aa7a154688a423e507d24/damoy_point_antarctica_hgr_160620_photo_yuri_matisse_choufour_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118916/9592d2a0432c97be302d5617ecf2816e/drake-passage-antarctica-hgr-153540-photo_yuri_matisse_choufour_3000x1688px.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118918/fd5e3bb4ef548958e93ea4a1ab9be838/orne-harbour-antarctica-hgr-152327-photo_oscar_farrera_3000x1688px.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/118914/65d3f406fa47a44d1c8a67ea0fc827aa/birds-the-drake-passage-hgr-141417-photo_andrea_klaussner_3000x1688.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/life-returns-springtime-expedition-to-antarctica-2027/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "antarctica-patagonia-expedition",
+      "title": "18天南极与巴塔哥尼亚",
+      "officialTitle": "Antarctica & Patagonia Expedition ",
+      "group": "三岛与远征",
+      "operator": "HX Expeditions",
+      "durationDays": 18,
+      "summary": "Explore the frozen continent of Antarctica in late spring, when penguin colonies start nesting. Visit stunning UNESCO World Heritage Sites and explore deep into the maze of the beautiful Chilean fjords. See vibrant Valparaíso, the colorful stilt houses of Castro, and the unique cultures of small, isolated communities of Patagonia.",
+      "routeSummary": "18-day all-inclusive Antarctica expedition cruise from Valparaíso to Buenos Aires",
+      "shipIds": [
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2027-10-26"
+      ],
+      "highlights": [
+        "Explore the frozen continent of Antarctica in late spring, when penguin colonies start nesting.",
+        "Visit stunning UNESCO World Heritage Sites and explore deep into the maze of the beautiful Chilean fjords",
+        "See vibrant Valparaíso, the colorful stilt houses of Castro, and the unique cultures of small, isolated communities of Patagonia"
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "Valparaíso, a UNESCO Gem",
+          "description": "Your Antarctica and Patagonia expedition cruise begins in colorful Valparaíso. Known as the “Jewel of the Pacific,” this friendly UNESCO-listed city is built on steep hillsides overlooking the ocean, and you'll love discovering it. Filled with enticing scents "
+        },
+        {
+          "day": "Days 2-3",
+          "title": "Preparing for Adventure",
+          "description": "Get into expedition mode Over the next two days at sea, you'll learn more about the wonders we'll encounter during our trip. Expedition Team members are experts in everything from oceanography and geology to ornithology and history. Drop in on their fascinatin"
+        },
+        {
+          "day": "Day 4",
+          "title": "Castro’s Chilotan Charm",
+          "description": "See stilt houses and historic churches Set among the lush vegetation of Chiloé Island, Castro is Chile’s third oldest city. It’s home to two UNESCO World Heritage Sites, namely Iglesia San Francisco and Iglesia Nuestra Señora de Gracia de Nercón. From various "
+        },
+        {
+          "day": "Day 5",
+          "title": "The Waters of Patagonia",
+          "description": "Witness unforgettable seascapes Your expedition cruise continues south through the waters of Patagonia. The seas here are captivating, with a whole palette of shades of blue, from the brightest aquamarine to the deepest midnight hues. As we sail, there's a goo"
+        },
+        {
+          "day": "Day 6",
+          "title": "Charming Caleta Tortel",
+          "description": "Receive a warm welcome in Caleta Tortel We continue to go off the beaten path to visit isolated Caleta Tortel. Lying at the mouth of Río Baker, Chile's largest river, this charming village is home to around 500 inhabitants. Instead of streets, a maze of boardw"
+        },
+        {
+          "day": "Days 7-9",
+          "title": "Expedition Days",
+          "description": "Wild Patagonia: Fjords, Culture, and Glaciers We continue our adventure deep into the Chilean fjords with fantastic opportunities for scenic cruising aboard the ship and in our small expedition boats too. Adventure awaits in this wild and stunning landscape! A"
+        },
+        {
+          "day": "Days 10-11",
+          "title": "Sailing the Drake Passage",
+          "description": "Get Ready for Antarctica Over the next two days, we'll navigate legendary Drake Passage toward Antarctica. En route, you'll find out what lies ahead and how to make your visit as safe and sustainable as possible. In the Science Center, the Expedition Team will"
+        },
+        {
+          "day": "Days 12-15",
+          "title": "Antarctica: Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing prepares you for your first sight of Antarctica’s immense, frozen beauty. Antarctica will fill you with wonder when you see its looming glaciers and icebergs the size of cathedrals. Perhaps the most surp"
+        },
+        {
+          "day": "Days 16-17",
+          "title": "Sailing toward Ushuaia",
+          "description": "Relax and learn as we cruise to Argentina After four incredible days in Antarctica, we’ll sail back across the Drake Passage toward warmer weather in Argentina, giving you an opportunity to enjoy life on board. You can take part in art workshops, or perhaps en"
+        },
+        {
+          "day": "Day 18",
+          "title": "Ushuaia and Buenos Aires",
+          "description": "From Ushuaia to Buenos Aires Your expedition cruise ends in Ushuaia, the main city in Tierra del Fuego, Argentina’s southernmost province. From here, you’ll take a flight back to Buenos Aires, but it doesn’t have to be the end of your adventure. We recommend j"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/exAITjSpcA9jHR7hYLZQE/e4fe539ddde5ac15054c8b0381d42226/Neko_Harbour_Antarctica_HX_13865_1200x675__1_.jpg",
+      "hero": "/products/hx/antarctica-patagonia-expedition/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/1gfWN67HOp4nAPspj3us1p/640094538a05a92c701cd1fa8ab51bba/.Antarctica_Lemaire_Channel_MS_Fridtjof_Nansen_HX_44945_Photo_Espen_Mills__1_.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/2QaTgrDm4GiFzb7Ezo4X6U/dcf0861e98ec387adb913e1675d48a71/Cuverville-Island-Antarctica-HGR-153519-_Photo_Yuri_Matisse_Choufour_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/5ORE1nCV7VNiBqEmGLbdnN/93c35abe04dcb47b32c3aeaf7e69b17d/Antarctica_Orne_Harbour_HX_45281_Photo_Ted_Gatlin_1200x675.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111213/5dcdb457cdb4978104845ed9729bcdb0/castro-chile-hgr-152110-photo_getty_images_web.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/antarctica-patagonia-expedition/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    },
+    {
+      "id": "antarctica-falklands-northbound-expedition-2028",
+      "title": "17天南极与福克兰北向航线",
+      "officialTitle": "Antarctica & Falklands Expedition",
+      "group": "三岛与远征",
+      "operator": "HX Expeditions",
+      "durationDays": 17,
+      "summary": "Embark on a late-summer Antarctic expedition, marveling at its stunning wildlife and breathtaking sunsets, before sailing north to the Falkland Islands. Get close to icebergs, spot whales and penguins and join the Expedition Team hiking, kayaking, ice-cruising, and perhaps even camping overnight in Antarctica. Explore the remote Falkland Islands and see the rich wildlife there before heading to Puerto Madryn in Patagonia.",
+      "routeSummary": "17-day all-inclusive Antarctica and Falklands Expedition Cruise from Buenos Aires to Montevideo ",
+      "shipIds": [
+        "fridtjof-nansen"
+      ],
+      "departureSummary": "1 个可查询出发日",
+      "departures": [
+        "2028-03-26"
+      ],
+      "highlights": [
+        "Embark on a late-summer Antarctic expedition, marveling at its stunning wildlife and breathtaking sunsets, before sailing north to the Falkland Islands.",
+        "Get close to icebergs, spot whales and penguins and join the Expedition Team hiking, kayaking, ice-cruising, and perhaps even camping overnight in Antarctica.",
+        "Explore the remote Falkland Islands and see the rich wildlife there before heading to Puerto Madryn in Patagonia."
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "The Beat of Buenos Aires",
+          "description": "Feel the rhythm of bustling Buenos Aires An overnight stay in Buenos Aires is the ideal way to start your Antarctic adventure. Home to a proud and diverse community of porteños , or “people of the port,” this city is a sensuous fusion of faded European splendo"
+        },
+        {
+          "day": "Day 2",
+          "title": "Early Start in Ushuaia",
+          "description": "Fly to Ushuaia and start your adventure Your adventure begins with an early morning flight to Ushuaia, where we'll meet your hybrid-powered expedition ship that is specially designed for sustainable cruising in polar waters. This bustling port is the capital o"
+        },
+        {
+          "day": "Days 3-4",
+          "title": "Get Ready for Antarctica",
+          "description": "Center on science before your Antarctic adventure On the two-day crossing through the Drake Passage, the Expedition Team will equip you with all you need to make the most of your polar expedition cruise. Visit the onboard Science Center and find out what lies "
+        },
+        {
+          "day": "Days 5-8",
+          "title": "Antarctica: Another World",
+          "description": "Experience Antarctica in all its natural majesty Nothing quite prepares you for the awe of Antarctica. Surrounded by towering glaciers, the continent will fill you with wonder as you spend five magical days exploring its frozen landscape. The Antarctic summer "
+        },
+        {
+          "day": "Days 9-10",
+          "title": "The Drake Passage",
+          "description": "Discover more about the Falkland Islands As you savor your Antarctic experiences, prepare for more adventures ahead as we cruise toward the Falkland Islands. Your Expedition Team will brief you about the history and biology of the islands. In the Science Cente"
+        },
+        {
+          "day": "Days 11-12",
+          "title": "Wildlife of the Falklands",
+          "description": "Enjoy birding and hiking in these green islands The Falkland archipelago is filled with seamless horizons and white sand beaches teeming with birdlife. Only the occasional farm dots the landscape. You’ll find grassy hills and wildflowers, in contrast to the va"
+        },
+        {
+          "day": "Day 13",
+          "title": "A Relaxing Day at Sea",
+          "description": "Relax and get ready for Puerto Madryn Enjoy a relaxing day at sea as we sail toward Puerto Madryn. You’ll have experienced so much in Antarctica and the Falklands. Savor the swirling kaleidoscope of special memories and new knowledge. Join the Expedition Team "
+        },
+        {
+          "day": "Day 14",
+          "title": "Puerto Madryn",
+          "description": "Visit a UNESCO wildlife haven Puerto Madryn boasts warm temperatures and beautiful beaches. It’s also the gateway to the dramatic Valdes Peninsula, and while we’re here, you can explore a stunning nature reserve and UNESCO World Heritage Site. You might get th"
+        },
+        {
+          "day": "Days 15-16",
+          "title": "Final Days at Sea",
+          "description": "Time at sea to rest and reflect As we sail the final leg from Puerto Madryn to Buenos Aires, enjoy your final day at sea. Join the Expedition Team in the Science Center to examine special interests in greater depth. Learn more about photography, or simply rela"
+        },
+        {
+          "day": "Day 17",
+          "title": "Montevideo",
+          "description": "Disembark the ship and explore the vibrant city Disembark the ship in the morning and enjoy time to explore Uruguay’s interesting capital at your leisure. You might stroll along the Rambla of Montevideo, a picturesque waterfront promenade stretching over 13 mi"
+        }
+      ],
+      "heroSource": "https://images.eu.ctfassets.net/vy34d8u43l9r/5IdI9Fr2E2epI8SuknuL0L/96d8e847fba0f79e9ec7822c16a7359f/Falkland_Islands_Saunders_Island_HX_44453_Photo_Yuri_Choufour.JPG",
+      "hero": "/products/hx/antarctica-falklands-northbound-expedition-2028/hero.webp",
+      "gallery": [
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/5IdI9Fr2E2epI8SuknuL0L/96d8e847fba0f79e9ec7822c16a7359f/Falkland_Islands_Saunders_Island_HX_44453_Photo_Yuri_Choufour.JPG",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/xW6A2fholb1FdofihoPck/88b0d882b091e455f59381b2e58b4133/Stanley_The_Falkland_Islands_HX_30569.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111261/951ce903618f63b3ad4f6c9ab4be9ec6/wildlife-antarctica-hgr-153303-photo_getty_images_3000x1688.jpg",
+        "https://images.eu.ctfassets.net/vy34d8u43l9r/111392/d88536ee5989378879864d9b4c293df0/wildlife-antarctica-hgr-152935-photo_roger_brendhagen_3000x1688px.jpg"
+      ],
+      "sourceUrl": "https://www.travelhx.com/en-us/cruises/antarctica-falklands-northbound-expedition-2028/",
+      "importedAt": "2026-08-13T13:49:35.974Z"
+    }
+  ]
+}
