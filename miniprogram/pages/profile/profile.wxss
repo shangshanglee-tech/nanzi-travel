@@ -1,0 +1,12 @@
+.profile-page { padding: 32rpx; }
+.loading { padding: 96rpx 0; color: #747976; text-align: center; }
+.brand-card, .section-card { padding: 34rpx; border-radius: 28rpx; background: #fff; box-shadow: 0 12rpx 32rpx rgba(20,63,53,.06); }
+.brand-card { display: flex; align-items: center; gap: 24rpx; }
+.brand-mark { width: 94rpx; height: 94rpx; border-radius: 28rpx; background: #143f35; color: #fff; font-size: 30rpx; font-weight: 700; line-height: 94rpx; text-align: center; }
+.brand-name { color: #151515; font-size: 36rpx; font-weight: 650; }
+.brand-summary { margin-top: 8rpx; color: #737a76; font-size: 24rpx; }
+.section-card { margin-top: 24rpx; }
+.section-label { color: #707a75; font-size: 22rpx; letter-spacing: 2rpx; }
+.section-title { margin-top: 16rpx; color: #143f35; font-size: 34rpx; font-weight: 650; }
+.section-copy { margin-top: 14rpx; color: #535a56; font-size: 27rpx; line-height: 1.7; white-space: pre-wrap; }
+.filing { padding: 48rpx 0 24rpx; color: #939895; font-size: 22rpx; text-align: center; }

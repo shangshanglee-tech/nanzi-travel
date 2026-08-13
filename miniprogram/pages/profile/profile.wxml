@@ -1,0 +1,23 @@
+<view class="profile-page">
+  <view wx:if="{{loading}}" class="loading">正在加载…</view>
+  <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadSite" />
+  <block wx:else>
+    <view class="brand-card">
+      <view class="brand-mark">NZ</view>
+      <view>
+        <view class="brand-name">{{site.brand_name}}</view>
+        <view class="brand-summary">{{site.brand_summary || '专注值得出发的旅行体验'}}</view>
+      </view>
+    </view>
+    <view class="section-card">
+      <view class="section-label">人工咨询</view>
+      <view class="section-title">{{site.official_account_name}}</view>
+      <view class="section-copy">{{site.official_account_guide || '请在微信中搜索公众号名称并关注，获取人工咨询服务。'}}</view>
+    </view>
+    <view wx:if="{{site.service_description}}" class="section-card">
+      <view class="section-label">服务说明</view>
+      <view class="section-copy">{{site.service_description}}</view>
+    </view>
+    <view wx:if="{{site.filing_number}}" class="filing">{{site.filing_number}}</view>
+  </block>
+</view>

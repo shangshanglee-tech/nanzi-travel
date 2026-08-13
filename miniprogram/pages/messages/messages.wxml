@@ -1,0 +1,3 @@
+<view class="messages-page">
+  <empty-state title="消息功能开发中" description="功能开发中，敬请期待" showAction="{{false}}" />
+</view>

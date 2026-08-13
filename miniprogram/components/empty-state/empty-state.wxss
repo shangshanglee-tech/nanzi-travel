@@ -1,0 +1,7 @@
+.empty-state { padding: 96rpx 36rpx; text-align: center; }
+.empty-mark { width: 88rpx; height: 88rpx; margin: 0 auto 28rpx; border-radius: 50%; background: #dbe6de; color: #143f35; font-size: 34rpx; line-height: 88rpx; font-weight: 700; }
+.empty-title { color: #151515; font-size: 32rpx; font-weight: 600; }
+.empty-description { margin-top: 14rpx; color: #747976; font-size: 26rpx; line-height: 1.6; }
+.empty-action { width: 240rpx; margin-top: 32rpx; border: 1rpx solid #143f35; border-radius: 999rpx; background: transparent; color: #143f35; font-size: 26rpx; }
+.empty-action::after { border: 0; }
+

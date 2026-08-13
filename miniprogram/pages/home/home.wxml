@@ -1,0 +1,19 @@
+<view class="home-page">
+  <view class="eyebrow">NANZI TRAVEL · 编辑精选</view>
+  <view class="headline">去看更远的世界</view>
+  <view class="lead">从南极开始，找到值得出发的旅程。</view>
+
+  <view wx:if="{{loading}}" class="loading-card">正在整理精选行程…</view>
+  <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadHome" />
+  <empty-state wx:elif="{{!products.length}}" title="首批行程正在准备" description="确认完成后会第一时间在这里发布" showAction="{{false}}" />
+  <view wx:else class="product-list">
+    <view wx:for="{{products}}" wx:key="slug" class="product-card">
+      <image wx:if="{{item.hero_image}}" class="product-image" src="{{item.hero_image}}" mode="aspectFill" />
+      <view class="product-body">
+        <view class="product-kicker">{{item.destination.name}} · {{item.season}}</view>
+        <view class="product-title">{{item.title}}</view>
+        <view class="product-summary">{{item.subtitle || item.summary}}</view>
+      </view>
+    </view>
+  </view>
+</view>
