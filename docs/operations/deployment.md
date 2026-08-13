@@ -10,6 +10,19 @@
 
 ## 首次初始化
 
+旧的 `bootstrap-server.sh` 会归档并关闭历史 AI 服务，只能在已经明确确认要下线旧服务时使用。首版体验版部署不得执行它。
+
+体验版使用只创建新服务的隔离初始化脚本。执行前确认 `api.nanzitravel.com` 与 `admin.nanzitravel.com` 已解析至此服务器，并预先创建 `/etc/nanzi-travel/backend.env`：
+
+```bash
+sudo CERTBOT_EMAIL=管理员邮箱 \
+  CONFIRM_ISOLATED_BOOTSTRAP=1 deploy/scripts/bootstrap-isolated-service.sh
+```
+
+该脚本不会触碰 `/opt/nanzi-ai`、`nanzi-ai.service` 或历史服务端口配置。
+
+## 旧服务切换（不用于体验版）
+
 初始化脚本会先完整归档旧服务，再申请证书、建立最小权限账户、切换 Nginx 配置并关闭旧服务。必须阅读脚本后显式确认：
 
 ```bash

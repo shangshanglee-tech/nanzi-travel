@@ -38,6 +38,12 @@ deploy_script = (root / "deploy/scripts/deploy.sh").read_text()
 assert "staticfiles/" in deploy_script
 assert "/var/lib/nanzi-travel/static/" in deploy_script
 
+isolated_bootstrap = (root / "deploy/scripts/bootstrap-isolated-service.sh").read_text()
+assert "CONFIRM_ISOLATED_BOOTSTRAP" in isolated_bootstrap
+assert "nanzi-ai" not in isolated_bootstrap
+assert "/opt/nanzi-ai" not in isolated_bootstrap
+assert "5000" not in isolated_bootstrap
+
 secret_assignment = re.compile(r"(?im)^\s*(?:DJANGO_SECRET_KEY|OSS_SECRET_ACCESS_KEY|PASSWORD)\s*=\s*[^\s#].+$")
 for path in (root / "deploy").rglob("*"):
     if path.is_file():
