@@ -1,0 +1,24 @@
+[Unit]
+Description=Nanzi Travel Mini Program API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nanziapp
+Group=nanziapp
+WorkingDirectory=/opt/nanzi-travel/current/backend
+EnvironmentFile=/etc/nanzi-travel/backend.env
+ExecStart=/opt/nanzi-travel/current/backend/.venv/bin/gunicorn config.wsgi:application --bind 127.0.0.1:8001 --workers 2 --timeout 60 --access-logfile /var/log/nanzi-travel/access.log --error-logfile /var/log/nanzi-travel/error.log
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/nanzi-travel /var/log/nanzi-travel /opt/nanzi-travel
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
+

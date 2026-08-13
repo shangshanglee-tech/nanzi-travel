@@ -1,0 +1,14 @@
+/var/log/nanzi-travel/*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 nanziapp adm
+    sharedscripts
+    postrotate
+        systemctl kill -s USR1 nanzi-travel-api.service >/dev/null 2>&1 || true
+    endscript
+}
+
