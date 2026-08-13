@@ -1,4 +1,33 @@
-# vinext-starter
+# 小楠子爱旅行
+
+本仓库同时保留早期 H5 交互原型，并承载正式微信小程序与内容后台。
+
+## 正式应用目录
+
+- `app/`：早期 H5 视觉与交互参考。
+- `miniprogram/`：微信原生小程序。
+- `backend/`：Django 内容服务与运营后台。
+- `docs/superpowers/specs/`：已确认的产品设计基线。
+- `docs/superpowers/plans/`：分阶段实施计划。
+
+## 本地运行要求
+
+- Node.js 22 或更高版本。
+- Python 3.10–3.14；本机开发固定使用 `/opt/homebrew/bin/python3.12`。
+
+初始化后台：
+
+```bash
+cd backend
+/opt/homebrew/bin/python3.12 -m venv .venv
+.venv/bin/pip install -e .
+.venv/bin/python manage.py check
+```
+
+微信开发者工具导入仓库根目录，复制
+`project.private.config.json.example` 为 `project.private.config.json`，并填写真实 AppID。
+
+## H5 原型（历史参考）
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and

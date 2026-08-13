@@ -41,3 +41,13 @@ next-env.d.ts
 /outputs/
 /work/
 /.worktrees/
+
+# mini-program and Django local state
+/project.private.config.json
+/backend/.venv/
+/backend/db.sqlite3
+/backend/media/
+/backend/staticfiles/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
