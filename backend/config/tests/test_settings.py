@@ -21,6 +21,29 @@ class SettingsTests(SimpleTestCase):
     def test_reverse_proxy_https_is_explicit(self):
         self.assertEqual(settings.SECURE_PROXY_SSL_HEADER, ("HTTP_X_FORWARDED_PROTO", "https"))
 
+    def test_admin_origin_and_persistent_media_directory_are_explicit(self):
+        self.assertIn("https://admin.nanzitravel.com", settings.CSRF_TRUSTED_ORIGINS)
+
+        environment = {
+            **os.environ,
+            "DJANGO_MEDIA_ROOT": "/var/lib/nanzi-travel/media",
+        }
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                (
+                    "from config import settings; "
+                    "assert str(settings.MEDIA_ROOT) == '/var/lib/nanzi-travel/media'"
+                ),
+            ],
+            cwd=settings.BASE_DIR,
+            env=environment,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_production_mode_enables_secure_cookies(self):
         environment = {
             **os.environ,
