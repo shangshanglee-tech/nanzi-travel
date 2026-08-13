@@ -88,6 +88,12 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+USE_OSS = env_bool("USE_OSS", False)
+OSS_ACCESS_KEY_ID = os.getenv("OSS_ACCESS_KEY_ID", "")
+OSS_SECRET_ACCESS_KEY = os.getenv("OSS_SECRET_ACCESS_KEY", "")
+OSS_BUCKET_NAME = os.getenv("OSS_BUCKET_NAME", "")
+OSS_ENDPOINT_URL = os.getenv("OSS_ENDPOINT_URL", "")
+OSS_CUSTOM_DOMAIN = os.getenv("OSS_CUSTOM_DOMAIN", "")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGGING = {

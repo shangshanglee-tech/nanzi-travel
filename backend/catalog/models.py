@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from .storage import build_media_storage
+
 
 class ProductStatus(models.TextChoices):
     DRAFT = "draft", "草稿"
@@ -45,7 +47,12 @@ class Product(models.Model):
     summary = models.TextField("产品简介", blank=True)
     season = models.CharField("航季/季节", max_length=100, blank=True)
     duration_days = models.PositiveSmallIntegerField("行程天数", null=True, blank=True)
-    hero_image = models.ImageField("封面图", upload_to="products/heroes/", blank=True)
+    hero_image = models.ImageField(
+        "封面图",
+        upload_to="products/heroes/",
+        storage=build_media_storage,
+        blank=True,
+    )
     vessel = models.CharField("船只/核心资源", max_length=160, blank=True)
     departure_city = models.CharField("出发地", max_length=100, blank=True)
     tags = models.JSONField("标签", default=list, blank=True)
@@ -133,7 +140,11 @@ class ProductImage(models.Model):
         related_name="images",
         on_delete=models.CASCADE,
     )
-    image = models.ImageField("图片", upload_to="products/gallery/")
+    image = models.ImageField(
+        "图片",
+        upload_to="products/gallery/",
+        storage=build_media_storage,
+    )
     alt_text = models.CharField("图片说明", max_length=180, blank=True)
     sort_order = models.PositiveIntegerField("排序", default=0)
 
