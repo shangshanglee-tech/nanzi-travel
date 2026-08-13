@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>以下产品确认后将立即出现在小程序中：</p>
+    <ul>
+      {% for product in products %}
+        <li>{{ product.title }}</li>
+        <input type="hidden" name="{{ action_checkbox_name }}" value="{{ product.pk }}">
+      {% endfor %}
+    </ul>
+    <input type="hidden" name="action" value="publish_products">
+    <input type="hidden" name="confirm" value="yes">
+    <button type="submit" class="default">确认发布</button>
+    <a href="../">取消</a>
+  </form>
+{% endblock %}
