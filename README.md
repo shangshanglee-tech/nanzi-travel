@@ -27,6 +27,13 @@ cd backend
 微信开发者工具导入仓库根目录，复制
 `project.private.config.json.example` 为 `project.private.config.json`，并填写真实 AppID。
 
+## 验证与发布资料
+
+- 首版验收：`docs/qa/v1-acceptance.md`
+- 微信提审：`docs/qa/wechat-review-checklist.md`
+- 产品发布：`docs/operations/content-publishing.md`
+- 服务器部署与回滚：`docs/operations/deployment.md`、`docs/operations/rollback.md`
+
 ## H5 原型（历史参考）
 
 A clean full-stack starter running on
