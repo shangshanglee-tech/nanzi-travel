@@ -4,6 +4,7 @@
 
 1. `api.nanzitravel.com` 和 `admin.nanzitravel.com` 均解析到目标服务器。
 2. 已在 `/etc/nanzi-travel/backend.env` 填写生产配置，权限为 `0640 root:nanziapp`。
+   OSS 的 boto3 Endpoint 使用 `https://s3.oss-<地域>.aliyuncs.com` 格式，代码固定采用 V2 签名和虚拟托管寻址。
 3. 已确认阿里云安全组仅开放 22、80、443，未开放 5000 和 8001。
 4. 已确认旧 `/opt/nanzi-ai` 服务无人使用，并预留回滚窗口。
 
@@ -35,4 +36,3 @@ sudo deploy/scripts/deploy.sh /path/to/h5-prototype
 ## 定时备份
 
 以 root 的定时任务每天运行 `deploy/scripts/backup.sh`。备份默认保留 14 天，包含 SQLite 一致性副本、媒体文件和加密存储所需的运行配置；备份目录必须仅 root 可读。
-

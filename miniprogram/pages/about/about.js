@@ -1,2 +1,14 @@
 const {getSite} = require("../../services/api");
-Page({data:{content:"",loading:true},onLoad(){getSite().then(site=>this.setData({content:site.about_us||site.brand_summary||"小楠子爱旅行，专注值得出发的旅行体验。"})).finally(()=>this.setData({loading:false}));}});
+const {loadDocument} = require("../../utils/document");
+
+Page({
+  data: {content: "", loading: true},
+  async onLoad() {
+    const content = await loadDocument(
+      getSite,
+      "about_us",
+      "小楠子爱旅行，专注值得出发的旅行体验。",
+    );
+    this.setData({content, loading: false});
+  },
+});

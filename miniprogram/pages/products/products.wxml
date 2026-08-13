@@ -1,4 +1,20 @@
 <view class="page">
+  <view class="picker-row">
+    <picker wx:if="{{options.destinations.length}}" mode="selector" range="{{options.destinations}}" range-key="name" bindchange="chooseDestination">
+      <view class="picker-button">{{selected.destination || '目的地'}}⌄</view>
+    </picker>
+    <picker wx:if="{{options.months.length}}" mode="selector" range="{{options.months}}" range-key="label" bindchange="chooseMonth">
+      <view class="picker-button">{{selected.month || '出发月份'}}⌄</view>
+    </picker>
+    <picker wx:if="{{options.durations.length}}" mode="selector" range="{{options.durations}}" range-key="label" bindchange="chooseDuration">
+      <view class="picker-button">{{selected.duration || '行程天数'}}⌄</view>
+    </picker>
+  </view>
+  <view wx:if="{{selected.destination || selected.month || selected.duration}}" class="selected-row">
+    <view wx:if="{{selected.destination}}" class="selected" data-field="destination" bindtap="clearFilter">{{selected.destination}} ×</view>
+    <view wx:if="{{selected.month}}" class="selected" data-field="month" bindtap="clearFilter">{{selected.month}} ×</view>
+    <view wx:if="{{selected.duration}}" class="selected" data-field="duration" bindtap="clearFilter">{{selected.duration}} ×</view>
+  </view>
   <scroll-view wx:if="{{options.tags.length}}" class="filters" scroll-x enhanced show-scrollbar="{{false}}">
     <view class="filter-row">
       <view wx:for="{{options.tags}}" wx:key="*this" data-tag="{{item}}" class="filter {{filters.tag === item ? 'active' : ''}}" bindtap="chooseTag">{{item}}</view>

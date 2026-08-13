@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from catalog.models import Destination, Product, SiteSettings
+from catalog.models import Departure, Destination, Product, SiteSettings
 
 
 class ProductApiTests(TestCase):
@@ -26,6 +26,12 @@ class ProductApiTests(TestCase):
             slug="reserve",
             status="draft",
         )
+        Departure.objects.create(
+            product=self.live,
+            start_date="2027-01-05",
+            end_date="2027-01-16",
+            label="2027年1月团期",
+        )
 
     def test_product_list_hides_drafts(self):
         response = self.client.get("/api/v1/products")
@@ -49,6 +55,19 @@ class ProductApiTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["results"][0]["slug"], "antarctica-classic")
+
+    def test_product_list_exposes_only_filter_values_present_in_public_products(self):
+        response = self.client.get("/api/v1/products")
+
+        self.assertEqual(
+            response.json()["filters"],
+            {
+                "destinations": [{"name": "南极", "slug": "antarctica"}],
+                "months": ["2027-01"],
+                "durations": [12],
+                "tags": ["首次去南极", "摄影"],
+            },
+        )
 
     def test_unknown_product_uses_stable_error_shape(self):
         response = self.client.get("/api/v1/products/not-found")

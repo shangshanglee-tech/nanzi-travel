@@ -68,7 +68,11 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": Path(os.getenv("DJANGO_DB_PATH", BASE_DIR / "db.sqlite3")),
-        "OPTIONS": {"timeout": 20},
+        "OPTIONS": {
+            "timeout": 20,
+            "transaction_mode": "IMMEDIATE",
+            "init_command": "PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL; PRAGMA foreign_keys=ON;",
+        },
     }
 }
 
@@ -95,6 +99,15 @@ OSS_BUCKET_NAME = os.getenv("OSS_BUCKET_NAME", "")
 OSS_ENDPOINT_URL = os.getenv("OSS_ENDPOINT_URL", "")
 OSS_CUSTOM_DOMAIN = os.getenv("OSS_CUSTOM_DOMAIN", "")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 LOGGING = {
     "version": 1,

@@ -14,7 +14,7 @@ class MediaStorageTests(SimpleTestCase):
         OSS_ACCESS_KEY_ID="access-id",
         OSS_SECRET_ACCESS_KEY="secret",
         OSS_BUCKET_NAME="nanzi-media",
-        OSS_ENDPOINT_URL="https://oss-cn-chengdu.aliyuncs.com",
+        OSS_ENDPOINT_URL="https://s3.oss-cn-chengdu.aliyuncs.com",
         OSS_CUSTOM_DOMAIN="media.nanzitravel.com",
     )
     def test_oss_mode_uses_public_read_urls_and_backend_only_credentials(self):
@@ -25,3 +25,5 @@ class MediaStorageTests(SimpleTestCase):
         self.assertEqual(storage.custom_domain, "media.nanzitravel.com")
         self.assertFalse(storage.querystring_auth)
         self.assertEqual(storage.default_acl, "public-read")
+        self.assertEqual(storage.signature_version, "s3")
+        self.assertEqual(storage.addressing_style, "virtual")

@@ -16,6 +16,8 @@ class AliyunMediaStorage(S3Storage):
         settings_overrides.setdefault("endpoint_url", settings.OSS_ENDPOINT_URL)
         settings_overrides.setdefault("custom_domain", settings.OSS_CUSTOM_DOMAIN)
         settings_overrides.setdefault("region_name", None)
+        settings_overrides.setdefault("signature_version", "s3")
+        settings_overrides.setdefault("addressing_style", "virtual")
         super().__init__(**settings_overrides)
 
 
@@ -23,4 +25,3 @@ def build_media_storage():
     if settings.USE_OSS:
         return AliyunMediaStorage()
     return FileSystemStorage(location=settings.MEDIA_ROOT, base_url=settings.MEDIA_URL)
-

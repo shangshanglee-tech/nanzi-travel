@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const {toProductCard, collectFilterOptions} = require("../pages/products/view-model");
+const {toProductCard, collectFilterOptions, normalizeFilterOptions} = require("../pages/products/view-model");
 
 
 test("product card never invents a numeric price", () => {
@@ -25,4 +25,16 @@ test("filter options only contain values present in products", () => {
 
   assert.deepEqual(options.destinations, [{name: "南极", slug: "antarctica"}]);
   assert.deepEqual(options.tags, ["摄影", "首次去南极"]);
+});
+
+test("API filter options get user-facing month and duration labels", () => {
+  const options = normalizeFilterOptions({
+    destinations: [{name: "南极", slug: "antarctica"}],
+    months: ["2027-01"],
+    durations: [12],
+    tags: ["摄影"],
+  });
+
+  assert.deepEqual(options.months, [{value: "2027-01", label: "2027年1月"}]);
+  assert.deepEqual(options.durations, [{value: 12, label: "12天"}]);
 });

@@ -30,6 +30,34 @@ def healthz(request):
     return JsonResponse({"status": "ok"})
 
 
+def build_filter_options(products):
+    destinations = {}
+    months = set()
+    durations = set()
+    tags = []
+    seen_tags = set()
+    for product in products:
+        destinations[product.destination.slug] = {
+            "name": product.destination.name,
+            "slug": product.destination.slug,
+        }
+        if product.duration_days:
+            durations.add(product.duration_days)
+        for departure in product.departures.all():
+            if departure.start_date:
+                months.add(departure.start_date.strftime("%Y-%m"))
+        for tag in product.tags:
+            if tag not in seen_tags:
+                tags.append(tag)
+                seen_tags.add(tag)
+    return {
+        "destinations": list(destinations.values()),
+        "months": sorted(months),
+        "durations": sorted(durations),
+        "tags": tags,
+    }
+
+
 class SiteView(APIView):
     authentication_classes = []
     permission_classes = []
@@ -68,6 +96,8 @@ class ProductListView(APIView):
     permission_classes = []
 
     def get(self, request):
+        base_queryset = Product.objects.public().select_related("destination").prefetch_related("departures")
+        filter_options = build_filter_options(base_queryset)
         queryset = Product.objects.public().select_related("destination")
         month = request.query_params.get("month", "")
         if month and not MONTH_PATTERN.fullmatch(month):
@@ -99,6 +129,7 @@ class ProductListView(APIView):
             queryset = [product for product in queryset if tag in product.tags]
         response = Response(
             {
+                "filters": filter_options,
                 "results": ProductCardSerializer(
                     queryset,
                     many=True,

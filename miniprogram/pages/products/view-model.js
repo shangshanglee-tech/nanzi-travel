@@ -21,5 +21,19 @@ function collectFilterOptions(products) {
   return {destinations: [...destinations.values()], tags: [...tags]};
 }
 
-module.exports = {toProductCard, collectFilterOptions};
+function normalizeFilterOptions(filters = {}) {
+  return {
+    destinations: filters.destinations || [],
+    months: (filters.months || []).map((value) => {
+      const [year, month] = value.split("-");
+      return {value, label: `${year}年${Number(month)}月`};
+    }),
+    durations: (filters.durations || []).map((value) => ({
+      value,
+      label: formatDuration(value),
+    })),
+    tags: filters.tags || [],
+  };
+}
 
+module.exports = {toProductCard, collectFilterOptions, normalizeFilterOptions};
