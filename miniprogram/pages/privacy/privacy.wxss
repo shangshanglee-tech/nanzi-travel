@@ -1,0 +1,2 @@
+.document { margin: 30rpx; padding: 38rpx; border-radius: 28rpx; background: #fff; }.title { color: #143f35; font-family: serif; font-size: 42rpx; font-weight: 700; }.content { margin-top: 28rpx; color: #505854; font-size: 27rpx; line-height: 1.9; white-space: pre-wrap; }
+

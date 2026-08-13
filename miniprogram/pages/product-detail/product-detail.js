@@ -20,11 +20,8 @@ Page({
     }
   },
   consult() {
-    wx.showModal({
-      title: "咨询该行程",
-      content: `请前往“我的”页面，通过公众号咨询：${this.data.product.title}`,
-      showCancel: false,
-      confirmColor: "#143F35",
+    wx.navigateTo({
+      url: `/pages/contact/contact?product=${encodeURIComponent(this.data.product.title)}`,
     });
   },
 });

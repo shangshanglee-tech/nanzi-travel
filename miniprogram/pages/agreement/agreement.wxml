@@ -1,0 +1,1 @@
+<view class="document"><view class="title">用户协议</view><view class="content">{{loading ? '正在加载…' : content}}</view></view>

@@ -9,7 +9,7 @@
         <view class="brand-summary">{{site.brand_summary || '专注值得出发的旅行体验'}}</view>
       </view>
     </view>
-    <view class="section-card">
+    <view class="section-card" bindtap="openContact">
       <view class="section-label">人工咨询</view>
       <view class="section-title">{{site.official_account_name}}</view>
       <view class="section-copy">{{site.official_account_guide || '请在微信中搜索公众号名称并关注，获取人工咨询服务。'}}</view>
@@ -17,6 +17,11 @@
     <view wx:if="{{site.service_description}}" class="section-card">
       <view class="section-label">服务说明</view>
       <view class="section-copy">{{site.service_description}}</view>
+    </view>
+    <view class="menu-card">
+      <view class="menu-row" data-page="about" bindtap="openPage"><text>关于我们</text><text>›</text></view>
+      <view class="menu-row" data-page="agreement" bindtap="openPage"><text>用户协议</text><text>›</text></view>
+      <view class="menu-row" data-page="privacy" bindtap="openPage"><text>隐私政策</text><text>›</text></view>
     </view>
     <view wx:if="{{site.filing_number}}" class="filing">{{site.filing_number}}</view>
   </block>

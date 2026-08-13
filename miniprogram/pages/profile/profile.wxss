@@ -10,3 +10,4 @@
 .section-title { margin-top: 16rpx; color: #143f35; font-size: 34rpx; font-weight: 650; }
 .section-copy { margin-top: 14rpx; color: #535a56; font-size: 27rpx; line-height: 1.7; white-space: pre-wrap; }
 .filing { padding: 48rpx 0 24rpx; color: #939895; font-size: 22rpx; text-align: center; }
+.menu-card { overflow: hidden; margin-top: 24rpx; border-radius: 28rpx; background: #fff; box-shadow: 0 12rpx 32rpx rgba(20,63,53,.06); }.menu-row { display: flex; justify-content: space-between; padding: 30rpx 34rpx; border-bottom: 1rpx solid #eceeeb; color: #353b38; font-size: 27rpx; }.menu-row:last-child { border-bottom: 0; }

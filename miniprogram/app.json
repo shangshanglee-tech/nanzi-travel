@@ -3,8 +3,12 @@
     "pages/home/home",
     "pages/products/products",
     "pages/product-detail/product-detail",
+    "pages/contact/contact",
     "pages/messages/messages",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/about/about",
+    "pages/privacy/privacy",
+    "pages/agreement/agreement"
   ],
   "window": {
     "navigationBarTitleText": "小楠子爱旅行",

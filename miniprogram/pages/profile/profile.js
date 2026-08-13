@@ -15,5 +15,10 @@ Page({
       this.setData({loading: false});
     }
   },
+  openContact() {
+    wx.navigateTo({url: "/pages/contact/contact"});
+  },
+  openPage(event) {
+    wx.navigateTo({url: `/pages/${event.currentTarget.dataset.page}/${event.currentTarget.dataset.page}`});
+  },
 });
-
