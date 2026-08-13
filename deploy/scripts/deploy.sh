@@ -26,6 +26,6 @@ ln -sfn "$release_dir" /opt/nanzi-travel/current
 chown -h nanziapp:nanziapp /opt/nanzi-travel/current
 systemctl enable --now nanzi-travel-api.service
 systemctl restart nanzi-travel-api.service
-curl --fail --silent --show-error --retry 10 --retry-delay 2 http://127.0.0.1:8001/healthz >/dev/null
+curl --fail --silent --show-error --retry 10 --retry-connrefused --retry-delay 2 \
+  http://127.0.0.1:8001/healthz >/dev/null
 echo "Deployed release $timestamp"
-
