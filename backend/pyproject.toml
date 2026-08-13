@@ -16,6 +16,5 @@ dependencies = [
   "boto3>=1.40,<2",
 ]
 
-[tool.setuptools]
-packages = ["config"]
-
+[tool.setuptools.packages.find]
+include = ["config*", "catalog*"]
