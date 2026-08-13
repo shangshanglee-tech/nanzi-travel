@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "小楠子爱旅行产品导入格式",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["products"],
+  "properties": {
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slug", "title", "destination", "summary", "duration_days", "departures", "itinerary"],
+        "properties": {
+          "slug": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "subtitle": {"type": "string"},
+          "destination": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "slug"],
+            "properties": {"name": {"type": "string"}, "slug": {"type": "string"}}
+          },
+          "summary": {"type": "string", "minLength": 1},
+          "season": {"type": "string"},
+          "duration_days": {"type": "integer", "minimum": 1},
+          "hero_image": {"type": "string"},
+          "vessel": {"type": "string"},
+          "departure_city": {"type": "string"},
+          "tags": {"$ref": "#/$defs/textList"},
+          "highlights": {"$ref": "#/$defs/textList"},
+          "included": {"$ref": "#/$defs/textList"},
+          "excluded": {"$ref": "#/$defs/textList"},
+          "suitable_for": {"$ref": "#/$defs/textList"},
+          "notices": {"$ref": "#/$defs/textList"},
+          "sort_order": {"type": "integer", "minimum": 0},
+          "departures": {"type": "array", "items": {"type": "object"}},
+          "itinerary": {"type": "array", "items": {"type": "object"}},
+          "images": {"type": "array", "items": {"type": "object"}}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "textList": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}
+

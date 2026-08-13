@@ -1,0 +1,29 @@
+{
+  "products": [
+    {
+      "slug": "antarctica-demo",
+      "title": "演示内容｜12天南极半岛精华",
+      "subtitle": "用于开发测试，不代表正式上线产品",
+      "destination": {"name": "南极", "slug": "antarctica"},
+      "summary": "这是一条用于验证后台导入流程的演示产品，不得直接发布。",
+      "season": "演示航季",
+      "duration_days": 12,
+      "hero_image": "",
+      "vessel": "演示船只",
+      "departure_city": "演示出发地",
+      "tags": ["演示内容"],
+      "highlights": ["验证产品导入和更新流程"],
+      "included": ["演示包含项目"],
+      "excluded": ["演示不含项目"],
+      "suitable_for": ["仅供开发测试"],
+      "notices": ["演示内容不得公开发布"],
+      "departures": [
+        {"start_date": "2027-01-01", "end_date": "2027-01-12", "label": "演示团期", "consultation_status": "不可咨询"}
+      ],
+      "itinerary": [
+        {"day_number": 1, "title": "演示行程", "description": "用于验证每日行程导入。", "accommodation": "", "meals": ""}
+      ],
+      "images": []
+    }
+  ]
+}
