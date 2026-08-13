@@ -31,6 +31,8 @@ assert re.search(r"server_name\s+api\.nanzitravel\.com;", nginx)
 assert re.search(r"server_name\s+admin\.nanzitravel\.com;", nginx)
 assert "proxy_pass http://127.0.0.1:8001;" in nginx
 assert "ssl_certificate" in nginx
+api_server = nginx.split("server {", 2)[2].split("server {", 1)[0]
+assert "location /media/ { alias /var/lib/nanzi-travel/media/; }" in api_server
 assert "alias /var/lib/nanzi-travel/static/;" in nginx
 assert "alias /var/lib/nanzi-travel/media/;" in nginx
 
