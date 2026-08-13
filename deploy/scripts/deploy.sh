@@ -21,6 +21,11 @@ sudo -u nanziapp env DJANGO_DB_PATH=/var/lib/nanzi-travel/db.sqlite3 \
   "$release_dir/backend/.venv/bin/python" "$release_dir/backend/manage.py" migrate --noinput
 sudo -u nanziapp env DJANGO_DB_PATH=/var/lib/nanzi-travel/db.sqlite3 \
   "$release_dir/backend/.venv/bin/python" "$release_dir/backend/manage.py" collectstatic --noinput
+install -d -o nanziapp -g www-data -m 2750 /var/lib/nanzi-travel/static
+rsync -a --delete "$release_dir/backend/staticfiles/" /var/lib/nanzi-travel/static/
+chown -R nanziapp:www-data /var/lib/nanzi-travel/static
+find /var/lib/nanzi-travel/static -type d -exec chmod 2750 {} +
+find /var/lib/nanzi-travel/static -type f -exec chmod 0640 {} +
 
 ln -sfn "$release_dir" /opt/nanzi-travel/current
 chown -h nanziapp:nanziapp /opt/nanzi-travel/current

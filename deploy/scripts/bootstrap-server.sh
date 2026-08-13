@@ -28,7 +28,9 @@ tar -tf "$legacy_backup/nanzi-ai.tar.gz" >/dev/null 2>&1 || [[ ! -f "$legacy_bac
 if ! id nanziapp >/dev/null 2>&1; then
   useradd --system --home /opt/nanzi-travel --shell /usr/sbin/nologin nanziapp
 fi
-install -d -o nanziapp -g nanziapp -m 0750 /opt/nanzi-travel/releases /var/lib/nanzi-travel /var/lib/nanzi-travel/media /var/log/nanzi-travel
+install -d -o nanziapp -g nanziapp -m 0750 /opt/nanzi-travel/releases /var/log/nanzi-travel
+install -d -o nanziapp -g www-data -m 2750 /var/lib/nanzi-travel
+install -d -o nanziapp -g www-data -m 2750 /var/lib/nanzi-travel/media /var/lib/nanzi-travel/static
 install -d -o root -g nanziapp -m 0750 /etc/nanzi-travel
 
 if [[ ! -f /etc/nanzi-travel/backend.env ]]; then
@@ -58,4 +60,3 @@ systemctl daemon-reload
 nginx -t
 systemctl reload nginx
 echo "Bootstrap complete. Also verify Alibaba Cloud security groups do not expose TCP 5000."
-

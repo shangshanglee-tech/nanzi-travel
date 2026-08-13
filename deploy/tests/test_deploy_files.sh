@@ -31,6 +31,12 @@ assert re.search(r"server_name\s+api\.nanzitravel\.com;", nginx)
 assert re.search(r"server_name\s+admin\.nanzitravel\.com;", nginx)
 assert "proxy_pass http://127.0.0.1:8001;" in nginx
 assert "ssl_certificate" in nginx
+assert "alias /var/lib/nanzi-travel/static/;" in nginx
+assert "alias /var/lib/nanzi-travel/media/;" in nginx
+
+deploy_script = (root / "deploy/scripts/deploy.sh").read_text()
+assert "staticfiles/" in deploy_script
+assert "/var/lib/nanzi-travel/static/" in deploy_script
 
 secret_assignment = re.compile(r"(?im)^\s*(?:DJANGO_SECRET_KEY|OSS_SECRET_ACCESS_KEY|PASSWORD)\s*=\s*[^\s#].+$")
 for path in (root / "deploy").rglob("*"):
