@@ -1,0 +1,4 @@
+.entry { display: flex; align-items: center; gap: 22rpx; padding: 30rpx; border: 1rpx solid #d8ded9; border-radius: 26rpx; background: #fff; }
+.mark { width: 72rpx; height: 72rpx; border-radius: 22rpx; background: #dbe6de; color: #143f35; font-size: 32rpx; line-height: 72rpx; text-align: center; }
+.copy { flex: 1; }.title { color: #151515; font-size: 29rpx; font-weight: 650; }.description { margin-top: 6rpx; color: #767d79; font-size: 22rpx; }.arrow { color: #8b918e; font-size: 42rpx; }
+

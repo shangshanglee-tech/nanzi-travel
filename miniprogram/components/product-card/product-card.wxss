@@ -1,0 +1,8 @@
+.card { overflow: hidden; margin-bottom: 28rpx; border-radius: 28rpx; background: #fff; box-shadow: 0 12rpx 34rpx rgba(20,63,53,.07); }
+.image { display: block; width: 100%; height: 340rpx; background: #dbe6de; }
+.body { padding: 28rpx; }
+.kicker { color: #75807b; font-size: 21rpx; letter-spacing: 1rpx; }
+.title { margin-top: 10rpx; color: #151515; font-size: 34rpx; font-weight: 650; }
+.subtitle { margin-top: 10rpx; color: #626965; font-size: 25rpx; line-height: 1.55; }
+.facts { display: flex; justify-content: space-between; margin-top: 24rpx; color: #143f35; font-size: 24rpx; font-weight: 600; }
+

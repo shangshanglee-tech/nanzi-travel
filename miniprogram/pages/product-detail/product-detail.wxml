@@ -1,0 +1,22 @@
+<view class="page with-action">
+  <view wx:if="{{loading}}" class="loading">正在展开完整行程…</view>
+  <empty-state wx:elif="{{error}}" title="暂时无法查看行程" description="{{error}}" bind:retry="loadProduct" />
+  <block wx:else>
+    <image wx:if="{{product.hero_image}}" class="hero" src="{{product.hero_image}}" mode="aspectFill" />
+    <view class="intro">
+      <view class="kicker">{{product.destination.name}} · {{product.season}}</view>
+      <view class="title">{{product.title}}</view>
+      <view class="summary">{{product.summary}}</view>
+      <view class="fact-row"><text wx:if="{{durationLabel}}">{{durationLabel}}</text><text wx:if="{{product.departure_city}}">{{product.departure_city}}出发</text><text wx:if="{{product.vessel}}">{{product.vessel}}</text></view>
+    </view>
+    <view wx:if="{{product.highlights.length}}" class="section"><view class="section-title">行程亮点</view><view wx:for="{{product.highlights}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view wx:if="{{product.departures.length}}" class="section"><view class="section-title">可咨询团期</view><view wx:for="{{product.departures}}" wx:key="index" class="departure"><text>{{item.label || item.start_date}}</text><text>{{item.consultation_status}}</text></view></view>
+    <view wx:if="{{product.itinerary_days.length}}" class="section"><view class="section-title">每日行程</view><view wx:for="{{product.itinerary_days}}" wx:key="day_number" class="day"><view class="day-index">DAY {{item.day_number}}</view><view class="day-title">{{item.title}}</view><view class="day-copy">{{item.description}}</view></view></view>
+    <view wx:if="{{product.images.length}}" class="section"><view class="section-title">旅程影像</view><scroll-view scroll-x class="gallery"><image wx:for="{{product.images}}" wx:key="image" class="gallery-image" src="{{item.image}}" mode="aspectFill" /></scroll-view></view>
+    <view wx:if="{{product.included.length}}" class="section"><view class="section-title">服务包含</view><view wx:for="{{product.included}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view wx:if="{{product.excluded.length}}" class="section"><view class="section-title">服务不含</view><view wx:for="{{product.excluded}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view wx:if="{{product.suitable_for.length}}" class="section"><view class="section-title">适合人群</view><view wx:for="{{product.suitable_for}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view wx:if="{{product.notices.length}}" class="section notice"><view class="section-title">重要提醒</view><view wx:for="{{product.notices}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view class="action-bar"><button class="consult-button" bindtap="consult">咨询该行程</button></view>
+  </block>
+</view>

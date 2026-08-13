@@ -1,0 +1,5 @@
+<view class="entry" bindtap="showComingSoon" role="button">
+  <view class="mark">{{mark}}</view>
+  <view class="copy"><view class="title">{{title}}</view><view class="description">{{description}}</view></view>
+  <view class="arrow">›</view>
+</view>

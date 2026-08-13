@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText":"小楠子爱旅行",
   "enablePullDownRefresh":true,
-  "usingComponents":{"empty-state":"/components/empty-state/empty-state"}
+  "usingComponents":{"empty-state":"/components/empty-state/empty-state","coming-soon":"/components/coming-soon/coming-soon"}
 }

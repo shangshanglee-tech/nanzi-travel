@@ -7,7 +7,7 @@
   <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadHome" />
   <empty-state wx:elif="{{!products.length}}" title="首批行程正在准备" description="确认完成后会第一时间在这里发布" showAction="{{false}}" />
   <view wx:else class="product-list">
-    <view wx:for="{{products}}" wx:key="slug" class="product-card">
+    <view wx:for="{{products}}" wx:key="slug" class="product-card" bindtap="openProducts">
       <image wx:if="{{item.hero_image}}" class="product-image" src="{{item.hero_image}}" mode="aspectFill" />
       <view class="product-body">
         <view class="product-kicker">{{item.destination.name}} · {{item.season}}</view>
@@ -15,5 +15,11 @@
         <view class="product-summary">{{item.subtitle || item.summary}}</view>
       </view>
     </view>
+  </view>
+  <view class="all-products" bindtap="openProducts">查看全部南极行程 <text>›</text></view>
+  <view class="future-title">更多旅行服务</view>
+  <view class="future-list">
+    <coming-soon title="找搭子" description="寻找同行伙伴，共享旅行期待" mark="伴" />
+    <coming-soon title="AI旅行顾问" description="用自然语言寻找合适的旅行" mark="✦" />
   </view>
 </view>

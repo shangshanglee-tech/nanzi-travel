@@ -1,0 +1,12 @@
+<view class="card" bindtap="openProduct" role="button">
+  <image wx:if="{{product.hero_image}}" class="image" src="{{product.hero_image}}" mode="aspectFill" />
+  <view class="body">
+    <view class="kicker">{{product.destination.name}} · {{product.season}}</view>
+    <view class="title">{{product.title}}</view>
+    <view class="subtitle">{{product.subtitle || product.summary}}</view>
+    <view class="facts">
+      <text wx:if="{{product.durationLabel}}">{{product.durationLabel}}</text>
+      <text>{{product.priceLabel}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<view class="page">
+  <scroll-view wx:if="{{options.tags.length}}" class="filters" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="filter-row">
+      <view wx:for="{{options.tags}}" wx:key="*this" data-tag="{{item}}" class="filter {{filters.tag === item ? 'active' : ''}}" bindtap="chooseTag">{{item}}</view>
+    </view>
+  </scroll-view>
+  <view wx:if="{{loading}}" class="loading">正在寻找合适的行程…</view>
+  <empty-state wx:elif="{{error}}" title="行程加载失败" description="{{error}}" bind:retry="loadProducts" />
+  <empty-state wx:elif="{{!products.length}}" title="没有找到匹配行程" description="可以清除筛选条件后再看看" actionText="清除筛选" bind:retry="clearFilters" />
+  <view wx:else class="list"><product-card wx:for="{{products}}" wx:key="slug" product="{{item}}" bind:open="openProduct" /></view>
+</view>

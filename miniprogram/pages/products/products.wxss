@@ -1,0 +1,2 @@
+.page { padding: 26rpx 30rpx 60rpx; }.filters { width: 100%; margin-bottom: 26rpx; white-space: nowrap; }.filter-row { display: inline-flex; gap: 16rpx; }.filter { padding: 14rpx 24rpx; border-radius: 999rpx; background: #e7e9e6; color: #58605c; font-size: 24rpx; }.filter.active { background: #143f35; color: #fff; }.loading { padding: 100rpx 0; color: #777e7a; text-align: center; }
+

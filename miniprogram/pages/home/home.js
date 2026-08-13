@@ -22,5 +22,7 @@ Page({
       this.setData({loading: false});
     }
   },
+  openProducts() {
+    wx.navigateTo({url: "/pages/products/products?destination=antarctica"});
+  },
 });
-

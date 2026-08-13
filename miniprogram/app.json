@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/products/products",
+    "pages/product-detail/product-detail",
     "pages/messages/messages",
     "pages/profile/profile"
   ],
@@ -24,4 +26,3 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
-
