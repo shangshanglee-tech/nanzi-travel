@@ -16,6 +16,8 @@ test("builds an experience build version from the workflow run", () => {
       privateKeyPath: "/tmp/key",
       version: "0.1.17",
       desc: "release abc123d",
+      useCOS: true,
+      robot: 1,
     },
   );
 });

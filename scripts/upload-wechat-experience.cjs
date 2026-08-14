@@ -18,6 +18,10 @@ function buildUploadConfig({appid, privateKeyPath, runNumber, sha}) {
     privateKeyPath,
     version: `0.1.${runNumber}`,
     desc: `release ${sha.slice(0, 7)}`,
+    // COS is the CI client's asynchronous upload channel. It avoids the less
+    // reliable direct upload path used automatically for small code packages.
+    useCOS: true,
+    robot: 1,
   };
 }
 
@@ -39,8 +43,13 @@ async function uploadExperience() {
     }),
     version: config.version,
     desc: config.desc,
+    robot: config.robot,
+    useCOS: config.useCOS,
     setting: {es6: true, minify: true},
-    onProgressUpdate: () => {},
+    onProgressUpdate: (progress) => {
+      const text = progress?.toString?.() || String(progress);
+      console.log(`[wechat-ci] ${text}`);
+    },
   });
   console.log(`WeChat experience build uploaded: ${config.version} (${config.desc})`);
 }
