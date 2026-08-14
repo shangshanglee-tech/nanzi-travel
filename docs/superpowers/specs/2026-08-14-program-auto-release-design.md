@@ -38,7 +38,7 @@
 - `WECHAT_APPID`：小程序 AppID。
 - `WECHAT_PRIVATE_KEY`：微信公众平台为小程序代码上传生成的私钥全文。
 
-服务器新增受限 `nanzi-deploy` 账号。它只能通过受控的 sudo 命令调用备份、部署、回滚和必要的服务状态检查；不可获得交互式 root shell。现有 `nanzi-ai.service` 不在发布脚本或权限范围内。
+服务器新增受限 `nanzi-deploy` 账号。该账号需要普通 SSH shell 以便 GitHub 上传发布包并执行固定发布命令，但只能通过受控的 sudo 命令调用备份、部署、回滚和必要的服务状态检查；不可获得交互式 root shell。现有 `nanzi-ai.service` 不在发布脚本或权限范围内。
 
 ## 版本与审计
 

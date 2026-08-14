@@ -68,7 +68,7 @@ Extract to `mktemp -d /tmp/nanzi-travel-release-XXXXXX`, run `backup.sh`, then `
 
 - [ ] **Step 4: Implement the account bootstrap script**
 
-Create a `nanzi-deploy` account with `/usr/sbin/nologin`, an SSH authorized-keys directory, and a root-owned `/usr/local/sbin/nanzi-github-release` copied from `github-release.sh` with mode `0750`. Install `/etc/sudoers.d/nanzi-deploy` mode `0440` containing exactly:
+Create a `nanzi-deploy` account with `/bin/bash`, an SSH authorized-keys directory, and a root-owned `/usr/local/sbin/nanzi-github-release` copied from `github-release.sh` with mode `0750`. The SSH shell is required solely for GitHub to upload the archive and invoke the fixed release command; it is not a root shell. Install `/etc/sudoers.d/nanzi-deploy` mode `0440` containing exactly:
 
 ```text
 nanzi-deploy ALL=(root) NOPASSWD: /usr/local/sbin/nanzi-github-release /tmp/nanzi-travel-release-*.tar.gz [0-9a-f]*
