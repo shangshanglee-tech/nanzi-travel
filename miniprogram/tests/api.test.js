@@ -43,3 +43,22 @@ test("API client preserves backend error codes and messages", async () => {
     (error) => error.code === "not_found" && error.message === "产品不存在或尚未发布",
   );
 });
+
+test("API client loads vessel list and vessel detail", async () => {
+  const paths = [];
+  const client = createApiClient({
+    baseUrl: "https://api.example.test/api/v1",
+    request({url}) {
+      paths.push(url);
+      return Promise.resolve({statusCode: 200, data: {results: []}});
+    },
+  });
+
+  await client.getVessels();
+  await client.getVessel("fridtjof-nansen");
+
+  assert.deepEqual(paths, [
+    "https://api.example.test/api/v1/vessels",
+    "https://api.example.test/api/v1/vessels/fridtjof-nansen",
+  ]);
+});

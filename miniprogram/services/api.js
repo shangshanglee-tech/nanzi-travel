@@ -55,6 +55,8 @@ function createApiClient({baseUrl, request = wxRequest}) {
       return send(`/products${query ? `?${query}` : ""}`);
     },
     getProduct: (slug) => send(`/products/${encodeURIComponent(slug)}`),
+    getVessels: () => send("/vessels"),
+    getVessel: (slug) => send(`/vessels/${encodeURIComponent(slug)}`),
   };
 }
 
@@ -70,5 +72,6 @@ module.exports = {
   getHome: () => currentClient().getHome(),
   getProducts: (filters) => currentClient().getProducts(filters),
   getProduct: (slug) => currentClient().getProduct(slug),
+  getVessels: () => currentClient().getVessels(),
+  getVessel: (slug) => currentClient().getVessel(slug),
 };
-

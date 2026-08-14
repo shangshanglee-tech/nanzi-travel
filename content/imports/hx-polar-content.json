@@ -1,0 +1,1319 @@
+{
+  "source": "HX official pages",
+  "imported_at": "2026-08-14T05:01:46.678Z",
+  "vessels": [
+    {
+      "slug": "roald-amundsen",
+      "name": "阿蒙森号",
+      "official_name": "MS Roald Amundsen",
+      "capacity": 490,
+      "year_built": 2019,
+      "summary": "HX 新一代混合动力探险船。它把面向极地的探险能力、开阔的公共空间与更完整的船上科学体验放在同一条船上，适合希望在舒适度与深度探索之间取得平衡的旅行者。",
+      "features": [
+        "混合动力探险船",
+        "船上科学中心",
+        "全景公共空间",
+        "探险队带领登陆与巡航"
+      ],
+      "source_url": "https://www.travelhx.com/ships/roald-amundsen/",
+      "review_status": "pending",
+      "cabins": [
+        {
+          "name": "探险套房",
+          "category": "套房",
+          "summary": "适合重视私密空间与船上服务体验的旅客；部分房型配有阳台或更开阔的窗景。",
+          "highlights": [
+            "更宽裕的起居空间",
+            "部分房型带阳台",
+            "套房礼遇以最终团期为准"
+          ]
+        },
+        {
+          "name": "北极高级舱",
+          "category": "高级舱",
+          "summary": "在舒适度、景观与预算之间取得平衡的主力选择。",
+          "highlights": [
+            "自然采光",
+            "适合双人入住",
+            "房型细节以具体舱号为准"
+          ]
+        },
+        {
+          "name": "极地海景舱",
+          "category": "海景舱",
+          "summary": "希望保有窗景、同时控制整体预算的旅行者可优先关注。",
+          "highlights": [
+            "设有窗景",
+            "双人入住为主",
+            "部分房型可选双床"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "fridtjof-nansen",
+      "name": "南森号",
+      "official_name": "MS Fridtjof Nansen",
+      "capacity": 490,
+      "year_built": 2020,
+      "summary": "HX 新一代混合动力探险船，以明亮的北欧风格公共空间、科学中心和高比例外舱体验见长。它适合第一次前往南极、同时希望船上体验更完整的旅行者。",
+      "features": [
+        "混合动力探险船",
+        "北欧风格内装",
+        "科学中心与探险讲座",
+        "全景观景与公共空间"
+      ],
+      "source_url": "https://www.travelhx.com/ships/fridtjof-nansen/",
+      "review_status": "pending",
+      "cabins": [
+        {
+          "name": "探险套房",
+          "category": "套房",
+          "summary": "为希望在极地探险外获得更高私密度与服务感的旅客准备。",
+          "highlights": [
+            "更大空间",
+            "部分房型带阳台",
+            "床型与礼遇以实际舱号为准"
+          ]
+        },
+        {
+          "name": "北极高级舱",
+          "category": "高级舱",
+          "summary": "兼顾空间感、自然光与整体预算的舒适型选择。",
+          "highlights": [
+            "采光良好",
+            "适合双人入住",
+            "部分房型可灵活安排床型"
+          ]
+        },
+        {
+          "name": "极地海景舱",
+          "category": "海景舱",
+          "summary": "保留极地窗景体验的实用选择。",
+          "highlights": [
+            "设有窗景",
+            "双人入住为主",
+            "具体视野以舱号为准"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "fram",
+      "name": "前进号",
+      "official_name": "MS Fram",
+      "capacity": 200,
+      "year_built": 2007,
+      "summary": "一艘为极地打造的紧凑型探险船，约 200 位宾客的规模让船上氛围更亲近；更新后的科学中心、探险休息区与公共空间，使它成为偏好小船感和远征气质的选择。",
+      "features": [
+        "约200位宾客的小船体验",
+        "为极地航行打造",
+        "升级科学中心",
+        "探险休息区与全景酒廊"
+      ],
+      "source_url": "https://www.travelhx.com/en-us/ships/fram/",
+      "review_status": "pending",
+      "cabins": [
+        {
+          "name": "探险套房",
+          "category": "套房",
+          "summary": "前进号上空间更充裕的住宿选择，适合希望拥有更多起居空间的旅客。",
+          "highlights": [
+            "部分房型带阳台",
+            "更开阔的窗景",
+            "套房礼遇以实际团期为准"
+          ]
+        },
+        {
+          "name": "北极高级舱",
+          "category": "高级舱",
+          "summary": "以更舒适的空间和自然采光提升长航段的居住体验。",
+          "highlights": [
+            "窗景或更佳视野",
+            "适合双人入住",
+            "具体配置因舱号而异"
+          ]
+        },
+        {
+          "name": "极地海景舱",
+          "category": "海景舱",
+          "summary": "适合希望保有窗景、又重视预算效率的旅客。",
+          "highlights": [
+            "设有窗景",
+            "部分视野可能受限",
+            "床型以实际舱号为准"
+          ]
+        },
+        {
+          "name": "极地内舱",
+          "category": "内舱",
+          "summary": "将预算更多放在目的地与探险体验上的实用选择。",
+          "highlights": [
+            "无窗",
+            "双人入住为主",
+            "适合对白天船上活动投入更高的旅客"
+          ]
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "slug": "life-returns-springtime-expedition-to-antarctica",
+      "subtitle": "23天南极春季三岛远征",
+      "summary": "从福克兰、南乔治亚一路进入南极半岛的长线远征。晚春时节的冰景与繁殖季野生动物，让这条路线适合愿意为更完整南大洋体验投入时间的旅行者。",
+      "highlights": [
+        "福克兰、南乔治亚与南极半岛三岛串联",
+        "晚春冰景与繁殖季野生动物",
+        "在南极停留多日，节奏更从容"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "深度南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fram"
+      ],
+      "departures": [
+        {
+          "start_date": "2026-10-16",
+          "label": "2026-10-16 出发",
+          "vessel_slug": "fram"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Days 2-4",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 5-7",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Days 8-9",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 10-12",
+          "title": "南乔治亚岛探索",
+          "description": "这里以企鹅、海豹和海鸟繁殖地闻名。探险队会在许可与天气允许时安排登陆和自然观察。"
+        },
+        {
+          "source_range": "Days 13-14",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 15-19",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 20-22",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Day 23",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/life-returns-springtime-expedition-to-antarctica/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "highlights-of-antarctica",
+      "subtitle": "12天南极半岛精华",
+      "summary": "第一次去南极、又希望在时间与预算之间保持效率的经典选择。以南极半岛、登陆、小艇巡航与野生动物观察为核心，完整体验极地探险的入门精华。",
+      "highlights": [
+        "5天左右南极半岛探索窗口",
+        "登陆与小艇巡航结合",
+        "适合首次前往南极"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "经典南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2026-10-30",
+          "label": "2026-10-30 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-11-09",
+          "label": "2026-11-09 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-11-19",
+          "label": "2026-11-19 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-11-29",
+          "label": "2026-11-29 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-12-09",
+          "label": "2026-12-09 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-12-19",
+          "label": "2026-12-19 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2026-12-29",
+          "label": "2026-12-29 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-01-08",
+          "label": "2027-01-08 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-01-18",
+          "label": "2027-01-18 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-01-28",
+          "label": "2027-01-28 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-02-07",
+          "label": "2027-02-07 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-02-17",
+          "label": "2027-02-17 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-02-27",
+          "label": "2027-02-27 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-03-09",
+          "label": "2027-03-09 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-11-11",
+          "label": "2027-11-11 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-01-02",
+          "label": "2028-01-02 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-01-12",
+          "label": "2028-01-12 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-01-22",
+          "label": "2028-01-22 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-02-01",
+          "label": "2028-02-01 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-02-25",
+          "label": "2028-02-25 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-01-09",
+          "label": "2027-01-09 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-01-19",
+          "label": "2027-01-19 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-01-29",
+          "label": "2027-01-29 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-03-06",
+          "label": "2028-03-06 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-03-16",
+          "label": "2028-03-16 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2027-02-08",
+          "label": "2027-02-08 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-10-29",
+          "label": "2027-10-29 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-11-22",
+          "label": "2027-11-22 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-12-16",
+          "label": "2027-12-16 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-01-09",
+          "label": "2028-01-09 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-01-19",
+          "label": "2028-01-19 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-02-26",
+          "label": "2028-02-26 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-03-21",
+          "label": "2028-03-21 出发",
+          "vessel_slug": "roald-amundsen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 3-4",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Day 5-9",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Day 10-11",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 12",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/highlights-of-antarctica/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "iconic-antarctica-the-explorers-route",
+      "subtitle": "16天经典南极之旅",
+      "summary": "比常规半岛行程多出更长的南极探索时间，向威德尔海及南极半岛更偏远的海峡延伸。适合希望把重点放在南极本身、而非只完成一次打卡的旅行者。",
+      "highlights": [
+        "约9天南极探索",
+        "威德尔海与偏远海峡",
+        "深度体验型经典路线"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "经典南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2027-03-04",
+          "label": "2027-03-04 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-11-08",
+          "label": "2027-11-08 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-12-02",
+          "label": "2027-12-02 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-12-26",
+          "label": "2027-12-26 出发",
+          "vessel_slug": "roald-amundsen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 3-4",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Day 5-13",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Day 14-15",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Day 16",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/iconic-antarctica-the-explorers-route/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "in-depth-antarctica-falklands-south-georgia-expedition",
+      "subtitle": "23天南极三岛深度探险",
+      "summary": "一条把福克兰、南乔治亚和南极半岛真正串起来的远征路线。时间足够时，野生动物、岛屿生态与南极冰原会构成层次更完整的南大洋体验。",
+      "highlights": [
+        "三岛深度串联",
+        "南乔治亚野生动物",
+        "适合时间充裕的深度旅行者"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "三岛与远征",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fram"
+      ],
+      "departures": [
+        {
+          "start_date": "2026-11-06",
+          "label": "2026-11-06 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2026-11-27",
+          "label": "2026-11-27 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2026-12-18",
+          "label": "2026-12-18 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-01-08",
+          "label": "2027-01-08 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-01-29",
+          "label": "2027-01-29 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-02-19",
+          "label": "2027-02-19 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-11-13",
+          "label": "2027-11-13 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-12-04",
+          "label": "2027-12-04 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2027-12-25",
+          "label": "2027-12-25 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2028-01-15",
+          "label": "2028-01-15 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2028-02-05",
+          "label": "2028-02-05 出发",
+          "vessel_slug": "fram"
+        },
+        {
+          "start_date": "2028-02-26",
+          "label": "2028-02-26 出发",
+          "vessel_slug": "fram"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 3",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 4-6",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 7-8",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 9-12",
+          "title": "南乔治亚岛探索",
+          "description": "这里以企鹅、海豹和海鸟繁殖地闻名。探险队会在许可与天气允许时安排登陆和自然观察。"
+        },
+        {
+          "source_range": "Day 13-15",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Day 16-19",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Day 20-22",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 23",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/in-depth-antarctica-falklands-south-georgia-expedition/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "antarctica-falklands-expedition",
+      "subtitle": "16天南极与福克兰探险",
+      "summary": "在南极半岛之外加入福克兰群岛，让这趟旅程同时拥有冰原、海鸟、企鹅与海岛生活的不同层次。",
+      "highlights": [
+        "南极半岛与福克兰双区域",
+        "野生动物观察层次丰富",
+        "适合希望延展经典半岛体验的旅行者"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "深度南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2026-11-28",
+          "label": "2026-11-28 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-03-18",
+          "label": "2027-03-18 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-12-05",
+          "label": "2027-12-05 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-03-07",
+          "label": "2028-03-07 出发",
+          "vessel_slug": "roald-amundsen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Days 3-4",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 5-9",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 10-11",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Days 12-14",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 15",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 16",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/antarctica-falklands-expedition/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "antarctic-circle-expedition",
+      "subtitle": "16天南极圈探险",
+      "summary": "在更长的南极探索窗口中，争取向南极圈以南航行。是否穿越取决于冰况与天气，正是它比常规路线更具探险感的原因。",
+      "highlights": [
+        "尝试穿越南极圈",
+        "约9天南极探索",
+        "天气与冰况决定最终航线"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "深度南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "roald-amundsen",
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2026-12-26",
+          "label": "2026-12-26 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2027-02-18",
+          "label": "2027-02-18 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-01-29",
+          "label": "2028-01-29 出发",
+          "vessel_slug": "roald-amundsen"
+        },
+        {
+          "start_date": "2028-02-11",
+          "label": "2028-02-11 出发",
+          "vessel_slug": "fridtjof-nansen"
+        },
+        {
+          "start_date": "2028-02-12",
+          "label": "2028-02-12 出发",
+          "vessel_slug": "roald-amundsen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Days 3-4",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 5-13",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 14-15",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Day 16",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/antarctic-circle-expedition/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "south-georgia-and-falklands-from-punta-arenas-to-montevideo",
+      "subtitle": "18天南乔治亚与福克兰",
+      "summary": "以南乔治亚和福克兰为主角的野生动物远征。它把重点放在偏远岛屿生态、海鸟与企鹅繁殖地，适合对南极三岛有明确兴趣的旅行者。",
+      "highlights": [
+        "南乔治亚深度停留",
+        "福克兰群岛生态体验",
+        "偏重野生动物与海岛远征"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "三岛与远征",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fram"
+      ],
+      "departures": [
+        {
+          "start_date": "2027-03-12",
+          "label": "2027-03-12 出发",
+          "vessel_slug": "fram"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 3",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 4",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 5-6",
+          "title": "南乔治亚岛探索",
+          "description": "这里以企鹅、海豹和海鸟繁殖地闻名。探险队会在许可与天气允许时安排登陆和自然观察。"
+        },
+        {
+          "source_range": "Day 7-10",
+          "title": "南乔治亚岛探索",
+          "description": "这里以企鹅、海豹和海鸟繁殖地闻名。探险队会在许可与天气允许时安排登陆和自然观察。"
+        },
+        {
+          "source_range": "Day 11-12",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 13-14",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 15-17",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 18",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/south-georgia-and-falklands-from-punta-arenas-to-montevideo/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "antarctica-and-falklands-expedition-2027",
+      "subtitle": "19天南极与福克兰北向航线",
+      "summary": "从南极出发一路向北连接福克兰群岛，在冰原之外加入更丰富的岛屿生态与航海层次。",
+      "highlights": [
+        "南极与福克兰双区域",
+        "北向航线",
+        "兼顾冰原与岛屿野生动物"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "三岛与远征",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2027-03-19",
+          "label": "2027-03-19 出发",
+          "vessel_slug": "fridtjof-nansen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Days 3-4",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 5-9",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 10-11",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Days 12-14",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 15",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 16",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 17-18",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 19",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/antarctica-and-falklands-expedition-2027/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "life-returns-springtime-expedition-to-antarctica-2027",
+      "subtitle": "23天南极春季三岛远征（2027）",
+      "summary": "与春季三岛远征相同的核心逻辑：从福克兰、南乔治亚进入南极，在晚春的纯净冰景和繁殖季生态中完成一次长线远征。",
+      "highlights": [
+        "三岛长线远征",
+        "晚春冰景",
+        "野生动物繁殖季"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "深度南极",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fram"
+      ],
+      "departures": [
+        {
+          "start_date": "2027-10-23",
+          "label": "2027-10-23 出发",
+          "vessel_slug": "fram"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 2-4",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 5-7",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Days 8-9",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 10-12",
+          "title": "南乔治亚岛探索",
+          "description": "这里以企鹅、海豹和海鸟繁殖地闻名。探险队会在许可与天气允许时安排登陆和自然观察。"
+        },
+        {
+          "source_range": "Days 13-14",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 15-19",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 20-22",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Day 23",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/life-returns-springtime-expedition-to-antarctica-2027/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "antarctica-patagonia-expedition",
+      "subtitle": "18天南极与巴塔哥尼亚",
+      "summary": "将南极探险与巴塔哥尼亚风景串联，是希望一次旅行同时感受南美大陆与南极冰原的长线选择。",
+      "highlights": [
+        "南极与巴塔哥尼亚组合",
+        "南美大陆与极地双体验",
+        "适合长假深度旅行"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "三岛与远征",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2027-10-26",
+          "label": "2027-10-26 出发",
+          "vessel_slug": "fridtjof-nansen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 2-3",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 4",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 5",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Day 6",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 7-9",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 10-11",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Days 12-15",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 16-17",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 18",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/antarctica-patagonia-expedition/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    },
+    {
+      "slug": "antarctica-falklands-northbound-expedition-2028",
+      "subtitle": "17天南极与福克兰北向航线",
+      "summary": "从南极向北延伸至福克兰群岛，用更长的时间感受冰原、海峡与岛屿野生动物之间的变化。",
+      "highlights": [
+        "南极与福克兰串联",
+        "北向航线",
+        "冰原与岛屿生态兼得"
+      ],
+      "season": "2026–2028 南极航季",
+      "departure_city": "以具体团期为准",
+      "tags": [
+        "三岛与远征",
+        "HX Expeditions",
+        "南极探险"
+      ],
+      "suitable_for": [
+        "希望深入了解南极自然与野生动物的旅行者"
+      ],
+      "notices": [
+        "极地行程受天气、冰况、野生动物和船长决定影响，具体安排以当日探险队通知为准。"
+      ],
+      "vessel_slugs": [
+        "fridtjof-nansen"
+      ],
+      "departures": [
+        {
+          "start_date": "2028-03-26",
+          "label": "2028-03-26 出发",
+          "vessel_slug": "fridtjof-nansen"
+        }
+      ],
+      "itinerary_segments": [
+        {
+          "source_range": "Day 1",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Day 2",
+          "title": "抵达与登船",
+          "description": "抵达南美出发城市，完成行前集合或转机，并在指定港口登上探险船，正式开启南极航程。"
+        },
+        {
+          "source_range": "Days 3-4",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 5-8",
+          "title": "南极探索日",
+          "description": "在天气、冰况和野生动物状况允许的前提下，探险队会安排登陆、小艇巡航、徒步或自然观察。每天的具体地点由当日条件决定，这正是极地探险最真实的部分。"
+        },
+        {
+          "source_range": "Days 9-10",
+          "title": "穿越德雷克海峡",
+          "description": "在前往或离开南极的航程中，探险队会通过讲座、装备说明和科学中心活动帮助你进入探险状态；海况与天气将决定航行节奏。"
+        },
+        {
+          "source_range": "Days 11-12",
+          "title": "福克兰群岛探索",
+          "description": "根据海况选择适合登陆的岛屿，观察海鸟、企鹅与开阔的海岛地貌；具体登陆点以探险队当天安排为准。"
+        },
+        {
+          "source_range": "Day 13",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 14",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        },
+        {
+          "source_range": "Days 15-16",
+          "title": "海上航行与准备",
+          "description": "在海上航段休整、参加探险队讲座，并为下一段目的地做好准备。"
+        },
+        {
+          "source_range": "Day 17",
+          "title": "探险航程",
+          "description": "跟随探险队在当天条件允许的范围内继续航行、观察与探索；具体安排以船长和探险队决定为准。"
+        }
+      ],
+      "source_url": "https://www.travelhx.com/en-us/cruises/antarctica-falklands-northbound-expedition-2028/",
+      "source_fetched_at": "2026-08-14T05:01:46.678Z",
+      "review_status": "pending"
+    }
+  ]
+}

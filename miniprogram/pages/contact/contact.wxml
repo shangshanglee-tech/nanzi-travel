@@ -2,19 +2,20 @@
   <view class="hero">
     <view class="eyebrow">HUMAN SERVICE</view>
     <view class="title">和小楠子聊聊这次旅行</view>
-    <view class="lead">关注公众号后发送咨询内容，由旅行顾问为你提供人工服务。</view>
+    <view class="lead">由旅行顾问本人提供一对一服务；路线、团期和船只信息会随咨询一同带入。</view>
   </view>
 
-  <view class="official-card">
-    <view class="label">已关联公众号</view>
-    <official-account binderror="handleOfficialAccountError"></official-account>
-    <view wx:if="{{componentUnavailable}}" class="component-note">当前入口暂不支持直接展示公众号，请使用下方搜索方式。</view>
+  <view class="service-card">
+    <view class="label">旅行顾问在线</view>
+    <view class="service-title">直接发起咨询</view>
+    <view class="service-copy">点击后进入小程序客服会话。顾问会看到本次咨询所关联的产品信息。</view>
+    <button class="service-button" open-type="contact" session-from="{{sessionFrom}}">进入咨询会话</button>
   </view>
 
   <view class="fallback-card">
-    <view class="step">01</view>
+    <view class="step">备选</view>
     <view class="step-content">
-      <view class="step-title">在微信中搜索公众号</view>
+      <view class="step-title">也可以从公众号了解更多</view>
       <view class="account-name">{{officialAccountName}}</view>
       <view class="step-copy">{{officialAccountGuide}}</view>
       <button class="outline-button" bindtap="copyAccountName">复制公众号名称</button>

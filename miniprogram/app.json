@@ -3,6 +3,7 @@
     "pages/home/home",
     "pages/products/products",
     "pages/product-detail/product-detail",
+    "pages/vessel-detail/vessel-detail",
     "pages/contact/contact",
     "pages/messages/messages",
     "pages/profile/profile",

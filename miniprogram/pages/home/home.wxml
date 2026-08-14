@@ -7,7 +7,7 @@
   <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadHome" />
   <empty-state wx:elif="{{!products.length}}" title="首批行程正在准备" description="确认完成后会第一时间在这里发布" showAction="{{false}}" />
   <view wx:else class="product-list">
-    <view wx:for="{{products}}" wx:key="slug" class="product-card" bindtap="openProducts">
+    <view wx:for="{{products}}" wx:key="slug" class="product-card" bindtap="openProduct" data-slug="{{item.slug}}">
       <image wx:if="{{item.hero_image}}" class="product-image" src="{{item.hero_image}}" mode="aspectFill" />
       <view class="product-body">
         <view class="product-kicker">{{item.destination.name}} · {{item.season}}</view>
@@ -15,6 +15,22 @@
         <view class="product-summary">{{item.subtitle || item.summary}}</view>
       </view>
     </view>
+  </view>
+  <view wx:if="{{vessels.length}}" class="vessel-section">
+    <view class="section-heading"><text>认识探险船</text><text class="section-note">每艘船都有不同气质</text></view>
+    <scroll-view scroll-x class="vessel-scroll">
+      <view class="vessel-row">
+        <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" bindtap="openVessel" data-slug="{{item.slug}}">
+          <image wx:if="{{item.hero_image}}" class="vessel-image" src="{{item.hero_image}}" mode="aspectFill" />
+          <view class="vessel-card-body">
+            <view class="vessel-name">{{item.name}}</view>
+            <view class="vessel-official">{{item.official_name}}</view>
+            <view class="vessel-fact"><text wx:if="{{item.capacity}}">约 {{item.capacity}} 位宾客</text><text wx:if="{{item.year_built}}">{{item.year_built}} 年</text></view>
+            <view class="vessel-summary">{{item.summary}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
   </view>
   <view class="all-products" bindtap="openProducts">查看全部南极行程 <text>›</text></view>
   <view class="future-title">更多旅行服务</view>

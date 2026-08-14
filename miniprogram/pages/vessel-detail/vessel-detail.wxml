@@ -1,0 +1,18 @@
+<view class="page with-action">
+  <view wx:if="{{loading}}" class="loading">正在展开船只档案…</view>
+  <empty-state wx:elif="{{error}}" title="暂时无法查看船只" description="{{error}}" bind:retry="loadVessel" />
+  <block wx:else>
+    <image wx:if="{{vessel.hero_image}}" class="hero" src="{{vessel.hero_image}}" mode="aspectFill" />
+    <view class="intro dark-intro">
+      <view class="kicker">HX EXPEDITIONS · 探险船档案</view>
+      <view class="title">{{vessel.name}}</view>
+      <view class="official-name">{{vessel.official_name}}</view>
+      <view class="summary">{{vessel.summary}}</view>
+      <view class="fact-row"><text wx:if="{{vessel.capacity}}">约 {{vessel.capacity}} 位宾客</text><text wx:if="{{vessel.year_built}}">{{vessel.year_built}} 年</text></view>
+    </view>
+    <view wx:if="{{vessel.features.length}}" class="section"><view class="section-title">船上体验</view><view wx:for="{{vessel.features}}" wx:key="*this" class="bullet">· {{item}}</view></view>
+    <view wx:if="{{vessel.cabins.length}}" class="section"><view class="section-title">舱位分类</view><view wx:for="{{vessel.cabins}}" wx:key="name" class="cabin"><view class="cabin-name">{{item.name}}</view><view class="cabin-copy">{{item.summary}}</view><view class="cabin-tags"><text wx:for="{{item.highlights}}" wx:key="*this">{{item}}</text></view></view><view class="cabin-note">舱位图片、具体舱号、床型、视野与价格以所选团期的正式确认信息为准。</view></view>
+    <view wx:if="{{vessel.products.length}}" class="section"><view class="section-title">这艘船可选择的路线</view><view wx:for="{{vessel.products}}" wx:key="slug" class="route-card" bindtap="openProduct" data-slug="{{item.slug}}"><image wx:if="{{item.hero_image}}" class="route-image" src="{{item.hero_image}}" mode="aspectFill" /><view class="route-body"><view class="route-kicker">{{item.season}}</view><view class="route-title">{{item.title}}</view><view class="route-copy">{{item.subtitle || item.summary}}</view></view></view></view>
+    <view class="action-bar"><button class="consult-button" bindtap="consult">咨询这艘船</button></view>
+  </block>
+</view>

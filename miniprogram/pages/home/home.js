@@ -1,7 +1,7 @@
 const {getHome} = require("../../services/api");
 
 Page({
-  data: {loading: true, error: "", products: [], destinations: []},
+  data: {loading: true, error: "", products: [], vessels: [], destinations: []},
   onLoad() {
     this.loadHome();
   },
@@ -14,6 +14,7 @@ Page({
       const data = await getHome();
       this.setData({
         products: data.featured_products || [],
+        vessels: data.featured_vessels || [],
         destinations: data.destinations || [],
       });
     } catch (error) {
@@ -24,5 +25,11 @@ Page({
   },
   openProducts() {
     wx.navigateTo({url: "/pages/products/products?destination=antarctica"});
+  },
+  openProduct(event) {
+    wx.navigateTo({url: `/pages/product-detail/product-detail?slug=${event.currentTarget.dataset.slug}`});
+  },
+  openVessel(event) {
+    wx.navigateTo({url: `/pages/vessel-detail/vessel-detail?slug=${event.currentTarget.dataset.slug}`});
   },
 });
