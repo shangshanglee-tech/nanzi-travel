@@ -1,4 +1,13 @@
 const path = require("node:path");
+const {createRequire} = require("node:module");
+
+const requireMiniProgramDependency = createRequire(
+  path.resolve(__dirname, "../miniprogram/package.json"),
+);
+
+function resolveCiModule() {
+  return requireMiniProgramDependency.resolve("miniprogram-ci");
+}
 
 function buildUploadConfig({appid, privateKeyPath, runNumber, sha}) {
   if (!appid || !privateKeyPath || !runNumber || !sha) {
@@ -19,7 +28,7 @@ async function uploadExperience() {
     runNumber: process.env.GITHUB_RUN_NUMBER,
     sha: process.env.GITHUB_SHA,
   });
-  const ci = require("miniprogram-ci");
+  const ci = requireMiniProgramDependency("miniprogram-ci");
   await ci.upload({
     project: new ci.Project({
       appid: config.appid,
@@ -43,4 +52,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = {buildUploadConfig, uploadExperience};
+module.exports = {buildUploadConfig, resolveCiModule, uploadExperience};

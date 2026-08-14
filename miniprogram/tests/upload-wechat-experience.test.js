@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const {buildUploadConfig} = require("../../scripts/upload-wechat-experience.cjs");
+const {buildUploadConfig, resolveCiModule} = require("../../scripts/upload-wechat-experience.cjs");
 
 test("builds an experience build version from the workflow run", () => {
   assert.deepEqual(
@@ -18,4 +18,8 @@ test("builds an experience build version from the workflow run", () => {
       desc: "release abc123d",
     },
   );
+});
+
+test("resolves the CI package from the mini program package directory", () => {
+  assert.match(resolveCiModule(), /miniprogram-ci/);
 });
