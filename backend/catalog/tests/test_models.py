@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils import timezone
 
-from catalog.models import Destination, Product, SiteSettings
+from catalog.models import Departure, Destination, Product, SiteSettings, Vessel
 
 
 class ProductPublishingTests(TestCase):
@@ -45,3 +45,25 @@ class SiteSettingsTests(TestCase):
 
         self.assertEqual(SiteSettings.objects.count(), 1)
         self.assertEqual(SiteSettings.objects.get().brand_name, "小楠子爱旅行")
+
+
+class PolarContentRelationshipTests(TestCase):
+    def setUp(self):
+        self.destination = Destination.objects.create(name="南极", slug="antarctica")
+
+    def test_route_and_vessel_are_peer_objects_linked_many_to_many(self):
+        vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        product = Product.objects.create(
+            destination=self.destination,
+            title="南极半岛精华",
+            slug="highlights",
+        )
+        product.vessels.add(vessel)
+        departure = Departure.objects.create(
+            product=product,
+            vessel=vessel,
+            start_date="2026-12-09",
+        )
+
+        self.assertEqual(list(vessel.products.all()), [product])
+        self.assertEqual(departure.vessel, vessel)

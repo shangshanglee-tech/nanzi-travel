@@ -34,6 +34,57 @@ class Destination(models.Model):
         return self.name
 
 
+class Vessel(models.Model):
+    slug = models.SlugField("英文标识", max_length=100, unique=True)
+    name = models.CharField("中文名称", max_length=120)
+    official_name = models.CharField("官方名称", max_length=160, blank=True)
+    summary = models.TextField("中文简介", blank=True)
+    hero_image = models.ImageField(
+        "封面图",
+        upload_to="vessels/heroes/",
+        storage=build_media_storage,
+        blank=True,
+    )
+    capacity = models.PositiveSmallIntegerField("载客人数", null=True, blank=True)
+    year_built = models.PositiveSmallIntegerField("建造年份", null=True, blank=True)
+    features = models.JSONField("体验特色", default=list, blank=True)
+    source_url = models.URLField("官方来源", blank=True)
+    source_fetched_at = models.DateTimeField("抓取时间", null=True, blank=True)
+    review_status = models.CharField("复核状态", max_length=32, default="pending")
+    is_active = models.BooleanField("启用", default=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "船只"
+        verbose_name_plural = "船只"
+
+    def __str__(self):
+        return self.name
+
+
+class CabinType(models.Model):
+    vessel = models.ForeignKey(Vessel, related_name="cabins", on_delete=models.CASCADE)
+    name = models.CharField("舱型名称", max_length=120)
+    category = models.CharField("舱型分类", max_length=80, blank=True)
+    size_sqm = models.DecimalField("面积（平方米）", max_digits=5, decimal_places=1, null=True, blank=True)
+    bed_layout = models.CharField("床型", max_length=160, blank=True)
+    view_type = models.CharField("窗景/阳台", max_length=120, blank=True)
+    summary = models.TextField("中文简介", blank=True)
+    highlights = models.JSONField("舱型亮点", default=list, blank=True)
+    image = models.ImageField("图片", upload_to="vessels/cabins/", storage=build_media_storage, blank=True)
+    source_url = models.URLField("官方来源", blank=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "舱位类型"
+        verbose_name_plural = "舱位类型"
+
+    def __str__(self):
+        return f"{self.vessel} · {self.name}"
+
+
 class Product(models.Model):
     destination = models.ForeignKey(
         Destination,
@@ -54,6 +105,7 @@ class Product(models.Model):
         blank=True,
     )
     vessel = models.CharField("船只/核心资源", max_length=160, blank=True)
+    vessels = models.ManyToManyField(Vessel, related_name="products", blank=True)
     departure_city = models.CharField("出发地", max_length=100, blank=True)
     tags = models.JSONField("标签", default=list, blank=True)
     highlights = models.JSONField("产品亮点", default=list, blank=True)
@@ -95,6 +147,14 @@ class Departure(models.Model):
         related_name="departures",
         on_delete=models.CASCADE,
     )
+    vessel = models.ForeignKey(
+        Vessel,
+        verbose_name="执行船只",
+        related_name="departures",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
     start_date = models.DateField("出发日期", null=True, blank=True)
     end_date = models.DateField("结束日期", null=True, blank=True)
     label = models.CharField("团期说明", max_length=160, blank=True)
@@ -118,6 +178,7 @@ class ItineraryDay(models.Model):
         on_delete=models.CASCADE,
     )
     day_number = models.PositiveSmallIntegerField("第几天")
+    source_range = models.CharField("官方行程区间", max_length=32, blank=True)
     title = models.CharField("行程标题", max_length=180)
     description = models.TextField("行程内容")
     accommodation = models.CharField("住宿", max_length=160, blank=True)
@@ -155,6 +216,39 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return self.alt_text or f"{self.product} 图片"
+
+
+class EditorialCollection(models.Model):
+    title = models.CharField("专题名称", max_length=120)
+    slug = models.SlugField("英文标识", max_length=120, unique=True)
+    summary = models.TextField("专题简介", blank=True)
+    is_active = models.BooleanField("启用", default=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "内容专题"
+        verbose_name_plural = "内容专题"
+
+    def __str__(self):
+        return self.title
+
+
+class EditorialEntry(models.Model):
+    collection = models.ForeignKey(EditorialCollection, related_name="entries", on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name="editorial_entries", on_delete=models.CASCADE, null=True, blank=True)
+    vessel = models.ForeignKey(Vessel, related_name="editorial_entries", on_delete=models.CASCADE, null=True, blank=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "专题内容"
+        verbose_name_plural = "专题内容"
+
+    def clean(self):
+        super().clean()
+        if bool(self.product) == bool(self.vessel):
+            raise ValidationError("专题内容必须且只能关联一条路线或一艘船")
 
 
 class SiteSettings(models.Model):
