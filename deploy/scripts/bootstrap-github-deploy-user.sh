@@ -21,6 +21,10 @@ touch /home/nanzi-deploy/.ssh/authorized_keys
 chown nanzi-deploy:nanzi-deploy /home/nanzi-deploy/.ssh/authorized_keys
 chmod 0600 /home/nanzi-deploy/.ssh/authorized_keys
 
+install -d -o root -g root -m 0755 /usr/local/lib/nanzi-travel
+for script in backup.sh deploy.sh rollback.sh; do
+  install -o root -g root -m 0750 "$script_dir/$script" "/usr/local/lib/nanzi-travel/$script"
+done
 install -o root -g root -m 0750 "$script_dir/github-release.sh" /usr/local/sbin/nanzi-github-release
 cat >/etc/sudoers.d/nanzi-deploy <<'EOF'
 nanzi-deploy ALL=(root) NOPASSWD: /usr/local/sbin/nanzi-github-release /tmp/nanzi-travel-release-*.tar.gz [0-9a-f]*

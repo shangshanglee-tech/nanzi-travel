@@ -9,7 +9,9 @@ bootstrap="$root/deploy/scripts/bootstrap-github-deploy-user.sh"
 [[ -x "$bootstrap" ]]
 grep -q 'tar -xzf' "$wrapper"
 grep -q 'rollback.sh' "$wrapper"
+grep -q '/usr/local/lib/nanzi-travel' "$wrapper"
 grep -q 'nanzi-github-release' "$bootstrap"
+grep -q '/usr/local/lib/nanzi-travel' "$bootstrap"
 grep -q 'nanzi-deploy ALL=(root) NOPASSWD:' "$bootstrap"
 if grep -q 'nanzi-ai' "$wrapper" "$bootstrap"; then
   echo "GitHub deployment scripts must not manage the legacy AI service" >&2
