@@ -8,6 +8,10 @@ fi
 source_dir="${1:?Usage: deploy.sh /path/to/repository}"
 timestamp="$(date -u +%Y%m%dT%H%M%SZ)"
 release_dir="/opt/nanzi-travel/releases/$timestamp"
+polar_content_source="$source_dir/content/imports/hx-polar-content.json"
+polar_content_target="/var/lib/nanzi-travel/content/hx-polar-content.json"
+
+[[ -f "$polar_content_source" ]] || { echo "Polar content source is missing." >&2; exit 2; }
 
 install -d -o nanziapp -g nanziapp -m 0750 "$release_dir/backend"
 rsync -a --delete \
@@ -26,6 +30,12 @@ rsync -a --delete "$release_dir/backend/staticfiles/" /var/lib/nanzi-travel/stat
 chown -R nanziapp:www-data /var/lib/nanzi-travel/static
 find /var/lib/nanzi-travel/static -type d -exec chmod 2750 {} +
 find /var/lib/nanzi-travel/static -type f -exec chmod 0640 {} +
+
+install -d -o nanziapp -g nanziapp -m 0750 /var/lib/nanzi-travel/content
+install -o nanziapp -g nanziapp -m 0640 "$polar_content_source" "$polar_content_target"
+sudo -u nanziapp env DJANGO_DB_PATH=/var/lib/nanzi-travel/db.sqlite3 \
+  "$release_dir/backend/.venv/bin/python" "$release_dir/backend/manage.py" \
+  import_hx_polar_content "$polar_content_target"
 
 ln -sfn "$release_dir" /opt/nanzi-travel/current
 chown -h nanziapp:nanziapp /opt/nanzi-travel/current
