@@ -15,3 +15,11 @@ if grep -q 'nanzi-ai' "$wrapper" "$bootstrap"; then
   echo "GitHub deployment scripts must not manage the legacy AI service" >&2
   exit 1
 fi
+
+workflow="$root/.github/workflows/release.yml"
+tests_workflow="$root/.github/workflows/tests.yml"
+grep -q '^name: Release' "$workflow"
+grep -q 'concurrency:' "$workflow"
+grep -q 'DEPLOY_SSH_PRIVATE_KEY' "$workflow"
+grep -q 'healthz' "$workflow"
+grep -q '^name: Tests' "$tests_workflow"
