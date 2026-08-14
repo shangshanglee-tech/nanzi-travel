@@ -26,4 +26,5 @@ grep -q 'DEPLOY_SSH_PRIVATE_KEY' "$workflow"
 grep -q 'healthz' "$workflow"
 grep -q 'WECHAT_PRIVATE_KEY' "$workflow"
 grep -q 'upload-wechat-experience.cjs' "$workflow"
+grep -A4 '^  upload-wechat-experience:' "$workflow" | grep -q 'timeout-minutes: 5'
 grep -q '^name: Tests' "$tests_workflow"

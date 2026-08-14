@@ -1,0 +1,20 @@
+{
+  "description": "小楠子爱旅行小程序",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.8.7",
+  "appid": "wx9dacae494a7ff9ab",
+  "projectname": "小楠子爱旅行",
+  "miniprogramRoot": "./"
+}
