@@ -1,1 +1,6 @@
-{"type":"commonjs"}
+{
+  "type": "commonjs",
+  "devDependencies": {
+    "miniprogram-ci": "2.1.31"
+  }
+}

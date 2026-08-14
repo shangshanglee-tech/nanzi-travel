@@ -57,3 +57,34 @@ jobs:
             "sudo /usr/local/sbin/nanzi-github-release '$archive' '${GITHUB_SHA}'"
       - name: Verify public API
         run: curl --fail --retry 5 --retry-delay 2 https://api.nanzitravel.com/healthz
+
+  upload-wechat-experience:
+    needs: deploy-api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install upload dependency
+        working-directory: miniprogram
+        run: npm ci --ignore-scripts
+      - name: Create temporary WeChat private key
+        id: wechat_key
+        env:
+          WECHAT_PRIVATE_KEY: ${{ secrets.WECHAT_PRIVATE_KEY }}
+        run: |
+          key_path="$(mktemp)"
+          printf '%s\n' "$WECHAT_PRIVATE_KEY" > "$key_path"
+          chmod 600 "$key_path"
+          echo "path=$key_path" >> "$GITHUB_OUTPUT"
+      - name: Upload WeChat experience build
+        env:
+          WECHAT_APPID: ${{ secrets.WECHAT_APPID }}
+          WECHAT_PRIVATE_KEY_PATH: ${{ steps.wechat_key.outputs.path }}
+        run: node scripts/upload-wechat-experience.cjs
+      - name: Remove temporary WeChat private key
+        if: always()
+        env:
+          WECHAT_PRIVATE_KEY_PATH: ${{ steps.wechat_key.outputs.path }}
+        run: rm -f "$WECHAT_PRIVATE_KEY_PATH"
