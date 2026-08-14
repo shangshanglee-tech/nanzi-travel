@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from catalog.models import Departure, Destination, Product, SiteSettings
+from catalog.models import Departure, Destination, Product, SiteSettings, Vessel
 
 
 class ProductApiTests(TestCase):
@@ -26,8 +26,11 @@ class ProductApiTests(TestCase):
             slug="reserve",
             status="draft",
         )
+        self.vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        self.live.vessels.add(self.vessel)
         Departure.objects.create(
             product=self.live,
+            vessel=self.vessel,
             start_date="2027-01-05",
             end_date="2027-01-16",
             label="2027年1月团期",
@@ -97,6 +100,13 @@ class ProductApiTests(TestCase):
 
         self.assertEqual(response["Cache-Control"], "public, max-age=60")
         self.assertNotIn("price", response.json())
+
+    def test_product_detail_exposes_possible_vessels_and_departure_vessel(self):
+        response = self.client.get("/api/v1/products/antarctica-classic")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["vessels"][0]["slug"], "roald-amundsen")
+        self.assertEqual(response.json()["departures"][0]["vessel"]["slug"], "roald-amundsen")
 
 
 class SiteAndHomeApiTests(TestCase):

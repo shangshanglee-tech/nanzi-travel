@@ -5,12 +5,14 @@ from django.utils.cache import patch_cache_control
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Destination, Product, SiteSettings
+from .models import Destination, Product, SiteSettings, Vessel
 from .serializers import (
     DestinationSerializer,
     ProductCardSerializer,
     ProductDetailSerializer,
     SiteSettingsSerializer,
+    VesselCardSerializer,
+    VesselDetailSerializer,
 )
 
 
@@ -73,6 +75,7 @@ class HomeView(APIView):
 
     def get(self, request):
         products = Product.objects.public().select_related("destination")[:8]
+        vessels = Vessel.objects.filter(is_active=True).prefetch_related("products")[:3]
         public_destination_ids = products.values_list("destination_id", flat=True)
         destinations = Destination.objects.filter(
             is_active=True,
@@ -86,6 +89,7 @@ class HomeView(APIView):
                     context={"request": request},
                 ).data,
                 "destinations": DestinationSerializer(destinations, many=True).data,
+                "featured_vessels": VesselCardSerializer(vessels, many=True, context={"request": request}).data,
             }
         )
         return cache_public(response)
@@ -149,7 +153,7 @@ class ProductDetailView(APIView):
             product = (
                 Product.objects.public()
                 .select_related("destination")
-                .prefetch_related("departures", "itinerary_days", "images")
+                .prefetch_related("vessels", "departures__vessel", "itinerary_days", "images")
                 .get(slug=slug)
             )
         except Product.DoesNotExist:
@@ -159,3 +163,26 @@ class ProductDetailView(APIView):
             ProductDetailSerializer(product, context={"request": request}).data
         )
         return cache_public(response)
+
+
+class VesselListView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request):
+        vessels = Vessel.objects.filter(is_active=True)
+        return cache_public(Response({"results": VesselCardSerializer(vessels, many=True, context={"request": request}).data}))
+
+
+class VesselDetailView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, slug):
+        try:
+            vessel = Vessel.objects.filter(is_active=True).prefetch_related(
+                "cabins", "products__destination"
+            ).get(slug=slug)
+        except Vessel.DoesNotExist:
+            return error_response("not_found", "船只不存在或暂未开放", 404)
+        return cache_public(Response(VesselDetailSerializer(vessel, context={"request": request}).data))

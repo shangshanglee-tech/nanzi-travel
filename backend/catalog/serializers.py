@@ -1,12 +1,27 @@
 from rest_framework import serializers
 
-from .models import Departure, Destination, ItineraryDay, Product, ProductImage, SiteSettings
+from .models import CabinType, Departure, Destination, ItineraryDay, Product, ProductImage, SiteSettings, Vessel
 
 
 class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
         fields = ("name", "slug")
+
+
+class VesselCardSerializer(serializers.ModelSerializer):
+    hero_image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Vessel
+        fields = ("slug", "name", "official_name", "summary", "hero_image", "capacity", "year_built", "features")
+
+    def get_hero_image(self, vessel):
+        if not vessel.hero_image:
+            return ""
+        request = self.context.get("request")
+        url = vessel.hero_image.url
+        return request.build_absolute_uri(url) if request else url
 
 
 class ProductCardSerializer(serializers.ModelSerializer):
@@ -37,15 +52,17 @@ class ProductCardSerializer(serializers.ModelSerializer):
 
 
 class DepartureSerializer(serializers.ModelSerializer):
+    vessel = VesselCardSerializer(read_only=True)
+
     class Meta:
         model = Departure
-        fields = ("start_date", "end_date", "label", "consultation_status")
+        fields = ("start_date", "end_date", "label", "consultation_status", "vessel")
 
 
 class ItineraryDaySerializer(serializers.ModelSerializer):
     class Meta:
         model = ItineraryDay
-        fields = ("day_number", "title", "description", "accommodation", "meals")
+        fields = ("day_number", "source_range", "title", "description", "accommodation", "meals")
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -62,6 +79,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 
 class ProductDetailSerializer(ProductCardSerializer):
+    vessels = VesselCardSerializer(many=True, read_only=True)
     departures = DepartureSerializer(many=True, read_only=True)
     itinerary_days = ItineraryDaySerializer(many=True, read_only=True)
     images = ProductImageSerializer(many=True, read_only=True)
@@ -70,6 +88,7 @@ class ProductDetailSerializer(ProductCardSerializer):
     class Meta(ProductCardSerializer.Meta):
         fields = ProductCardSerializer.Meta.fields + (
             "vessel",
+            "vessels",
             "departure_city",
             "departures",
             "itinerary_days",
@@ -88,6 +107,29 @@ class ProductDetailSerializer(ProductCardSerializer):
         }
 
 
+class CabinTypeSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CabinType
+        fields = ("name", "category", "size_sqm", "bed_layout", "view_type", "summary", "highlights", "image")
+
+    def get_image(self, cabin):
+        if not cabin.image:
+            return ""
+        request = self.context.get("request")
+        url = cabin.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class VesselDetailSerializer(VesselCardSerializer):
+    cabins = CabinTypeSerializer(many=True, read_only=True)
+    products = ProductCardSerializer(many=True, read_only=True)
+
+    class Meta(VesselCardSerializer.Meta):
+        fields = VesselCardSerializer.Meta.fields + ("cabins", "products", "source_url")
+
+
 class SiteSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteSettings
@@ -102,4 +144,3 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
             "privacy_text",
             "filing_number",
         )
-
