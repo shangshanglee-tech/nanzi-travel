@@ -1,8 +1,11 @@
 const {getHome} = require("../../services/api");
+const {getHomeTopPadding} = require("./layout");
 
 Page({
-  data: {loading: true, error: "", products: [], vessels: [], destinations: []},
+  data: {loading: true, error: "", products: [], vessels: [], destinations: [], topPadding: 38},
   onLoad() {
+    const system = wx.getSystemInfoSync();
+    this.setData({topPadding: getHomeTopPadding(system.statusBarHeight || 0)});
     this.loadHome();
   },
   onPullDownRefresh() {

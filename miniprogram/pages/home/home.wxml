@@ -1,4 +1,4 @@
-<view class="home-page">
+<view class="home-page" style="padding-top: {{topPadding}}px;">
   <view class="eyebrow">NANZI TRAVEL · 编辑精选</view>
   <view class="headline">去看更远的世界</view>
   <view class="lead">从南极开始，找到值得出发的旅程。</view>
