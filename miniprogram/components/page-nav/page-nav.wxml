@@ -1,0 +1,4 @@
+<view class="nav" style="padding-top: {{metrics.topPadding}}px; height: {{metrics.topPadding + metrics.height}}px; padding-right: {{metrics.rightPadding}}px;">
+  <view wx:if="{{showBack}}" class="back-button" bindtap="goBack" aria-label="返回">‹</view>
+  <view class="nav-title">{{title}}</view>
+</view>

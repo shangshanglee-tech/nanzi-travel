@@ -12,6 +12,7 @@
     "pages/agreement/agreement"
   ],
   "window": {
+    "navigationStyle": "custom",
     "navigationBarTitleText": "小楠子爱旅行",
     "navigationBarBackgroundColor": "#F3F2EE",
     "navigationBarTextStyle": "black",

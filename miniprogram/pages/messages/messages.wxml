@@ -1,3 +1,4 @@
 <view class="messages-page">
+  <page-nav title="消息" show-back="{{false}}" />
   <empty-state title="消息功能开发中" description="功能开发中，敬请期待" showAction="{{false}}" />
 </view>

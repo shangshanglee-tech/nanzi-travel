@@ -1,4 +1,5 @@
 <view class="page with-action">
+  <page-nav title="{{vessel.name || '探险船档案'}}" show-back="{{true}}" />
   <view wx:if="{{loading}}" class="loading">正在展开船只档案…</view>
   <empty-state wx:elif="{{error}}" title="暂时无法查看船只" description="{{error}}" bind:retry="loadVessel" />
   <block wx:else>

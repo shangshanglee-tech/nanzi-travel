@@ -1,1 +1,1 @@
-<view class="document"><view class="title">隐私政策</view><view class="content">{{loading ? '正在加载…' : content}}</view></view>
+<view class="document"><page-nav title="隐私政策" show-back="{{true}}" /><view class="title">隐私政策</view><view class="content">{{loading ? '正在加载…' : content}}</view></view>

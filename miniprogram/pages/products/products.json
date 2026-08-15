@@ -1,4 +1,4 @@
 {
   "navigationBarTitleText":"南极行程",
-  "usingComponents":{"product-card":"/components/product-card/product-card","empty-state":"/components/empty-state/empty-state"}
+  "usingComponents":{"product-card":"/components/product-card/product-card","empty-state":"/components/empty-state/empty-state","page-nav":"/components/page-nav/page-nav"}
 }

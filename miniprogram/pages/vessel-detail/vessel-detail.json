@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "empty-state": "/components/empty-state/empty-state"
+    "empty-state": "/components/empty-state/empty-state",
+    "page-nav": "/components/page-nav/page-nav"
   }
 }

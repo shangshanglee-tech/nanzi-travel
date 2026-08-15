@@ -1,4 +1,5 @@
 <view class="page with-action">
+  <page-nav title="{{product.title || '行程详情'}}" show-back="{{true}}" />
   <view wx:if="{{loading}}" class="loading">正在展开完整行程…</view>
   <empty-state wx:elif="{{error}}" title="暂时无法查看行程" description="{{error}}" bind:retry="loadProduct" />
   <block wx:else>

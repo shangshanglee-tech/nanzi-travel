@@ -1,1 +1,1 @@
-<view class="document"><view class="title">关于小楠子爱旅行</view><view class="content">{{loading ? '正在加载…' : content}}</view></view>
+<view class="document"><page-nav title="关于我们" show-back="{{true}}" /><view class="title">关于小楠子爱旅行</view><view class="content">{{loading ? '正在加载…' : content}}</view></view>

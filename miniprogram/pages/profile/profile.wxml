@@ -1,4 +1,5 @@
 <view class="profile-page">
+  <page-nav title="我的" show-back="{{false}}" />
   <view wx:if="{{loading}}" class="loading">正在加载…</view>
   <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadSite" />
   <block wx:else>

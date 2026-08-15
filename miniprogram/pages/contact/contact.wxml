@@ -1,4 +1,5 @@
 <view class="page">
+  <page-nav title="人工咨询" show-back="{{true}}" />
   <view class="hero">
     <view class="eyebrow">HUMAN SERVICE</view>
     <view class="title">和小楠子聊聊这次旅行</view>

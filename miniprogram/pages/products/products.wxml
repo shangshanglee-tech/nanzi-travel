@@ -1,4 +1,5 @@
 <view class="page">
+  <page-nav title="全部行程" show-back="{{true}}" />
   <view class="picker-row">
     <picker wx:if="{{options.destinations.length}}" mode="selector" range="{{options.destinations}}" range-key="name" bindchange="chooseDestination">
       <view class="picker-button">{{selected.destination || '目的地'}}⌄</view>
