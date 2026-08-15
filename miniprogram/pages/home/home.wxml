@@ -1,7 +1,6 @@
 <view class="home-page" style="padding-top: {{topPadding}}px;">
-  <view class="eyebrow">NANZI TRAVEL · 编辑精选</view>
-  <view class="headline">去看更远的世界</view>
-  <view class="lead">从南极开始，找到值得出发的旅程。</view>
+  <view class="eyebrow">NANZI TRAVEL</view>
+  <view class="headline">看更远的世界</view>
 
   <view wx:if="{{loading}}" class="loading-card">正在整理精选行程…</view>
   <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadHome" />
