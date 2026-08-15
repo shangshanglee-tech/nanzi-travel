@@ -1,6 +1,11 @@
 <view class="home-page" style="padding-top: {{topPadding}}px;">
-  <view class="eyebrow">NANZI TRAVEL</view>
-  <view class="headline">看更远的世界</view>
+  <view class="hero-lockup">
+    <image class="brand-logo" src="/assets/XNZ.svg" mode="aspectFit" />
+    <view class="hero-copy">
+      <view class="eyebrow">NANZI TRAVEL</view>
+      <view class="headline">看更远的世界</view>
+    </view>
+  </view>
 
   <view wx:if="{{loading}}" class="loading-card">正在整理精选行程…</view>
   <empty-state wx:elif="{{error}}" title="暂时没有加载成功" description="{{error}}" bind:retry="loadHome" />
