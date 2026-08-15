@@ -1,4 +1,4 @@
-.home-page { padding: 38px 32rpx 64rpx; }
+.home-page { padding: 50px 32rpx 64rpx; }
 .hero-lockup { display: flex; align-items: center; gap: 22rpx; margin-bottom: 42rpx; }
 .brand-logo { flex: 0 0 auto; width: 102rpx; height: 102rpx; }
 .hero-copy { display: flex; flex: 1; flex-direction: column; justify-content: center; }

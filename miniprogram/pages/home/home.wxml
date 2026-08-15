@@ -2,7 +2,7 @@
   <view class="hero-lockup">
     <image class="brand-logo" src="/assets/XNZ.svg" mode="aspectFit" />
     <view class="hero-copy">
-      <view class="eyebrow">NANZI TRAVEL</view>
+      <view class="eyebrow">NANZI TRAVEL · 小楠子爱旅行</view>
       <view class="headline">看更远的世界</view>
     </view>
   </view>
