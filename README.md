@@ -27,6 +27,18 @@ cd backend
 微信开发者工具导入仓库根目录，复制
 `project.private.config.json.example` 为 `project.private.config.json`，并填写真实 AppID。
 
+## 船只内容导入
+
+船只资料以可复核的 JSON 保存，并可重复导入，不会删除后台人工新增的内容。阿蒙森号的首批资料位于
+`content/imports/hx-roald-amundsen-content.json`。导入并发布：
+
+```bash
+backend/.venv/bin/python backend/manage.py import_vessel_content \
+  content/imports/hx-roald-amundsen-content.json --publish
+```
+
+导入后可在桌面端后台的“船只”编辑页补充或修订中文文案、英文原文、体验模块、舱位分组和已授权图片。
+
 ## 验证与发布资料
 
 - 首版验收：`docs/qa/v1-acceptance.md`

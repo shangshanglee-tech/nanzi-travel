@@ -1,0 +1,179 @@
+{
+  "vessel": {
+    "slug": "roald-amundsen",
+    "name": "阿蒙森号",
+    "official_name": "MS Roald Amundsen",
+    "operator_name": "HX Expeditions",
+    "ship_type": "混合动力极地探险船",
+    "short_pitch": "以混合动力技术驶入极地，把舒适的海上营地带到南北两端。",
+    "summary": "HX 的混合动力极地探险船，以舒适、科学探索和斯堪的纳维亚风格为核心。",
+    "intro_zh": "阿蒙森号以首位抵达南极点的挪威探险家罗尔德·阿蒙森命名，是 HX 船队中的混合动力探险船之一。她专为极地水域建造，在旅途中既是移动的海上营地，也是通往冰山、峡湾与野生动物的观察平台。\n\n船上公共空间采用花岗岩、橡木、桦木和羊毛等自然材质，整体克制而温暖。室内外双层观景甲板、科学中心、餐厅、无边泳池与康体空间共同构成在海上的探险日常。",
+    "intro_en": "MS Roald Amundsen is one of HX's hybrid expedition ships, purpose-built for polar waters and designed as a comfortable base camp at sea.",
+    "capacity": 490,
+    "year_built": 2019,
+    "features": ["混合动力技术", "室内外双层观景甲板", "科学中心", "三间餐厅", "无边泳池与热水池", "桑拿、康体与健身空间"],
+    "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/",
+    "review_status": "official-source-checked",
+    "sort_order": 1
+  },
+  "experiences": [
+    {
+      "kind": "observation-deck",
+      "title_zh": "双层观景甲板",
+      "title_en": "Observation Deck",
+      "body_zh": "室内外相连的两层观景空间，适合在航行时观察冰山、海鸟与鲸群；天气合适时可带着望远镜停留更久。",
+      "body_en": "A two-level indoor/outdoor observation area for watching scenery and wildlife.",
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "kind": "science-centre",
+      "title_zh": "科学中心",
+      "title_en": "Science Centre",
+      "body_zh": "船上探索体验的核心。这里有讲座空间、小型图书区与摄影、生物等主题工作区，也是探险队员与宾客交流当天观察和目的地知识的地方。",
+      "body_en": "A flexible learning space with lectures, a small library and specialist workshop areas.",
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "kind": "dining",
+      "title_zh": "三种餐饮体验",
+      "title_en": "Dining",
+      "body_zh": "主餐厅 Aune 提供航程包含的餐食；Fredheim 是更轻松的社交与简餐空间；Lindstrøm 提供以斯堪的纳维亚风味为灵感的精致单点餐饮，套房宾客餐食已包含。",
+      "body_en": "Three restaurants: Aune, Fredheim and the fine-dining Lindstrøm.",
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "kind": "wellness",
+      "title_zh": "泳池、热水池与康体空间",
+      "title_en": "Wellness",
+      "body_zh": "靠岸探索或甲板活动之后，可以在无边泳池、热水池、桑拿、健身房和康体空间放松；护理服务可按船上安排另行预订。",
+      "body_en": "Infinity pool, hot tubs, sauna, fitness room and wellness treatments.",
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    }
+  ],
+  "cabin_groups": [
+    {
+      "slug": "expedition-suites",
+      "title_zh": "探险套房",
+      "title_en": "Expedition Suites",
+      "cabin_codes": ["MA", "MB", "MC", "MD", "ME", "MF"]
+    },
+    {
+      "slug": "arctic-superior",
+      "title_zh": "北极高级阳台房",
+      "title_en": "Arctic Superior",
+      "cabin_codes": ["XT", "XTD", "XTJ", "XY"]
+    },
+    {
+      "slug": "polar-outside",
+      "title_zh": "极地海景房",
+      "title_en": "Polar Outside",
+      "cabin_codes": ["TT", "TY", "RR"]
+    }
+  ],
+  "cabins": [
+    {
+      "official_code": "MA", "name": "XL 阳台套房", "official_name": "XL Suite with balcony", "category": "suite",
+      "size_sqm": 47, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床", "view_type": "私人阳台与大幅窗景",
+      "description_zh": "位于高层甲板角落的大型套房，面积约 46–48㎡；设独立起居与沙发床空间、步入式衣帽间，以及带淋浴和浴缸的独立卫浴。",
+      "description_en": "Upper deck corner suite with private balcony, 46–48 m², living area and walk-in wardrobe.",
+      "amenities": ["私人阳台", "独立起居区", "咖啡机", "迷你吧", "淋浴与浴缸", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "大面积", "阳台"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "MC", "name": "转角阳台套房", "official_name": "Corner Suite with balcony", "category": "suite",
+      "size_sqm": 25, "max_guests": 2, "bed_layout": "双人床，可申请拆分为双床", "view_type": "私人阳台，部分配热水池",
+      "description_zh": "高层甲板转角套房，面积约 20–30㎡，设休息区和私人阳台；部分房间带阳台热水池。",
+      "description_en": "Upper deck corner suite, 20–30 m², with private balcony; some feature a hot tub.",
+      "amenities": ["私人阳台", "休息区", "咖啡机", "迷你吧", "淋浴", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "阳台", "转角"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "MB", "name": "XL 套房", "official_name": "XL Suite", "category": "suite",
+      "size_sqm": 44, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床；附加下拉床", "view_type": "大幅窗景",
+      "description_zh": "约 44㎡的转角大套房，以大窗和宽敞休息区取景；配步入式衣帽间及带淋浴和浴缸的独立卫浴。",
+      "description_en": "Extra-large 44 m² corner suite with large windows and a walk-in wardrobe.",
+      "amenities": ["大幅窗景", "独立起居区", "咖啡机", "迷你吧", "淋浴与浴缸", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "大面积"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "MD", "name": "大阳台套房", "official_name": "Large Suite with balcony", "category": "suite",
+      "size_sqm": 35, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床；两张下拉床", "view_type": "私人阳台与大幅窗景",
+      "description_zh": "约 35㎡的高层甲板套房，设私人阳台、休息区和可容纳更多同行者的睡眠组合。",
+      "description_en": "Large 35 m² upper-deck suite with private balcony and spacious seating area.",
+      "amenities": ["私人阳台", "休息区", "咖啡机", "迷你吧", "淋浴与浴缸", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "阳台"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "ME", "name": "阳台套房", "official_name": "Suite with balcony", "category": "suite",
+      "size_sqm": 25, "max_guests": 3, "bed_layout": "双人床，可申请拆分为双床；部分含沙发床", "view_type": "私人阳台",
+      "description_zh": "高层甲板套房，面积约 22–28㎡，以私人阳台和独立休息区为主要特色；多数配步入式衣帽间。",
+      "description_en": "Upper deck suite, 22–28 m², with private balcony and separate seating area.",
+      "amenities": ["私人阳台", "休息区", "咖啡机", "迷你吧", "淋浴", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "阳台"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "MF", "name": "转角套房", "official_name": "Corner Suite", "category": "suite",
+      "size_sqm": 22, "max_guests": 2, "bed_layout": "双人床，可申请拆分为双床", "view_type": "大幅窗景",
+      "description_zh": "约 22㎡的高层甲板转角套房，设躺椅式休息区，以大窗观看极地海面与天际线。",
+      "description_en": "Upper deck corner suite, 22 m², with large windows and a chaise lounge.",
+      "amenities": ["大幅窗景", "休息区", "咖啡机", "迷你吧", "淋浴", "Lindstrøm 餐厅餐食"], "display_tags": ["套房", "转角"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "XT", "name": "高级阳台房", "official_name": "Outside cabin with balcony", "category": "balcony",
+      "size_sqm": 18, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床；部分含沙发床", "view_type": "私人阳台，部分视野受限",
+      "description_zh": "高层甲板阳台房，约 18㎡，部分房间的阳台视野可能受限或有遮挡。",
+      "description_en": "Upper-deck cabin with private balcony; some have limited or obstructed views.",
+      "amenities": ["私人阳台", "独立卫浴", "电视", "保险箱", "迷你吧", "茶与咖啡"], "display_tags": ["阳台", "部分受限视野"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "XTD", "name": "双人高级阳台房", "official_name": "Outside cabin with balcony", "category": "balcony",
+      "size_sqm": 17, "max_guests": 2, "bed_layout": "双人床", "view_type": "私人阳台",
+      "description_zh": "高层甲板双人阳台房，面积约 15–19㎡，以简洁舒适的双人入住配置为主。",
+      "description_en": "Upper-deck double cabin, 15–19 m², with private balcony.",
+      "amenities": ["私人阳台", "独立卫浴", "电视", "保险箱", "迷你吧", "茶与咖啡"], "display_tags": ["阳台", "双人"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "XY", "name": "无障碍高级阳台房", "official_name": "Wheelchair-accessible outside cabin with balcony", "category": "balcony",
+      "size_sqm": 19, "max_guests": 2, "bed_layout": "双人床", "view_type": "私人阳台", "is_accessible": true,
+      "description_zh": "约 19㎡的高层甲板无障碍阳台房；具体是否可按普通库存预订，以出发日期和船方确认为准。",
+      "description_en": "Wheelchair-accessible upper-deck cabin, 19 m², with private balcony.",
+      "amenities": ["私人阳台", "无障碍设计", "独立卫浴", "电视", "保险箱", "茶与咖啡"], "display_tags": ["阳台", "无障碍"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "XTJ", "name": "受限视野高级阳台房", "official_name": "Outside cabin with balcony", "category": "balcony",
+      "size_sqm": 18, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床；部分含沙发床", "view_type": "私人阳台，视野受限",
+      "description_zh": "约 18㎡的阳台房，部分房间阳台的景观有遮挡或受限，适合把阳台作为户外空间而非全景观景位的客人。",
+      "description_en": "Upper-deck cabin with limited-view private balcony.",
+      "amenities": ["私人阳台", "独立卫浴", "电视", "保险箱", "迷你吧", "茶与咖啡"], "display_tags": ["阳台", "受限视野"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "TT", "name": "大海景房", "official_name": "Outside cabin", "category": "ocean-view",
+      "size_sqm": 27, "max_guests": 3, "bed_layout": "双人床，可申请拆分为双床；部分含沙发床", "view_type": "窗景",
+      "description_zh": "约 27㎡的大型低层甲板海景房，配置窗景与灵活床型。",
+      "description_en": "Large lower-deck outside cabin, 27 m², with window.",
+      "amenities": ["窗景", "独立卫浴", "电视", "保险箱", "迷你吧", "茶与咖啡"], "display_tags": ["海景", "大面积"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "TY", "name": "无障碍大海景房", "official_name": "Wheelchair-accessible outside cabin", "category": "ocean-view",
+      "size_sqm": 25, "max_guests": 2, "bed_layout": "双人床，可申请拆分为双床", "view_type": "窗景", "is_accessible": true,
+      "description_zh": "约 24–26㎡的无障碍低层甲板海景房；具体可售条件以船方和所选出发日期确认为准。",
+      "description_en": "Wheelchair-accessible lower-deck outside cabin, 24–26 m², with window.",
+      "amenities": ["窗景", "无障碍设计", "独立卫浴", "电视", "保险箱", "茶与咖啡"], "display_tags": ["海景", "无障碍"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    },
+    {
+      "official_code": "RR", "name": "极地海景房", "official_name": "Outside cabin", "category": "ocean-view",
+      "size_sqm": 21, "max_guests": 4, "bed_layout": "双人床，可申请拆分为双床；部分含沙发床", "view_type": "窗景",
+      "description_zh": "低层甲板海景房，面积约 19–23㎡，设窗景；部分房间配有沙发床。",
+      "description_en": "Lower-deck outside cabin, 19–23 m², with window.",
+      "amenities": ["窗景", "独立卫浴", "电视", "保险箱", "迷你吧", "茶与咖啡"], "display_tags": ["海景"],
+      "source_url": "https://www.travelhx.com/en-gb/ships/roald-amundsen/"
+    }
+  ]
+}
