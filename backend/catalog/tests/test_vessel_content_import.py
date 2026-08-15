@@ -1,6 +1,7 @@
 import json
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 from django.core.management import call_command
 from django.test import TestCase
@@ -44,3 +45,43 @@ class ImportVesselContentTests(TestCase):
             list(CabinDisplayGroup.objects.get(vessel=vessel, slug="suite").cabins.values_list("official_code", flat=True)),
             ["MA"],
         )
+
+
+class ImportVesselHeroImagesTests(TestCase):
+    def test_downloads_and_assigns_a_hero_image_to_each_named_vessel(self):
+        first = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        second = Vessel.objects.create(slug="fram", name="前进号")
+        payload = {
+            "vessels": [
+                {"slug": "roald-amundsen", "image_url": "https://images.example.test/roald.webp"},
+                {"slug": "fram", "image_url": "https://images.example.test/fram.webp"},
+            ]
+        }
+
+        class ImageResponse:
+            headers = {"Content-Type": "image/webp"}
+
+            def read(self):
+                return b"test-webp-image"
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "heroes.json"
+            source.write_text(json.dumps(payload), encoding="utf-8")
+            with patch(
+                "catalog.management.commands.import_vessel_hero_images.urlopen",
+                return_value=ImageResponse(),
+            ):
+                call_command("import_vessel_hero_images", source)
+
+        first.refresh_from_db()
+        second.refresh_from_db()
+        self.assertTrue(first.hero_image.name.startswith("vessels/heroes/roald-amundsen"))
+        self.assertTrue(second.hero_image.name.startswith("vessels/heroes/fram"))
+        self.assertTrue(first.hero_image.name.endswith(".webp"))
+        self.assertTrue(second.hero_image.name.endswith(".webp"))

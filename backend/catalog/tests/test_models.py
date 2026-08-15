@@ -15,6 +15,36 @@ from catalog.models import (
 )
 
 
+class VesselPublicationTests(TestCase):
+    def test_published_vessel_requires_a_hero_image(self):
+        vessel = Vessel(
+            slug="no-hero",
+            name="无封面图测试船",
+            content_status="published",
+            published_at=timezone.now(),
+        )
+
+        with self.assertRaisesRegex(ValidationError, "封面图"):
+            vessel.full_clean()
+
+    def test_public_vessel_list_excludes_vessels_without_a_hero_image(self):
+        hidden = Vessel.objects.create(
+            slug="no-hero",
+            name="无封面图测试船",
+            content_status="published",
+            published_at=timezone.now(),
+        )
+        visible = Vessel.objects.create(
+            slug="with-hero",
+            name="有封面图测试船",
+            hero_image="vessels/heroes/with-hero.webp",
+            content_status="published",
+            published_at=timezone.now(),
+        )
+
+        self.assertEqual(list(Vessel.objects.public()), [visible])
+
+
 class ProductPublishingTests(TestCase):
     def setUp(self):
         self.destination = Destination.objects.create(name="南极", slug="antarctica")

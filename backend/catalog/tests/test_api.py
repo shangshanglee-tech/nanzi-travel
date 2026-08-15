@@ -132,6 +132,7 @@ class VesselApiTests(TestCase):
             short_pitch="混合动力极地探险船",
             intro_zh="面向极地探索的旗舰探险船。",
             intro_en="A hybrid-powered expedition ship.",
+            hero_image="vessels/heroes/roald-amundsen.webp",
             content_status=VesselContentStatus.PUBLISHED,
             published_at=timezone.now(),
         )

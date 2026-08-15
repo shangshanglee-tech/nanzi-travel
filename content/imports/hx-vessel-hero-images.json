@@ -1,0 +1,16 @@
+{
+  "vessels": [
+    {
+      "slug": "roald-amundsen",
+      "image_url": "https://images.eu.ctfassets.net/vy34d8u43l9r/1hHlXyeYJ5vol3K9PEI17R/4072a38220da1a407500cf3708058eb7/Antarctica_MS_Roald_Amundsen_HX_28993_Photo_Dan_and_Zora_Avila__1_.jpg?fm=webp&q=75&w=3840"
+    },
+    {
+      "slug": "fridtjof-nansen",
+      "image_url": "https://images.eu.ctfassets.net/vy34d8u43l9r/1gfWN67HOp4nAPspj3us1p/640094538a05a92c701cd1fa8ab51bba/.Antarctica_Lemaire_Channel_MS_Fridtjof_Nansen_HX_44945_Photo_Espen_Mills__1_.jpg?fm=webp&q=75&w=3840"
+    },
+    {
+      "slug": "fram",
+      "image_url": "https://images.eu.ctfassets.net/vy34d8u43l9r/7kx3sAd1iUzQJ9UH34nuzL/d99cd5f4f19b205e90632d1d4afae70f/MSFram_1920x1080_v2_1.jpg?fm=webp&q=75&w=3840"
+    }
+  ]
+}

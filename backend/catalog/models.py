@@ -31,7 +31,7 @@ class VesselQuerySet(models.QuerySet):
             is_active=True,
             content_status=VesselContentStatus.PUBLISHED,
             published_at__isnull=False,
-        )
+        ).exclude(hero_image="")
 
 
 class Destination(models.Model):
@@ -99,6 +99,8 @@ class Vessel(models.Model):
         super().clean()
         if self.content_status == VesselContentStatus.PUBLISHED and not self.published_at:
             raise ValidationError({"published_at": "published_at 是发布船只内容的必填项"})
+        if self.content_status == VesselContentStatus.PUBLISHED and not self.hero_image:
+            raise ValidationError({"hero_image": "发布船只内容前必须上传封面图"})
 
 
 class CabinType(models.Model):
