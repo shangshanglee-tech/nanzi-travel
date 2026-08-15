@@ -47,3 +47,30 @@ class ImportPolarContentTests(TestCase):
         self.assertEqual(CabinType.objects.get().name, "探险套房")
         self.assertEqual(Departure.objects.get().vessel.slug, "roald-amundsen")
         self.assertEqual(product.itinerary_days.filter(source_range="Day 3-4").count(), 2)
+
+    def test_default_import_preserves_manually_added_cabin(self):
+        payload = {
+            "vessels": [{
+                "slug": "roald-amundsen",
+                "name": "阿蒙森号",
+                "cabins": [{"name": "官方舱型", "category": "套房"}],
+            }],
+            "products": [{
+                "slug": "highlights-of-antarctica",
+                "vessel_slugs": ["roald-amundsen"],
+                "departures": [],
+                "itinerary_segments": [],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "polar.json"
+            source.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            call_command("import_hx_polar_content", source)
+            CabinType.objects.create(
+                vessel=Vessel.objects.get(slug="roald-amundsen"),
+                name="人工舱型",
+                summary="人工文案",
+            )
+            call_command("import_hx_polar_content", source)
+
+        self.assertTrue(CabinType.objects.filter(name="人工舱型", summary="人工文案").exists())

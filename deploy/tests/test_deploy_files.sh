@@ -39,9 +39,8 @@ assert "alias /var/lib/nanzi-travel/media/;" in nginx
 deploy_script = (root / "deploy/scripts/deploy.sh").read_text()
 assert "staticfiles/" in deploy_script
 assert "/var/lib/nanzi-travel/static/" in deploy_script
-assert "hx-polar-content.json" in deploy_script
-assert "import_hx_polar_content" in deploy_script
-assert "/var/lib/nanzi-travel/content" in deploy_script
+assert "import_hx_polar_content" not in deploy_script
+assert "/var/lib/nanzi-travel/content" not in deploy_script
 
 isolated_bootstrap = (root / "deploy/scripts/bootstrap-isolated-service.sh").read_text()
 assert "CONFIRM_ISOLATED_BOOTSTRAP" in isolated_bootstrap
