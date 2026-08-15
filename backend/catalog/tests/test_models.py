@@ -2,7 +2,17 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils import timezone
 
-from catalog.models import Departure, Destination, Product, SiteSettings, Vessel
+from catalog.models import (
+    CabinDisplayGroup,
+    CabinType,
+    Departure,
+    Destination,
+    Product,
+    SiteSettings,
+    Vessel,
+    VesselContentStatus,
+    VesselMedia,
+)
 
 
 class ProductPublishingTests(TestCase):
@@ -67,3 +77,30 @@ class PolarContentRelationshipTests(TestCase):
 
         self.assertEqual(list(vessel.products.all()), [product])
         self.assertEqual(departure.vessel, vessel)
+
+
+class VesselEditorialContentTests(TestCase):
+    def setUp(self):
+        self.vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+
+    def test_published_vessel_requires_published_at(self):
+        self.vessel.content_status = VesselContentStatus.PUBLISHED
+
+        with self.assertRaisesMessage(ValidationError, "published_at"):
+            self.vessel.full_clean()
+
+    def test_cabin_can_belong_to_multiple_display_groups(self):
+        cabin = CabinType.objects.create(vessel=self.vessel, name="MA", official_code="MA")
+        suite = CabinDisplayGroup.objects.create(vessel=self.vessel, slug="suite", title_zh="套房")
+        balcony = CabinDisplayGroup.objects.create(vessel=self.vessel, slug="balcony", title_zh="阳台房")
+        suite.cabins.add(cabin)
+        balcony.cabins.add(cabin)
+
+        self.assertEqual(list(cabin.display_groups.all()), [suite, balcony])
+
+    def test_media_requires_exactly_one_parent(self):
+        cabin = CabinType.objects.create(vessel=self.vessel, name="MA", official_code="MA")
+        media = VesselMedia(vessel=self.vessel, cabin=cabin, image="vessels/test.jpg")
+
+        with self.assertRaisesMessage(ValidationError, "一个媒体资源"):
+            media.full_clean()
