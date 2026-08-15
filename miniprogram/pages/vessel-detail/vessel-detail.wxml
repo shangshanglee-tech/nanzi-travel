@@ -4,15 +4,72 @@
   <block wx:else>
     <image wx:if="{{vessel.hero_image}}" class="hero" src="{{vessel.hero_image}}" mode="aspectFill" />
     <view class="intro dark-intro">
-      <view class="kicker">HX EXPEDITIONS · 探险船档案</view>
+      <view class="kicker">{{vessel.operator_name || 'HX EXPEDITIONS'}} · 探险船档案</view>
       <view class="title">{{vessel.name}}</view>
       <view class="official-name">{{vessel.official_name}}</view>
-      <view class="summary">{{vessel.summary}}</view>
-      <view class="fact-row"><text wx:if="{{vessel.capacity}}">约 {{vessel.capacity}} 位宾客</text><text wx:if="{{vessel.year_built}}">{{vessel.year_built}} 年</text></view>
+      <view class="summary">{{vessel.short_pitch || vessel.summary}}</view>
+      <view wx:if="{{detail.facts.length}}" class="fact-row">
+        <view wx:for="{{detail.facts}}" wx:key="label" class="fact">
+          <text class="fact-label">{{item.label}}</text>
+          <text class="fact-value">{{item.value}}</text>
+        </view>
+      </view>
     </view>
-    <view wx:if="{{vessel.features.length}}" class="section"><view class="section-title">船上体验</view><view wx:for="{{vessel.features}}" wx:key="*this" class="bullet">· {{item}}</view></view>
-    <view wx:if="{{vessel.cabins.length}}" class="section"><view class="section-title">舱位分类</view><view wx:for="{{vessel.cabins}}" wx:key="name" class="cabin"><view class="cabin-name">{{item.name}}</view><view class="cabin-copy">{{item.summary}}</view><view class="cabin-tags"><text wx:for="{{item.highlights}}" wx:key="*this">{{item}}</text></view></view><view class="cabin-note">舱位图片、具体舱号、床型、视野与价格以所选团期的正式确认信息为准。</view></view>
-    <view wx:if="{{vessel.products.length}}" class="section"><view class="section-title">这艘船可选择的路线</view><view wx:for="{{vessel.products}}" wx:key="slug" class="route-card" bindtap="openProduct" data-slug="{{item.slug}}"><image wx:if="{{item.hero_image}}" class="route-image" src="{{item.hero_image}}" mode="aspectFill" /><view class="route-body"><view class="route-kicker">{{item.season}}</view><view class="route-title">{{item.title}}</view><view class="route-copy">{{item.subtitle || item.summary}}</view></view></view></view>
+
+    <view wx:if="{{vessel.intro_zh}}" class="section">
+      <view class="section-title">船只介绍</view>
+      <view class="body-copy">{{vessel.intro_zh}}</view>
+    </view>
+
+    <view wx:if="{{detail.gallery.length}}" class="gallery-scroll">
+      <image wx:for="{{detail.gallery}}" wx:key="image" class="gallery-image" src="{{item.image}}" mode="aspectFill" />
+    </view>
+
+    <view wx:if="{{detail.experiences.length}}" class="section">
+      <view class="section-title">船上体验</view>
+      <view wx:for="{{detail.experiences}}" wx:for-item="experience" wx:key="id" class="experience">
+        <view class="experience-title">{{experience.title_zh}}</view>
+        <view class="body-copy">{{experience.body_zh}}</view>
+        <image wx:if="{{experience.media.length}}" class="experience-image" src="{{experience.media[0].image}}" mode="aspectFill" />
+      </view>
+    </view>
+
+    <view wx:if="{{detail.cabinGroups.length}}" class="section">
+      <view class="section-title">舱位选择</view>
+      <view wx:for="{{detail.cabinGroups}}" wx:for-item="cabinGroup" wx:key="slug" class="cabin-group">
+        <view class="group-title">{{cabinGroup.title}}</view>
+        <view wx:for="{{cabinGroup.cabins}}" wx:for-item="cabin" wx:key="id" class="cabin">
+          <image wx:if="{{cabin.media.length}}" class="cabin-image" src="{{cabin.media[0].image}}" mode="aspectFill" />
+          <view class="cabin-header">
+            <view class="cabin-name">{{cabin.name}}</view>
+            <text wx:if="{{cabin.official_code}}" class="cabin-code">{{cabin.official_code}}</text>
+          </view>
+          <view wx:if="{{cabin.description_zh || cabin.summary}}" class="cabin-copy">{{cabin.description_zh || cabin.summary}}</view>
+          <view class="cabin-facts">
+            <text wx:if="{{cabin.size_sqm}}">{{cabin.size_sqm}}㎡</text>
+            <text wx:if="{{cabin.max_guests}}">最多 {{cabin.max_guests}} 人</text>
+            <text wx:if="{{cabin.deck}}">{{cabin.deck}}</text>
+          </view>
+          <view wx:if="{{cabin.amenities.length || cabin.highlights.length}}" class="cabin-tags">
+            <text wx:for="{{cabin.amenities.length ? cabin.amenities : cabin.highlights}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="cabin-note">具体舱号、床型、视野与可售状态，以所选团期的正式确认信息为准。</view>
+    </view>
+
+    <view wx:if="{{detail.products.length}}" class="section">
+      <view class="section-title">这艘船可选择的路线</view>
+      <view wx:for="{{detail.products}}" wx:key="slug" class="route-card" bindtap="openProduct" data-slug="{{item.slug}}">
+        <image wx:if="{{item.hero_image}}" class="route-image" src="{{item.hero_image}}" mode="aspectFill" />
+        <view class="route-body">
+          <view class="route-kicker">{{item.season}}</view>
+          <view class="route-title">{{item.title}}</view>
+          <view class="route-copy">{{item.subtitle || item.summary}}</view>
+        </view>
+      </view>
+    </view>
+
     <view class="action-bar"><button class="consult-button" bindtap="consult">咨询这艘船</button></view>
   </block>
 </view>

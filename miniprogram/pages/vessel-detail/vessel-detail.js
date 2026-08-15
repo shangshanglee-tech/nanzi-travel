@@ -1,7 +1,8 @@
 const {getVessel} = require("../../services/api");
+const {buildVesselDetailState} = require("./view-model");
 
 Page({
-  data: {loading: true, error: "", vessel: {}},
+  data: {loading: true, error: "", vessel: {}, detail: {}},
   onLoad(query) {
     this.slug = query.slug || "";
     this.loadVessel();
@@ -10,7 +11,7 @@ Page({
     this.setData({loading: true, error: ""});
     try {
       const vessel = await getVessel(this.slug);
-      this.setData({vessel});
+      this.setData({vessel, detail: buildVesselDetailState(vessel)});
       wx.setNavigationBarTitle({title: vessel.name});
     } catch (error) {
       this.setData({error: error.message || "加载失败，请稍后重试"});
