@@ -21,20 +21,17 @@
         </view>
       </view>
       <view wx:if="{{index === 0 && vessels.length}}" class="vessel-section">
-        <view class="section-heading"><text>认识探险船</text><text class="section-note">每艘船都有不同气质</text></view>
-        <scroll-view scroll-x class="vessel-scroll">
-          <view class="vessel-row">
-            <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" bindtap="openVessel" data-slug="{{item.slug}}">
-              <image wx:if="{{item.hero_image}}" class="vessel-image" src="{{item.hero_image}}" mode="aspectFill" />
-              <view class="vessel-card-body">
-                <view class="vessel-name">{{item.name}}</view>
-                <view class="vessel-official">{{item.official_name}}</view>
-                <view class="vessel-fact"><text wx:if="{{item.capacity}}">约 {{item.capacity}} 位宾客</text><text wx:if="{{item.year_built}}">{{item.year_built}} 年</text></view>
-                <view class="vessel-summary">{{item.summary}}</view>
-              </view>
+        <view class="vessel-list">
+          <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" bindtap="openVessel" data-slug="{{item.slug}}">
+            <image wx:if="{{item.hero_image}}" class="vessel-image" src="{{item.hero_image}}" mode="aspectFill" />
+            <view class="vessel-card-body">
+              <view class="vessel-official">{{item.official_name}}</view>
+              <view class="vessel-name">{{item.name}}</view>
+              <view class="vessel-summary">{{item.summary}}</view>
+              <view class="vessel-fact"><text wx:if="{{item.capacity}}">约 {{item.capacity}} 位宾客</text><text wx:if="{{item.year_built}}">{{item.year_built}} 年</text></view>
             </view>
           </view>
-        </scroll-view>
+        </view>
       </view>
     </block>
   </view>

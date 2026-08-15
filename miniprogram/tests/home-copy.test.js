@@ -21,3 +21,8 @@ test("places the vessel section between the first and second product cards", () 
   assert.ok(vesselIndex > productLoopIndex);
   assert.match(homeMarkup, /wx:if="{{index === 0 && vessels\.length}}"/);
 });
+
+test("uses a vertical vessel card list without a section heading", () => {
+  assert.match(homeMarkup, /class="vessel-list"/);
+  assert.doesNotMatch(homeMarkup, /认识探险船|每艘船都有不同气质|scroll-x class="vessel-scroll"/);
+});
