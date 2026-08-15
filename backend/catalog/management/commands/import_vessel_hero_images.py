@@ -21,8 +21,16 @@ CONTENT_TYPE_EXTENSIONS = {
 class Command(BaseCommand):
     help = "下载官方图片并写入指定船只的封面图"
 
+    default_source = Path(__file__).resolve().parents[2] / "data" / "hx-vessel-hero-images.json"
+
     def add_arguments(self, parser):
-        parser.add_argument("source", type=Path, help="包含 vessels[].slug 与 image_url 的 JSON 文件")
+        parser.add_argument(
+            "source",
+            type=Path,
+            nargs="?",
+            default=self.default_source,
+            help="包含 vessels[].slug 与 image_url 的 JSON 文件；默认使用随程序部署的 HX 图片清单",
+        )
 
     def handle(self, *args, **options):
         source = options["source"]

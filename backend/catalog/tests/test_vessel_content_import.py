@@ -85,3 +85,27 @@ class ImportVesselHeroImagesTests(TestCase):
         self.assertTrue(second.hero_image.name.startswith("vessels/heroes/fram"))
         self.assertTrue(first.hero_image.name.endswith(".webp"))
         self.assertTrue(second.hero_image.name.endswith(".webp"))
+
+    def test_uses_the_bundled_hx_hero_list_when_no_source_is_given(self):
+        for slug, name in (("roald-amundsen", "阿蒙森号"), ("fridtjof-nansen", "南森号"), ("fram", "前进号")):
+            Vessel.objects.create(slug=slug, name=name)
+
+        class ImageResponse:
+            headers = {"Content-Type": "image/webp"}
+
+            def read(self):
+                return b"test-webp-image"
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+        with patch(
+            "catalog.management.commands.import_vessel_hero_images.urlopen",
+            return_value=ImageResponse(),
+        ):
+            call_command("import_vessel_hero_images")
+
+        self.assertEqual(Vessel.objects.exclude(hero_image="").count(), 3)
