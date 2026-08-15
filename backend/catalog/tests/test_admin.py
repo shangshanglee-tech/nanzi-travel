@@ -3,9 +3,19 @@ from django.contrib.auth import get_user_model
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
-from catalog.admin import ProductAdmin, SiteSettingsAdmin
-from catalog.forms import ProductAdminForm
-from catalog.models import Destination, Product, ProductStatus, SiteSettings
+from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin
+from catalog.forms import ProductAdminForm, VesselAdminForm
+from catalog.models import (
+    CabinDisplayGroup,
+    Destination,
+    Product,
+    ProductStatus,
+    SiteSettings,
+    Vessel,
+    VesselContentStatus,
+    VesselExperience,
+    VesselMedia,
+)
 
 
 class CatalogAdminTests(TestCase):
@@ -90,6 +100,29 @@ class CatalogAdminTests(TestCase):
 
         self.assertFalse(settings_admin.has_add_permission(request))
 
+    def test_vessel_editor_is_registered_with_content_inlines(self):
+        self.assertIn(Vessel, site._registry)
+        vessel_admin = site._registry[Vessel]
+        inline_models = {inline.model for inline in vessel_admin.inlines}
+
+        self.assertEqual(vessel_admin.__class__, VesselAdmin)
+        self.assertTrue({VesselExperience, CabinDisplayGroup, VesselMedia}.issubset(inline_models))
+
+    def test_vessel_publish_action_sets_status_and_publish_time(self):
+        vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        request = RequestFactory().post("/admin/catalog/vessel/")
+        request.user = get_user_model().objects.create_superuser(
+            username="vessel-publisher",
+            password="strong-password",
+        )
+        vessel_admin = VesselAdmin(Vessel, site)
+
+        vessel_admin.publish_vessels(request, Vessel.objects.filter(pk=vessel.pk))
+
+        vessel.refresh_from_db()
+        self.assertEqual(vessel.content_status, VesselContentStatus.PUBLISHED)
+        self.assertIsNotNone(vessel.published_at)
+
 
 class ProductAdminFormTests(TestCase):
     def setUp(self):
@@ -123,3 +156,17 @@ class ProductAdminFormTests(TestCase):
 
         self.assertFalse(form.is_valid())
         self.assertIn("空白项", form.errors["highlights"][0])
+
+
+class VesselAdminFormTests(TestCase):
+    def test_vessel_features_reject_non_list_value(self):
+        form = VesselAdminForm(data={
+            "slug": "roald-amundsen",
+            "name": "阿蒙森号",
+            "features": '{"name":"科学中心"}',
+            "content_status": VesselContentStatus.DRAFT,
+            "sort_order": 0,
+        })
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("必须是列表", form.errors["features"][0])

@@ -1,6 +1,18 @@
 from rest_framework import serializers
 
-from .models import CabinType, Departure, Destination, ItineraryDay, Product, ProductImage, SiteSettings, Vessel
+from .models import (
+    CabinType,
+    CabinDisplayGroup,
+    Departure,
+    Destination,
+    ItineraryDay,
+    Product,
+    ProductImage,
+    SiteSettings,
+    Vessel,
+    VesselExperience,
+    VesselMedia,
+)
 
 
 class DestinationSerializer(serializers.ModelSerializer):
@@ -109,10 +121,15 @@ class ProductDetailSerializer(ProductCardSerializer):
 
 class CabinTypeSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
+    media = serializers.SerializerMethodField()
 
     class Meta:
         model = CabinType
-        fields = ("name", "category", "size_sqm", "bed_layout", "view_type", "summary", "highlights", "image")
+        fields = (
+            "name", "official_code", "official_name", "category", "size_sqm", "max_guests", "deck",
+            "bed_layout", "view_type", "summary", "description_zh", "description_en", "amenities",
+            "display_tags", "is_accessible", "highlights", "image", "media",
+        )
 
     def get_image(self, cabin):
         if not cabin.image:
@@ -121,13 +138,84 @@ class CabinTypeSerializer(serializers.ModelSerializer):
         url = cabin.image.url
         return request.build_absolute_uri(url) if request else url
 
+    def get_media(self, cabin):
+        return VesselMediaSerializer(cabin.media.all(), many=True, context=self.context).data
+
+
+class VesselMediaSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = VesselMedia
+        fields = ("image", "alt_zh", "alt_en", "source_note")
+
+    def get_image(self, media):
+        request = self.context.get("request")
+        url = media.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class VesselExperienceSerializer(serializers.ModelSerializer):
+    media = VesselMediaSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = VesselExperience
+        fields = ("kind", "title_zh", "title_en", "body_zh", "body_en", "media")
+
+
+class CabinDisplayGroupSerializer(serializers.ModelSerializer):
+    cabins = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CabinDisplayGroup
+        fields = ("slug", "title_zh", "title_en", "cabins")
+
+    def get_cabins(self, group):
+        cabins = [cabin for cabin in group.cabins.all() if cabin.is_visible]
+        return CabinTypeSerializer(cabins, many=True, context=self.context).data
+
 
 class VesselDetailSerializer(VesselCardSerializer):
     cabins = CabinTypeSerializer(many=True, read_only=True)
+    experiences = serializers.SerializerMethodField()
+    cabin_groups = serializers.SerializerMethodField()
+    media = VesselMediaSerializer(many=True, read_only=True)
     products = ProductCardSerializer(many=True, read_only=True)
 
     class Meta(VesselCardSerializer.Meta):
-        fields = VesselCardSerializer.Meta.fields + ("cabins", "products", "source_url")
+        fields = VesselCardSerializer.Meta.fields + (
+            "operator_name", "ship_type", "short_pitch", "intro_zh", "intro_en", "year_refurbished",
+            "experiences", "cabin_groups", "cabins", "media", "products", "source_url",
+        )
+
+    def get_experiences(self, vessel):
+        experiences = [experience for experience in vessel.experiences.all() if experience.is_visible]
+        return VesselExperienceSerializer(experiences, many=True, context=self.context).data
+
+    def get_cabin_groups(self, vessel):
+        groups = [group for group in vessel.cabin_groups.all() if group.is_visible]
+        visible_groups = [
+            group for group in groups
+            if any(cabin.is_visible for cabin in group.cabins.all())
+        ]
+        payload = CabinDisplayGroupSerializer(visible_groups, many=True, context=self.context).data
+        grouped_cabin_ids = {
+            cabin.pk
+            for group in visible_groups
+            for cabin in group.cabins.all()
+        }
+        ungrouped = [
+            cabin for cabin in vessel.cabins.all()
+            if cabin.is_visible and cabin.pk not in grouped_cabin_ids
+        ]
+        if ungrouped:
+            payload.append({
+                "slug": "other",
+                "title_zh": "其他舱位",
+                "title_en": "Other cabins",
+                "cabins": CabinTypeSerializer(ungrouped, many=True, context=self.context).data,
+            })
+        return payload
 
 
 class SiteSettingsSerializer(serializers.ModelSerializer):

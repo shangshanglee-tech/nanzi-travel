@@ -3,8 +3,10 @@ from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.template.response import TemplateResponse
 from django.utils import timezone
 
-from .forms import ProductAdminForm
+from .forms import ProductAdminForm, VesselAdminForm
 from .models import (
+    CabinDisplayGroup,
+    CabinType,
     Departure,
     Destination,
     ItineraryDay,
@@ -12,6 +14,9 @@ from .models import (
     ProductImage,
     ProductStatus,
     SiteSettings,
+    Vessel,
+    VesselExperience,
+    VesselMedia,
 )
 
 
@@ -27,6 +32,27 @@ class ItineraryDayInline(admin.StackedInline):
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
+    extra = 0
+
+
+class VesselExperienceInline(admin.StackedInline):
+    model = VesselExperience
+    extra = 0
+
+
+class CabinTypeInline(admin.StackedInline):
+    model = CabinType
+    extra = 0
+
+
+class CabinDisplayGroupInline(admin.StackedInline):
+    model = CabinDisplayGroup
+    filter_horizontal = ("cabins",)
+    extra = 0
+
+
+class VesselMediaInline(admin.TabularInline):
+    model = VesselMedia
     extra = 0
 
 
@@ -77,6 +103,33 @@ class ProductAdmin(admin.ModelAdmin):
     @admin.action(description="下架所选产品")
     def archive_products(self, request, queryset):
         queryset.update(status=ProductStatus.ARCHIVED)
+
+
+@admin.register(Vessel)
+class VesselAdmin(admin.ModelAdmin):
+    form = VesselAdminForm
+    inlines = (VesselExperienceInline, CabinTypeInline, CabinDisplayGroupInline, VesselMediaInline)
+    list_display = ("name", "official_name", "operator_name", "content_status", "published_at", "is_active", "updated_at")
+    list_filter = ("content_status", "is_active", "operator_name")
+    search_fields = ("name", "official_name", "operator_name", "slug")
+    prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = ("created_at", "updated_at")
+    actions = ("publish_vessels", "unpublish_vessels")
+    fieldsets = (
+        ("基础与发布", {"fields": ("name", "official_name", "operator_name", "slug", "content_status", "published_at", "is_active", "sort_order")}),
+        ("中文展示文案", {"fields": ("short_pitch", "summary", "intro_zh", "hero_image", "features")}),
+        ("英文原文与来源", {"fields": ("intro_en", "source_url", "source_fetched_at", "source_checked_at", "review_status")}),
+        ("结构化事实", {"fields": ("ship_type", "capacity", "year_built", "year_refurbished")}),
+        ("记录", {"fields": ("created_at", "updated_at")}),
+    )
+
+    @admin.action(description="发布所选船只内容")
+    def publish_vessels(self, request, queryset):
+        queryset.update(content_status="published", published_at=timezone.now())
+
+    @admin.action(description="撤回为草稿")
+    def unpublish_vessels(self, request, queryset):
+        queryset.update(content_status="draft", published_at=None)
 
 
 @admin.register(SiteSettings)

@@ -1,7 +1,17 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from catalog.models import Departure, Destination, Product, SiteSettings, Vessel
+from catalog.models import (
+    CabinDisplayGroup,
+    CabinType,
+    Departure,
+    Destination,
+    Product,
+    SiteSettings,
+    Vessel,
+    VesselContentStatus,
+    VesselExperience,
+)
 
 
 class ProductApiTests(TestCase):
@@ -26,7 +36,12 @@ class ProductApiTests(TestCase):
             slug="reserve",
             status="draft",
         )
-        self.vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        self.vessel = Vessel.objects.create(
+            slug="roald-amundsen",
+            name="阿蒙森号",
+            content_status=VesselContentStatus.PUBLISHED,
+            published_at=timezone.now(),
+        )
         self.live.vessels.add(self.vessel)
         Departure.objects.create(
             product=self.live,
@@ -107,6 +122,59 @@ class ProductApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["vessels"][0]["slug"], "roald-amundsen")
         self.assertEqual(response.json()["departures"][0]["vessel"]["slug"], "roald-amundsen")
+
+
+class VesselApiTests(TestCase):
+    def setUp(self):
+        self.vessel = Vessel.objects.create(
+            slug="roald-amundsen",
+            name="阿蒙森号",
+            short_pitch="混合动力极地探险船",
+            intro_zh="面向极地探索的旗舰探险船。",
+            intro_en="A hybrid-powered expedition ship.",
+            content_status=VesselContentStatus.PUBLISHED,
+            published_at=timezone.now(),
+        )
+        Vessel.objects.create(slug="draft-vessel", name="草稿船", content_status=VesselContentStatus.DRAFT)
+        experience = VesselExperience.objects.create(
+            vessel=self.vessel,
+            kind="science-centre",
+            title_zh="科学中心",
+            title_en="Science Center",
+            body_zh="跟随探险队深入理解目的地。",
+        )
+        cabin = CabinType.objects.create(
+            vessel=self.vessel,
+            name="XL 探险套房",
+            official_code="MA",
+            max_guests=2,
+            deck="8层甲板",
+            amenities=["迷你吧"],
+        )
+        group = CabinDisplayGroup.objects.create(vessel=self.vessel, slug="suite", title_zh="套房")
+        group.cabins.add(cabin)
+        self.experience = experience
+
+    def test_vessel_list_hides_drafts(self):
+        response = self.client.get("/api/v1/vessels")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual([item["slug"] for item in response.json()["results"]], ["roald-amundsen"])
+
+    def test_vessel_detail_exposes_editorial_modules_and_grouped_cabins(self):
+        response = self.client.get("/api/v1/vessels/roald-amundsen")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["intro_zh"], "面向极地探索的旗舰探险船。")
+        self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
+        self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")
+        self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["amenities"], ["迷你吧"])
+
+    def test_draft_vessel_detail_returns_not_found(self):
+        response = self.client.get("/api/v1/vessels/draft-vessel")
+
+        self.assertEqual(response.status_code, 404)
 
 
 class SiteAndHomeApiTests(TestCase):

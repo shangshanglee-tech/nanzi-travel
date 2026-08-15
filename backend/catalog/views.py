@@ -75,7 +75,7 @@ class HomeView(APIView):
 
     def get(self, request):
         products = Product.objects.public().select_related("destination")[:8]
-        vessels = Vessel.objects.filter(is_active=True).prefetch_related("products")[:3]
+        vessels = Vessel.objects.public().prefetch_related("products")[:3]
         public_destination_ids = products.values_list("destination_id", flat=True)
         destinations = Destination.objects.filter(
             is_active=True,
@@ -170,7 +170,7 @@ class VesselListView(APIView):
     permission_classes = []
 
     def get(self, request):
-        vessels = Vessel.objects.filter(is_active=True)
+        vessels = Vessel.objects.public()
         return cache_public(Response({"results": VesselCardSerializer(vessels, many=True, context={"request": request}).data}))
 
 
@@ -180,8 +180,8 @@ class VesselDetailView(APIView):
 
     def get(self, request, slug):
         try:
-            vessel = Vessel.objects.filter(is_active=True).prefetch_related(
-                "cabins", "products__destination"
+            vessel = Vessel.objects.public().prefetch_related(
+                "media", "experiences__media", "cabins__media", "cabin_groups__cabins__media", "products__destination"
             ).get(slug=slug)
         except Vessel.DoesNotExist:
             return error_response("not_found", "船只不存在或暂未开放", 404)
