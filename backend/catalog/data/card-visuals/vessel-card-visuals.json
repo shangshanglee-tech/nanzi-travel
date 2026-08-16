@@ -1,0 +1,9 @@
+{
+  "vessels": [
+    {
+      "slug": "roald-amundsen",
+      "card_image": "roald-amundsen-card.webp",
+      "card_tone": "#071A32"
+    }
+  ]
+}

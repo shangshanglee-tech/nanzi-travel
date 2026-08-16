@@ -16,6 +16,17 @@ from catalog.models import (
 
 
 class VesselPublicationTests(TestCase):
+    def test_vessel_card_tone_accepts_a_hex_color(self):
+        vessel = Vessel(slug="card-tint", name="卡片底色测试船", card_tone="#071A32")
+
+        vessel.full_clean()
+
+    def test_vessel_card_tone_rejects_an_invalid_color(self):
+        vessel = Vessel(slug="bad-card-tint", name="错误卡片底色测试船", card_tone="navy")
+
+        with self.assertRaisesRegex(ValidationError, "请输入 #071A32 形式"):
+            vessel.full_clean()
+
     def test_published_vessel_requires_a_hero_image(self):
         vessel = Vessel(
             slug="no-hero",

@@ -109,3 +109,34 @@ class ImportVesselHeroImagesTests(TestCase):
             call_command("import_vessel_hero_images")
 
         self.assertEqual(Vessel.objects.exclude(hero_image="").count(), 3)
+
+
+class ImportVesselCardVisualsTests(TestCase):
+    def test_imports_a_card_image_and_tone_from_a_local_bundle(self):
+        vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
+        with tempfile.TemporaryDirectory() as directory:
+            directory_path = Path(directory)
+            source = directory_path / "card-visuals.json"
+            image = directory_path / "roald-amundsen-card.webp"
+            image.write_bytes(b"test-webp-card-image")
+            source.write_text(
+                json.dumps(
+                    {
+                        "vessels": [
+                            {
+                                "slug": "roald-amundsen",
+                                "card_image": "roald-amundsen-card.webp",
+                                "card_tone": "#071A32",
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            call_command("import_vessel_card_visuals", source)
+            call_command("import_vessel_card_visuals", source)
+
+        vessel.refresh_from_db()
+        self.assertTrue(vessel.card_image.name.startswith("vessels/cards/roald-amundsen-card"))
+        self.assertEqual(vessel.card_tone, "#071A32")

@@ -133,6 +133,8 @@ class VesselApiTests(TestCase):
             intro_zh="面向极地探索的旗舰探险船。",
             intro_en="A hybrid-powered expedition ship.",
             hero_image="vessels/heroes/roald-amundsen.webp",
+            card_image="vessels/cards/roald-amundsen-card.webp",
+            card_tone="#071A32",
             content_status=VesselContentStatus.PUBLISHED,
             published_at=timezone.now(),
         )
@@ -161,6 +163,8 @@ class VesselApiTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual([item["slug"] for item in response.json()["results"]], ["roald-amundsen"])
+        self.assertEqual(response.json()["results"][0]["card_tone"], "#071A32")
+        self.assertTrue(response.json()["results"][0]["card_image"].endswith("roald-amundsen-card.webp"))
 
     def test_vessel_detail_exposes_editorial_modules_and_grouped_cabins(self):
         response = self.client.get("/api/v1/vessels/roald-amundsen")

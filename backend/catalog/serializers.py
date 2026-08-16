@@ -23,16 +23,35 @@ class DestinationSerializer(serializers.ModelSerializer):
 
 class VesselCardSerializer(serializers.ModelSerializer):
     hero_image = serializers.SerializerMethodField()
+    card_image = serializers.SerializerMethodField()
 
     class Meta:
         model = Vessel
-        fields = ("slug", "name", "official_name", "summary", "hero_image", "capacity", "year_built", "features")
+        fields = (
+            "slug",
+            "name",
+            "official_name",
+            "summary",
+            "hero_image",
+            "card_image",
+            "card_tone",
+            "capacity",
+            "year_built",
+            "features",
+        )
 
     def get_hero_image(self, vessel):
         if not vessel.hero_image:
             return ""
         request = self.context.get("request")
         url = vessel.hero_image.url
+        return request.build_absolute_uri(url) if request else url
+
+    def get_card_image(self, vessel):
+        if not vessel.card_image:
+            return ""
+        request = self.context.get("request")
+        url = vessel.card_image.url
         return request.build_absolute_uri(url) if request else url
 
 

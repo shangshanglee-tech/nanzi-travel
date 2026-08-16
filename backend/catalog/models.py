@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 
@@ -64,6 +65,18 @@ class Vessel(models.Model):
         upload_to="vessels/heroes/",
         storage=build_media_storage,
         blank=True,
+    )
+    card_image = models.ImageField(
+        "卡片图",
+        upload_to="vessels/cards/",
+        storage=build_media_storage,
+        blank=True,
+    )
+    card_tone = models.CharField(
+        "卡片底色",
+        max_length=7,
+        blank=True,
+        validators=[RegexValidator(r"^#[0-9A-Fa-f]{6}$", "请输入 #071A32 形式的六位色值")],
     )
     capacity = models.PositiveSmallIntegerField("载客人数", null=True, blank=True)
     year_built = models.PositiveSmallIntegerField("建造年份", null=True, blank=True)
