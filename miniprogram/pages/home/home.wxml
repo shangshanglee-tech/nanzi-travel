@@ -24,7 +24,7 @@
         <view class="vessel-list">
           <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" style="background-color: {{item.card_tone}}" bindtap="openVessel" data-slug="{{item.slug}}">
             <image class="vessel-image" src="{{item.card_image}}" mode="widthFix" />
-            <view class="vessel-type-mark"><image src="/assets/ship.svg" mode="aspectFit" /></view>
+            <view class="vessel-type-mark"><image src="/assets/ship-white.svg" mode="aspectFit" /></view>
             <view class="vessel-card-body">
               <view class="vessel-official">{{item.official_name}}</view>
               <view class="vessel-name">{{item.name}}</view>

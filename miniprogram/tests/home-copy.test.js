@@ -50,9 +50,13 @@ test("uses the prepared vessel card image with three white copy blocks", () => {
 });
 
 test("marks vessel cards with the ship type icon in the upper right corner", () => {
+  const shipIcon = fs.readFileSync(path.join(__dirname, "../assets/ship-white.svg"), "utf8");
+
   assert.match(homeMarkup, /class="vessel-type-mark"/);
-  assert.match(homeMarkup, /src="\/assets\/ship\.svg"/);
+  assert.match(homeMarkup, /src="\/assets\/ship-white\.svg"/);
   assert.match(homeStyles, /\.vessel-type-mark\s*\{[^}]*position:\s*absolute[^}]*top:\s*26rpx[^}]*right:\s*26rpx/);
+  assert.doesNotMatch(shipIcon, /#cdcdcd/i);
+  assert.match(shipIcon, /fill="#FFFFFF"/);
 });
 
 test("uses the shared system font instead of device-dependent serif fallbacks", () => {
