@@ -3,7 +3,7 @@
 .brand-logo { flex: 0 0 auto; width: 102rpx; height: 102rpx; }
 .hero-copy { display: flex; flex: 1; flex-direction: column; justify-content: center; }
 .eyebrow { color: #64706b; font-size: 21rpx; letter-spacing: 3rpx; }
-.headline { margin-top: 8rpx; color: #143f35; font-family: serif; font-size: 58rpx; font-weight: 700; }
+.headline { margin-top: 8rpx; color: #143f35; font-size: 58rpx; font-weight: 700; }
 .loading-card { padding: 72rpx 32rpx; border-radius: 28rpx; background: #fff; color: #747976; text-align: center; }
 .product-card { overflow: hidden; margin-bottom: 28rpx; border-radius: 30rpx; background: #fff; box-shadow: 0 14rpx 36rpx rgba(20,63,53,.08); }
 .product-image { display: block; width: 100%; height: 380rpx; background: #dbe6de; }
@@ -11,5 +11,5 @@
 .product-kicker { color: #76807b; font-size: 22rpx; }
 .product-title { margin-top: 12rpx; color: #151515; font-size: 36rpx; font-weight: 650; }
 .product-summary { margin-top: 12rpx; color: #656b68; font-size: 26rpx; line-height: 1.6; }
-.vessel-section { margin-bottom: 28rpx; }.vessel-list { display: flex; flex-direction: column; gap: 28rpx; }.vessel-card { overflow: hidden; border-radius: 30rpx; background: #fff; box-shadow: 0 14rpx 36rpx rgba(20,63,53,.08); }.vessel-image { display: block; width: 100%; height: 380rpx; background: #dbe6de; }.vessel-card-body { padding: 30rpx; }.vessel-name { margin-top: 8rpx; color: #151515; font-family: serif; font-size: 38rpx; font-weight: 700; }.vessel-official { color: #76807b; font-size: 20rpx; letter-spacing: 1rpx; }.vessel-summary { display: -webkit-box; overflow: hidden; margin-top: 12rpx; color: #656b68; font-size: 26rpx; line-height: 1.6; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }.vessel-fact { display: flex; gap: 18rpx; margin-top: 18rpx; color: #5e6d65; font-size: 22rpx; }
+.vessel-section { margin-bottom: 28rpx; }.vessel-list { display: flex; flex-direction: column; gap: 28rpx; }.vessel-card { overflow: hidden; border-radius: 30rpx; background: #fff; box-shadow: 0 14rpx 36rpx rgba(20,63,53,.08); }.vessel-image { display: block; width: 100%; height: 380rpx; background: #dbe6de; }.vessel-card-body { padding: 30rpx; }.vessel-name { margin-top: 8rpx; color: #151515; font-size: 38rpx; font-weight: 700; }.vessel-official { color: #76807b; font-size: 20rpx; letter-spacing: 1rpx; }.vessel-summary { display: -webkit-box; overflow: hidden; margin-top: 12rpx; color: #656b68; font-size: 26rpx; line-height: 1.6; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }.vessel-fact { display: flex; gap: 18rpx; margin-top: 18rpx; color: #5e6d65; font-size: 22rpx; }
 .all-products { padding: 20rpx 0 42rpx; color: #143f35; font-size: 27rpx; font-weight: 600; text-align: center; }.future-title { margin-bottom: 22rpx; color: #151515; font-size: 32rpx; font-weight: 650; }.future-list { display: flex; flex-direction: column; gap: 18rpx; }
