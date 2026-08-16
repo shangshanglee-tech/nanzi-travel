@@ -62,3 +62,10 @@ test("supports a transparent title-free page navigation variant", () => {
   assert.match(navStyles, /\.nav\.transparent\s*\{[^}]*position:\s*absolute[^}]*background:\s*transparent/);
   assert.match(navStyles, /\.nav\.transparent \.back-button\s*\{[^}]*color:\s*#fff/);
 });
+
+test("presents the full Chinese vessel introduction in its dark card tone", () => {
+  assert.match(vesselMarkup, /class="section vessel-intro-card" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
+  assert.match(vesselMarkup, /class="vessel-intro-copy">\{\{vessel\.intro_zh\}\}/);
+  assert.match(vesselStyles, /\.vessel-intro-card\s*\{[^}]*color:\s*#fff/);
+  assert.match(vesselStyles, /\.vessel-intro-copy\s*\{[^}]*white-space:\s*pre-line/);
+});

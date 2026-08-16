@@ -21,9 +21,9 @@
       </view>
     </view>
 
-    <view wx:if="{{vessel.intro_zh}}" class="section">
+    <view wx:if="{{vessel.intro_zh}}" class="section vessel-intro-card" style="background-color: {{vessel.card_tone || '#143f35'}}">
       <view class="section-title">船只介绍</view>
-      <view class="body-copy">{{vessel.intro_zh}}</view>
+      <view class="vessel-intro-copy">{{vessel.intro_zh}}</view>
     </view>
 
     <view wx:if="{{detail.gallery.length}}" class="gallery-scroll">
