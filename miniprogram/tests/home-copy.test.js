@@ -49,6 +49,7 @@ test("uses the prepared vessel card image with only bilingual vessel names", () 
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*margin-top:\s*-172rpx/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
   assert.match(homeStyles, /\.vessel-name\s*\{[^}]*font-size:\s*46rpx/);
+  assert.match(homeStyles, /\.vessel-name\s*\{[^}]*margin-top:\s*24rpx/);
 });
 
 test("marks vessel cards with the ship type icon in the upper right corner", () => {
