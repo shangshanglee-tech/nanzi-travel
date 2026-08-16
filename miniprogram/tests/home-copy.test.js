@@ -41,10 +41,11 @@ test("shows only vessels that have a prepared card visual", () => {
   assert.match(homeScript, /featured_vessels \|\| \[\]\)\.filter\(\(vessel\) => vessel\.card_image\)/);
 });
 
-test("uses the prepared vessel card image with three white copy blocks", () => {
+test("uses the prepared vessel card image with only bilingual vessel names", () => {
   assert.match(homeMarkup, /src="{{item\.card_image}}"/);
   assert.match(homeMarkup, /style="background-color: {{item\.card_tone}}"/);
   assert.doesNotMatch(homeMarkup, /class="vessel-fact"/);
+  assert.doesNotMatch(homeMarkup, /class="vessel-summary"/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*margin-top:\s*-172rpx/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
 });
