@@ -49,6 +49,12 @@ test("uses the prepared vessel card image with three white copy blocks", () => {
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
 });
 
+test("marks vessel cards with the ship type icon in the upper right corner", () => {
+  assert.match(homeMarkup, /class="vessel-type-mark"/);
+  assert.match(homeMarkup, /src="\/assets\/ship\.svg"/);
+  assert.match(homeStyles, /\.vessel-type-mark\s*\{[^}]*position:\s*absolute[^}]*top:\s*26rpx[^}]*right:\s*26rpx/);
+});
+
 test("uses the shared system font instead of device-dependent serif fallbacks", () => {
   assert.doesNotMatch(homeStyles, /font-family:\s*serif/);
   assert.doesNotMatch(navStyles, /font-family:\s*serif/);
