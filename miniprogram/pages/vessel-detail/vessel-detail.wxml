@@ -1,13 +1,17 @@
 <view class="page with-action">
-  <page-nav title="{{vessel.name || '探险船档案'}}" show-back="{{true}}" />
+  <page-nav transparent="{{true}}" show-title="{{false}}" show-back="{{true}}" />
   <view wx:if="{{loading}}" class="loading">正在展开船只档案…</view>
   <empty-state wx:elif="{{error}}" title="暂时无法查看船只" description="{{error}}" bind:retry="loadVessel" />
   <block wx:else>
-    <image wx:if="{{vessel.hero_image}}" class="hero" src="{{vessel.hero_image}}" mode="aspectFill" />
+    <view wx:if="{{vessel.card_image || vessel.hero_image}}" class="hero">
+      <image class="hero-image" src="{{vessel.card_image || vessel.hero_image}}" mode="widthFix" />
+      <view class="hero-copy">
+        <view class="hero-official">{{vessel.official_name}}</view>
+        <view class="hero-name">{{vessel.name}}</view>
+      </view>
+    </view>
     <view class="intro dark-intro">
       <view class="kicker">{{vessel.operator_name || 'HX EXPEDITIONS'}} · 探险船档案</view>
-      <view class="title">{{vessel.name}}</view>
-      <view class="official-name">{{vessel.official_name}}</view>
       <view class="summary">{{vessel.short_pitch || vessel.summary}}</view>
       <view wx:if="{{detail.facts.length}}" class="fact-row">
         <view wx:for="{{detail.facts}}" wx:key="label" class="fact">

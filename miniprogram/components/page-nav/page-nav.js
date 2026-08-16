@@ -4,6 +4,8 @@ Component({
   properties: {
     title: {type: String, value: ""},
     showBack: {type: Boolean, value: true},
+    showTitle: {type: Boolean, value: true},
+    transparent: {type: Boolean, value: false},
   },
   data: {
     metrics: {topPadding: 20, height: 44, rightPadding: 16},

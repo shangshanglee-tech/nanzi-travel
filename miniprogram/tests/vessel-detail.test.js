@@ -2,6 +2,25 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 
 const {buildVesselDetailState} = require("../../miniprogram/pages/vessel-detail/view-model");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const vesselMarkup = fs.readFileSync(
+  path.join(__dirname, "../pages/vessel-detail/vessel-detail.wxml"),
+  "utf8"
+);
+const vesselStyles = fs.readFileSync(
+  path.join(__dirname, "../pages/vessel-detail/vessel-detail.wxss"),
+  "utf8"
+);
+const navMarkup = fs.readFileSync(
+  path.join(__dirname, "../components/page-nav/page-nav.wxml"),
+  "utf8"
+);
+const navStyles = fs.readFileSync(
+  path.join(__dirname, "../components/page-nav/page-nav.wxss"),
+  "utf8"
+);
 
 test("builds visible vessel modules and keeps cabin groups", () => {
   const state = buildVesselDetailState({
@@ -27,4 +46,19 @@ test("builds visible vessel modules and keeps cabin groups", () => {
   ]);
   assert.equal(state.experiences.length, 1);
   assert.deepEqual(state.cabinGroups.map((group) => group.title), ["套房"]);
+});
+
+test("uses a card visual as the immersive vessel detail hero", () => {
+  assert.match(vesselMarkup, /<page-nav transparent="\{\{true\}\}" show-title="\{\{false\}\}" show-back="\{\{true\}\}"/);
+  assert.match(vesselMarkup, /src="\{\{vessel\.card_image \|\| vessel\.hero_image\}\}" mode="widthFix"/);
+  assert.match(vesselMarkup, /class="hero-official">\{\{vessel\.official_name\}\}/);
+  assert.match(vesselMarkup, /class="hero-name">\{\{vessel\.name\}\}/);
+  assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*position:\s*absolute[^}]*bottom:/);
+});
+
+test("supports a transparent title-free page navigation variant", () => {
+  assert.match(navMarkup, /class="nav \{\{transparent \? 'transparent' : ''\}\}"/);
+  assert.match(navMarkup, /wx:if="\{\{showTitle\}\}" class="nav-title"/);
+  assert.match(navStyles, /\.nav\.transparent\s*\{[^}]*position:\s*absolute[^}]*background:\s*transparent/);
+  assert.match(navStyles, /\.nav\.transparent \.back-button\s*\{[^}]*color:\s*#fff/);
 });

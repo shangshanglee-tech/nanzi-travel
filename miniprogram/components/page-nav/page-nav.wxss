@@ -1,3 +1,4 @@
 .nav { position: relative; box-sizing: border-box; display: flex; align-items: center; padding-left: 28rpx; background: #f3f2ee; color: #143f35; }
 .back-button { display: flex; align-items: center; justify-content: center; width: 60rpx; height: 60rpx; margin-left: -14rpx; color: #143f35; font-size: 58rpx; line-height: 1; }
 .nav-title { flex: 1; overflow: hidden; padding: 0 18rpx; font-size: 29rpx; font-weight: 650; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.nav.transparent { position: absolute; top: 0; z-index: 10; width: 100%; background: transparent; color: #fff; }.nav.transparent .back-button { color: #fff; text-shadow: 0 2rpx 8rpx rgba(0,0,0,.24); }
