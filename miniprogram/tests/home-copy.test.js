@@ -60,6 +60,15 @@ test("marks vessel cards with the ship type icon in the upper right corner", () 
   assert.match(shipIcon, /fill="#FFFFFF"/);
 });
 
+test("marks every product card with the route type icon in the upper right corner", () => {
+  const mapIcon = fs.readFileSync(path.join(__dirname, "../assets/map-white.svg"), "utf8");
+
+  assert.match(homeMarkup, /class="product-type-mark"/);
+  assert.match(homeMarkup, /src="\/assets\/map-white\.svg"/);
+  assert.match(homeStyles, /\.product-type-mark\s*\{[^}]*position:\s*absolute[^}]*top:\s*26rpx[^}]*right:\s*26rpx/);
+  assert.match(mapIcon, /fill="#FFFFFF"/);
+});
+
 test("uses the shared system font instead of device-dependent serif fallbacks", () => {
   assert.doesNotMatch(homeStyles, /font-family:\s*serif/);
   assert.doesNotMatch(navStyles, /font-family:\s*serif/);

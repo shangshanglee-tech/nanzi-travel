@@ -14,6 +14,7 @@
     <block wx:for="{{products}}" wx:key="slug">
       <view class="product-card" bindtap="openProduct" data-slug="{{item.slug}}">
         <image wx:if="{{item.hero_image}}" class="product-image" src="{{item.hero_image}}" mode="aspectFill" />
+        <view class="product-type-mark"><image src="/assets/map-white.svg" mode="aspectFit" /></view>
         <view class="product-body">
           <view class="product-kicker">{{item.destination.name}} · {{item.season}}</view>
           <view class="product-title">{{item.title}}</view>
