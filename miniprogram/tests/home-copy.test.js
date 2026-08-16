@@ -35,6 +35,20 @@ test("uses a vertical vessel card list without a section heading", () => {
   assert.doesNotMatch(homeMarkup, /认识探险船|每艘船都有不同气质|scroll-x class="vessel-scroll"/);
 });
 
+test("shows only vessels that have a prepared card visual", () => {
+  const homeScript = fs.readFileSync(path.join(__dirname, "../pages/home/home.js"), "utf8");
+
+  assert.match(homeScript, /featured_vessels \|\| \[\]\)\.filter\(\(vessel\) => vessel\.card_image\)/);
+});
+
+test("uses the prepared vessel card image with three white copy blocks", () => {
+  assert.match(homeMarkup, /src="{{item\.card_image}}"/);
+  assert.match(homeMarkup, /style="background-color: {{item\.card_tone}}"/);
+  assert.doesNotMatch(homeMarkup, /class="vessel-fact"/);
+  assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*margin-top:\s*-172rpx/);
+  assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
+});
+
 test("uses the shared system font instead of device-dependent serif fallbacks", () => {
   assert.doesNotMatch(homeStyles, /font-family:\s*serif/);
   assert.doesNotMatch(navStyles, /font-family:\s*serif/);

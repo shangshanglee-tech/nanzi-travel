@@ -17,7 +17,7 @@ Page({
       const data = await getHome();
       this.setData({
         products: data.featured_products || [],
-        vessels: data.featured_vessels || [],
+        vessels: (data.featured_vessels || []).filter((vessel) => vessel.card_image),
         destinations: data.destinations || [],
       });
     } catch (error) {

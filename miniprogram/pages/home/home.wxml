@@ -22,13 +22,12 @@
       </view>
       <view wx:if="{{index === 0 && vessels.length}}" class="vessel-section">
         <view class="vessel-list">
-          <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" bindtap="openVessel" data-slug="{{item.slug}}">
-            <image wx:if="{{item.hero_image}}" class="vessel-image" src="{{item.hero_image}}" mode="aspectFill" />
+          <view wx:for="{{vessels}}" wx:key="slug" class="vessel-card" style="background-color: {{item.card_tone}}" bindtap="openVessel" data-slug="{{item.slug}}">
+            <image class="vessel-image" src="{{item.card_image}}" mode="widthFix" />
             <view class="vessel-card-body">
               <view class="vessel-official">{{item.official_name}}</view>
               <view class="vessel-name">{{item.name}}</view>
               <view class="vessel-summary">{{item.summary}}</view>
-              <view class="vessel-fact"><text wx:if="{{item.capacity}}">约 {{item.capacity}} 位宾客</text><text wx:if="{{item.year_built}}">{{item.year_built}} 年</text></view>
             </view>
           </view>
         </view>
