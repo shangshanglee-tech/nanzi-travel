@@ -29,6 +29,7 @@
             <view class="vessel-card-body">
               <view class="vessel-official">{{item.official_name}}</view>
               <view class="vessel-name">{{item.name}}</view>
+              <view class="vessel-summary">{{item.summary}}</view>
             </view>
           </view>
         </view>
