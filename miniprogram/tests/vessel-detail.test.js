@@ -53,7 +53,8 @@ test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /src="\{\{vessel\.card_image \|\| vessel\.hero_image\}\}" mode="widthFix"/);
   assert.match(vesselMarkup, /class="hero-official">\{\{vessel\.official_name\}\}/);
   assert.match(vesselMarkup, /class="hero-name">\{\{vessel\.name\}\}/);
-  assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*position:\s*absolute[^}]*bottom:/);
+  assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
+  assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*margin-top:\s*-172rpx/);
 });
 
 test("supports a transparent title-free page navigation variant", () => {
@@ -63,9 +64,9 @@ test("supports a transparent title-free page navigation variant", () => {
   assert.match(navStyles, /\.nav\.transparent \.back-button\s*\{[^}]*color:\s*#fff/);
 });
 
-test("presents the full Chinese vessel introduction in its dark card tone", () => {
-  assert.match(vesselMarkup, /class="section vessel-intro-card" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
-  assert.match(vesselMarkup, /class="vessel-intro-copy">\{\{vessel\.intro_zh\}\}/);
-  assert.match(vesselStyles, /\.vessel-intro-card\s*\{[^}]*color:\s*#fff/);
-  assert.match(vesselStyles, /\.vessel-intro-copy\s*\{[^}]*white-space:\s*pre-line/);
+test("continues the hero card tone below the image for the full Chinese introduction", () => {
+  assert.match(vesselMarkup, /class="hero" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
+  assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
+  assert.doesNotMatch(vesselMarkup, /vessel-intro-card/);
+  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*white-space:\s*pre-line/);
 });
