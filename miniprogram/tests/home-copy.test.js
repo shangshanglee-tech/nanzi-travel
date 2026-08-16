@@ -39,3 +39,7 @@ test("uses the shared system font instead of device-dependent serif fallbacks", 
   assert.doesNotMatch(homeStyles, /font-family:\s*serif/);
   assert.doesNotMatch(navStyles, /font-family:\s*serif/);
 });
+
+test("lowers the brand eyebrow without moving the headline", () => {
+  assert.match(homeStyles, /\.eyebrow\s*\{[^}]*transform:\s*translateY\(4rpx\)/);
+});

@@ -2,7 +2,7 @@
 .hero-lockup { display: flex; align-items: center; gap: 22rpx; margin-bottom: 42rpx; }
 .brand-logo { flex: 0 0 auto; width: 102rpx; height: 102rpx; }
 .hero-copy { display: flex; flex: 1; flex-direction: column; justify-content: center; }
-.eyebrow { color: #64706b; font-size: 21rpx; letter-spacing: 3rpx; }
+.eyebrow { transform: translateY(4rpx); color: #64706b; font-size: 21rpx; letter-spacing: 3rpx; }
 .headline { margin-top: 8rpx; color: #143f35; font-size: 58rpx; font-weight: 700; }
 .loading-card { padding: 72rpx 32rpx; border-radius: 28rpx; background: #fff; color: #747976; text-align: center; }
 .product-card { overflow: hidden; margin-bottom: 28rpx; border-radius: 30rpx; background: #fff; box-shadow: 0 14rpx 36rpx rgba(20,63,53,.08); }
