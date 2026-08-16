@@ -55,6 +55,7 @@ test("marks vessel cards with the ship type icon in the upper right corner", () 
   assert.match(homeMarkup, /class="vessel-type-mark"/);
   assert.match(homeMarkup, /src="\/assets\/ship-white\.svg"/);
   assert.match(homeStyles, /\.vessel-type-mark\s*\{[^}]*position:\s*absolute[^}]*top:\s*26rpx[^}]*right:\s*26rpx/);
+  assert.match(homeStyles, /\.vessel-type-mark\s*\{[^}]*width:\s*81rpx[^}]*height:\s*81rpx/);
   assert.doesNotMatch(shipIcon, /#cdcdcd/i);
   assert.match(shipIcon, /fill="#FFFFFF"/);
 });
