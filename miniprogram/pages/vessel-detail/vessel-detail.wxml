@@ -13,7 +13,7 @@
     </view>
     <view wx:if="{{detail.facilities.length}}" class="facility-grid">
       <view wx:for="{{detail.facilities}}" wx:key="text" class="facility-item" style="color: {{vessel.card_tone || '#143f35'}}">
-        <image class="facility-icon" src="../../assets/{{item.icon}}.svg" mode="aspectFit" />
+        <image class="facility-icon" src="{{apiBaseUrl}}/vessel-icons/{{item.icon}}.svg?tone={{detail.iconTone}}" mode="aspectFit" />
         <text class="facility-text">{{item.text}}</text>
       </view>
     </view>

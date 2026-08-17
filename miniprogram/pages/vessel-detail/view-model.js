@@ -1,4 +1,5 @@
 function buildVesselDetailState(vessel = {}) {
+  const iconTone = /^#[0-9a-f]{6}$/i.test(vessel.card_tone || "") ? vessel.card_tone.slice(1) : "143f35";
   const facilities = [];
   if (vessel.year_refurbished) facilities.push({icon: "verified-badge", text: `${vessel.year_refurbished}年翻新`});
   else if (vessel.year_built) facilities.push({icon: "verified-badge", text: `建成于${vessel.year_built}年`});
@@ -16,6 +17,7 @@ function buildVesselDetailState(vessel = {}) {
   if (vessel.has_fitness_center) facilities.push({icon: "fitness", text: "健身房"});
 
   return {
+    iconTone,
     facilities,
     experiences: (vessel.experiences || []).filter((item) => item.title_zh && item.body_zh),
     cabinGroups: (vessel.cabin_groups || [])

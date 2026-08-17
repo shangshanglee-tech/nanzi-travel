@@ -75,6 +75,11 @@ test("uses a built year only when no refurbishment year exists", () => {
   assert.deepEqual(state.facilities, [{icon: "verified-badge", text: "建成于2020年"}]);
 });
 
+test("derives a safe vessel tone for remote facility icons", () => {
+  assert.equal(buildVesselDetailState({card_tone: "#071A32"}).iconTone, "071A32");
+  assert.equal(buildVesselDetailState({card_tone: "not-a-color"}).iconTone, "143f35");
+});
+
 test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /<page-nav transparent="\{\{true\}\}" show-title="\{\{false\}\}" show-back="\{\{true\}\}"/);
   assert.match(vesselMarkup, /src="\{\{vessel\.card_image \|\| vessel\.hero_image\}\}" mode="widthFix"/);
@@ -101,7 +106,7 @@ test("continues the hero card tone below the image for the full Chinese introduc
 test("renders a two-column vessel facility grid instead of the green introduction card", () => {
   assert.doesNotMatch(vesselMarkup, /class="intro dark-intro"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.facilities\.length\}\}" class="facility-grid"/);
-  assert.match(vesselMarkup, /class="facility-icon" src="\.\.\/\.\.\/assets\/\{\{item\.icon\}\}\.svg" mode="aspectFit"/);
+  assert.match(vesselMarkup, /class="facility-icon" src="\{\{apiBaseUrl\}\}\/vessel-icons\/\{\{item\.icon\}\}\.svg\?tone=\{\{detail\.iconTone\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /\{\{item\.text\}\}/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*background:\s*transparent/);

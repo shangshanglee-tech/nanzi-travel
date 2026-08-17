@@ -203,6 +203,14 @@ class VesselApiTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+    def test_vessel_icon_endpoint_applies_the_requested_vessel_tone(self):
+        response = self.client.get("/api/v1/vessel-icons/lounge.svg", {"tone": "071A32"})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "image/svg+xml")
+        self.assertIn(b'fill="#071A32"', response.content)
+        self.assertNotIn(b'#323332', response.content)
+
 
 class SiteAndHomeApiTests(TestCase):
     def setUp(self):

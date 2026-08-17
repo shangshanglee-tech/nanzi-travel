@@ -1,6 +1,7 @@
 import re
+from pathlib import Path
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils.cache import patch_cache_control
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,6 +18,25 @@ from .serializers import (
 
 
 MONTH_PATTERN = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+ICON_TONE_PATTERN = re.compile(r"^[0-9A-Fa-f]{6}$")
+VESSEL_ICON_DIRECTORY = Path(__file__).resolve().parent / "static" / "catalog" / "vessel-icons"
+VESSEL_ICON_NAMES = frozenset(
+    {
+        "verified-badge",
+        "capacity",
+        "science_center",
+        "wifi",
+        "hybrid",
+        "modern_stable_tech",
+        "restaurants",
+        "bars",
+        "lounge",
+        "spa",
+        "swimming_pool",
+        "hot_tubs",
+        "fitness",
+    }
+)
 
 
 def cache_public(response):
@@ -172,6 +192,25 @@ class VesselListView(APIView):
     def get(self, request):
         vessels = Vessel.objects.public()
         return cache_public(Response({"results": VesselCardSerializer(vessels, many=True, context={"request": request}).data}))
+
+
+class VesselIconView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, icon):
+        tone = request.query_params.get("tone", "143f35")
+        if icon not in VESSEL_ICON_NAMES or not ICON_TONE_PATTERN.fullmatch(tone):
+            return error_response("not_found", "图标不存在", 404)
+
+        source = VESSEL_ICON_DIRECTORY / f"{icon}.svg"
+        if not source.is_file():
+            return error_response("not_found", "图标不存在", 404)
+
+        svg = source.read_text(encoding="utf-8").replace("#323332", f"#{tone.upper()}")
+        response = HttpResponse(svg, content_type="image/svg+xml")
+        patch_cache_control(response, public=True, max_age=86400)
+        return response
 
 
 class VesselDetailView(APIView):

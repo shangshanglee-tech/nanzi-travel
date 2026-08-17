@@ -2,9 +2,10 @@ const {getVessel} = require("../../services/api");
 const {buildVesselDetailState} = require("./view-model");
 
 Page({
-  data: {loading: true, error: "", vessel: {}, detail: {}},
+  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: ""},
   onLoad(query) {
     this.slug = query.slug || "";
+    this.setData({apiBaseUrl: getApp().globalData.apiBaseUrl});
     this.loadVessel();
   },
   async loadVessel() {
