@@ -3,7 +3,7 @@ from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.template.response import TemplateResponse
 from django.utils import timezone
 
-from .forms import ProductAdminForm
+from .forms import ProductAdminForm, VesselPageBlockInlineForm
 from .models import (
     CabinDisplayGroup,
     CabinType,
@@ -56,23 +56,9 @@ class VesselMediaInline(admin.TabularInline):
 
 class VesselPageBlockInline(admin.StackedInline):
     model = VesselPageBlock
+    form = VesselPageBlockInlineForm
     extra = 0
-    fields = ("block_type", "title", "image", "body", "is_visible", "sort_order")
-
-
-class VesselPageBlockImageInline(admin.TabularInline):
-    model = VesselPageBlockImage
-    extra = 0
-    fields = ("page_block", "image", "is_visible", "sort_order")
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "page_block":
-            object_id = request.resolver_match.kwargs.get("object_id") if request.resolver_match else None
-            kwargs["queryset"] = VesselPageBlock.objects.filter(
-                vessel_id=object_id,
-                block_type="card",
-            )
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    fields = ("block_type", "title", "image", "additional_images", "body", "is_visible", "sort_order")
 
 
 class VesselDeckPlanInline(admin.StackedInline):
@@ -134,7 +120,6 @@ class ProductAdmin(admin.ModelAdmin):
 class VesselAdmin(admin.ModelAdmin):
     inlines = (
         VesselPageBlockInline,
-        VesselPageBlockImageInline,
         CabinTypeInline,
         CabinDisplayGroupInline,
         VesselDeckPlanInline,

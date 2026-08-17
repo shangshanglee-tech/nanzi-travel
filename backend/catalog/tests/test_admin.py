@@ -1,10 +1,11 @@
 from django.contrib.admin.sites import site
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from pathlib import Path
 
-from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin
+from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin, VesselPageBlockInlineForm
 from catalog.forms import ProductAdminForm
 from catalog.models import (
     CabinDisplayGroup,
@@ -110,7 +111,8 @@ class CatalogAdminTests(TestCase):
         inline_models = {inline.model for inline in vessel_admin.inlines}
 
         self.assertEqual(vessel_admin.__class__, VesselAdmin)
-        self.assertTrue({CabinDisplayGroup, VesselMedia, VesselPageBlock, VesselPageBlockImage, VesselDeckPlan}.issubset(inline_models))
+        self.assertTrue({CabinDisplayGroup, VesselMedia, VesselPageBlock, VesselDeckPlan}.issubset(inline_models))
+        self.assertNotIn(VesselPageBlockImage, inline_models)
         self.assertNotIn(VesselExperience, inline_models)
 
     def test_vessel_editor_has_page_composer_switches_and_grouping_script(self):
@@ -127,6 +129,12 @@ class CatalogAdminTests(TestCase):
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
         vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")
+        VesselPageBlock.objects.create(
+            vessel=vessel,
+            block_type="card",
+            title="可增加图片的内容卡片",
+            image="vessels/page-blocks/primary.jpg",
+        )
         user = get_user_model().objects.create_superuser(username="page-block-operator", password="strong-password")
         self.client.force_login(user)
 
@@ -134,6 +142,41 @@ class CatalogAdminTests(TestCase):
 
         self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
+        self.assertContains(response, 'name="page_blocks-0-additional_images"')
+
+    def test_content_card_editor_uploads_multiple_additional_images_directly(self):
+        vessel = Vessel.objects.create(slug="card-image-upload", name="多图上传测试船")
+        block = VesselPageBlock.objects.create(
+            vessel=vessel,
+            block_type="card",
+            title="极地景观",
+            image="vessels/page-blocks/primary.jpg",
+        )
+        form = VesselPageBlockInlineForm(
+            data={
+                "block_type": "card",
+                "title": block.title,
+                "body": "",
+                "is_visible": "on",
+                "sort_order": "0",
+            },
+            files={
+                "additional_images": [
+                    SimpleUploadedFile("second.jpg", b"second", content_type="image/jpeg"),
+                    SimpleUploadedFile("third.jpg", b"third", content_type="image/jpeg"),
+                ]
+            },
+            instance=block,
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
+        form.save()
+
+        self.assertEqual(block.additional_images.count(), 2)
+        self.assertEqual(
+            list(block.additional_images.values_list("sort_order", flat=True)),
+            [0, 1],
+        )
 
     def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
         script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
@@ -143,6 +186,7 @@ class CatalogAdminTests(TestCase):
         self.assertIn("#page_blocks-group", source)
         self.assertIn('django.jQuery(document).on("formset:added", refresh)', source)
         self.assertIn('fieldWrapper(row, "image")', source)
+        self.assertIn('fieldWrapper(row, "additional_images")', source)
         self.assertIn('fieldWrapper(row, "body")', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
