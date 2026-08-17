@@ -1,5 +1,6 @@
 function buildVesselDetailState(vessel = {}) {
-  const iconTone = /^#[0-9a-f]{6}$/i.test(vessel.card_tone || "") ? vessel.card_tone.slice(1) : "143f35";
+  const cardTone = /^#[0-9a-f]{6}$/i.test(vessel.card_tone || "") ? vessel.card_tone : "#143f35";
+  const iconTone = cardTone.slice(1);
   const facilities = [];
   if (vessel.year_refurbished) facilities.push({icon: "verified-badge", text: `${vessel.year_refurbished}年翻新`});
   else if (vessel.year_built) facilities.push({icon: "verified-badge", text: `建成于${vessel.year_built}年`});
@@ -17,12 +18,22 @@ function buildVesselDetailState(vessel = {}) {
   if (vessel.has_fitness_center) facilities.push({icon: "fitness", text: "健身房"});
 
   return {
+    cardTone,
+    cardToneStyle: `color: ${cardTone}`,
+    cardToneBgStyle: `background-color: ${cardTone}`,
     iconTone,
     facilities,
-    pageBlocks: (vessel.page_blocks || []).filter((item) => {
-      if (item.block_type === "heading") return Boolean(item.title);
-      return item.block_type === "card" && Boolean(item.title && item.image);
-    }),
+    pageBlocks: (vessel.page_blocks || [])
+      .map((item) => ({
+        ...item,
+        images: Array.isArray(item.images)
+          ? item.images.filter(Boolean)
+          : item.image ? [item.image] : [],
+      }))
+      .filter((item) => {
+        if (item.block_type === "heading") return Boolean(item.title);
+        return item.block_type === "card" && Boolean(item.title && item.images.length);
+      }),
     showCabins: vessel.show_cabins !== false,
     cabinGroups: vessel.show_cabins === false ? [] : (vessel.cabin_groups || [])
       .filter((group) => group.title_zh && (group.cabins || []).length)

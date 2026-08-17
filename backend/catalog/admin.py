@@ -19,6 +19,7 @@ from .models import (
     VesselExperience,
     VesselMedia,
     VesselPageBlock,
+    VesselPageBlockImage,
 )
 
 
@@ -57,6 +58,21 @@ class VesselPageBlockInline(admin.StackedInline):
     model = VesselPageBlock
     extra = 0
     fields = ("block_type", "title", "image", "body", "is_visible", "sort_order")
+
+
+class VesselPageBlockImageInline(admin.TabularInline):
+    model = VesselPageBlockImage
+    extra = 0
+    fields = ("page_block", "image", "is_visible", "sort_order")
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "page_block":
+            object_id = request.resolver_match.kwargs.get("object_id") if request.resolver_match else None
+            kwargs["queryset"] = VesselPageBlock.objects.filter(
+                vessel_id=object_id,
+                block_type="card",
+            )
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class VesselDeckPlanInline(admin.StackedInline):
@@ -116,7 +132,14 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Vessel)
 class VesselAdmin(admin.ModelAdmin):
-    inlines = (VesselPageBlockInline, CabinTypeInline, CabinDisplayGroupInline, VesselDeckPlanInline, VesselMediaInline)
+    inlines = (
+        VesselPageBlockInline,
+        VesselPageBlockImageInline,
+        CabinTypeInline,
+        CabinDisplayGroupInline,
+        VesselDeckPlanInline,
+        VesselMediaInline,
+    )
     list_display = ("name", "official_name", "operator_name", "content_status", "published_at", "is_active", "updated_at")
     list_filter = ("content_status", "is_active", "operator_name")
     search_fields = ("name", "official_name", "operator_name", "slug")

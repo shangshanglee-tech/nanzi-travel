@@ -13,6 +13,7 @@ from catalog.models import (
     VesselDeckPlan,
     VesselExperience,
     VesselPageBlock,
+    VesselPageBlockImage,
 )
 
 
@@ -169,12 +170,25 @@ class VesselApiTests(TestCase):
         VesselPageBlock.objects.create(
             vessel=self.vessel, block_type="heading", title="探索与学习", sort_order=10
         )
-        VesselPageBlock.objects.create(
+        science_block = VesselPageBlock.objects.create(
             vessel=self.vessel,
             block_type="card",
             title="科学中心",
             image="vessels/page-blocks/science-centre.webp",
             body="和探险队一起理解极地。",
+            sort_order=20,
+        )
+        VesselPageBlockImage.objects.create(
+            vessel=self.vessel,
+            page_block=science_block,
+            image="vessels/page-block-images/science-centre-2.webp",
+            sort_order=10,
+        )
+        VesselPageBlockImage.objects.create(
+            vessel=self.vessel,
+            page_block=science_block,
+            image="vessels/page-block-images/science-centre-hidden.webp",
+            is_visible=False,
             sort_order=20,
         )
         VesselPageBlock.objects.create(
@@ -228,7 +242,10 @@ class VesselApiTests(TestCase):
             [(block["block_type"], block["title"]) for block in payload["page_blocks"]],
             [("heading", "探索与学习"), ("card", "科学中心")],
         )
-        self.assertTrue(payload["page_blocks"][1]["image"].endswith("science-centre.webp"))
+        self.assertEqual(
+            [image.rsplit("/", 1)[-1] for image in payload["page_blocks"][1]["images"]],
+            ["science-centre.webp", "science-centre-2.webp"],
+        )
         self.assertEqual(payload["deck_plans"][0]["title"], "7 层甲板")
         self.assertTrue(payload["deck_plans"][0]["image"].endswith("deck-7.webp"))
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")

@@ -14,6 +14,7 @@ from .models import (
     VesselExperience,
     VesselMedia,
     VesselPageBlock,
+    VesselPageBlockImage,
 )
 
 
@@ -175,18 +176,21 @@ class VesselExperienceSerializer(serializers.ModelSerializer):
 
 
 class VesselPageBlockSerializer(serializers.ModelSerializer):
-    image = serializers.SerializerMethodField()
+    images = serializers.SerializerMethodField()
 
     class Meta:
         model = VesselPageBlock
-        fields = ("block_type", "title", "image", "body")
+        fields = ("block_type", "title", "images", "body")
 
-    def get_image(self, block):
-        if not block.image:
-            return ""
+    def get_images(self, block):
         request = self.context.get("request")
-        url = block.image.url
-        return request.build_absolute_uri(url) if request else url
+        images = [block.image] if block.image else []
+        images.extend(image.image for image in block.additional_images.all() if image.is_visible)
+        urls = []
+        for image in images:
+            url = image.url
+            urls.append(request.build_absolute_uri(url) if request else url)
+        return urls
 
 
 class VesselDeckPlanSerializer(serializers.ModelSerializer):

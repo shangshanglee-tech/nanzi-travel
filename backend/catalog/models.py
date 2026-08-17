@@ -155,6 +155,43 @@ class VesselPageBlock(models.Model):
         return f"{self.vessel} · {self.get_block_type_display()} · {self.title}"
 
 
+class VesselPageBlockImage(models.Model):
+    vessel = models.ForeignKey(
+        Vessel,
+        verbose_name="船只",
+        related_name="page_block_images",
+        on_delete=models.CASCADE,
+    )
+    page_block = models.ForeignKey(
+        VesselPageBlock,
+        verbose_name="所属内容卡片",
+        related_name="additional_images",
+        on_delete=models.CASCADE,
+    )
+    image = models.ImageField(
+        "附加图片",
+        upload_to="vessels/page-block-images/",
+        storage=build_media_storage,
+    )
+    is_visible = models.BooleanField("展示", default=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "内容卡片附加图片"
+        verbose_name_plural = "内容卡片附加图片"
+
+    def clean(self):
+        super().clean()
+        if self.page_block_id and self.page_block.block_type != VesselPageBlockType.CARD:
+            raise ValidationError({"page_block": "附加图片只能关联内容卡片"})
+        if self.page_block_id and self.vessel_id and self.page_block.vessel_id != self.vessel_id:
+            raise ValidationError({"page_block": "附加图片和内容卡片必须属于同一艘船"})
+
+    def __str__(self):
+        return f"{self.vessel} · {self.page_block.title} · 附加图片"
+
+
 class VesselDeckPlan(models.Model):
     vessel = models.ForeignKey(
         Vessel,

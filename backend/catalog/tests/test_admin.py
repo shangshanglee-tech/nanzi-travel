@@ -18,6 +18,7 @@ from catalog.models import (
     VesselExperience,
     VesselMedia,
     VesselPageBlock,
+    VesselPageBlockImage,
 )
 
 
@@ -109,7 +110,7 @@ class CatalogAdminTests(TestCase):
         inline_models = {inline.model for inline in vessel_admin.inlines}
 
         self.assertEqual(vessel_admin.__class__, VesselAdmin)
-        self.assertTrue({CabinDisplayGroup, VesselMedia, VesselPageBlock, VesselDeckPlan}.issubset(inline_models))
+        self.assertTrue({CabinDisplayGroup, VesselMedia, VesselPageBlock, VesselPageBlockImage, VesselDeckPlan}.issubset(inline_models))
         self.assertNotIn(VesselExperience, inline_models)
 
     def test_vessel_editor_has_page_composer_switches_and_grouping_script(self):

@@ -8,22 +8,25 @@
 .title { margin-top: 14rpx; color: #143f35; font-family: serif; font-size: 46rpx; font-weight: 700; }
 .official-name { margin-top: 6rpx; color: #728078; font-size: 21rpx; letter-spacing: 1rpx; }
 .summary, .cabin-copy, .route-copy { margin-top: 14rpx; color: #565e5a; font-size: 26rpx; line-height: 1.7; }
-.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 42rpx 40rpx 26rpx; background: transparent; }
+.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 126rpx 40rpx 78rpx; background: transparent; }
 .facility-item { display: flex; align-items: center; min-width: 0; gap: 14rpx; font-size: 24rpx; line-height: 1.45; }
 .facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; }
 .facility-text { min-width: 0; }
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .page-composer { padding: 0 24rpx; }
-.composer-heading { margin: 42rpx 8rpx 18rpx; color: #143f35; font-size: 34rpx; font-weight: 700; }
-.composer-card { overflow: hidden; margin-bottom: 20rpx; border-radius: 24rpx; background: #fff; }
+.composer-heading { margin: 84rpx 8rpx 54rpx; color: #143f35; font-size: 34rpx; font-weight: 700; }
+.composer-card { overflow: hidden; margin-bottom: 60rpx; border-radius: 24rpx; background: #fff; }
+.composer-card-swiper { width: 100%; height: 460rpx; }
 .composer-card-image { display: block; width: 100%; background: #dbe6de; }
-.composer-card-title { padding: 26rpx 28rpx 0; color: #143f35; font-size: 30rpx; font-weight: 650; }
-.composer-card-body { padding: 14rpx 28rpx 28rpx; color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
-.group-title { color: #143f35; font-size: 29rpx; font-weight: 650; }
+.composer-card-swiper .composer-card-image { height: 100%; }
+.composer-card-title { padding: 26rpx 28rpx 30rpx; background: #fff; font-size: 30rpx; font-weight: 500; }
+.composer-card-body { padding: 6rpx 28rpx 84rpx; color: #565e5a; font-size: 26rpx; line-height: 1.8; font-weight: 400; white-space: pre-line; }
+.group-title { display: inline-block; padding: 8rpx 16rpx; border-radius: 999rpx; font-size: 33rpx; font-weight: 700; }
 .cabin-image { width: 100%; height: 300rpx; margin-top: 20rpx; border-radius: 18rpx; background: #dbe6de; }
-.cabin-group + .cabin-group { margin-top: 36rpx; }
-.group-title { margin-bottom: 2rpx; }
+.cabin-group + .cabin-group { margin-top: 108rpx; }
+.group-title { margin-bottom: 54rpx; }
+.group-title + .cabin { padding-top: 0; }
 .cabin { padding: 24rpx 0; border-bottom: 1rpx solid #eceeeb; }
 .cabin-name { color: #143f35; font-size: 29rpx; font-weight: 650; }
 .cabin-header { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }

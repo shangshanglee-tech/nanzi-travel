@@ -20,10 +20,15 @@
 
     <view wx:if="{{detail.pageBlocks.length}}" class="page-composer">
       <block wx:for="{{detail.pageBlocks}}" wx:key="index">
-        <view wx:if="{{item.block_type === 'heading'}}" class="composer-heading">{{item.title}}</view>
+        <view wx:if="{{item.block_type === 'heading'}}" class="composer-heading" style="{{detail.cardToneStyle}}">{{item.title}}</view>
         <view wx:else class="composer-card">
-          <image class="composer-card-image" src="{{item.image}}" mode="widthFix" />
-          <view class="composer-card-title">{{item.title}}</view>
+          <swiper wx:if="{{item.images.length > 1}}" class="composer-card-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="{{detail.cardTone}}">
+            <swiper-item wx:for="{{item.images}}" wx:for-item="image" wx:key="*this">
+              <image class="composer-card-image" src="{{image}}" mode="aspectFill" />
+            </swiper-item>
+          </swiper>
+          <image wx:else class="composer-card-image" src="{{item.images[0]}}" mode="widthFix" />
+          <view class="composer-card-title" style="{{detail.cardToneStyle}}">{{item.title}}</view>
           <view wx:if="{{item.body}}" class="composer-card-body">{{item.body}}</view>
         </view>
       </block>
@@ -32,7 +37,7 @@
     <view wx:if="{{detail.showCabins && detail.cabinGroups.length}}" class="section">
       <view class="section-title">舱位选择</view>
       <view wx:for="{{detail.cabinGroups}}" wx:for-item="cabinGroup" wx:key="slug" class="cabin-group">
-        <view class="group-title">{{cabinGroup.title}}</view>
+        <view class="group-title" style="{{detail.cardToneStyle}}">{{cabinGroup.title}}</view>
         <view wx:for="{{cabinGroup.cabins}}" wx:for-item="cabin" wx:key="id" class="cabin">
           <image wx:if="{{cabin.media.length}}" class="cabin-image" src="{{cabin.media[0].image}}" mode="aspectFill" />
           <view class="cabin-header">

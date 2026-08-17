@@ -14,6 +14,7 @@ from catalog.models import (
     VesselDeckPlan,
     VesselMedia,
     VesselPageBlock,
+    VesselPageBlockImage,
 )
 
 
@@ -94,6 +95,31 @@ class VesselPageComposerTests(TestCase):
         with self.assertRaises(ValidationError) as error:
             deck_plan.full_clean()
         self.assertIn("image", error.exception.message_dict)
+
+    def test_additional_card_image_must_belong_to_a_card_on_the_same_vessel(self):
+        other_vessel = Vessel.objects.create(slug="other-composer", name="另一艘测试船")
+        heading = VesselPageBlock.objects.create(
+            vessel=self.vessel, block_type="heading", title="分组标题"
+        )
+        other_card = VesselPageBlock.objects.create(
+            vessel=other_vessel,
+            block_type="card",
+            title="另一艘船的卡片",
+            image="vessels/page-blocks/other.webp",
+        )
+
+        with self.assertRaisesRegex(ValidationError, "内容卡片"):
+            VesselPageBlockImage(
+                vessel=self.vessel,
+                page_block=heading,
+                image="vessels/page-block-images/heading.webp",
+            ).full_clean()
+        with self.assertRaisesRegex(ValidationError, "同一艘船"):
+            VesselPageBlockImage(
+                vessel=self.vessel,
+                page_block=other_card,
+                image="vessels/page-block-images/other-vessel.webp",
+            ).full_clean()
 
 
 class ProductPublishingTests(TestCase):

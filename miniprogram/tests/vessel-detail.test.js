@@ -42,8 +42,13 @@ test("builds ordered visible vessel facilities and keeps cabin groups", () => {
     show_deck_plans: true,
     page_blocks: [
       {block_type: "heading", title: "探索与学习"},
-      {block_type: "card", title: "科学中心", image: "https://example.test/science.webp", body: "跟随探险队理解极地。"},
-      {block_type: "card", title: "缺图卡片", image: "", body: "不展示"},
+      {
+        block_type: "card",
+        title: "科学中心",
+        images: ["https://example.test/science.webp", "https://example.test/science-2.webp"],
+        body: "跟随探险队理解极地。",
+      },
+      {block_type: "card", title: "缺图卡片", images: [], body: "不展示"},
     ],
     deck_plans: [{title: "7 层甲板", description: "公共区域", image: "https://example.test/deck-7.webp"}],
     cabin_groups: [
@@ -70,6 +75,7 @@ test("builds ordered visible vessel facilities and keeps cabin groups", () => {
     {icon: "fitness", text: "健身房"},
   ]);
   assert.deepEqual(state.pageBlocks.map((block) => block.title), ["探索与学习", "科学中心"]);
+  assert.equal(state.pageBlocks[1].images.length, 2);
   assert.equal(state.cabinGroups.length, 1);
   assert.equal(state.deckPlans[0].title, "7 层甲板");
   assert.deepEqual(state.cabinGroups.map((group) => group.title), ["套房"]);
@@ -135,9 +141,17 @@ test("renders a two-column vessel facility grid instead of the green introductio
 test("renders operator page blocks as a continuous information flow before optional tail modules", () => {
   assert.match(vesselMarkup, /wx:if="\{\{detail\.pageBlocks\.length\}\}" class="page-composer"/);
   assert.match(vesselMarkup, /item\.block_type === 'heading'/);
-  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.image\}\}"/);
+  assert.match(vesselMarkup, /wx:if="\{\{item\.images\.length > 1\}\}" class="composer-card-swiper"/);
+  assert.match(vesselMarkup, /indicator-dots="\{\{true\}\}"/);
+  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.images\[0\]\}\}"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.showCabins && detail\.cabinGroups\.length\}\}"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.deckPlans\.length\}\}" class="section"/);
   assert.doesNotMatch(vesselMarkup, /class="gallery-scroll"/);
   assert.doesNotMatch(vesselMarkup, /class="experience"/);
+  assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}"/);
+  assert.match(vesselStyles, /\.composer-heading\s*\{[^}]*margin:\s*84rpx 8rpx 54rpx/);
+  assert.match(vesselStyles, /\.composer-card\s*\{[^}]*margin-bottom:\s*60rpx/);
+  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*font-weight:\s*500/);
+  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*26rpx 28rpx 30rpx/);
+  assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*6rpx 28rpx 84rpx/);
 });

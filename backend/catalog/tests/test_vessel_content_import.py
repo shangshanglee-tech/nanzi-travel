@@ -16,6 +16,7 @@ class ImportVesselContentTests(TestCase):
                 "name": "阿蒙森号",
                 "official_name": "MS Roald Amundsen",
                 "content_status": "draft",
+                "card_tone": "#071A32",
             },
             "experiences": [{"kind": "science", "title_zh": "科学中心", "body_zh": "探险队讲座。"}],
             "cabin_groups": [{"slug": "suite", "title_zh": "探险套房", "cabin_codes": ["MA"]}],
@@ -37,6 +38,7 @@ class ImportVesselContentTests(TestCase):
         vessel = Vessel.objects.get(slug="roald-amundsen")
         self.assertEqual(vessel.content_status, VesselContentStatus.PUBLISHED)
         self.assertIsNotNone(vessel.published_at)
+        self.assertEqual(vessel.card_tone, "#071A32")
         self.assertEqual(VesselExperience.objects.filter(vessel=vessel).count(), 1)
         self.assertEqual(CabinType.objects.filter(vessel=vessel, official_code="MA").count(), 1)
         self.assertEqual(

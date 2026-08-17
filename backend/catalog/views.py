@@ -220,7 +220,8 @@ class VesselDetailView(APIView):
     def get(self, request, slug):
         try:
             vessel = Vessel.objects.public().prefetch_related(
-                "media", "experiences__media", "cabins__media", "cabin_groups__cabins__media", "products__destination"
+                "media", "experiences__media", "page_blocks__additional_images", "cabins__media",
+                "cabin_groups__cabins__media", "products__destination"
             ).get(slug=slug)
         except Vessel.DoesNotExist:
             return error_response("not_found", "船只不存在或暂未开放", 404)
