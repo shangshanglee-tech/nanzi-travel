@@ -53,16 +53,16 @@ test("builds ordered visible vessel facilities and keeps cabin groups", () => {
   assert.deepEqual(state.facilities, [
     {icon: "verified-badge", text: "2025年翻新"},
     {icon: "capacity", text: "最大载客量 490"},
-    {icon: "science-center", text: "科研中心"},
+    {icon: "science_center", text: "科研中心"},
     {icon: "wifi", text: "免费 Wi-Fi"},
     {icon: "hybrid", text: "环保混合动力引擎"},
-    {icon: "modern-stable-tech", text: "船身稳定技术"},
+    {icon: "modern_stable_tech", text: "船身稳定技术"},
     {icon: "restaurants", text: "3 个餐厅"},
     {icon: "bars", text: "2 个酒吧"},
     {icon: "lounge", text: "行政酒廊"},
     {icon: "spa", text: "桑拿房"},
-    {icon: "swimming-pool", text: "无边泳池"},
-    {icon: "hot-tubs", text: "1 个恒温泳池"},
+    {icon: "swimming_pool", text: "无边泳池"},
+    {icon: "hot_tubs", text: "1 个恒温泳池"},
     {icon: "fitness", text: "健身房"},
   ]);
   assert.equal(state.experiences.length, 1);
@@ -101,8 +101,9 @@ test("continues the hero card tone below the image for the full Chinese introduc
 test("renders a two-column vessel facility grid instead of the green introduction card", () => {
   assert.doesNotMatch(vesselMarkup, /class="intro dark-intro"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.facilities\.length\}\}" class="facility-grid"/);
-  assert.match(vesselMarkup, /class="facility-icon facility-icon-\{\{item\.icon\}\}"/);
+  assert.match(vesselMarkup, /class="facility-icon" src="\.\.\/\.\.\/assets\/\{\{item\.icon\}\}\.svg" mode="aspectFit"/);
   assert.match(vesselMarkup, /\{\{item\.text\}\}/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
-  assert.match(vesselMarkup, /class="facility-icon facility-icon-\{\{item\.icon\}\}" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
+  assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*background:\s*transparent/);
+  assert.match(vesselStyles, /\.page\s*\{[^}]*background:\s*#F3F2EE/);
 });

@@ -1,4 +1,4 @@
-.page { min-height: 100vh; }
+.page { min-height: 100vh; background: #F3F2EE; }
 .with-action { padding-bottom: 150rpx; }
 .loading { padding: 120rpx 0; color: #747b77; text-align: center; }
 .hero { position: relative; overflow: hidden; width: 100%; background: #dbe6de; }.hero-image { display: block; width: 100%; }.hero-copy { position: absolute; right: 30rpx; bottom: 38rpx; left: 30rpx; color: #fff; text-shadow: 0 3rpx 14rpx rgba(0,0,0,.28); }.hero-official { font-size: 22rpx; letter-spacing: 1.2rpx; opacity: .82; }.hero-name { margin-top: 8rpx; font-size: 48rpx; font-weight: 700; }
@@ -8,23 +8,10 @@
 .title { margin-top: 14rpx; color: #143f35; font-family: serif; font-size: 46rpx; font-weight: 700; }
 .official-name { margin-top: 6rpx; color: #728078; font-size: 21rpx; letter-spacing: 1rpx; }
 .summary, .cabin-copy, .route-copy { margin-top: 14rpx; color: #565e5a; font-size: 26rpx; line-height: 1.7; }
-.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 42rpx 30rpx 26rpx; background: #fff; }
+.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 42rpx 30rpx 26rpx; background: transparent; }
 .facility-item { display: flex; align-items: center; min-width: 0; gap: 14rpx; font-size: 24rpx; line-height: 1.45; }
-.facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain; mask-repeat: no-repeat; mask-position: center; mask-size: contain; }
+.facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; }
 .facility-text { min-width: 0; }
-.facility-icon-verified-badge { -webkit-mask-image: url("../../assets/verified-badge.svg"); mask-image: url("../../assets/verified-badge.svg"); }
-.facility-icon-capacity { -webkit-mask-image: url("../../assets/capacity.svg"); mask-image: url("../../assets/capacity.svg"); }
-.facility-icon-science-center { -webkit-mask-image: url("../../assets/science_center.svg"); mask-image: url("../../assets/science_center.svg"); }
-.facility-icon-wifi { -webkit-mask-image: url("../../assets/wifi.svg"); mask-image: url("../../assets/wifi.svg"); }
-.facility-icon-hybrid { -webkit-mask-image: url("../../assets/hybrid.svg"); mask-image: url("../../assets/hybrid.svg"); }
-.facility-icon-modern-stable-tech { -webkit-mask-image: url("../../assets/modern_stable_tech.svg"); mask-image: url("../../assets/modern_stable_tech.svg"); }
-.facility-icon-restaurants { -webkit-mask-image: url("../../assets/restaurants.svg"); mask-image: url("../../assets/restaurants.svg"); }
-.facility-icon-bars { -webkit-mask-image: url("../../assets/bars.svg"); mask-image: url("../../assets/bars.svg"); }
-.facility-icon-lounge { -webkit-mask-image: url("../../assets/lounge.svg"); mask-image: url("../../assets/lounge.svg"); }
-.facility-icon-spa { -webkit-mask-image: url("../../assets/spa.svg"); mask-image: url("../../assets/spa.svg"); }
-.facility-icon-swimming-pool { -webkit-mask-image: url("../../assets/swimming_pool.svg"); mask-image: url("../../assets/swimming_pool.svg"); }
-.facility-icon-hot-tubs { -webkit-mask-image: url("../../assets/hot_tubs.svg"); mask-image: url("../../assets/hot_tubs.svg"); }
-.facility-icon-fitness { -webkit-mask-image: url("../../assets/fitness.svg"); mask-image: url("../../assets/fitness.svg"); }
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .gallery-scroll { display: flex; gap: 18rpx; overflow-x: scroll; padding: 0 24rpx 24rpx; white-space: nowrap; }
