@@ -142,6 +142,8 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /wx:if="\{\{detail\.pageBlocks\.length\}\}" class="page-composer"/);
   assert.match(vesselMarkup, /item\.block_type === 'heading'/);
   assert.match(vesselMarkup, /wx:if="\{\{item\.images\.length > 1\}\}" class="composer-card-swiper"/);
+  assert.match(vesselMarkup, /indicator-color="rgba\(255,255,255,\.25\)"/);
+  assert.match(vesselMarkup, /indicator-active-color="#ffffff"/);
   assert.match(vesselMarkup, /indicator-dots="\{\{true\}\}"/);
   assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.images\[0\]\}\}"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.showCabins && detail\.cabinGroups\.length\}\}"/);

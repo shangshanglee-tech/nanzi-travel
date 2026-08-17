@@ -22,7 +22,7 @@
       <block wx:for="{{detail.pageBlocks}}" wx:key="index">
         <view wx:if="{{item.block_type === 'heading'}}" class="composer-heading" style="{{detail.cardToneStyle}}">{{item.title}}</view>
         <view wx:else class="composer-card">
-          <swiper wx:if="{{item.images.length > 1}}" class="composer-card-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="{{detail.cardTone}}">
+          <swiper wx:if="{{item.images.length > 1}}" class="composer-card-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.25)" indicator-active-color="#ffffff">
             <swiper-item wx:for="{{item.images}}" wx:for-item="image" wx:key="*this">
               <image class="composer-card-image" src="{{image}}" mode="aspectFill" />
             </swiper-item>
