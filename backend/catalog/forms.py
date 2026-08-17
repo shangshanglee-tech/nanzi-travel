@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models import Max
-from django.utils.html import format_html, format_html_join
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
 from .models import Product, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 
@@ -50,28 +51,34 @@ class MultipleImageField(forms.FileField):
 
 class AdditionalImagesPreviewWidget(forms.Widget):
     def render(self, name, value, attrs=None, renderer=None):
-        if not value:
+        images = list(self.choices)
+        if not images:
             return format_html('<div class="additional-images-preview additional-images-preview--empty">暂无已上传图片</div>')
-        return format_html(
-            '<div class="additional-images-preview"><ul>{}</ul></div>',
-            format_html_join(
-                "",
-                '<li><a href="{0}" target="_blank" rel="noopener"><img src="{0}" alt="{1}" style="display:block;width:180px;max-height:120px;object-fit:cover;margin:0 0 6px;border-radius:4px" /><span>{1}</span></a></li>',
-                ((image_url, image_name) for image_url, image_name in value),
-            ),
-        )
+        selected_ids = {str(image_id) for image_id in (value or [])}
+        items = []
+        image_urls = getattr(self, "image_urls", {})
+        for image_id, image_name in images:
+            image_url = image_urls.get(str(image_id), "")
+            checked = mark_safe(" checked") if str(image_id) in selected_ids else ""
+            items.append(format_html(
+                '<li><a href="{}" target="_blank" rel="noopener"><img src="{}" alt="{}" style="display:block;width:180px;max-height:120px;object-fit:cover;margin:0 0 6px;border-radius:4px" /><span>{}</span></a><label style="display:block;margin-top:6px;color:#b42318"><input type="checkbox" name="{}" value="{}"{} /> 删除这张图片</label></li>',
+                image_url,
+                image_url,
+                image_name,
+                image_name,
+                name,
+                image_id,
+                checked,
+            ))
+        return format_html('<div class="additional-images-preview"><ul>{}</ul></div>', mark_safe("".join(items)))
 
 
-class AdditionalImagesPreviewField(forms.Field):
+class AdditionalImagesPreviewField(forms.MultipleChoiceField):
     widget = AdditionalImagesPreviewWidget
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("required", False)
-        kwargs.setdefault("disabled", True)
         super().__init__(*args, **kwargs)
-
-    def to_python(self, value):
-        return value or []
 
 
 class VesselPageBlockInlineForm(forms.ModelForm):
@@ -92,13 +99,16 @@ class VesselPageBlockInlineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         existing_images = []
+        image_urls = {}
         if self.instance and self.instance.pk:
-            existing_images = [
-                (image.image.url, image.image.name.rsplit("/", 1)[-1])
-                for image in self.instance.additional_images.filter(is_visible=True).order_by("sort_order", "id")
-                if image.image
-            ]
-        self.fields["existing_additional_images"].initial = existing_images
+            for image in self.instance.additional_images.order_by("sort_order", "id"):
+                if image.image:
+                    image_id = str(image.pk)
+                    existing_images.append((image_id, image.image.name.rsplit("/", 1)[-1]))
+                    image_urls[image_id] = image.image.url
+        self.fields["existing_additional_images"].choices = existing_images
+        self.fields["existing_additional_images"].widget.image_urls = image_urls
+        self.fields["existing_additional_images"].initial = []
 
     def clean(self):
         cleaned_data = super().clean()
@@ -125,4 +135,7 @@ class VesselPageBlockInlineForm(forms.ModelForm):
                     for index, image in enumerate(images)
                 ]
             )
+        image_ids_to_delete = self.cleaned_data.get("existing_additional_images", [])
+        if image_ids_to_delete:
+            page_block.additional_images.filter(pk__in=image_ids_to_delete).delete()
         return page_block

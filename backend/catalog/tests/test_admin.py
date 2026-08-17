@@ -203,11 +203,43 @@ class CatalogAdminTests(TestCase):
         form = VesselPageBlockInlineForm(instance=block)
 
         self.assertIn("existing_additional_images", form.fields)
-        self.assertEqual(form.fields["existing_additional_images"].initial, [
-            (extra_image.image.url, "explorer-lounge-second.jpg"),
+        self.assertEqual(list(form.fields["existing_additional_images"].choices), [
+            (str(extra_image.pk), "explorer-lounge-second.jpg"),
         ])
         self.assertIn("explorer-lounge-second.jpg", form.as_p())
         self.assertIn("<img", form.as_p())
+        self.assertIn(f'name="existing_additional_images" value="{extra_image.pk}"', form.as_p())
+        self.assertIn("删除这张图片", form.as_p())
+
+    def test_content_card_editor_deletes_selected_additional_image_when_saved(self):
+        vessel = Vessel.objects.create(slug="card-image-delete", name="多图删除测试船")
+        block = VesselPageBlock.objects.create(
+            vessel=vessel,
+            block_type="card",
+            title="Explorer Lounge & Bar",
+            image="vessels/page-blocks/primary.jpg",
+        )
+        extra_image = VesselPageBlockImage.objects.create(
+            vessel=vessel,
+            page_block=block,
+            image="vessels/page-block-images/explorer-lounge-second.jpg",
+        )
+        form = VesselPageBlockInlineForm(
+            data={
+                "block_type": "card",
+                "title": block.title,
+                "body": "",
+                "is_visible": "on",
+                "sort_order": "0",
+                "existing_additional_images": [str(extra_image.pk)],
+            },
+            instance=block,
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
+        form.save()
+
+        self.assertFalse(VesselPageBlockImage.objects.filter(pk=extra_image.pk).exists())
 
     def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
         script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
