@@ -58,7 +58,7 @@ class VesselPageBlockInline(admin.StackedInline):
     model = VesselPageBlock
     form = VesselPageBlockInlineForm
     extra = 0
-    fields = ("block_type", "title", "image", "additional_images", "body", "is_visible", "sort_order")
+    fields = ("block_type", "title", "image", "additional_images", "existing_additional_images", "body", "is_visible", "sort_order")
 
 
 class VesselDeckPlanInline(admin.StackedInline):

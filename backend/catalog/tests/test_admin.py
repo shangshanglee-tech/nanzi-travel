@@ -129,11 +129,17 @@ class CatalogAdminTests(TestCase):
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
         vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")
-        VesselPageBlock.objects.create(
+        block = VesselPageBlock.objects.create(
             vessel=vessel,
             block_type="card",
             title="可增加图片的内容卡片",
             image="vessels/page-blocks/primary.jpg",
+        )
+        VesselPageBlockImage.objects.create(
+            vessel=vessel,
+            page_block=block,
+            image="vessels/page-block-images/secondary.jpg",
+            sort_order=1,
         )
         user = get_user_model().objects.create_superuser(username="page-block-operator", password="strong-password")
         self.client.force_login(user)
@@ -143,6 +149,8 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-0-additional_images"')
+        self.assertContains(response, 'name="page_blocks-0-existing_additional_images"')
+        self.assertContains(response, "secondary.jpg")
 
     def test_content_card_editor_uploads_multiple_additional_images_directly(self):
         vessel = Vessel.objects.create(slug="card-image-upload", name="多图上传测试船")
@@ -187,6 +195,7 @@ class CatalogAdminTests(TestCase):
         self.assertIn('django.jQuery(document).on("formset:added", refresh)', source)
         self.assertIn('fieldWrapper(row, "image")', source)
         self.assertIn('fieldWrapper(row, "additional_images")', source)
+        self.assertIn('fieldWrapper(row, "existing_additional_images")', source)
         self.assertIn('fieldWrapper(row, "body")', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
