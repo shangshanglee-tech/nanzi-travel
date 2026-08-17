@@ -209,7 +209,8 @@ class CatalogAdminTests(TestCase):
         self.assertIn("explorer-lounge-second.jpg", form.as_p())
         self.assertIn("<img", form.as_p())
         self.assertIn(f'name="existing_additional_images" value="{extra_image.pk}"', form.as_p())
-        self.assertIn("删除这张图片", form.as_p())
+        self.assertIn('data-delete-image="true"', form.as_p())
+        self.assertIn("删除图片", form.as_p())
 
     def test_content_card_editor_deletes_selected_additional_image_when_saved(self):
         vessel = Vessel.objects.create(slug="card-image-delete", name="多图删除测试船")
@@ -252,6 +253,8 @@ class CatalogAdminTests(TestCase):
         self.assertIn('fieldWrapper(row, "additional_images")', source)
         self.assertIn('fieldWrapper(row, "existing_additional_images")', source)
         self.assertIn('fieldWrapper(row, "body")', source)
+        self.assertIn("data-delete-image", source)
+        self.assertIn('.delete input[type="checkbox"]', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)

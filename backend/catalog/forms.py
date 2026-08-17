@@ -61,7 +61,7 @@ class AdditionalImagesPreviewWidget(forms.Widget):
             image_url = image_urls.get(str(image_id), "")
             checked = mark_safe(" checked") if str(image_id) in selected_ids else ""
             items.append(format_html(
-                '<li><a href="{}" target="_blank" rel="noopener"><img src="{}" alt="{}" style="display:block;width:180px;max-height:120px;object-fit:cover;margin:0 0 6px;border-radius:4px" /><span>{}</span></a><label style="display:block;margin-top:6px;color:#b42318"><input type="checkbox" name="{}" value="{}"{} /> 删除这张图片</label></li>',
+                '<li><a href="{}" target="_blank" rel="noopener"><img src="{}" alt="{}" style="display:block;width:180px;max-height:120px;object-fit:cover;margin:0 0 6px;border-radius:4px" /><span>{}</span></a><input type="checkbox" name="{}" value="{}"{} style="display:none" /><button type="button" data-delete-image="true" style="display:block;margin-top:6px;color:#b42318">删除图片</button></li>',
                 image_url,
                 image_url,
                 image_name,

@@ -23,6 +23,42 @@
     });
   }
 
+  function markForDeletion(control, target) {
+    control.checked = true;
+    target.dataset.pendingDelete = "true";
+    target.style.display = "none";
+  }
+
+  function setDeleteButtons() {
+    document.querySelectorAll("[data-delete-image]").forEach(function (button) {
+      if (button.dataset.deleteControlReady === "true") return;
+      button.dataset.deleteControlReady = "true";
+      button.onclick = function () {
+        var target = button.closest("li");
+        var checkbox = target && target.querySelector('input[type="checkbox"]');
+        if (checkbox && target) markForDeletion(checkbox, target);
+      };
+    });
+
+    document.querySelectorAll('.inline-group .delete input[type="checkbox"]').forEach(function (checkbox) {
+      if (checkbox.dataset.deleteControlReady === "true") return;
+      checkbox.dataset.deleteControlReady = "true";
+      checkbox.style.display = "none";
+      var label = checkbox.closest("label") || checkbox.parentElement.querySelector('label[for="' + checkbox.id + '"]');
+      if (label) label.style.display = "none";
+      var button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "删除";
+      button.dataset.pendingDeleteButton = "true";
+      button.style.color = "#b42318";
+      button.onclick = function () {
+        var row = checkbox.closest(".inline-related") || checkbox.closest("tr");
+        if (row) markForDeletion(checkbox, row);
+      };
+      checkbox.parentElement.appendChild(button);
+    });
+  }
+
   function setToggle(heading, cards) {
     const headingTitle = heading.querySelector("h3");
     if (!headingTitle) return;
@@ -54,6 +90,10 @@
     const headings = [];
     let active = null;
     blockRows().forEach(function (row) {
+      if (row.dataset.pendingDelete === "true") {
+        row.style.display = "none";
+        return;
+      }
       row.style.display = "";
       syncFieldsForType(row);
       if (blockType(row) === "heading") {
@@ -64,6 +104,7 @@
       }
     });
     headings.forEach(function (heading) { setToggle(heading.row, heading.cards); });
+    setDeleteButtons();
   }
 
   document.addEventListener("change", function (event) {
