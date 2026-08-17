@@ -10,7 +10,9 @@ from catalog.models import (
     SiteSettings,
     Vessel,
     VesselContentStatus,
+    VesselDeckPlan,
     VesselExperience,
+    VesselPageBlock,
 )
 
 
@@ -164,6 +166,33 @@ class VesselApiTests(TestCase):
         )
         group = CabinDisplayGroup.objects.create(vessel=self.vessel, slug="suite", title_zh="套房")
         group.cabins.add(cabin)
+        VesselPageBlock.objects.create(
+            vessel=self.vessel, block_type="heading", title="探索与学习", sort_order=10
+        )
+        VesselPageBlock.objects.create(
+            vessel=self.vessel,
+            block_type="card",
+            title="科学中心",
+            image="vessels/page-blocks/science-centre.webp",
+            body="和探险队一起理解极地。",
+            sort_order=20,
+        )
+        VesselPageBlock.objects.create(
+            vessel=self.vessel,
+            block_type="card",
+            title="隐藏卡片",
+            image="vessels/page-blocks/hidden.webp",
+            is_visible=False,
+            sort_order=30,
+        )
+        VesselDeckPlan.objects.create(
+            vessel=self.vessel,
+            title="7 层甲板",
+            description="公共活动空间",
+            image="vessels/deck-plans/deck-7.webp",
+        )
+        self.vessel.show_deck_plans = True
+        self.vessel.save(update_fields=["show_deck_plans", "updated_at"])
         self.experience = experience
 
     def test_vessel_list_hides_drafts(self):
@@ -193,6 +222,15 @@ class VesselApiTests(TestCase):
         self.assertTrue(payload["has_infinity_pool"])
         self.assertTrue(payload["has_sauna"])
         self.assertTrue(payload["has_executive_lounge"])
+        self.assertTrue(payload["show_cabins"])
+        self.assertTrue(payload["show_deck_plans"])
+        self.assertEqual(
+            [(block["block_type"], block["title"]) for block in payload["page_blocks"]],
+            [("heading", "探索与学习"), ("card", "科学中心")],
+        )
+        self.assertTrue(payload["page_blocks"][1]["image"].endswith("science-centre.webp"))
+        self.assertEqual(payload["deck_plans"][0]["title"], "7 层甲板")
+        self.assertTrue(payload["deck_plans"][0]["image"].endswith("deck-7.webp"))
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["amenities"], ["迷你吧"])

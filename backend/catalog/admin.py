@@ -15,8 +15,10 @@ from .models import (
     ProductStatus,
     SiteSettings,
     Vessel,
+    VesselDeckPlan,
     VesselExperience,
     VesselMedia,
+    VesselPageBlock,
 )
 
 
@@ -35,11 +37,6 @@ class ProductImageInline(admin.TabularInline):
     extra = 0
 
 
-class VesselExperienceInline(admin.StackedInline):
-    model = VesselExperience
-    extra = 0
-
-
 class CabinTypeInline(admin.StackedInline):
     model = CabinType
     extra = 0
@@ -54,6 +51,18 @@ class CabinDisplayGroupInline(admin.StackedInline):
 class VesselMediaInline(admin.TabularInline):
     model = VesselMedia
     extra = 0
+
+
+class VesselPageBlockInline(admin.StackedInline):
+    model = VesselPageBlock
+    extra = 0
+    fields = ("block_type", "title", "image", "body", "is_visible", "sort_order")
+
+
+class VesselDeckPlanInline(admin.StackedInline):
+    model = VesselDeckPlan
+    extra = 0
+    fields = ("title", "image", "description", "is_visible", "sort_order")
 
 
 @admin.register(Destination)
@@ -107,7 +116,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Vessel)
 class VesselAdmin(admin.ModelAdmin):
-    inlines = (VesselExperienceInline, CabinTypeInline, CabinDisplayGroupInline, VesselMediaInline)
+    inlines = (VesselPageBlockInline, CabinTypeInline, CabinDisplayGroupInline, VesselDeckPlanInline, VesselMediaInline)
     list_display = ("name", "official_name", "operator_name", "content_status", "published_at", "is_active", "updated_at")
     list_filter = ("content_status", "is_active", "operator_name")
     search_fields = ("name", "official_name", "operator_name", "slug")
@@ -117,6 +126,7 @@ class VesselAdmin(admin.ModelAdmin):
         ("基础与发布", {"fields": ("name", "official_name", "operator_name", "slug", "content_status", "published_at", "is_active", "sort_order")}),
         ("中文展示文案", {"fields": ("summary", "intro_zh")}),
         ("首页卡片展示", {"fields": ("card_image", "card_tone")}),
+        ("页面末尾模块", {"fields": ("show_cabins", "show_deck_plans")}),
         (
             "结构化事实",
             {
@@ -147,6 +157,9 @@ class VesselAdmin(admin.ModelAdmin):
     @admin.action(description="撤回为草稿")
     def unpublish_vessels(self, request, queryset):
         queryset.update(content_status="draft", published_at=None)
+
+    class Media:
+        js = ("catalog/vessel-page-blocks-admin.js",)
 
 
 @admin.register(SiteSettings)

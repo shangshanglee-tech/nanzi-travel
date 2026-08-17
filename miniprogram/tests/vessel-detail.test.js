@@ -38,10 +38,14 @@ test("builds ordered visible vessel facilities and keeps cabin groups", () => {
     has_infinity_pool: true,
     heated_pool_count: 1,
     has_fitness_center: true,
-    experiences: [
-      {title_zh: "科学中心", body_zh: "探险队讲座", media: []},
-      {title_zh: "隐藏模块", body_zh: "", media: []},
+    show_cabins: true,
+    show_deck_plans: true,
+    page_blocks: [
+      {block_type: "heading", title: "探索与学习"},
+      {block_type: "card", title: "科学中心", image: "https://example.test/science.webp", body: "跟随探险队理解极地。"},
+      {block_type: "card", title: "缺图卡片", image: "", body: "不展示"},
     ],
+    deck_plans: [{title: "7 层甲板", description: "公共区域", image: "https://example.test/deck-7.webp"}],
     cabin_groups: [
       {title_zh: "套房", cabins: [{official_code: "MA", name: "XL 套房"}]},
       {title_zh: "空分组", cabins: []},
@@ -65,7 +69,9 @@ test("builds ordered visible vessel facilities and keeps cabin groups", () => {
     {icon: "hot_tubs", text: "1 个恒温泳池"},
     {icon: "fitness", text: "健身房"},
   ]);
-  assert.equal(state.experiences.length, 1);
+  assert.deepEqual(state.pageBlocks.map((block) => block.title), ["探索与学习", "科学中心"]);
+  assert.equal(state.cabinGroups.length, 1);
+  assert.equal(state.deckPlans[0].title, "7 层甲板");
   assert.deepEqual(state.cabinGroups.map((group) => group.title), ["套房"]);
 });
 
@@ -73,6 +79,18 @@ test("uses a built year only when no refurbishment year exists", () => {
   const state = buildVesselDetailState({year_built: 2020});
 
   assert.deepEqual(state.facilities, [{icon: "verified-badge", text: "建成于2020年"}]);
+});
+
+test("hides optional tail modules when vessel settings turn them off", () => {
+  const state = buildVesselDetailState({
+    show_cabins: false,
+    show_deck_plans: false,
+    cabin_groups: [{title_zh: "套房", cabins: [{name: "XL 套房"}]}],
+    deck_plans: [{title: "7 层甲板", image: "https://example.test/deck-7.webp"}],
+  });
+
+  assert.deepEqual(state.cabinGroups, []);
+  assert.deepEqual(state.deckPlans, []);
 });
 
 test("derives a safe vessel tone for remote facility icons", () => {
@@ -112,4 +130,14 @@ test("renders a two-column vessel facility grid instead of the green introductio
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*background:\s*transparent/);
   assert.match(vesselStyles, /\.page\s*\{[^}]*background:\s*#F3F2EE/);
+});
+
+test("renders operator page blocks as a continuous information flow before optional tail modules", () => {
+  assert.match(vesselMarkup, /wx:if="\{\{detail\.pageBlocks\.length\}\}" class="page-composer"/);
+  assert.match(vesselMarkup, /item\.block_type === 'heading'/);
+  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.image\}\}"/);
+  assert.match(vesselMarkup, /wx:if="\{\{detail\.showCabins && detail\.cabinGroups\.length\}\}"/);
+  assert.match(vesselMarkup, /wx:if="\{\{detail\.deckPlans\.length\}\}" class="section"/);
+  assert.doesNotMatch(vesselMarkup, /class="gallery-scroll"/);
+  assert.doesNotMatch(vesselMarkup, /class="experience"/);
 });

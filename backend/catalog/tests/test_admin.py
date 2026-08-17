@@ -2,6 +2,7 @@ from django.contrib.admin.sites import site
 from django.contrib.auth import get_user_model
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
+from pathlib import Path
 
 from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin
 from catalog.forms import ProductAdminForm
@@ -13,8 +14,10 @@ from catalog.models import (
     SiteSettings,
     Vessel,
     VesselContentStatus,
+    VesselDeckPlan,
     VesselExperience,
     VesselMedia,
+    VesselPageBlock,
 )
 
 
@@ -106,7 +109,28 @@ class CatalogAdminTests(TestCase):
         inline_models = {inline.model for inline in vessel_admin.inlines}
 
         self.assertEqual(vessel_admin.__class__, VesselAdmin)
-        self.assertTrue({VesselExperience, CabinDisplayGroup, VesselMedia}.issubset(inline_models))
+        self.assertTrue({CabinDisplayGroup, VesselMedia, VesselPageBlock, VesselDeckPlan}.issubset(inline_models))
+        self.assertNotIn(VesselExperience, inline_models)
+
+    def test_vessel_editor_has_page_composer_switches_and_grouping_script(self):
+        vessel_admin = VesselAdmin(Vessel, site)
+        editable_fields = {
+            field
+            for _, options in vessel_admin.fieldsets
+            for field in options["fields"]
+        }
+
+        self.assertIn("show_cabins", editable_fields)
+        self.assertIn("show_deck_plans", editable_fields)
+        self.assertIn("catalog/vessel-page-blocks-admin.js", vessel_admin.media._js)
+
+    def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
+        script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
+        source = script.read_text(encoding="utf-8")
+
+        self.assertIn("pageComposerCollapsed", source)
+        self.assertIn("#page_blocks-group", source)
+        self.assertIn('django.jQuery(document).on("formset:added", refresh)', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)

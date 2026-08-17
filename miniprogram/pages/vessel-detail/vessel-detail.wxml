@@ -18,20 +18,18 @@
       </view>
     </view>
 
-    <view wx:if="{{detail.gallery.length}}" class="gallery-scroll">
-      <image wx:for="{{detail.gallery}}" wx:key="image" class="gallery-image" src="{{item.image}}" mode="aspectFill" />
+    <view wx:if="{{detail.pageBlocks.length}}" class="page-composer">
+      <block wx:for="{{detail.pageBlocks}}" wx:key="index">
+        <view wx:if="{{item.block_type === 'heading'}}" class="composer-heading">{{item.title}}</view>
+        <view wx:else class="composer-card">
+          <image class="composer-card-image" src="{{item.image}}" mode="widthFix" />
+          <view class="composer-card-title">{{item.title}}</view>
+          <view wx:if="{{item.body}}" class="composer-card-body">{{item.body}}</view>
+        </view>
+      </block>
     </view>
 
-    <view wx:if="{{detail.experiences.length}}" class="section">
-      <view class="section-title">船上体验</view>
-      <view wx:for="{{detail.experiences}}" wx:for-item="experience" wx:key="id" class="experience">
-        <view class="experience-title">{{experience.title_zh}}</view>
-        <view class="body-copy">{{experience.body_zh}}</view>
-        <image wx:if="{{experience.media.length}}" class="experience-image" src="{{experience.media[0].image}}" mode="aspectFill" />
-      </view>
-    </view>
-
-    <view wx:if="{{detail.cabinGroups.length}}" class="section">
+    <view wx:if="{{detail.showCabins && detail.cabinGroups.length}}" class="section">
       <view class="section-title">舱位选择</view>
       <view wx:for="{{detail.cabinGroups}}" wx:for-item="cabinGroup" wx:key="slug" class="cabin-group">
         <view class="group-title">{{cabinGroup.title}}</view>
@@ -53,6 +51,15 @@
         </view>
       </view>
       <view class="cabin-note">具体舱号、床型、视野与可售状态，以所选团期的正式确认信息为准。</view>
+    </view>
+
+    <view wx:if="{{detail.deckPlans.length}}" class="section">
+      <view class="section-title">甲板示意图</view>
+      <view wx:for="{{detail.deckPlans}}" wx:key="image" class="deck-plan">
+        <image class="deck-plan-image" src="{{item.image}}" mode="widthFix" />
+        <view wx:if="{{item.title}}" class="deck-plan-title">{{item.title}}</view>
+        <view wx:if="{{item.description}}" class="deck-plan-copy">{{item.description}}</view>
+      </view>
     </view>
 
     <view wx:if="{{detail.products.length}}" class="section">

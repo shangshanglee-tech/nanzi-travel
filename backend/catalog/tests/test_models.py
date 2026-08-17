@@ -11,7 +11,9 @@ from catalog.models import (
     SiteSettings,
     Vessel,
     VesselContentStatus,
+    VesselDeckPlan,
     VesselMedia,
+    VesselPageBlock,
 )
 
 
@@ -69,6 +71,29 @@ class VesselPublicationTests(TestCase):
         )
 
         self.assertEqual(list(Vessel.objects.public()), [visible])
+
+
+class VesselPageComposerTests(TestCase):
+    def setUp(self):
+        self.vessel = Vessel.objects.create(slug="composer", name="页面编排测试船")
+
+    def test_content_card_requires_a_title_and_image(self):
+        block = VesselPageBlock(vessel=self.vessel, block_type="card")
+
+        with self.assertRaisesRegex(ValidationError, "图片"):
+            block.full_clean()
+
+    def test_heading_only_requires_its_title(self):
+        block = VesselPageBlock(vessel=self.vessel, block_type="heading", title="船上体验")
+
+        block.full_clean()
+
+    def test_deck_plan_requires_an_image(self):
+        deck_plan = VesselDeckPlan(vessel=self.vessel, title="7 层甲板")
+
+        with self.assertRaises(ValidationError) as error:
+            deck_plan.full_clean()
+        self.assertIn("image", error.exception.message_dict)
 
 
 class ProductPublishingTests(TestCase):

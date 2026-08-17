@@ -14,13 +14,14 @@
 .facility-text { min-width: 0; }
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
-.gallery-scroll { display: flex; gap: 18rpx; overflow-x: scroll; padding: 0 24rpx 24rpx; white-space: nowrap; }
-.gallery-image { width: 470rpx; height: 300rpx; border-radius: 22rpx; background: #dbe6de; }
-.experience { padding: 26rpx 0; border-bottom: 1rpx solid #eceeeb; }
-.experience:first-of-type { padding-top: 0; }
-.experience:last-child { border-bottom: 0; padding-bottom: 0; }
-.experience-title, .group-title { color: #143f35; font-size: 29rpx; font-weight: 650; }
-.experience-image, .cabin-image { width: 100%; height: 300rpx; margin-top: 20rpx; border-radius: 18rpx; background: #dbe6de; }
+.page-composer { padding: 0 24rpx; }
+.composer-heading { margin: 42rpx 8rpx 18rpx; color: #143f35; font-size: 34rpx; font-weight: 700; }
+.composer-card { overflow: hidden; margin-bottom: 20rpx; border-radius: 24rpx; background: #fff; }
+.composer-card-image { display: block; width: 100%; background: #dbe6de; }
+.composer-card-title { padding: 26rpx 28rpx 0; color: #143f35; font-size: 30rpx; font-weight: 650; }
+.composer-card-body { padding: 14rpx 28rpx 28rpx; color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
+.group-title { color: #143f35; font-size: 29rpx; font-weight: 650; }
+.cabin-image { width: 100%; height: 300rpx; margin-top: 20rpx; border-radius: 18rpx; background: #dbe6de; }
 .cabin-group + .cabin-group { margin-top: 36rpx; }
 .group-title { margin-bottom: 2rpx; }
 .cabin { padding: 24rpx 0; border-bottom: 1rpx solid #eceeeb; }
@@ -31,6 +32,10 @@
 .cabin-tags { display: flex; flex-wrap: wrap; gap: 12rpx; margin-top: 16rpx; }
 .cabin-tags text { padding: 8rpx 13rpx; border-radius: 999rpx; background: #edf2ef; color: #426055; font-size: 20rpx; }
 .cabin-note { margin-top: 22rpx; color: #7c827e; font-size: 21rpx; line-height: 1.6; }
+.deck-plan + .deck-plan { margin-top: 28rpx; }
+.deck-plan-image { display: block; width: 100%; border-radius: 18rpx; background: #edf0ed; }
+.deck-plan-title { margin-top: 16rpx; color: #143f35; font-size: 28rpx; font-weight: 650; }
+.deck-plan-copy { margin-top: 8rpx; color: #565e5a; font-size: 24rpx; line-height: 1.7; white-space: pre-line; }
 .route-card { overflow: hidden; margin-top: 20rpx; border: 1rpx solid #edf0ed; border-radius: 20rpx; }
 .route-image { width: 100%; height: 230rpx; background: #dbe6de; }
 .route-body { padding: 24rpx; }

@@ -93,6 +93,8 @@ class Vessel(models.Model):
     )
     published_at = models.DateTimeField("内容发布时间", null=True, blank=True)
     is_active = models.BooleanField("启用", default=True)
+    show_cabins = models.BooleanField("展示舱位详情", default=True)
+    show_deck_plans = models.BooleanField("展示甲板示意图", default=False)
     sort_order = models.PositiveIntegerField("排序", default=0)
     created_at = models.DateTimeField("创建时间", default=timezone.now, editable=False)
     updated_at = models.DateTimeField("更新时间", auto_now=True)
@@ -113,6 +115,70 @@ class Vessel(models.Model):
             raise ValidationError({"published_at": "published_at 是发布船只内容的必填项"})
         if self.content_status == VesselContentStatus.PUBLISHED and not self.card_image:
             raise ValidationError({"card_image": "发布船只内容前必须上传卡片图"})
+
+
+class VesselPageBlockType(models.TextChoices):
+    HEADING = "heading", "分组标题"
+    CARD = "card", "内容卡片"
+
+
+class VesselPageBlock(models.Model):
+    vessel = models.ForeignKey(
+        Vessel,
+        verbose_name="船只",
+        related_name="page_blocks",
+        on_delete=models.CASCADE,
+    )
+    block_type = models.CharField("项目类型", max_length=16, choices=VesselPageBlockType.choices)
+    title = models.CharField("标题", max_length=160)
+    image = models.ImageField(
+        "图片",
+        upload_to="vessels/page-blocks/",
+        storage=build_media_storage,
+        blank=True,
+    )
+    body = models.TextField("正文", blank=True)
+    is_visible = models.BooleanField("展示", default=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "船只页面内容"
+        verbose_name_plural = "船只页面内容"
+
+    def clean(self):
+        super().clean()
+        if self.block_type == VesselPageBlockType.CARD and not self.image:
+            raise ValidationError({"image": "内容卡片必须上传图片"})
+
+    def __str__(self):
+        return f"{self.vessel} · {self.get_block_type_display()} · {self.title}"
+
+
+class VesselDeckPlan(models.Model):
+    vessel = models.ForeignKey(
+        Vessel,
+        verbose_name="船只",
+        related_name="deck_plans",
+        on_delete=models.CASCADE,
+    )
+    title = models.CharField("甲板名称", max_length=160, blank=True)
+    description = models.TextField("说明", blank=True)
+    image = models.ImageField(
+        "甲板示意图",
+        upload_to="vessels/deck-plans/",
+        storage=build_media_storage,
+    )
+    is_visible = models.BooleanField("展示", default=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "甲板示意图"
+        verbose_name_plural = "甲板示意图"
+
+    def __str__(self):
+        return f"{self.vessel} · {self.title or '甲板示意图'}"
 
 
 class CabinType(models.Model):

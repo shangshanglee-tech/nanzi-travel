@@ -19,11 +19,15 @@ function buildVesselDetailState(vessel = {}) {
   return {
     iconTone,
     facilities,
-    experiences: (vessel.experiences || []).filter((item) => item.title_zh && item.body_zh),
-    cabinGroups: (vessel.cabin_groups || [])
+    pageBlocks: (vessel.page_blocks || []).filter((item) => {
+      if (item.block_type === "heading") return Boolean(item.title);
+      return item.block_type === "card" && Boolean(item.title && item.image);
+    }),
+    showCabins: vessel.show_cabins !== false,
+    cabinGroups: vessel.show_cabins === false ? [] : (vessel.cabin_groups || [])
       .filter((group) => group.title_zh && (group.cabins || []).length)
       .map((group) => ({...group, title: group.title_zh || group.title_en})),
-    gallery: vessel.media || [],
+    deckPlans: vessel.show_deck_plans ? (vessel.deck_plans || []).filter((item) => item.image) : [],
     products: vessel.products || [],
   };
 }
