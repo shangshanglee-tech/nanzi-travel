@@ -28,7 +28,7 @@ class VesselPublicationTests(TestCase):
         self.assertFalse(vessel.has_fitness_center)
         self.assertEqual(vessel.heated_pool_count, 0)
         self.assertFalse(vessel.has_infinity_pool)
-        self.assertEqual(vessel.sauna_count, 0)
+        self.assertFalse(vessel.has_sauna)
         self.assertFalse(vessel.has_executive_lounge)
 
     def test_vessel_card_tone_accepts_a_hex_color(self):

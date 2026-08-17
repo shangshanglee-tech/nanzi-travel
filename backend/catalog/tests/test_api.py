@@ -144,7 +144,7 @@ class VesselApiTests(TestCase):
             has_fitness_center=True,
             heated_pool_count=1,
             has_infinity_pool=True,
-            sauna_count=2,
+            has_sauna=True,
             has_executive_lounge=True,
             content_status=VesselContentStatus.PUBLISHED,
             published_at=timezone.now(),
@@ -192,7 +192,7 @@ class VesselApiTests(TestCase):
         self.assertTrue(payload["has_fitness_center"])
         self.assertEqual(payload["heated_pool_count"], 1)
         self.assertTrue(payload["has_infinity_pool"])
-        self.assertEqual(payload["sauna_count"], 2)
+        self.assertTrue(payload["has_sauna"])
         self.assertTrue(payload["has_executive_lounge"])
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")

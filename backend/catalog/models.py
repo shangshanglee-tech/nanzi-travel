@@ -65,7 +65,7 @@ class Vessel(models.Model):
     has_fitness_center = models.BooleanField("健身中心", default=False)
     heated_pool_count = models.PositiveSmallIntegerField("恒温泳池", default=0)
     has_infinity_pool = models.BooleanField("无边泳池", default=False)
-    sauna_count = models.PositiveSmallIntegerField("桑拿房", default=0)
+    has_sauna = models.BooleanField("桑拿房", default=False)
     has_executive_lounge = models.BooleanField("行政酒廊", default=False)
     short_pitch = models.CharField("首页一句话卖点", max_length=220, blank=True)
     intro_zh = models.TextField("中文完整介绍", blank=True)

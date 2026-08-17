@@ -124,7 +124,7 @@ class CatalogAdminTests(TestCase):
                 "has_fitness_center",
                 "heated_pool_count",
                 "has_infinity_pool",
-                "sauna_count",
+                "has_sauna",
                 "has_executive_lounge",
                 "capacity",
                 "year_built",
