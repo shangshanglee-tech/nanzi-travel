@@ -22,11 +22,22 @@ const navStyles = fs.readFileSync(
   "utf8"
 );
 
-test("builds visible vessel modules and keeps cabin groups", () => {
+test("builds ordered visible vessel facilities and keeps cabin groups", () => {
   const state = buildVesselDetailState({
     capacity: 490,
     year_built: 2019,
     year_refurbished: 2025,
+    has_science_center: true,
+    has_wifi: true,
+    is_hybrid: true,
+    has_stabilization_system: true,
+    restaurant_count: 3,
+    bar_count: 2,
+    has_executive_lounge: true,
+    has_sauna: true,
+    has_infinity_pool: true,
+    heated_pool_count: 1,
+    has_fitness_center: true,
     experiences: [
       {title_zh: "科学中心", body_zh: "探险队讲座", media: []},
       {title_zh: "隐藏模块", body_zh: "", media: []},
@@ -39,13 +50,29 @@ test("builds visible vessel modules and keeps cabin groups", () => {
     products: [],
   });
 
-  assert.deepEqual(state.facts, [
-    {label: "载客", value: "约 490 位"},
-    {label: "建造", value: "2019 年"},
-    {label: "翻新", value: "2025 年"},
+  assert.deepEqual(state.facilities, [
+    {icon: "verified-badge", text: "2025年翻新"},
+    {icon: "capacity", text: "最大载客量 490"},
+    {icon: "science-center", text: "科研中心"},
+    {icon: "wifi", text: "免费 Wi-Fi"},
+    {icon: "hybrid", text: "环保混合动力引擎"},
+    {icon: "modern-stable-tech", text: "船身稳定技术"},
+    {icon: "restaurants", text: "3 个餐厅"},
+    {icon: "bars", text: "2 个酒吧"},
+    {icon: "lounge", text: "行政酒廊"},
+    {icon: "spa", text: "桑拿房"},
+    {icon: "swimming-pool", text: "无边泳池"},
+    {icon: "hot-tubs", text: "1 个恒温泳池"},
+    {icon: "fitness", text: "健身房"},
   ]);
   assert.equal(state.experiences.length, 1);
   assert.deepEqual(state.cabinGroups.map((group) => group.title), ["套房"]);
+});
+
+test("uses a built year only when no refurbishment year exists", () => {
+  const state = buildVesselDetailState({year_built: 2020});
+
+  assert.deepEqual(state.facilities, [{icon: "verified-badge", text: "建成于2020年"}]);
 });
 
 test("uses a card visual as the immersive vessel detail hero", () => {
@@ -69,4 +96,13 @@ test("continues the hero card tone below the image for the full Chinese introduc
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.doesNotMatch(vesselMarkup, /vessel-intro-card/);
   assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*white-space:\s*pre-line/);
+});
+
+test("renders a two-column vessel facility grid instead of the green introduction card", () => {
+  assert.doesNotMatch(vesselMarkup, /class="intro dark-intro"/);
+  assert.match(vesselMarkup, /wx:if="\{\{detail\.facilities\.length\}\}" class="facility-grid"/);
+  assert.match(vesselMarkup, /class="facility-icon facility-icon-\{\{item\.icon\}\}"/);
+  assert.match(vesselMarkup, /\{\{item\.text\}\}/);
+  assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(vesselMarkup, /class="facility-icon facility-icon-\{\{item\.icon\}\}" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
 });

@@ -11,14 +11,10 @@
         <view wx:if="{{vessel.intro_zh}}" class="hero-intro">{{vessel.intro_zh}}</view>
       </view>
     </view>
-    <view class="intro dark-intro">
-      <view class="kicker">{{vessel.operator_name || 'HX EXPEDITIONS'}} · 探险船档案</view>
-      <view class="summary">{{vessel.short_pitch || vessel.summary}}</view>
-      <view wx:if="{{detail.facts.length}}" class="fact-row">
-        <view wx:for="{{detail.facts}}" wx:key="label" class="fact">
-          <text class="fact-label">{{item.label}}</text>
-          <text class="fact-value">{{item.value}}</text>
-        </view>
+    <view wx:if="{{detail.facilities.length}}" class="facility-grid">
+      <view wx:for="{{detail.facilities}}" wx:key="text" class="facility-item" style="color: {{vessel.card_tone || '#143f35'}}">
+        <view class="facility-icon facility-icon-{{item.icon}}" style="background-color: {{vessel.card_tone || '#143f35'}}"></view>
+        <text class="facility-text">{{item.text}}</text>
       </view>
     </view>
 

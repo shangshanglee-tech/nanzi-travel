@@ -4,20 +4,27 @@
 .hero { position: relative; overflow: hidden; width: 100%; background: #dbe6de; }.hero-image { display: block; width: 100%; }.hero-copy { position: absolute; right: 30rpx; bottom: 38rpx; left: 30rpx; color: #fff; text-shadow: 0 3rpx 14rpx rgba(0,0,0,.28); }.hero-official { font-size: 22rpx; letter-spacing: 1.2rpx; opacity: .82; }.hero-name { margin-top: 8rpx; font-size: 48rpx; font-weight: 700; }
 .hero { overflow: visible; }.hero-copy { position: relative; right: auto; bottom: auto; left: auto; z-index: 1; margin-top: -172rpx; padding: 32rpx 30rpx 52rpx; text-shadow: none; }.hero-intro { margin-top: 26rpx; color: rgba(255,255,255,.9); font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .vessel-intro-card { color: #fff; box-shadow: 0 14rpx 36rpx rgba(20,63,53,.12); }.vessel-intro-card .section-title { color: #fff; }.vessel-intro-copy { color: rgba(255,255,255,.9); font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
-.intro, .section { margin: 24rpx; padding: 32rpx; border-radius: 28rpx; background: #fff; }
-.dark-intro { background: #143f35; }
-.kicker { color: #74807a; font-size: 22rpx; }
-.dark-intro .kicker { color: #b4c8be; }
+.section { margin: 24rpx; padding: 32rpx; border-radius: 28rpx; background: #fff; }
 .title { margin-top: 14rpx; color: #143f35; font-family: serif; font-size: 46rpx; font-weight: 700; }
-.dark-intro .title { color: #fff; }
 .official-name { margin-top: 6rpx; color: #728078; font-size: 21rpx; letter-spacing: 1rpx; }
-.dark-intro .official-name { color: #b4c8be; }
 .summary, .cabin-copy, .route-copy { margin-top: 14rpx; color: #565e5a; font-size: 26rpx; line-height: 1.7; }
-.dark-intro .summary { color: rgba(255,255,255,.86); }
-.fact-row { display: flex; flex-wrap: wrap; gap: 16rpx 28rpx; margin-top: 24rpx; }
-.fact { display: flex; flex-direction: column; gap: 6rpx; }
-.fact-label { color: #b4c8be; font-size: 20rpx; }
-.fact-value { color: #fff; font-size: 24rpx; }
+.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 42rpx 30rpx 26rpx; background: #fff; }
+.facility-item { display: flex; align-items: center; min-width: 0; gap: 14rpx; font-size: 24rpx; line-height: 1.45; }
+.facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain; mask-repeat: no-repeat; mask-position: center; mask-size: contain; }
+.facility-text { min-width: 0; }
+.facility-icon-verified-badge { -webkit-mask-image: url("../../assets/verified-badge.svg"); mask-image: url("../../assets/verified-badge.svg"); }
+.facility-icon-capacity { -webkit-mask-image: url("../../assets/capacity.svg"); mask-image: url("../../assets/capacity.svg"); }
+.facility-icon-science-center { -webkit-mask-image: url("../../assets/science_center.svg"); mask-image: url("../../assets/science_center.svg"); }
+.facility-icon-wifi { -webkit-mask-image: url("../../assets/wifi.svg"); mask-image: url("../../assets/wifi.svg"); }
+.facility-icon-hybrid { -webkit-mask-image: url("../../assets/hybrid.svg"); mask-image: url("../../assets/hybrid.svg"); }
+.facility-icon-modern-stable-tech { -webkit-mask-image: url("../../assets/modern_stable_tech.svg"); mask-image: url("../../assets/modern_stable_tech.svg"); }
+.facility-icon-restaurants { -webkit-mask-image: url("../../assets/restaurants.svg"); mask-image: url("../../assets/restaurants.svg"); }
+.facility-icon-bars { -webkit-mask-image: url("../../assets/bars.svg"); mask-image: url("../../assets/bars.svg"); }
+.facility-icon-lounge { -webkit-mask-image: url("../../assets/lounge.svg"); mask-image: url("../../assets/lounge.svg"); }
+.facility-icon-spa { -webkit-mask-image: url("../../assets/spa.svg"); mask-image: url("../../assets/spa.svg"); }
+.facility-icon-swimming-pool { -webkit-mask-image: url("../../assets/swimming_pool.svg"); mask-image: url("../../assets/swimming_pool.svg"); }
+.facility-icon-hot-tubs { -webkit-mask-image: url("../../assets/hot_tubs.svg"); mask-image: url("../../assets/hot_tubs.svg"); }
+.facility-icon-fitness { -webkit-mask-image: url("../../assets/fitness.svg"); mask-image: url("../../assets/fitness.svg"); }
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .gallery-scroll { display: flex; gap: 18rpx; overflow-x: scroll; padding: 0 24rpx 24rpx; white-space: nowrap; }
