@@ -40,7 +40,7 @@
       };
     });
 
-    document.querySelectorAll('.inline-group .delete input[type="checkbox"]').forEach(function (checkbox) {
+    document.querySelectorAll('.inline-group input[type="checkbox"][name$="-DELETE"]').forEach(function (checkbox) {
       if (checkbox.dataset.deleteControlReady === "true") return;
       checkbox.dataset.deleteControlReady = "true";
       checkbox.style.display = "none";

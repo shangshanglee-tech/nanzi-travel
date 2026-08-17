@@ -254,7 +254,7 @@ class CatalogAdminTests(TestCase):
         self.assertIn('fieldWrapper(row, "existing_additional_images")', source)
         self.assertIn('fieldWrapper(row, "body")', source)
         self.assertIn("data-delete-image", source)
-        self.assertIn('.delete input[type="checkbox"]', source)
+        self.assertIn('input[type="checkbox"][name$="-DELETE"]', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)
