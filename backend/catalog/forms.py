@@ -56,7 +56,7 @@ class AdditionalImagesPreviewWidget(forms.Widget):
             '<div class="additional-images-preview"><ul>{}</ul></div>',
             format_html_join(
                 "",
-                '<li><a href="{0}" target="_blank" rel="noopener">{1}</a></li>',
+                '<li><a href="{0}" target="_blank" rel="noopener"><img src="{0}" alt="{1}" style="display:block;width:180px;max-height:120px;object-fit:cover;margin:0 0 6px;border-radius:4px" /><span>{1}</span></a></li>',
                 ((image_url, image_name) for image_url, image_name in value),
             ),
         )

@@ -149,7 +149,7 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-0-additional_images"')
-        self.assertContains(response, 'name="page_blocks-0-existing_additional_images"')
+        self.assertContains(response, "已上传图片")
         self.assertContains(response, "secondary.jpg")
 
     def test_content_card_editor_uploads_multiple_additional_images_directly(self):
@@ -185,6 +185,29 @@ class CatalogAdminTests(TestCase):
             list(block.additional_images.values_list("sort_order", flat=True)),
             [0, 1],
         )
+
+    def test_content_card_editor_shows_existing_additional_images_for_review(self):
+        vessel = Vessel.objects.create(slug="card-image-review", name="多图回显测试船")
+        block = VesselPageBlock.objects.create(
+            vessel=vessel,
+            block_type="card",
+            title="Explorer Lounge & Bar",
+            image="vessels/page-blocks/primary.jpg",
+        )
+        extra_image = VesselPageBlockImage.objects.create(
+            vessel=vessel,
+            page_block=block,
+            image="vessels/page-block-images/explorer-lounge-second.jpg",
+        )
+
+        form = VesselPageBlockInlineForm(instance=block)
+
+        self.assertIn("existing_additional_images", form.fields)
+        self.assertEqual(form.fields["existing_additional_images"].initial, [
+            (extra_image.image.url, "explorer-lounge-second.jpg"),
+        ])
+        self.assertIn("explorer-lounge-second.jpg", form.as_p())
+        self.assertIn("<img", form.as_p())
 
     def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
         script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
