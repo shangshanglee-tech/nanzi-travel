@@ -16,6 +16,21 @@ from catalog.models import (
 
 
 class VesselPublicationTests(TestCase):
+    def test_vessel_structured_facilities_default_to_disabled_or_zero(self):
+        vessel = Vessel.objects.create(slug="facility-defaults", name="设施默认值测试船")
+
+        self.assertFalse(vessel.is_hybrid)
+        self.assertFalse(vessel.has_science_center)
+        self.assertFalse(vessel.has_wifi)
+        self.assertFalse(vessel.has_stabilization_system)
+        self.assertEqual(vessel.restaurant_count, 0)
+        self.assertEqual(vessel.bar_count, 0)
+        self.assertEqual(vessel.fitness_center_count, 0)
+        self.assertEqual(vessel.heated_pool_count, 0)
+        self.assertEqual(vessel.infinity_pool_count, 0)
+        self.assertEqual(vessel.sauna_count, 0)
+        self.assertEqual(vessel.executive_lounge_count, 0)
+
     def test_vessel_card_tone_accepts_a_hex_color(self):
         vessel = Vessel(slug="card-tint", name="卡片底色测试船", card_tone="#071A32")
 

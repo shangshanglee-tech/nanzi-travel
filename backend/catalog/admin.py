@@ -120,7 +120,27 @@ class VesselAdmin(admin.ModelAdmin):
         ("中文展示文案", {"fields": ("short_pitch", "summary", "intro_zh", "hero_image", "features")}),
         ("首页卡片展示", {"fields": ("card_image", "card_tone")}),
         ("英文原文与来源", {"fields": ("intro_en", "source_url", "source_fetched_at", "source_checked_at", "review_status")}),
-        ("结构化事实", {"fields": ("ship_type", "capacity", "year_built", "year_refurbished")}),
+        (
+            "结构化事实",
+            {
+                "fields": (
+                    "is_hybrid",
+                    "has_science_center",
+                    "has_wifi",
+                    "has_stabilization_system",
+                    "restaurant_count",
+                    "bar_count",
+                    "fitness_center_count",
+                    "heated_pool_count",
+                    "infinity_pool_count",
+                    "sauna_count",
+                    "executive_lounge_count",
+                    "capacity",
+                    "year_built",
+                    "year_refurbished",
+                )
+            },
+        ),
         ("记录", {"fields": ("created_at", "updated_at")}),
     )
 

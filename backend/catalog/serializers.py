@@ -203,7 +203,9 @@ class VesselDetailSerializer(VesselCardSerializer):
 
     class Meta(VesselCardSerializer.Meta):
         fields = VesselCardSerializer.Meta.fields + (
-            "operator_name", "ship_type", "short_pitch", "intro_zh", "intro_en", "year_refurbished",
+            "operator_name", "is_hybrid", "has_science_center", "has_wifi", "has_stabilization_system",
+            "restaurant_count", "bar_count", "fitness_center_count", "heated_pool_count", "infinity_pool_count",
+            "sauna_count", "executive_lounge_count", "short_pitch", "intro_zh", "intro_en", "year_refurbished",
             "experiences", "cabin_groups", "cabins", "media", "products", "source_url",
         )
 

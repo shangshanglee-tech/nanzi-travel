@@ -108,6 +108,30 @@ class CatalogAdminTests(TestCase):
         self.assertEqual(vessel_admin.__class__, VesselAdmin)
         self.assertTrue({VesselExperience, CabinDisplayGroup, VesselMedia}.issubset(inline_models))
 
+    def test_vessel_structured_facts_follow_the_editorial_order(self):
+        vessel_admin = VesselAdmin(Vessel, site)
+        structured_facts = next(options for title, options in vessel_admin.fieldsets if title == "结构化事实")
+
+        self.assertEqual(
+            structured_facts["fields"],
+            (
+                "is_hybrid",
+                "has_science_center",
+                "has_wifi",
+                "has_stabilization_system",
+                "restaurant_count",
+                "bar_count",
+                "fitness_center_count",
+                "heated_pool_count",
+                "infinity_pool_count",
+                "sauna_count",
+                "executive_lounge_count",
+                "capacity",
+                "year_built",
+                "year_refurbished",
+            ),
+        )
+
     def test_vessel_publish_action_sets_status_and_publish_time(self):
         vessel = Vessel.objects.create(slug="roald-amundsen", name="阿蒙森号")
         request = RequestFactory().post("/admin/catalog/vessel/")

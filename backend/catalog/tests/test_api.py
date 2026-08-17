@@ -135,6 +135,17 @@ class VesselApiTests(TestCase):
             hero_image="vessels/heroes/roald-amundsen.webp",
             card_image="vessels/cards/roald-amundsen-card.webp",
             card_tone="#071A32",
+            is_hybrid=True,
+            has_science_center=True,
+            has_wifi=True,
+            has_stabilization_system=True,
+            restaurant_count=3,
+            bar_count=2,
+            fitness_center_count=1,
+            heated_pool_count=1,
+            infinity_pool_count=1,
+            sauna_count=2,
+            executive_lounge_count=1,
             content_status=VesselContentStatus.PUBLISHED,
             published_at=timezone.now(),
         )
@@ -172,6 +183,17 @@ class VesselApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         payload = response.json()
         self.assertEqual(payload["intro_zh"], "面向极地探索的旗舰探险船。")
+        self.assertTrue(payload["is_hybrid"])
+        self.assertTrue(payload["has_science_center"])
+        self.assertTrue(payload["has_wifi"])
+        self.assertTrue(payload["has_stabilization_system"])
+        self.assertEqual(payload["restaurant_count"], 3)
+        self.assertEqual(payload["bar_count"], 2)
+        self.assertEqual(payload["fitness_center_count"], 1)
+        self.assertEqual(payload["heated_pool_count"], 1)
+        self.assertEqual(payload["infinity_pool_count"], 1)
+        self.assertEqual(payload["sauna_count"], 2)
+        self.assertEqual(payload["executive_lounge_count"], 1)
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["amenities"], ["迷你吧"])

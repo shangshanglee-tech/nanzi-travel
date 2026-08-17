@@ -52,7 +52,9 @@ class Command(BaseCommand):
 
     def import_vessel(self, item):
         allowed = (
-            "official_name", "summary", "operator_name", "ship_type", "short_pitch",
+            "official_name", "summary", "operator_name", "is_hybrid", "has_science_center", "has_wifi",
+            "has_stabilization_system", "restaurant_count", "bar_count", "fitness_center_count",
+            "heated_pool_count", "infinity_pool_count", "sauna_count", "executive_lounge_count", "short_pitch",
             "intro_zh", "intro_en", "capacity", "year_built", "year_refurbished",
             "features", "source_url", "review_status", "sort_order",
         )
