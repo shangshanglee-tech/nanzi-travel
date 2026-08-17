@@ -124,6 +124,16 @@ class CatalogAdminTests(TestCase):
         self.assertIn("show_deck_plans", editable_fields)
         self.assertIn("catalog/vessel-page-blocks-admin.js", vessel_admin.media._js)
 
+    def test_current_vessel_change_form_includes_page_block_management_fields(self):
+        vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")
+        user = get_user_model().objects.create_superuser(username="page-block-operator", password="strong-password")
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:catalog_vessel_change", args=[vessel.pk]))
+
+        self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
+        self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
+
     def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
         script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
         source = script.read_text(encoding="utf-8")
@@ -131,6 +141,8 @@ class CatalogAdminTests(TestCase):
         self.assertIn("pageComposerCollapsed", source)
         self.assertIn("#page_blocks-group", source)
         self.assertIn('django.jQuery(document).on("formset:added", refresh)', source)
+        self.assertIn('fieldWrapper(row, "image")', source)
+        self.assertIn('fieldWrapper(row, "body")', source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)

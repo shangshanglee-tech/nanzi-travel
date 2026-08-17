@@ -10,6 +10,19 @@
     return select ? select.value : "";
   }
 
+  function fieldWrapper(row, name) {
+    const field = row.querySelector(`[name$="-${name}"]`);
+    if (!field) return null;
+    return field.closest(".form-row") || field.parentElement;
+  }
+
+  function syncFieldsForType(row) {
+    const isHeading = blockType(row) === "heading";
+    [fieldWrapper(row, "image"), fieldWrapper(row, "body")].forEach(function (field) {
+      if (field) field.style.display = isHeading ? "none" : "";
+    });
+  }
+
   function setToggle(heading, cards) {
     const headingTitle = heading.querySelector("h3");
     if (!headingTitle) return;
@@ -42,6 +55,7 @@
     let active = null;
     blockRows().forEach(function (row) {
       row.style.display = "";
+      syncFieldsForType(row);
       if (blockType(row) === "heading") {
         active = {row: row, cards: []};
         headings.push(active);
