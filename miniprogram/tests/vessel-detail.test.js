@@ -82,7 +82,8 @@ test("derives a safe vessel tone for remote facility icons", () => {
 
 test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /<page-nav transparent="\{\{true\}\}" show-title="\{\{false\}\}" show-back="\{\{true\}\}"/);
-  assert.match(vesselMarkup, /src="\{\{vessel\.card_image \|\| vessel\.hero_image\}\}" mode="widthFix"/);
+  assert.match(vesselMarkup, /src="\{\{vessel\.card_image\}\}" mode="widthFix"/);
+  assert.doesNotMatch(vesselMarkup, /vessel\.hero_image/);
   assert.match(vesselMarkup, /class="hero-official">\{\{vessel\.official_name\}\}/);
   assert.match(vesselMarkup, /class="hero-name">\{\{vessel\.name\}\}/);
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);

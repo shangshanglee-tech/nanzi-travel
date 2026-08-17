@@ -4,7 +4,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin
-from catalog.forms import ProductAdminForm, VesselAdminForm
+from catalog.forms import ProductAdminForm
 from catalog.models import (
     CabinDisplayGroup,
     Destination,
@@ -182,15 +182,21 @@ class ProductAdminFormTests(TestCase):
         self.assertIn("空白项", form.errors["highlights"][0])
 
 
-class VesselAdminFormTests(TestCase):
-    def test_vessel_features_reject_non_list_value(self):
-        form = VesselAdminForm(data={
-            "slug": "roald-amundsen",
-            "name": "阿蒙森号",
-            "features": '{"name":"科学中心"}',
-            "content_status": VesselContentStatus.DRAFT,
-            "sort_order": 0,
-        })
+class VesselAdminFieldsTests(TestCase):
+    def test_vessel_editor_hides_removed_and_audit_fields(self):
+        editable_fields = {
+            field
+            for _, options in VesselAdmin.fieldsets
+            for field in options["fields"]
+        }
 
-        self.assertFalse(form.is_valid())
-        self.assertIn("必须是列表", form.errors["features"][0])
+        self.assertNotIn("short_pitch", editable_fields)
+        self.assertNotIn("features", editable_fields)
+        self.assertNotIn("hero_image", editable_fields)
+        self.assertNotIn("intro_en", editable_fields)
+        self.assertNotIn("source_url", editable_fields)
+        self.assertNotIn("source_fetched_at", editable_fields)
+        self.assertNotIn("source_checked_at", editable_fields)
+        self.assertNotIn("review_status", editable_fields)
+        self.assertNotIn("created_at", editable_fields)
+        self.assertNotIn("updated_at", editable_fields)

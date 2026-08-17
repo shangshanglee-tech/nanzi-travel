@@ -3,8 +3,8 @@
   <view wx:if="{{loading}}" class="loading">正在展开船只档案…</view>
   <empty-state wx:elif="{{error}}" title="暂时无法查看船只" description="{{error}}" bind:retry="loadVessel" />
   <block wx:else>
-    <view wx:if="{{vessel.card_image || vessel.hero_image}}" class="hero" style="background-color: {{vessel.card_tone || '#143f35'}}">
-      <image class="hero-image" src="{{vessel.card_image || vessel.hero_image}}" mode="widthFix" />
+    <view wx:if="{{vessel.card_image}}" class="hero" style="background-color: {{vessel.card_tone || '#143f35'}}">
+      <image class="hero-image" src="{{vessel.card_image}}" mode="widthFix" />
       <view class="hero-copy">
         <view class="hero-official">{{vessel.official_name}}</view>
         <view class="hero-name">{{vessel.name}}</view>

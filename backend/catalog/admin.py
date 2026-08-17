@@ -3,7 +3,7 @@ from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.template.response import TemplateResponse
 from django.utils import timezone
 
-from .forms import ProductAdminForm, VesselAdminForm
+from .forms import ProductAdminForm
 from .models import (
     CabinDisplayGroup,
     CabinType,
@@ -107,19 +107,16 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Vessel)
 class VesselAdmin(admin.ModelAdmin):
-    form = VesselAdminForm
     inlines = (VesselExperienceInline, CabinTypeInline, CabinDisplayGroupInline, VesselMediaInline)
     list_display = ("name", "official_name", "operator_name", "content_status", "published_at", "is_active", "updated_at")
     list_filter = ("content_status", "is_active", "operator_name")
     search_fields = ("name", "official_name", "operator_name", "slug")
     prepopulated_fields = {"slug": ("name",)}
-    readonly_fields = ("created_at", "updated_at")
     actions = ("publish_vessels", "unpublish_vessels")
     fieldsets = (
         ("基础与发布", {"fields": ("name", "official_name", "operator_name", "slug", "content_status", "published_at", "is_active", "sort_order")}),
-        ("中文展示文案", {"fields": ("short_pitch", "summary", "intro_zh", "hero_image", "features")}),
+        ("中文展示文案", {"fields": ("summary", "intro_zh")}),
         ("首页卡片展示", {"fields": ("card_image", "card_tone")}),
-        ("英文原文与来源", {"fields": ("intro_en", "source_url", "source_fetched_at", "source_checked_at", "review_status")}),
         (
             "结构化事实",
             {
@@ -141,7 +138,6 @@ class VesselAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("记录", {"fields": ("created_at", "updated_at")}),
     )
 
     @admin.action(description="发布所选船只内容")

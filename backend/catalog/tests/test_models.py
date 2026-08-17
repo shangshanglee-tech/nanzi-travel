@@ -42,7 +42,7 @@ class VesselPublicationTests(TestCase):
         with self.assertRaisesRegex(ValidationError, "请输入 #071A32 形式"):
             vessel.full_clean()
 
-    def test_published_vessel_requires_a_hero_image(self):
+    def test_published_vessel_requires_a_card_image(self):
         vessel = Vessel(
             slug="no-hero",
             name="无封面图测试船",
@@ -50,10 +50,10 @@ class VesselPublicationTests(TestCase):
             published_at=timezone.now(),
         )
 
-        with self.assertRaisesRegex(ValidationError, "封面图"):
+        with self.assertRaisesRegex(ValidationError, "卡片图"):
             vessel.full_clean()
 
-    def test_public_vessel_list_excludes_vessels_without_a_hero_image(self):
+    def test_public_vessel_list_excludes_vessels_without_a_card_image(self):
         hidden = Vessel.objects.create(
             slug="no-hero",
             name="无封面图测试船",
@@ -61,9 +61,9 @@ class VesselPublicationTests(TestCase):
             published_at=timezone.now(),
         )
         visible = Vessel.objects.create(
-            slug="with-hero",
-            name="有封面图测试船",
-            hero_image="vessels/heroes/with-hero.webp",
+            slug="with-card",
+            name="有卡片图测试船",
+            card_image="vessels/cards/with-card.webp",
             content_status="published",
             published_at=timezone.now(),
         )

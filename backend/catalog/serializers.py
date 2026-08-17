@@ -22,7 +22,6 @@ class DestinationSerializer(serializers.ModelSerializer):
 
 
 class VesselCardSerializer(serializers.ModelSerializer):
-    hero_image = serializers.SerializerMethodField()
     card_image = serializers.SerializerMethodField()
 
     class Meta:
@@ -32,20 +31,11 @@ class VesselCardSerializer(serializers.ModelSerializer):
             "name",
             "official_name",
             "summary",
-            "hero_image",
             "card_image",
             "card_tone",
             "capacity",
             "year_built",
-            "features",
         )
-
-    def get_hero_image(self, vessel):
-        if not vessel.hero_image:
-            return ""
-        request = self.context.get("request")
-        url = vessel.hero_image.url
-        return request.build_absolute_uri(url) if request else url
 
     def get_card_image(self, vessel):
         if not vessel.card_image:
@@ -205,8 +195,8 @@ class VesselDetailSerializer(VesselCardSerializer):
         fields = VesselCardSerializer.Meta.fields + (
             "operator_name", "is_hybrid", "has_science_center", "has_wifi", "has_stabilization_system",
             "restaurant_count", "bar_count", "has_fitness_center", "heated_pool_count", "has_infinity_pool",
-            "has_sauna", "has_executive_lounge", "short_pitch", "intro_zh", "intro_en", "year_refurbished",
-            "experiences", "cabin_groups", "cabins", "media", "products", "source_url",
+            "has_sauna", "has_executive_lounge", "intro_zh", "year_refurbished",
+            "experiences", "cabin_groups", "cabins", "media", "products",
         )
 
     def get_experiences(self, vessel):

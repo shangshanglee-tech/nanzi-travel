@@ -54,9 +54,8 @@ class Command(BaseCommand):
         allowed = (
             "official_name", "summary", "operator_name", "is_hybrid", "has_science_center", "has_wifi",
             "has_stabilization_system", "restaurant_count", "bar_count", "has_fitness_center",
-            "heated_pool_count", "has_infinity_pool", "has_sauna", "has_executive_lounge", "short_pitch",
-            "intro_zh", "intro_en", "capacity", "year_built", "year_refurbished",
-            "features", "source_url", "review_status", "sort_order",
+            "heated_pool_count", "has_infinity_pool", "has_sauna", "has_executive_lounge",
+            "intro_zh", "capacity", "year_built", "year_refurbished", "sort_order",
         )
         defaults = {"name": item["name"]}
         for field in allowed:

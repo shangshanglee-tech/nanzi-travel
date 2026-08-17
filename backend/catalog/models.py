@@ -32,7 +32,7 @@ class VesselQuerySet(models.QuerySet):
             is_active=True,
             content_status=VesselContentStatus.PUBLISHED,
             published_at__isnull=False,
-        ).exclude(hero_image="")
+        ).exclude(card_image="")
 
 
 class Destination(models.Model):
@@ -67,15 +67,7 @@ class Vessel(models.Model):
     has_infinity_pool = models.BooleanField("无边泳池", default=False)
     has_sauna = models.BooleanField("桑拿房", default=False)
     has_executive_lounge = models.BooleanField("行政酒廊", default=False)
-    short_pitch = models.CharField("首页一句话卖点", max_length=220, blank=True)
     intro_zh = models.TextField("中文完整介绍", blank=True)
-    intro_en = models.TextField("英文原文介绍", blank=True)
-    hero_image = models.ImageField(
-        "封面图",
-        upload_to="vessels/heroes/",
-        storage=build_media_storage,
-        blank=True,
-    )
     card_image = models.ImageField(
         "卡片图",
         upload_to="vessels/cards/",
@@ -91,11 +83,8 @@ class Vessel(models.Model):
     capacity = models.PositiveSmallIntegerField("载客人数", null=True, blank=True)
     year_built = models.PositiveSmallIntegerField("建造年份", null=True, blank=True)
     year_refurbished = models.PositiveSmallIntegerField("翻新年份", null=True, blank=True)
-    features = models.JSONField("体验特色", default=list, blank=True)
-    source_url = models.URLField("官方来源", blank=True)
     source_fetched_at = models.DateTimeField("抓取时间", null=True, blank=True)
     source_checked_at = models.DateTimeField("资料核对时间", null=True, blank=True)
-    review_status = models.CharField("复核状态", max_length=32, default="pending")
     content_status = models.CharField(
         "内容发布状态",
         max_length=16,
@@ -122,8 +111,8 @@ class Vessel(models.Model):
         super().clean()
         if self.content_status == VesselContentStatus.PUBLISHED and not self.published_at:
             raise ValidationError({"published_at": "published_at 是发布船只内容的必填项"})
-        if self.content_status == VesselContentStatus.PUBLISHED and not self.hero_image:
-            raise ValidationError({"hero_image": "发布船只内容前必须上传封面图"})
+        if self.content_status == VesselContentStatus.PUBLISHED and not self.card_image:
+            raise ValidationError({"card_image": "发布船只内容前必须上传卡片图"})
 
 
 class CabinType(models.Model):

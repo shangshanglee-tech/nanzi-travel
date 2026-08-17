@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 key: item.get(key, default)
                 for key, default in (
                     ("official_name", ""), ("summary", ""), ("capacity", None), ("year_built", None),
-                    ("features", []), ("source_url", ""), ("review_status", "pending"), ("sort_order", 0),
+                    ("sort_order", 0),
                 )
             }
             defaults["name"] = name

@@ -129,10 +129,7 @@ class VesselApiTests(TestCase):
         self.vessel = Vessel.objects.create(
             slug="roald-amundsen",
             name="阿蒙森号",
-            short_pitch="混合动力极地探险船",
             intro_zh="面向极地探索的旗舰探险船。",
-            intro_en="A hybrid-powered expedition ship.",
-            hero_image="vessels/heroes/roald-amundsen.webp",
             card_image="vessels/cards/roald-amundsen-card.webp",
             card_tone="#071A32",
             is_hybrid=True,
@@ -183,6 +180,8 @@ class VesselApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         payload = response.json()
         self.assertEqual(payload["intro_zh"], "面向极地探索的旗舰探险船。")
+        for removed_field in ("short_pitch", "features", "hero_image", "intro_en", "source_url"):
+            self.assertNotIn(removed_field, payload)
         self.assertTrue(payload["is_hybrid"])
         self.assertTrue(payload["has_science_center"])
         self.assertTrue(payload["has_wifi"])

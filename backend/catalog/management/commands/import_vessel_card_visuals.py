@@ -58,12 +58,11 @@ class Command(BaseCommand):
             raise CommandError(f"找不到船只：{slug}") from error
 
         vessel.card_tone = card_tone
-        try:
-            vessel.full_clean(exclude=("hero_image",))
-        except Exception as error:
-            raise CommandError(f"{slug} 的卡片底色无效：{card_tone}") from error
-
         if vessel.card_image:
             vessel.card_image.delete(save=False)
         vessel.card_image.save(image_path.name, ContentFile(image_path.read_bytes()), save=False)
+        try:
+            vessel.full_clean()
+        except Exception as error:
+            raise CommandError(f"{slug} 的卡片图或底色无效") from error
         vessel.save(update_fields=("card_image", "card_tone", "updated_at"))
