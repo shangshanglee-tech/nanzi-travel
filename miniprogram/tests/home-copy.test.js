@@ -48,7 +48,7 @@ test("uses the prepared vessel card image with bilingual vessel names and its Ch
   assert.match(homeMarkup, /class="vessel-summary">\{\{item\.summary\}\}/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*margin-top:\s*-172rpx/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
-  assert.match(homeStyles, /\.vessel-name\s*\{[^}]*font-size:\s*48rpx[^}]*font-weight:\s*500/);
+  assert.match(homeStyles, /\.vessel-name\s*\{[^}]*font-size:\s*46rpx[^}]*font-weight:\s*500/);
   assert.match(homeStyles, /\.vessel-name\s*\{[^}]*margin-top:\s*12rpx/);
   assert.match(homeStyles, /\.vessel-official\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200[^}]*opacity:\s*1/);
   assert.match(homeStyles, /\.vessel-summary\s*\{[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200[^}]*line-height:\s*36rpx[^}]*opacity:\s*1/);
