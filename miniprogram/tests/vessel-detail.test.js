@@ -157,7 +157,7 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.doesNotMatch(vesselMarkup, /class="gallery-scroll"/);
   assert.doesNotMatch(vesselMarkup, /class="experience"/);
   assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}"/);
-  assert.match(vesselStyles, /\.composer-heading\s*\{[^}]*margin:\s*96rpx 8rpx 48rpx[^}]*font-size:\s*48rpx[^}]*font-weight:\s*500/);
+  assert.match(vesselStyles, /\.composer-heading\s*\{[^}]*margin:\s*96rpx 8rpx 52rpx[^}]*font-size:\s*48rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card\s*\{[^}]*margin-bottom:\s*60rpx/);
   assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*26rpx 28rpx 30rpx/);
