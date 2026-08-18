@@ -47,6 +47,7 @@ test("uses the prepared vessel card image with bilingual vessel names and its Ch
   assert.doesNotMatch(homeMarkup, /class="vessel-fact"/);
   assert.match(homeMarkup, /class="vessel-summary">\{\{item\.summary\}\}/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*margin-top:\s*-172rpx/);
+  assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*padding:\s*32rpx 30rpx 52rpx/);
   assert.match(homeStyles, /\.vessel-card-body\s*\{[^}]*color:\s*#fff/);
   assert.match(homeStyles, /\.vessel-name\s*\{[^}]*font-size:\s*46rpx[^}]*font-weight:\s*500/);
   assert.match(homeStyles, /\.vessel-name\s*\{[^}]*margin-top:\s*12rpx/);
