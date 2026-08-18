@@ -113,6 +113,8 @@ test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*margin-top:\s*-172rpx/);
   assert.match(vesselStyles, /\.hero-official\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200[^}]*opacity:\s*1/);
+  assert.match(vesselStyles, /\.hero-name\s*\{[^}]*margin-top:\s*16rpx/);
+  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*margin-top:\s*24rpx/);
 });
 
 test("supports a transparent title-free page navigation variant", () => {
