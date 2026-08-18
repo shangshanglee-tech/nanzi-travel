@@ -13,6 +13,10 @@ const vesselStyles = fs.readFileSync(
   path.join(__dirname, "../pages/vessel-detail/vessel-detail.wxss"),
   "utf8"
 );
+const vesselScript = fs.readFileSync(
+  path.join(__dirname, "../pages/vessel-detail/vessel-detail.js"),
+  "utf8"
+);
 const navMarkup = fs.readFileSync(
   path.join(__dirname, "../components/page-nav/page-nav.wxml"),
   "utf8"
@@ -105,7 +109,7 @@ test("derives a safe vessel tone for remote facility icons", () => {
 });
 
 test("uses a card visual as the immersive vessel detail hero", () => {
-  assert.match(vesselMarkup, /<page-nav transparent="\{\{true\}\}" show-title="\{\{false\}\}" show-back="\{\{true\}\}"/);
+  assert.match(vesselMarkup, /<page-nav title="\{\{vessel\.name\}\}" transparent="\{\{true\}\}" show-title="\{\{navCollapsed\}\}" show-back="\{\{true\}\}" collapsed="\{\{navCollapsed\}\}" background-color="\{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
   assert.match(vesselMarkup, /src="\{\{vessel\.card_image\}\}" mode="widthFix"/);
   assert.doesNotMatch(vesselMarkup, /vessel\.hero_image/);
   assert.match(vesselMarkup, /class="hero-official">\{\{vessel\.official_name\}\}/);
@@ -118,10 +122,21 @@ test("uses a card visual as the immersive vessel detail hero", () => {
 });
 
 test("supports a transparent title-free page navigation variant", () => {
-  assert.match(navMarkup, /class="nav \{\{transparent \? 'transparent' : ''\}\}"/);
+  assert.match(navMarkup, /class="nav \{\{transparent && !collapsed \? 'transparent' : ''\}\} \{\{collapsed \? 'collapsed' : ''\}\}"/);
   assert.match(navMarkup, /wx:if="\{\{showTitle\}\}" class="nav-title"/);
   assert.match(navStyles, /\.nav\.transparent\s*\{[^}]*position:\s*absolute[^}]*background:\s*transparent/);
   assert.match(navStyles, /\.nav\.transparent \.back-button\s*\{[^}]*color:\s*#fff/);
+});
+
+test("collapses the vessel hero into a fixed, tone-matched title navigation after scrolling", () => {
+  assert.match(vesselScript, /navCollapsed:\s*false/);
+  assert.match(vesselScript, /navCollapseOffset:\s*260/);
+  assert.match(vesselScript, /onPageScroll\(event\)\s*\{[^}]*scrollTop >= this\.data\.navCollapseOffset/);
+  assert.match(navMarkup, /transparent && !collapsed/);
+  assert.match(navMarkup, /collapsed \? 'collapsed' : ''/);
+  assert.match(navMarkup, /background-color: \{\{collapsed \? backgroundColor : 'transparent'\}\}/);
+  assert.match(navStyles, /\.nav\.collapsed\s*\{[^}]*position:\s*fixed/);
+  assert.match(navStyles, /\.nav\.collapsed \.nav-title\s*\{[^}]*color:\s*#fff/);
 });
 
 test("continues the hero card tone below the image for the full Chinese introduction", () => {

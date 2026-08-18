@@ -6,6 +6,8 @@ Component({
     showBack: {type: Boolean, value: true},
     showTitle: {type: Boolean, value: true},
     transparent: {type: Boolean, value: false},
+    collapsed: {type: Boolean, value: false},
+    backgroundColor: {type: String, value: "#143f35"},
   },
   data: {
     metrics: {topPadding: 20, height: 44, rightPadding: 16},

@@ -1,5 +1,5 @@
 <view class="page with-action">
-  <page-nav transparent="{{true}}" show-title="{{false}}" show-back="{{true}}" />
+  <page-nav title="{{vessel.name}}" transparent="{{true}}" show-title="{{navCollapsed}}" show-back="{{true}}" collapsed="{{navCollapsed}}" background-color="{{vessel.card_tone || '#143f35'}}" />
   <view wx:if="{{loading}}" class="loading">正在展开船只档案…</view>
   <empty-state wx:elif="{{error}}" title="暂时无法查看船只" description="{{error}}" bind:retry="loadVessel" />
   <block wx:else>

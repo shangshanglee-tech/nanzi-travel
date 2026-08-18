@@ -2,7 +2,7 @@ const {getVessel} = require("../../services/api");
 const {buildVesselDetailState} = require("./view-model");
 
 Page({
-  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: ""},
+  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: "", navCollapsed: false, navCollapseOffset: 260},
   onLoad(query) {
     this.slug = query.slug || "";
     this.setData({apiBaseUrl: getApp().globalData.apiBaseUrl});
@@ -25,5 +25,9 @@ Page({
   },
   consult() {
     wx.navigateTo({url: `/pages/contact/contact?vessel=${encodeURIComponent(this.data.vessel.name || "")}`});
+  },
+  onPageScroll(event) {
+    const navCollapsed = event.scrollTop >= this.data.navCollapseOffset;
+    if (navCollapsed !== this.data.navCollapsed) this.setData({navCollapsed});
   },
 });
