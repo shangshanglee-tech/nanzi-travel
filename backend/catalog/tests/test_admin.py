@@ -1,12 +1,13 @@
 from django.contrib.admin.sites import site
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.http import QueryDict
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from pathlib import Path
 
 from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin, VesselPageBlockInlineForm
-from catalog.forms import ProductAdminForm
+from catalog.forms import AdditionalImagesPreviewWidget, ProductAdminForm
 from catalog.models import (
     CabinDisplayGroup,
     Destination,
@@ -26,6 +27,18 @@ from catalog.models import (
 class CatalogAdminTests(TestCase):
     def setUp(self):
         self.destination = Destination.objects.create(name="南极", slug="antarctica")
+
+    def test_existing_card_image_delete_widget_submits_all_selected_image_ids(self):
+        data = QueryDict("", mutable=True)
+        data.setlist("page_blocks-0-existing_additional_images", ["17", "18"])
+
+        selected_ids = AdditionalImagesPreviewWidget().value_from_datadict(
+            data,
+            {},
+            "page_blocks-0-existing_additional_images",
+        )
+
+        self.assertEqual(selected_ids, ["17", "18"])
 
     def test_anonymous_user_cannot_open_product_admin(self):
         response = self.client.get(reverse("admin:catalog_product_changelist"))

@@ -50,6 +50,14 @@ class MultipleImageField(forms.FileField):
 
 
 class AdditionalImagesPreviewWidget(forms.Widget):
+    def value_from_datadict(self, data, files, name):
+        if hasattr(data, "getlist"):
+            return data.getlist(name)
+        value = data.get(name)
+        if value in (None, ""):
+            return []
+        return value if isinstance(value, (list, tuple)) else [value]
+
     def render(self, name, value, attrs=None, renderer=None):
         images = list(self.choices)
         if not images:
