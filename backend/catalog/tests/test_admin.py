@@ -79,6 +79,11 @@ class CatalogAdminTests(TestCase):
             self.assertContains(response, label)
         self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
         self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
+        self.assertContains(response, 'class="vessel-editor-page-header"')
+        self.assertContains(response, 'form="vessel_form" name="_save"')
+        self.assertContains(response, 'class="deletelink"')
+        self.assertNotContains(response, "保存并增加另一个")
+        self.assertNotContains(response, "历史")
 
         source = (Path(__file__).resolve().parents[1] / "static/catalog/vessel-editor-tabs.js").read_text(encoding="utf-8")
         self.assertIn("firstInvalidPanel", source)

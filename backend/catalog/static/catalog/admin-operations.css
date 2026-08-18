@@ -17,6 +17,10 @@
 .vessel-editor-tabs__tab.is-active { border-bottom-color: var(--link-fg); color: var(--link-fg); font-weight: 700; }
 [data-vessel-tab-panel][hidden] { display: none; }
 
+.vessel-editor-page-header { display: flex; align-items: center; gap: 12px; }
+.vessel-editor-page-header h1 { margin: 0; }
+.vessel-editor-page-header__save { margin: 0; }
+
 @media (max-width: 767px) {
   #nav-sidebar.operations-sidebar { position: static; width: 100%; border-right: 0; border-bottom: 1px solid var(--hairline-color); }
   .operations-sidebar__section { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
