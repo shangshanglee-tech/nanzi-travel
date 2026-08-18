@@ -46,6 +46,44 @@ class CatalogAdminTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn("/admin/login/", response.url)
 
+    def test_operations_sidebar_contains_only_daily_editorial_entries(self):
+        user = get_user_model().objects.create_superuser(
+            username="operations-sidebar-user",
+            password="strong-password",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:catalog_vessel_changelist"))
+
+        self.assertContains(response, 'data-operations-nav="true"')
+        self.assertContains(response, "旅行产品")
+        self.assertContains(response, "目的地")
+        self.assertContains(response, "船只")
+        self.assertContains(response, "站点设置")
+        self.assertContains(response, 'data-operations-nav-item="vessel" data-active="true"')
+        self.assertNotContains(response, 'data-operations-nav-item="用户"')
+        self.assertNotContains(response, 'data-operations-nav-item="组"')
+
+    def test_vessel_editor_renders_six_tabs_without_replacing_formsets(self):
+        vessel = Vessel.objects.create(slug="tabbed-editor", name="Tab 编辑测试船")
+        user = get_user_model().objects.create_superuser(
+            username="tabbed-vessel-editor-user",
+            password="strong-password",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:catalog_vessel_change", args=[vessel.pk]))
+
+        self.assertContains(response, 'data-vessel-editor-tabs="true"')
+        for label in ("基础信息", "首页卡片", "结构化事实", "页面内容", "舱位", "甲板图"):
+            self.assertContains(response, label)
+        self.assertContains(response, 'name="page_blocks-TOTAL_FORMS"')
+        self.assertContains(response, 'name="page_blocks-INITIAL_FORMS"')
+
+        source = (Path(__file__).resolve().parents[1] / "static/catalog/vessel-editor-tabs.js").read_text(encoding="utf-8")
+        self.assertIn("firstInvalidPanel", source)
+        self.assertIn("data-vessel-tab", source)
+
     def test_product_is_registered_with_admin(self):
         self.assertIn(Product, site._registry)
 
