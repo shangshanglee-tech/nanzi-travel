@@ -198,7 +198,7 @@ class VesselDeckPlanSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = VesselDeckPlan
-        fields = ("title", "description", "image")
+        fields = ("title", "image")
 
     def get_image(self, deck_plan):
         request = self.context.get("request")

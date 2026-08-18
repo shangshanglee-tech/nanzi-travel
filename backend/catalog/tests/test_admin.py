@@ -6,7 +6,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from pathlib import Path
 
-from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin, VesselPageBlockInlineForm
+from catalog.admin import ProductAdmin, SiteSettingsAdmin, VesselAdmin, VesselDeckPlanInline, VesselPageBlockInlineForm
 from catalog.forms import AdditionalImagesPreviewWidget, ProductAdminForm
 from catalog.models import (
     CabinDisplayGroup,
@@ -182,6 +182,12 @@ class CatalogAdminTests(TestCase):
         self.assertIn("show_cabins", editable_fields)
         self.assertIn("show_deck_plans", editable_fields)
         self.assertIn("catalog/vessel-page-blocks-admin.js", vessel_admin.media._js)
+
+    def test_vessel_deck_plan_editor_only_exposes_name_image_and_visibility(self):
+        self.assertEqual(
+            VesselDeckPlanInline.fields,
+            ("title", "image", "is_visible", "sort_order"),
+        )
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
         vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")

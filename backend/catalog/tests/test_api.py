@@ -248,6 +248,7 @@ class VesselApiTests(TestCase):
         )
         self.assertEqual(payload["deck_plans"][0]["title"], "7 层甲板")
         self.assertTrue(payload["deck_plans"][0]["image"].endswith("deck-7.webp"))
+        self.assertNotIn("description", payload["deck_plans"][0])
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["amenities"], ["迷你吧"])

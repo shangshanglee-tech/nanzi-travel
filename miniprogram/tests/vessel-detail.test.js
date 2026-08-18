@@ -170,7 +170,11 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /indicator-dots="\{\{true\}\}"/);
   assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.images\[0\]\}\}" mode="aspectFill"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.showCabins && detail\.cabinGroups\.length\}\}"/);
-  assert.match(vesselMarkup, /wx:if="\{\{detail\.deckPlans\.length\}\}" class="section"/);
+  assert.match(vesselMarkup, /wx:if="\{\{detail\.deckPlans\.length\}\}" class="page-composer deck-plans"/);
+  assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}">甲板舱位图<\/view>/);
+  assert.match(vesselMarkup, /class="deck-plan-image" src="\{\{item\.image\}\}" mode="widthFix"/);
+  assert.match(vesselMarkup, /class="composer-card-title" style="\{\{detail\.cardToneStyle\}\}">\{\{item\.title\}\}/);
+  assert.doesNotMatch(vesselMarkup, /item\.description/);
   assert.doesNotMatch(vesselMarkup, /class="gallery-scroll"/);
   assert.doesNotMatch(vesselMarkup, /class="experience"/);
   assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}"/);

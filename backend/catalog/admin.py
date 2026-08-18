@@ -65,7 +65,7 @@ class VesselPageBlockInline(admin.StackedInline):
 class VesselDeckPlanInline(admin.StackedInline):
     model = VesselDeckPlan
     extra = 0
-    fields = ("title", "image", "description", "is_visible", "sort_order")
+    fields = ("title", "image", "is_visible", "sort_order")
 
 
 @admin.register(Destination)

@@ -34,6 +34,14 @@
       </block>
     </view>
 
+    <view wx:if="{{detail.deckPlans.length}}" class="page-composer deck-plans">
+      <view class="composer-heading" style="{{detail.cardToneStyle}}">甲板舱位图</view>
+      <view wx:for="{{detail.deckPlans}}" wx:key="image" class="composer-card deck-plan-card">
+        <image class="deck-plan-image" src="{{item.image}}" mode="widthFix" />
+        <view wx:if="{{item.title}}" class="composer-card-title" style="{{detail.cardToneStyle}}">{{item.title}}</view>
+      </view>
+    </view>
+
     <view wx:if="{{detail.showCabins && detail.cabinGroups.length}}" class="section">
       <view class="section-title">舱位选择</view>
       <view wx:for="{{detail.cabinGroups}}" wx:for-item="cabinGroup" wx:key="slug" class="cabin-group">
@@ -56,15 +64,6 @@
         </view>
       </view>
       <view class="cabin-note">具体舱号、床型、视野与可售状态，以所选团期的正式确认信息为准。</view>
-    </view>
-
-    <view wx:if="{{detail.deckPlans.length}}" class="section">
-      <view class="section-title">甲板示意图</view>
-      <view wx:for="{{detail.deckPlans}}" wx:key="image" class="deck-plan">
-        <image class="deck-plan-image" src="{{item.image}}" mode="widthFix" />
-        <view wx:if="{{item.title}}" class="deck-plan-title">{{item.title}}</view>
-        <view wx:if="{{item.description}}" class="deck-plan-copy">{{item.description}}</view>
-      </view>
     </view>
 
     <view wx:if="{{detail.products.length}}" class="section">
