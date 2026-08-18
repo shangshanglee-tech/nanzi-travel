@@ -136,7 +136,8 @@ test("collapses the vessel hero into a fixed, tone-matched title navigation afte
   assert.match(navMarkup, /collapsed \? 'collapsed' : ''/);
   assert.match(navMarkup, /background-color: \{\{collapsed \? backgroundColor : 'transparent'\}\}/);
   assert.match(navStyles, /\.nav\.collapsed\s*\{[^}]*position:\s*fixed/);
-  assert.match(navStyles, /\.nav\.collapsed \.nav-title\s*\{[^}]*color:\s*#fff/);
+  assert.match(navStyles, /\.nav\.collapsed \.nav-title\s*\{[^}]*text-align:\s*left/);
+  assert.match(navStyles, /\.nav\.collapsed \.back-button, \.nav\.collapsed \.nav-title\s*\{[^}]*color:\s*#fff/);
 });
 
 test("continues the hero card tone below the image for the full Chinese introduction", () => {
