@@ -138,7 +138,7 @@ test("renders a two-column vessel facility grid instead of the green introductio
   assert.match(vesselMarkup, /class="facility-icon" src="\{\{apiBaseUrl\}\}\/vessel-icons\/\{\{item\.icon\}\}\.svg\?tone=\{\{detail\.iconTone\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /\{\{item\.text\}\}/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
-  assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*padding:\s*52rpx/);
+  assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*padding:\s*96rpx 52rpx 52rpx/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*background:\s*transparent/);
   assert.match(vesselStyles, /\.facility-debug-shell\s*\{[^}]*outline:\s*2rpx solid #EF4444/);
   assert.match(vesselStyles, /\.facility-item\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200/);
