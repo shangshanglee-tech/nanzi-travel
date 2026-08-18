@@ -8,10 +8,11 @@
 .title { margin-top: 14rpx; color: #143f35; font-family: serif; font-size: 46rpx; font-weight: 700; }
 .official-name { margin-top: 6rpx; color: #728078; font-size: 21rpx; letter-spacing: 1rpx; }
 .summary, .cabin-copy, .route-copy { margin-top: 14rpx; color: #565e5a; font-size: 26rpx; line-height: 1.7; }
-.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 126rpx 40rpx 78rpx; background: transparent; }
-.facility-item { display: flex; align-items: center; min-width: 0; gap: 14rpx; font-size: 24rpx; font-weight: 200; line-height: 1.45; }
-.facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; }
-.facility-text { min-width: 0; }
+.facility-debug-shell { outline: 2rpx solid #EF4444; }
+.facility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28rpx 18rpx; padding: 126rpx 40rpx 78rpx; outline: 2rpx dashed #F59E0B; background: transparent; }
+.facility-item { display: flex; align-items: center; min-width: 0; gap: 14rpx; outline: 2rpx solid #3B82F6; font-size: 24rpx; font-weight: 200; line-height: 1.45; }
+.facility-icon { flex: 0 0 auto; width: 36rpx; height: 36rpx; outline: 2rpx solid #8B5CF6; }
+.facility-text { min-width: 0; outline: 2rpx solid #22C55E; }
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .page-composer { padding: 0 24rpx; }

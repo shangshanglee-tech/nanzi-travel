@@ -11,10 +11,12 @@
         <view wx:if="{{vessel.intro_zh}}" class="hero-intro">{{vessel.intro_zh}}</view>
       </view>
     </view>
-    <view wx:if="{{detail.facilities.length}}" class="facility-grid">
-      <view wx:for="{{detail.facilities}}" wx:key="text" class="facility-item" style="color: {{vessel.card_tone || '#143f35'}}">
-        <image class="facility-icon" src="{{apiBaseUrl}}/vessel-icons/{{item.icon}}.svg?tone={{detail.iconTone}}" mode="aspectFit" />
-        <text class="facility-text">{{item.text}}</text>
+    <view wx:if="{{detail.facilities.length}}" class="facility-debug-shell">
+      <view class="facility-grid">
+        <view wx:for="{{detail.facilities}}" wx:key="text" class="facility-item" style="color: {{vessel.card_tone || '#143f35'}}">
+          <image class="facility-icon" src="{{apiBaseUrl}}/vessel-icons/{{item.icon}}.svg?tone={{detail.iconTone}}" mode="aspectFit" />
+          <text class="facility-text">{{item.text}}</text>
+        </view>
       </view>
     </view>
 
