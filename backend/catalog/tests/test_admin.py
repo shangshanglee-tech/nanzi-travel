@@ -317,6 +317,14 @@ class CatalogAdminTests(TestCase):
         self.assertIn("下移", source)
         self.assertIn("编辑", source)
 
+    def test_vessel_editor_hides_manual_sort_fields_and_syncs_them_on_save(self):
+        script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
+        stylesheet = Path(__file__).resolve().parents[1] / "static/catalog/admin-operations.css"
+
+        self.assertIn("syncAllInlineSortOrders", script.read_text(encoding="utf-8"))
+        self.assertIn('document.addEventListener("submit", syncAllInlineSortOrders)', script.read_text(encoding="utf-8"))
+        self.assertIn("#vessel_form .inline-group .field-sort_order", stylesheet.read_text(encoding="utf-8"))
+
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)
         structured_facts = next(options for title, options in vessel_admin.fieldsets if title == "结构化事实")

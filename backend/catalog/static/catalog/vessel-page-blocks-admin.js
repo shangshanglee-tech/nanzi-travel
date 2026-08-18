@@ -86,6 +86,21 @@
       if (input) input.value = index;
     });
   }
+  function syncAllInlineSortOrders() {
+    var form = document.querySelector("#vessel_form");
+    if (!form) return;
+    form.querySelectorAll(".inline-group").forEach(function (group) {
+      Array.from(group.querySelectorAll(".inline-related:not(.empty-form)"))
+        .filter(function (row) {
+          var checkbox = deletionControl(row);
+          return row.dataset.pendingDelete !== "true" && !(checkbox && checkbox.checked);
+        })
+        .forEach(function (row, index) {
+          var input = row.querySelector('input[name$="-sort_order"]');
+          if (input) input.value = index;
+        });
+    });
+  }
   function moveBlock(row, direction) {
     var visible = rows().filter(function (item) { return item.dataset.pendingDelete !== "true"; });
     var index = visible.indexOf(row);
@@ -157,6 +172,10 @@
     if (event.target.matches('#page_blocks-group select[name$="-block_type"]')) refresh();
   });
   document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeEditor(); });
+  document.addEventListener("submit", syncAllInlineSortOrders);
   if (window.django && window.django.jQuery) window.django.jQuery(document).on("formset:added", refresh);
-  document.addEventListener("DOMContentLoaded", refresh);
+  document.addEventListener("DOMContentLoaded", function () {
+    syncAllInlineSortOrders();
+    refresh();
+  });
 })();
