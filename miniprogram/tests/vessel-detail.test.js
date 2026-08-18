@@ -148,10 +148,11 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /wx:if="\{\{detail\.pageBlocks\.length\}\}" class="page-composer"/);
   assert.match(vesselMarkup, /item\.block_type === 'heading'/);
   assert.match(vesselMarkup, /wx:if="\{\{item\.images\.length > 1\}\}" class="composer-card-swiper"/);
+  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{image\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /indicator-color="rgba\(255,255,255,\.25\)"/);
   assert.match(vesselMarkup, /indicator-active-color="#ffffff"/);
   assert.match(vesselMarkup, /indicator-dots="\{\{true\}\}"/);
-  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.images\[0\]\}\}"/);
+  assert.match(vesselMarkup, /class="composer-card-image" src="\{\{item\.images\[0\]\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.showCabins && detail\.cabinGroups\.length\}\}"/);
   assert.match(vesselMarkup, /wx:if="\{\{detail\.deckPlans\.length\}\}" class="section"/);
   assert.doesNotMatch(vesselMarkup, /class="gallery-scroll"/);
@@ -159,6 +160,8 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}"/);
   assert.match(vesselStyles, /\.composer-heading\s*\{[^}]*margin:\s*96rpx 8rpx 52rpx[^}]*font-size:\s*48rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card\s*\{[^}]*margin-bottom:\s*52rpx/);
+  assert.match(vesselStyles, /\.composer-card-swiper\s*\{[^}]*height:\s*527rpx/);
+  assert.match(vesselStyles, /\.composer-card-image\s*\{[^}]*height:\s*527rpx/);
   assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*24rpx 28rpx 24rpx[^}]*font-size:\s*36rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*0 28rpx 52rpx[^}]*color:\s*rgba\(0,0,0,\.65\)[^}]*font-size:\s*26rpx[^}]*font-weight:\s*400/);
 });
