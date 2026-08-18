@@ -46,6 +46,24 @@ class CatalogAdminTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn("/admin/login/", response.url)
 
+    def test_operations_sidebar_contains_only_daily_editorial_entries(self):
+        user = get_user_model().objects.create_superuser(
+            username="operations-sidebar-user",
+            password="strong-password",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:catalog_vessel_changelist"))
+
+        self.assertContains(response, 'data-operations-nav="true"')
+        self.assertContains(response, "旅行产品")
+        self.assertContains(response, "目的地")
+        self.assertContains(response, "船只")
+        self.assertContains(response, "站点设置")
+        self.assertContains(response, 'data-operations-nav-item="vessel" data-active="true"')
+        self.assertNotContains(response, 'data-operations-nav-item="用户"')
+        self.assertNotContains(response, 'data-operations-nav-item="组"')
+
     def test_product_is_registered_with_admin(self):
         self.assertIn(Product, site._registry)
 
