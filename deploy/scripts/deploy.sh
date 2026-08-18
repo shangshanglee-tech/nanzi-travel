@@ -27,6 +27,10 @@ chown -R nanziapp:www-data /var/lib/nanzi-travel/static
 find /var/lib/nanzi-travel/static -type d -exec chmod 2750 {} +
 find /var/lib/nanzi-travel/static -type f -exec chmod 0640 {} +
 
+install -m 0644 "$source_dir/deploy/nginx/nanzi-travel.conf" /etc/nginx/sites-available/nanzi-travel
+nginx -t
+systemctl reload nginx
+
 ln -sfn "$release_dir" /opt/nanzi-travel/current
 chown -h nanziapp:nanziapp /opt/nanzi-travel/current
 systemctl enable --now nanzi-travel-api.service

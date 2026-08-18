@@ -35,10 +35,16 @@ api_server = nginx.split("server {", 2)[2].split("server {", 1)[0]
 assert "location /media/ { alias /var/lib/nanzi-travel/media/; }" in api_server
 assert "alias /var/lib/nanzi-travel/static/;" in nginx
 assert "alias /var/lib/nanzi-travel/media/;" in nginx
+admin_server = nginx.split("server {", 3)[3]
+assert "server_name admin.nanzitravel.com;" in admin_server
+assert "location = / { return 302 /admin/; }" in admin_server
 
 deploy_script = (root / "deploy/scripts/deploy.sh").read_text()
 assert "staticfiles/" in deploy_script
 assert "/var/lib/nanzi-travel/static/" in deploy_script
+assert 'deploy/nginx/nanzi-travel.conf' in deploy_script
+assert 'nginx -t' in deploy_script
+assert 'systemctl reload nginx' in deploy_script
 assert "import_hx_polar_content" not in deploy_script
 assert "/var/lib/nanzi-travel/content" not in deploy_script
 
