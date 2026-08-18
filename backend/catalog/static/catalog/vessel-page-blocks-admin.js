@@ -1,117 +1,162 @@
 (function () {
   "use strict";
 
-  function blockRows() {
-    return Array.from(document.querySelectorAll("#page_blocks-group .inline-related"));
+  function editor() { return document.querySelector("[data-page-block-editor]"); }
+  function rows() {
+    var root = editor();
+    return root ? Array.from(root.querySelectorAll(".page-block-editor__rows .inline-related:not(.empty-form)")) : [];
   }
-
   function blockType(row) {
-    const select = row.querySelector('select[name$="-block_type"]');
+    var select = row.querySelector('select[name$="-block_type"]');
     return select ? select.value : "";
   }
-
-  function fieldWrapper(row, name) {
-    const field = row.querySelector(`[name$="-${name}"]`);
-    if (!field) return null;
-    return field.closest(".form-row") || field.parentElement;
+  function blockTypeLabel(row) {
+    var select = row.querySelector('select[name$="-block_type"]');
+    return select && select.selectedOptions[0] ? select.selectedOptions[0].textContent.trim() : "未设置类型";
   }
-
+  function blockTitle(row) {
+    var input = row.querySelector('input[name$="-title"]');
+    return input && input.value.trim() ? input.value.trim() : "未命名内容";
+  }
+  function fieldWrapper(row, name) {
+    var field = row.querySelector('[name$="-' + name + '"]');
+    return field ? field.closest(".form-row") || field.parentElement : null;
+  }
   function syncFieldsForType(row) {
-    const isHeading = blockType(row) === "heading";
-    [fieldWrapper(row, "image"), fieldWrapper(row, "additional_images"), fieldWrapper(row, "existing_additional_images"), fieldWrapper(row, "body")].forEach(function (field) {
+    var isHeading = blockType(row) === "heading";
+    ["image", "additional_images", "existing_additional_images", "body"].forEach(function (name) {
+      var field = fieldWrapper(row, name);
       if (field) field.style.display = isHeading ? "none" : "";
     });
   }
-
-  function markForDeletion(control, target) {
-    control.checked = true;
-    target.dataset.pendingDelete = "true";
-    target.style.display = "none";
+  function deletionControl(row) { return row.querySelector('input[type="checkbox"][name$="-DELETE"]'); }
+  function markForDeletion(row) {
+    var checkbox = deletionControl(row);
+    if (checkbox) checkbox.checked = true;
+    row.dataset.pendingDelete = "true";
+    closeEditor(row);
+    refresh();
   }
-
-  function setDeleteButtons() {
+  function setAdditionalImageDeleteButtons() {
     document.querySelectorAll("[data-delete-image]").forEach(function (button) {
       if (button.dataset.deleteControlReady === "true") return;
       button.dataset.deleteControlReady = "true";
-      button.onclick = function () {
-        var target = button.closest("li");
-        var checkbox = target && target.querySelector('input[type="checkbox"]');
-        if (checkbox && target) markForDeletion(checkbox, target);
-      };
-    });
-
-    document.querySelectorAll('.inline-group input[type="checkbox"][name$="-DELETE"]').forEach(function (checkbox) {
-      if (checkbox.dataset.deleteControlReady === "true") return;
-      checkbox.dataset.deleteControlReady = "true";
-      checkbox.style.display = "none";
-      var label = checkbox.closest("label") || checkbox.parentElement.querySelector('label[for="' + checkbox.id + '"]');
-      if (label) label.style.display = "none";
-      var button = document.createElement("button");
-      button.type = "button";
-      button.textContent = "删除";
-      button.dataset.pendingDeleteButton = "true";
-      button.style.color = "#b42318";
-      button.onclick = function () {
-        var row = checkbox.closest(".inline-related") || checkbox.closest("tr");
-        if (row) markForDeletion(checkbox, row);
-      };
-      checkbox.parentElement.appendChild(button);
+      button.addEventListener("click", function () {
+        var item = button.closest("li");
+        var checkbox = item && item.querySelector('input[type="checkbox"]');
+        if (checkbox && item) { checkbox.checked = true; item.style.display = "none"; }
+      });
     });
   }
-
-  function setToggle(heading, cards) {
-    const headingTitle = heading.querySelector("h3");
-    if (!headingTitle) return;
-    const existing = headingTitle.querySelector("[data-page-composer-toggle]");
-    if (!cards.length) {
-      if (existing) existing.remove();
-      return;
+  function backdrop() {
+    var existing = document.querySelector("[data-page-block-backdrop]");
+    if (existing) return existing;
+    var element = document.createElement("div");
+    element.className = "page-block-editor__backdrop";
+    element.dataset.pageBlockBackdrop = "true";
+    element.addEventListener("click", function () { closeEditor(); });
+    document.body.appendChild(element);
+    return element;
+  }
+  function closeEditor(target) {
+    var active = target || document.querySelector(".page-block-editor__rows .inline-related.is-editing");
+    if (active) active.classList.remove("is-editing");
+    var overlay = document.querySelector("[data-page-block-backdrop]");
+    if (overlay) overlay.classList.remove("is-visible");
+  }
+  function openEditor(row) {
+    rows().forEach(function (item) { item.classList.remove("is-editing"); });
+    row.classList.add("is-editing");
+    backdrop().classList.add("is-visible");
+    var close = row.querySelector("[data-page-block-close]");
+    if (!close) {
+      close = document.createElement("button");
+      close.type = "button";
+      close.textContent = "完成编辑";
+      close.dataset.pageBlockClose = "true";
+      close.addEventListener("click", function () { closeEditor(row); refresh(); });
+      row.querySelector("h3").appendChild(close);
     }
-
-    let button = existing;
-    if (!button) {
-      button = document.createElement("button");
-      button.type = "button";
-      button.dataset.pageComposerToggle = "true";
-      button.style.marginLeft = "12px";
-      button.style.cursor = "pointer";
-      headingTitle.appendChild(button);
-    }
-    const collapsed = heading.dataset.pageComposerCollapsed === "true";
-    button.textContent = collapsed ? `展开 ${cards.length} 项` : `收起 ${cards.length} 项`;
-    cards.forEach(function (card) { card.style.display = collapsed ? "none" : ""; });
-    button.onclick = function () {
-      heading.dataset.pageComposerCollapsed = collapsed ? "false" : "true";
+    syncFieldsForType(row);
+    row.scrollTop = 0;
+  }
+  function updateSortOrders() {
+    rows().filter(function (row) { return row.dataset.pendingDelete !== "true"; }).forEach(function (row, index) {
+      var input = row.querySelector('input[name$="-sort_order"]');
+      if (input) input.value = index;
+    });
+  }
+  function moveBlock(row, direction) {
+    var visible = rows().filter(function (item) { return item.dataset.pendingDelete !== "true"; });
+    var index = visible.indexOf(row);
+    var other = visible[index + direction];
+    if (!other) return;
+    var container = row.parentElement;
+    if (direction < 0) container.insertBefore(row, other);
+    else container.insertBefore(other, row);
+    updateSortOrders();
+    refresh();
+  }
+  function addAction(parent, label, callback, disabled) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.textContent = label;
+    button.disabled = Boolean(disabled);
+    button.addEventListener("click", callback);
+    parent.appendChild(button);
+  }
+  function renderList() {
+    var root = editor();
+    if (!root) return;
+    var list = root.querySelector("[data-page-block-list]");
+    list.replaceChildren();
+    rows().filter(function (row) { return row.dataset.pendingDelete !== "true"; }).forEach(function (row, index, visible) {
+      var item = document.createElement("div");
+      item.className = "page-block-editor__item";
+      var type = document.createElement("span"); type.className = "page-block-editor__type"; type.textContent = blockTypeLabel(row);
+      var name = document.createElement("strong"); name.className = "page-block-editor__name"; name.textContent = blockTitle(row);
+      var actions = document.createElement("div"); actions.className = "page-block-editor__actions";
+      addAction(actions, "上移", function () { moveBlock(row, -1); }, index === 0);
+      addAction(actions, "下移", function () { moveBlock(row, 1); }, index === visible.length - 1);
+      addAction(actions, "编辑", function () { openEditor(row); });
+      addAction(actions, "删除", function () { markForDeletion(row); });
+      item.append(type, name, actions);
+      list.appendChild(item);
+    });
+  }
+  function addBlock(type) {
+    var root = editor();
+    var addLink = root && root.querySelector(".add-row a");
+    if (!addLink) return;
+    addLink.click();
+    window.setTimeout(function () {
+      var available = rows();
+      var row = available[available.length - 1];
+      var select = row && row.querySelector('select[name$="-block_type"]');
+      if (!row || !select) return;
+      select.value = type;
+      select.dispatchEvent(new Event("change", {bubbles: true}));
+      updateSortOrders();
       refresh();
-    };
+      openEditor(row);
+    }, 0);
   }
-
   function refresh() {
-    const headings = [];
-    let active = null;
-    blockRows().forEach(function (row) {
-      if (row.dataset.pendingDelete === "true") {
-        row.style.display = "none";
-        return;
-      }
-      row.style.display = "";
-      syncFieldsForType(row);
-      if (blockType(row) === "heading") {
-        active = {row: row, cards: []};
-        headings.push(active);
-      } else if (blockType(row) === "card" && active) {
-        active.cards.push(row);
-      }
-    });
-    headings.forEach(function (heading) { setToggle(heading.row, heading.cards); });
-    setDeleteButtons();
+    rows().forEach(function (row) { syncFieldsForType(row); });
+    setAdditionalImageDeleteButtons();
+    renderList();
   }
-
+  document.addEventListener("click", function (event) {
+    var button = event.target.closest("[data-page-block-create]");
+    if (button) addBlock(button.dataset.pageBlockCreate);
+  });
+  document.addEventListener("input", function (event) {
+    if (event.target.matches('#page_blocks-group input[name$="-title"]')) renderList();
+  });
   document.addEventListener("change", function (event) {
     if (event.target.matches('#page_blocks-group select[name$="-block_type"]')) refresh();
   });
-  if (window.django && window.django.jQuery) {
-    window.django.jQuery(document).on("formset:added", refresh);
-  }
+  document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeEditor(); });
+  if (window.django && window.django.jQuery) window.django.jQuery(document).on("formset:added", refresh);
   document.addEventListener("DOMContentLoaded", refresh);
 })();

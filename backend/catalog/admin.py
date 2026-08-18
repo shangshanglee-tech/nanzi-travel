@@ -57,6 +57,7 @@ class VesselMediaInline(admin.TabularInline):
 class VesselPageBlockInline(admin.StackedInline):
     model = VesselPageBlock
     form = VesselPageBlockInlineForm
+    template = "admin/catalog/vessel/page_blocks_inline.html"
     extra = 0
     fields = ("block_type", "title", "image", "additional_images", "existing_additional_images", "body", "is_visible", "sort_order")
 

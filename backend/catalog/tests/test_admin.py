@@ -207,6 +207,9 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'name="page_blocks-0-additional_images"')
         self.assertContains(response, "已上传图片")
         self.assertContains(response, "secondary.jpg")
+        self.assertContains(response, 'data-page-block-list="true"')
+        self.assertContains(response, 'data-page-block-create="heading"')
+        self.assertContains(response, 'data-page-block-create="card"')
 
     def test_content_card_editor_uploads_multiple_additional_images_directly(self):
         vessel = Vessel.objects.create(slug="card-image-upload", name="多图上传测试船")
@@ -298,19 +301,21 @@ class CatalogAdminTests(TestCase):
 
         self.assertFalse(VesselPageBlockImage.objects.filter(pk=extra_image.pk).exists())
 
-    def test_page_composer_admin_script_groups_cards_and_handles_new_rows(self):
+    def test_page_composer_admin_script_renders_a_list_and_edits_rows_in_a_dialog(self):
         script = Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js"
         source = script.read_text(encoding="utf-8")
 
-        self.assertIn("pageComposerCollapsed", source)
-        self.assertIn("#page_blocks-group", source)
+        self.assertIn("data-page-block-list", source)
         self.assertIn('django.jQuery(document).on("formset:added", refresh)', source)
-        self.assertIn('fieldWrapper(row, "image")', source)
-        self.assertIn('fieldWrapper(row, "additional_images")', source)
-        self.assertIn('fieldWrapper(row, "existing_additional_images")', source)
-        self.assertIn('fieldWrapper(row, "body")', source)
+        self.assertIn('"additional_images"', source)
+        self.assertIn('"existing_additional_images"', source)
         self.assertIn("data-delete-image", source)
         self.assertIn('input[type="checkbox"][name$="-DELETE"]', source)
+        self.assertIn("openEditor", source)
+        self.assertIn("moveBlock", source)
+        self.assertIn("上移", source)
+        self.assertIn("下移", source)
+        self.assertIn("编辑", source)
 
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)
