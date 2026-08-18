@@ -112,6 +112,7 @@ test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /class="hero-name">\{\{vessel\.name\}\}/);
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*margin-top:\s*-172rpx/);
+  assert.match(vesselStyles, /\.hero-official\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200[^}]*opacity:\s*1/);
 });
 
 test("supports a transparent title-free page navigation variant", () => {
@@ -135,6 +136,7 @@ test("renders a two-column vessel facility grid instead of the green introductio
   assert.match(vesselMarkup, /\{\{item\.text\}\}/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(vesselStyles, /\.facility-grid\s*\{[^}]*background:\s*transparent/);
+  assert.match(vesselStyles, /\.facility-item\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200/);
   assert.match(vesselStyles, /\.page\s*\{[^}]*background:\s*#F3F2EE/);
 });
 
