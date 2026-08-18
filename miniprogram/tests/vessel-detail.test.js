@@ -126,7 +126,7 @@ test("continues the hero card tone below the image for the full Chinese introduc
   assert.match(vesselMarkup, /class="hero" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.doesNotMatch(vesselMarkup, /vessel-intro-card/);
-  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*white-space:\s*pre-line/);
+  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200[^}]*white-space:\s*pre-line/);
 });
 
 test("renders a two-column vessel facility grid instead of the green introduction card", () => {
@@ -158,4 +158,5 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*26rpx 28rpx 30rpx/);
   assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*6rpx 28rpx 84rpx/);
+  assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200/);
 });
