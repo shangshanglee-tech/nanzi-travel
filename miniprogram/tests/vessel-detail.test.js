@@ -159,8 +159,6 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /class="composer-heading" style="\{\{detail\.cardToneStyle\}\}"/);
   assert.match(vesselStyles, /\.composer-heading\s*\{[^}]*margin:\s*96rpx 8rpx 52rpx[^}]*font-size:\s*48rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card\s*\{[^}]*margin-bottom:\s*60rpx/);
-  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*font-weight:\s*500/);
-  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*26rpx 28rpx 30rpx/);
-  assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*6rpx 28rpx 84rpx/);
-  assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200/);
+  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*24rpx 28rpx 24rpx[^}]*font-size:\s*36rpx[^}]*font-weight:\s*500/);
+  assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*0 28rpx 52rpx[^}]*font-size:\s*26rpx[^}]*font-weight:\s*400/);
 });
