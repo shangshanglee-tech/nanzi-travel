@@ -325,6 +325,13 @@ class CatalogAdminTests(TestCase):
         self.assertIn('document.addEventListener("submit", syncAllInlineSortOrders)', script.read_text(encoding="utf-8"))
         self.assertIn("#vessel_form .inline-group .field-sort_order", stylesheet.read_text(encoding="utf-8"))
 
+    def test_page_block_dialog_keeps_the_delete_state_hidden(self):
+        template = Path(__file__).resolve().parents[1] / "templates/admin/catalog/vessel/page_blocks_inline.html"
+        source = template.read_text(encoding="utf-8")
+
+        self.assertIn('class="page-block-editor__delete-control"', source)
+        self.assertNotIn("deletion_field.label_tag", source)
+
     def test_vessel_structured_facts_follow_the_editorial_order(self):
         vessel_admin = VesselAdmin(Vessel, site)
         structured_facts = next(options for title, options in vessel_admin.fieldsets if title == "结构化事实")
