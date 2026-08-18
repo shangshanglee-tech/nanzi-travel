@@ -113,7 +113,7 @@ test("uses a card visual as the immersive vessel detail hero", () => {
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.match(vesselStyles, /\.hero-copy\s*\{[^}]*margin-top:\s*-172rpx/);
   assert.match(vesselStyles, /\.hero-official\s*\{[^}]*font-size:\s*24rpx[^}]*font-weight:\s*200[^}]*opacity:\s*1/);
-  assert.match(vesselStyles, /\.hero-name\s*\{[^}]*margin-top:\s*12rpx/);
+  assert.match(vesselStyles, /\.hero-name\s*\{[^}]*margin-top:\s*12rpx[^}]*font-size:\s*64rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*margin-top:\s*24rpx/);
 });
 
@@ -128,7 +128,7 @@ test("continues the hero card tone below the image for the full Chinese introduc
   assert.match(vesselMarkup, /class="hero" style="background-color: \{\{vessel\.card_tone \|\| '#143f35'\}\}"/);
   assert.match(vesselMarkup, /class="hero-intro">\{\{vessel\.intro_zh\}\}/);
   assert.doesNotMatch(vesselMarkup, /vessel-intro-card/);
-  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200[^}]*line-height:\s*36rpx[^}]*white-space:\s*pre-line/);
+  assert.match(vesselStyles, /\.hero-intro\s*\{[^}]*color:\s*#fff[^}]*font-size:\s*26rpx[^}]*font-weight:\s*200[^}]*line-height:\s*36rpx[^}]*white-space:\s*pre-line/);
 });
 
 test("renders a two-column vessel facility grid instead of the green introduction card", () => {
