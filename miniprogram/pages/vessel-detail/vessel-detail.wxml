@@ -24,16 +24,10 @@
         <view wx:else class="composer-card">
           <swiper wx:if="{{item.images.length > 1}}" class="composer-card-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.25)" indicator-active-color="#ffffff">
             <swiper-item wx:for="{{item.images}}" wx:for-item="image" wx:key="*this">
-              <view class="composer-card-media">
-                <image class="composer-card-image-backdrop" src="{{image}}" mode="aspectFill" />
-                <image class="composer-card-image" src="{{image}}" mode="aspectFit" />
-              </view>
+              <image class="composer-card-image" src="{{image}}" mode="aspectFill" />
             </swiper-item>
           </swiper>
-          <view wx:else class="composer-card-media">
-            <image class="composer-card-image-backdrop" src="{{item.images[0]}}" mode="aspectFill" />
-            <image class="composer-card-image" src="{{item.images[0]}}" mode="aspectFit" />
-          </view>
+          <image wx:else class="composer-card-image" src="{{item.images[0]}}" mode="aspectFill" />
           <view class="composer-card-title" style="{{detail.cardToneStyle}}">{{item.title}}</view>
           <view wx:if="{{item.body}}" class="composer-card-body">{{item.body}}</view>
         </view>

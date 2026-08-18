@@ -18,9 +18,7 @@
 .composer-heading { margin: 96rpx 8rpx 52rpx; color: #143f35; font-size: 48rpx; font-weight: 500; }
 .composer-card { overflow: hidden; margin-bottom: 52rpx; border-radius: 0; background: #fff; }
 .composer-card-swiper { width: 100%; height: 527rpx; }
-.composer-card-media { position: relative; overflow: hidden; width: 100%; height: 527rpx; background: #dbe6de; }
-.composer-card-image-backdrop { position: absolute; top: -18rpx; right: -18rpx; bottom: -18rpx; left: -18rpx; width: calc(100% + 36rpx); height: calc(100% + 36rpx); filter: blur(18rpx); opacity: .78; }
-.composer-card-image { position: relative; z-index: 1; display: block; width: 100%; height: 527rpx; }
+.composer-card-image { display: block; width: 100%; height: 527rpx; background: #dbe6de; }
 .composer-card-swiper .composer-card-image { height: 100%; }
 .composer-card-title { padding: 24rpx 28rpx 24rpx; background: #fff; font-size: 36rpx; font-weight: 500; }
 .composer-card-body { padding: 0 28rpx 52rpx; color: rgba(0,0,0,.65); font-size: 26rpx; line-height: 1.8; font-weight: 400; white-space: pre-line; }
