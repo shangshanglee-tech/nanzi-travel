@@ -15,7 +15,7 @@
 .section-title { margin-bottom: 20rpx; color: #151515; font-size: 32rpx; font-weight: 650; }
 .body-copy { color: #565e5a; font-size: 26rpx; line-height: 1.8; white-space: pre-line; }
 .page-composer { padding: 0 24rpx; }
-.composer-heading { margin: 84rpx 8rpx 54rpx; color: #143f35; font-size: 34rpx; font-weight: 700; }
+.composer-heading { margin: 96rpx 8rpx 48rpx; color: #143f35; font-size: 48rpx; font-weight: 500; }
 .composer-card { overflow: hidden; margin-bottom: 60rpx; border-radius: 0; background: #fff; }
 .composer-card-swiper { width: 100%; height: 460rpx; }
 .composer-card-image { display: block; width: 100%; background: #dbe6de; }
