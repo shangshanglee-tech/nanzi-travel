@@ -118,6 +118,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Vessel)
 class VesselAdmin(admin.ModelAdmin):
+    change_form_template = "admin/catalog/vessel/change_form.html"
     inlines = (
         VesselPageBlockInline,
         CabinTypeInline,
@@ -134,7 +135,8 @@ class VesselAdmin(admin.ModelAdmin):
         ("基础与发布", {"fields": ("name", "official_name", "operator_name", "slug", "content_status", "published_at", "is_active", "sort_order")}),
         ("中文展示文案", {"fields": ("summary", "intro_zh")}),
         ("首页卡片展示", {"fields": ("card_image", "card_tone")}),
-        ("页面末尾模块", {"fields": ("show_cabins", "show_deck_plans")}),
+        ("舱位", {"fields": ("show_cabins",)}),
+        ("甲板图", {"fields": ("show_deck_plans",)}),
         (
             "结构化事实",
             {
@@ -167,7 +169,8 @@ class VesselAdmin(admin.ModelAdmin):
         queryset.update(content_status="draft", published_at=None)
 
     class Media:
-        js = ("catalog/vessel-page-blocks-admin.js",)
+        css = {"all": ("catalog/admin-operations.css",)}
+        js = ("catalog/vessel-page-blocks-admin.js", "catalog/vessel-editor-tabs.js")
 
 
 @admin.register(SiteSettings)

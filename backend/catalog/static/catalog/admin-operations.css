@@ -11,9 +11,16 @@
 .operations-sidebar__link:hover { background: var(--darkened-bg); color: var(--link-hover-color); }
 .operations-sidebar__link.is-active { background: var(--selected-bg); color: var(--selected-row); font-weight: 700; }
 
+.vessel-editor-tabs__list { display: flex; gap: 4px; margin: 0 0 20px; border-bottom: 1px solid var(--hairline-color); overflow-x: auto; }
+.vessel-editor-tabs__tab { flex: 0 0 auto; margin: 0; padding: 10px 14px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: var(--body-quiet-color); font: inherit; cursor: pointer; }
+.vessel-editor-tabs__tab:hover { color: var(--link-hover-color); }
+.vessel-editor-tabs__tab.is-active { border-bottom-color: var(--link-fg); color: var(--link-fg); font-weight: 700; }
+[data-vessel-tab-panel][hidden] { display: none; }
+
 @media (max-width: 767px) {
   #nav-sidebar.operations-sidebar { position: static; width: 100%; border-right: 0; border-bottom: 1px solid var(--hairline-color); }
   .operations-sidebar__section { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
   .operations-sidebar__section + .operations-sidebar__section { margin-top: 14px; }
   .operations-sidebar__label { width: 100%; }
+  .vessel-editor-tabs__list { margin-right: -8px; margin-left: -8px; padding: 0 8px; }
 }
