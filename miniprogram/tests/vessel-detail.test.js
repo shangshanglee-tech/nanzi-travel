@@ -179,6 +179,6 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselStyles, /\.composer-card-swiper\s*\{[^}]*height:\s*527rpx/);
   assert.match(vesselStyles, /\.composer-card-image\s*\{[^}]*height:\s*527rpx/);
   assert.doesNotMatch(vesselStyles, /composer-card-image-backdrop/);
-  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*24rpx 28rpx 24rpx[^}]*font-size:\s*36rpx[^}]*font-weight:\s*500/);
+  assert.match(vesselStyles, /\.composer-card-title\s*\{[^}]*padding:\s*24rpx 28rpx 12rpx[^}]*font-size:\s*36rpx[^}]*font-weight:\s*500/);
   assert.match(vesselStyles, /\.composer-card-body\s*\{[^}]*padding:\s*0 28rpx 52rpx[^}]*color:\s*rgba\(0,0,0,\.65\)[^}]*font-size:\s*26rpx[^}]*font-weight:\s*400/);
 });
