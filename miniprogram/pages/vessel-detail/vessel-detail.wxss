@@ -21,7 +21,7 @@
 .composer-card-image { display: block; width: 100%; background: #dbe6de; }
 .composer-card-swiper .composer-card-image { height: 100%; }
 .composer-card-title { padding: 24rpx 28rpx 24rpx; background: #fff; font-size: 36rpx; font-weight: 500; }
-.composer-card-body { padding: 0 28rpx 52rpx; color: #565e5a; font-size: 26rpx; line-height: 1.8; font-weight: 400; white-space: pre-line; }
+.composer-card-body { padding: 0 28rpx 52rpx; color: rgba(0,0,0,.65); font-size: 26rpx; line-height: 1.8; font-weight: 400; white-space: pre-line; }
 .group-title { display: inline-block; padding: 8rpx 16rpx; border-radius: 999rpx; font-size: 33rpx; font-weight: 700; }
 .cabin-image { width: 100%; height: 300rpx; margin-top: 20rpx; border-radius: 18rpx; background: #dbe6de; }
 .cabin-group + .cabin-group { margin-top: 108rpx; }
