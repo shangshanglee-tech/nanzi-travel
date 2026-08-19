@@ -29,6 +29,10 @@
 .page-block-editor__actions { display: flex; gap: 6px; }
 .page-block-editor__actions button:last-child { color: #b42318; }
 .page-block-editor__delete-control { display: none; }
+.page-block-editor__rows > .inline-related.is-heading .field-image,
+.page-block-editor__rows > .inline-related.is-heading .field-additional_images,
+.page-block-editor__rows > .inline-related.is-heading .field-existing_additional_images,
+.page-block-editor__rows > .inline-related.is-heading .field-body { display: none !important; }
 #vessel_form .inline-group .field-sort_order { display: none; }
 .vessel-deck-plan-inline .field-description, .vessel-deck-plan-inline .field-is_visible { display: none; }
 [data-deck-plan-upload="true"] { display: block; }

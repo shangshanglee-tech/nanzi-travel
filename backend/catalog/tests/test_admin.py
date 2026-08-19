@@ -247,6 +247,13 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'data-page-block-create="heading"')
         self.assertContains(response, 'data-page-block-create="card"')
 
+    def test_heading_editor_hides_image_configuration(self):
+        source = (Path(__file__).resolve().parents[1] / "static/catalog/vessel-page-blocks-admin.js").read_text(encoding="utf-8")
+        stylesheet = (Path(__file__).resolve().parents[1] / "static/catalog/admin-operations.css").read_text(encoding="utf-8")
+
+        self.assertIn('row.classList.toggle("is-heading", isHeading)', source)
+        self.assertIn(".page-block-editor__rows > .inline-related.is-heading .field-image", stylesheet)
+
     def test_content_card_editor_uploads_multiple_additional_images_directly(self):
         vessel = Vessel.objects.create(slug="card-image-upload", name="多图上传测试船")
         block = VesselPageBlock.objects.create(

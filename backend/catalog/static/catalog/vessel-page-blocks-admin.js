@@ -24,6 +24,7 @@
   }
   function syncFieldsForType(row) {
     var isHeading = blockType(row) === "heading";
+    row.classList.toggle("is-heading", isHeading);
     ["image", "additional_images", "existing_additional_images", "body"].forEach(function (name) {
       var field = fieldWrapper(row, name);
       if (field) field.style.display = isHeading ? "none" : "";
