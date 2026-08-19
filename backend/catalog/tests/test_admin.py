@@ -207,7 +207,7 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'data-deck-plan-delete="true"')
         self.assertContains(response, 'class="deck-plan-preview-image"')
         self.assertContains(response, 'data-deck-plan-row-delete="true"')
-        self.assertContains(response, 'class="deck-plan-editor__delete-control"')
+        self.assertContains(response, 'class="deck-plan-editor__delete-control" hidden')
         self.assertNotContains(response, 'name="deck_plans-0-description"')
         self.assertNotContains(response, 'name="deck_plans-0-is_visible"')
         stylesheet = (Path(__file__).resolve().parents[1] / "static/catalog/admin-operations.css").read_text(encoding="utf-8")

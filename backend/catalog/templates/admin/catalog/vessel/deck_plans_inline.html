@@ -11,7 +11,7 @@
 {% for inline_admin_form in inline_admin_formset %}<div class="inline-related{% if inline_admin_form.original or inline_admin_form.show_url %} has_original{% endif %}{% if forloop.last and inline_admin_formset.has_add_permission %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if forloop.last and inline_admin_formset.has_add_permission %}empty{% else %}{{ forloop.counter0 }}{% endif %}">
   <h3><b>{{ inline_admin_formset.opts.verbose_name|capfirst }}:</b> <span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}#{{ forloop.counter }}{% endif %}</span>
     {% if inline_admin_formset.formset.can_delete and inline_admin_formset.has_delete_permission and inline_admin_form.original %}
-      <span class="deck-plan-editor__delete-control">{{ inline_admin_form.deletion_field.field }}</span>
+      <span class="deck-plan-editor__delete-control" hidden>{{ inline_admin_form.deletion_field.field }}</span>
       <button type="button" class="deck-plan-editor__delete-button" data-deck-plan-row-delete="true">删除</button>
     {% endif %}
   </h3>
