@@ -23,7 +23,7 @@
           {% if inline_admin_form.fk_field %}{{ inline_admin_form.fk_field.field }}{% endif %}
         </div>
       {% endfor %}
-      {% if inline_admin_formset.has_add_permission %}<div class="add-row"><a href="#">{% blocktranslate with name=inline_admin_formset.opts.verbose_name %}Add another {{ name }}{% endblocktranslate %}</a></div>{% endif %}
+      {% if inline_admin_formset.has_add_permission %}<div class="add-row" hidden><a href="#">{% blocktranslate with name=inline_admin_formset.opts.verbose_name %}Add another {{ name }}{% endblocktranslate %}</a></div>{% endif %}
     </div>
   </fieldset>
 </div>

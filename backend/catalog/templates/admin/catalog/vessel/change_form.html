@@ -57,7 +57,7 @@
 
 {% block inline_field_sets %}
   {% for inline_admin_formset in inline_admin_formsets %}
-    {% if forloop.counter == 1 or forloop.counter == 5 %}
+    {% if forloop.counter == 1 %}
       <div data-vessel-tab-panel="content">{% include inline_admin_formset.opts.template %}</div>
     {% elif forloop.counter == 2 or forloop.counter == 3 %}
       <div data-vessel-tab-panel="cabins">{% include inline_admin_formset.opts.template %}</div>

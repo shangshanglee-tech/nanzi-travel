@@ -128,7 +128,6 @@ class VesselAdmin(admin.ModelAdmin):
         CabinTypeInline,
         CabinDisplayGroupInline,
         VesselDeckPlanInline,
-        VesselMediaInline,
     )
     list_display = ("name", "official_name", "operator_name", "content_status", "published_at", "is_active", "updated_at")
     list_filter = ("content_status", "is_active", "operator_name")
