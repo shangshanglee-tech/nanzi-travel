@@ -206,6 +206,8 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'data-deck-plan-preview="true"')
         self.assertContains(response, 'data-deck-plan-delete="true"')
         self.assertContains(response, 'class="deck-plan-preview-image"')
+        self.assertContains(response, 'data-deck-plan-row-delete="true"')
+        self.assertContains(response, 'class="deck-plan-editor__delete-control"')
         self.assertNotContains(response, 'name="deck_plans-0-description"')
         self.assertNotContains(response, 'name="deck_plans-0-is_visible"')
         stylesheet = (Path(__file__).resolve().parents[1] / "static/catalog/admin-operations.css").read_text(encoding="utf-8")
@@ -213,6 +215,9 @@ class CatalogAdminTests(TestCase):
             stylesheet,
             r"\.deck-plan-preview-image\s*\{[^}]*width:\s*400px[^}]*height:\s*300px[^}]*object-fit:\s*contain",
         )
+        script = (Path(__file__).resolve().parents[1] / "static/catalog/deck-plan-upload-admin.js").read_text(encoding="utf-8")
+        self.assertIn("data-deck-plan-row-delete", script)
+        self.assertIn("pendingDelete", script)
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
         vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")

@@ -12,7 +12,17 @@
 
   document.addEventListener("click", function (event) {
     var button = event.target.closest('[data-deck-plan-delete="true"]');
-    if (!button) return;
-    enableReplacement(button);
+    if (button) {
+      enableReplacement(button);
+      return;
+    }
+    var rowDeleteButton = event.target.closest('[data-deck-plan-row-delete="true"]');
+    if (!rowDeleteButton) return;
+    var row = rowDeleteButton.closest(".inline-related");
+    var checkbox = row && row.querySelector('input[type="checkbox"][name$="-DELETE"]');
+    if (!row || !checkbox) return;
+    checkbox.checked = true;
+    row.dataset.pendingDelete = "true";
+    row.classList.add("is-pending-delete");
   });
 }());

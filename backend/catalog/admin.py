@@ -66,6 +66,7 @@ class VesselDeckPlanInline(admin.StackedInline):
     model = VesselDeckPlan
     form = VesselDeckPlanInlineForm
     classes = ("vessel-deck-plan-inline",)
+    template = "admin/catalog/vessel/deck_plans_inline.html"
     extra = 0
     fields = ("title", "image", "sort_order")
 
