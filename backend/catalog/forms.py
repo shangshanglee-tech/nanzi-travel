@@ -136,7 +136,7 @@ class VesselPageBlockInlineForm(forms.ModelForm):
 
     class Meta:
         model = VesselPageBlock
-        fields = ("block_type", "title", "image", "additional_images", "existing_additional_images", "body", "is_visible", "sort_order")
+        fields = ("block_type", "title", "image", "additional_images", "existing_additional_images", "body", "sort_order")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -244,6 +244,7 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'name="page_blocks-0-additional_images"')
         self.assertContains(response, "已上传图片")
         self.assertContains(response, "secondary.jpg")
+        self.assertNotContains(response, 'name="page_blocks-0-is_visible"')
         self.assertContains(response, 'data-page-block-list="true"')
         self.assertContains(response, 'data-page-block-create="heading"')
         self.assertContains(response, 'data-page-block-create="card"')

@@ -185,7 +185,7 @@ class VesselPageBlockSerializer(serializers.ModelSerializer):
     def get_images(self, block):
         request = self.context.get("request")
         images = [block.image] if block.image else []
-        images.extend(image.image for image in block.additional_images.all() if image.is_visible)
+        images.extend(image.image for image in block.additional_images.all())
         urls = []
         for image in images:
             url = image.url
@@ -242,8 +242,7 @@ class VesselDetailSerializer(VesselCardSerializer):
         return VesselExperienceSerializer(experiences, many=True, context=self.context).data
 
     def get_page_blocks(self, vessel):
-        blocks = [block for block in vessel.page_blocks.all() if block.is_visible]
-        return VesselPageBlockSerializer(blocks, many=True, context=self.context).data
+        return VesselPageBlockSerializer(vessel.page_blocks.all(), many=True, context=self.context).data
 
     def get_show_deck_plans(self, vessel):
         # Kept for older mini-program builds; individual deck plans now publish automatically.

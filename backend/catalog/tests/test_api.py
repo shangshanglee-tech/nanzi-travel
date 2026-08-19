@@ -240,11 +240,11 @@ class VesselApiTests(TestCase):
         self.assertTrue(payload["show_deck_plans"])
         self.assertEqual(
             [(block["block_type"], block["title"]) for block in payload["page_blocks"]],
-            [("heading", "探索与学习"), ("card", "科学中心")],
+            [("heading", "探索与学习"), ("card", "科学中心"), ("card", "隐藏卡片")],
         )
         self.assertEqual(
             [image.rsplit("/", 1)[-1] for image in payload["page_blocks"][1]["images"]],
-            ["science-centre.webp", "science-centre-2.webp"],
+            ["science-centre.webp", "science-centre-2.webp", "science-centre-hidden.webp"],
         )
         self.assertEqual(payload["deck_plans"][0]["title"], "7 层甲板")
         self.assertTrue(payload["deck_plans"][0]["image"].endswith("deck-7.webp"))
