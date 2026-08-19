@@ -237,7 +237,7 @@ class VesselApiTests(TestCase):
         self.assertTrue(payload["has_sauna"])
         self.assertTrue(payload["has_executive_lounge"])
         self.assertTrue(payload["show_cabins"])
-        self.assertNotIn("show_deck_plans", payload)
+        self.assertTrue(payload["show_deck_plans"])
         self.assertEqual(
             [(block["block_type"], block["title"]) for block in payload["page_blocks"]],
             [("heading", "探索与学习"), ("card", "科学中心")],

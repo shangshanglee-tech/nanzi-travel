@@ -224,6 +224,7 @@ class VesselDetailSerializer(VesselCardSerializer):
     cabin_groups = serializers.SerializerMethodField()
     page_blocks = serializers.SerializerMethodField()
     deck_plans = serializers.SerializerMethodField()
+    show_deck_plans = serializers.SerializerMethodField()
     media = VesselMediaSerializer(many=True, read_only=True)
     products = ProductCardSerializer(many=True, read_only=True)
 
@@ -232,7 +233,7 @@ class VesselDetailSerializer(VesselCardSerializer):
             "operator_name", "is_hybrid", "has_science_center", "has_wifi", "has_stabilization_system",
             "restaurant_count", "bar_count", "has_fitness_center", "heated_pool_count", "has_infinity_pool",
             "has_sauna", "has_executive_lounge", "intro_zh", "year_refurbished",
-            "show_cabins", "page_blocks", "deck_plans",
+            "show_cabins", "show_deck_plans", "page_blocks", "deck_plans",
             "experiences", "cabin_groups", "cabins", "media", "products",
         )
 
@@ -243,6 +244,10 @@ class VesselDetailSerializer(VesselCardSerializer):
     def get_page_blocks(self, vessel):
         blocks = [block for block in vessel.page_blocks.all() if block.is_visible]
         return VesselPageBlockSerializer(blocks, many=True, context=self.context).data
+
+    def get_show_deck_plans(self, vessel):
+        # Kept for older mini-program builds; individual deck plans now publish automatically.
+        return True
 
     def get_deck_plans(self, vessel):
         plans = [deck_plan for deck_plan in vessel.deck_plans.all() if deck_plan.image]
