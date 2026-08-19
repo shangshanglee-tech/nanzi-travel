@@ -38,7 +38,7 @@ function buildVesselDetailState(vessel = {}) {
     cabinGroups: vessel.show_cabins === false ? [] : (vessel.cabin_groups || [])
       .filter((group) => group.title_zh && (group.cabins || []).length)
       .map((group) => ({...group, title: group.title_zh || group.title_en})),
-    deckPlans: vessel.show_deck_plans ? (vessel.deck_plans || []).filter((item) => item.image) : [],
+    deckPlans: (vessel.deck_plans || []).filter((item) => item.image),
     products: vessel.products || [],
   };
 }

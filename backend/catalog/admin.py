@@ -3,7 +3,7 @@ from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.template.response import TemplateResponse
 from django.utils import timezone
 
-from .forms import ProductAdminForm, VesselPageBlockInlineForm
+from .forms import ProductAdminForm, VesselDeckPlanInlineForm, VesselPageBlockInlineForm
 from .models import (
     CabinDisplayGroup,
     CabinType,
@@ -64,8 +64,10 @@ class VesselPageBlockInline(admin.StackedInline):
 
 class VesselDeckPlanInline(admin.StackedInline):
     model = VesselDeckPlan
+    form = VesselDeckPlanInlineForm
+    classes = ("vessel-deck-plan-inline",)
     extra = 0
-    fields = ("title", "image", "description", "is_visible", "sort_order")
+    fields = ("title", "image", "sort_order")
 
 
 @admin.register(Destination)
@@ -137,7 +139,6 @@ class VesselAdmin(admin.ModelAdmin):
         ("中文展示文案", {"fields": ("summary", "intro_zh")}),
         ("首页卡片展示", {"fields": ("card_image", "card_tone")}),
         ("舱位", {"fields": ("show_cabins",)}),
-        ("甲板图", {"fields": ("show_deck_plans",)}),
         (
             "结构化事实",
             {
@@ -171,7 +172,7 @@ class VesselAdmin(admin.ModelAdmin):
 
     class Media:
         css = {"all": ("catalog/admin-operations.css",)}
-        js = ("catalog/vessel-page-blocks-admin.js", "catalog/vessel-editor-tabs.js")
+        js = ("catalog/vessel-page-blocks-admin.js", "catalog/deck-plan-upload-admin.js", "catalog/vessel-editor-tabs.js")
 
 
 @admin.register(SiteSettings)

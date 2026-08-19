@@ -91,7 +91,7 @@ test("uses a built year only when no refurbishment year exists", () => {
   assert.deepEqual(state.facilities, [{icon: "verified-badge", text: "建成于2020年"}]);
 });
 
-test("hides optional tail modules when vessel settings turn them off", () => {
+test("keeps uploaded deck plans visible without a separate display switch", () => {
   const state = buildVesselDetailState({
     show_cabins: false,
     show_deck_plans: false,
@@ -100,7 +100,7 @@ test("hides optional tail modules when vessel settings turn them off", () => {
   });
 
   assert.deepEqual(state.cabinGroups, []);
-  assert.deepEqual(state.deckPlans, []);
+  assert.deepEqual(state.deckPlans, [{title: "7 层甲板", image: "https://example.test/deck-7.webp"}]);
 });
 
 test("derives a safe vessel tone for remote facility icons", () => {
@@ -178,10 +178,10 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /class="deck-plan-image" src="\{\{detail\.deckPlans\[0\]\.image\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /class="composer-card-body deck-plan-body"/);
   assert.match(vesselMarkup, /class="deck-plan-name">\{\{currentDeckTitle\}\}/);
-  assert.match(vesselMarkup, /class="deck-plan-copy">\{\{currentDeckBody\}\}/);
+  assert.doesNotMatch(vesselMarkup, /currentDeckBody|deck-plan-copy/);
   assert.match(vesselScript, /deckPlanIndex:\s*0/);
   assert.match(vesselScript, /currentDeckTitle:/);
-  assert.match(vesselScript, /currentDeckBody:/);
+  assert.doesNotMatch(vesselScript, /currentDeckBody/);
   assert.match(vesselScript, /setCurrentDeckPlan\(index, detail\)/);
   assert.match(vesselScript, /changeDeckPlan\(event\)/);
   assert.match(vesselScript, /event\.detail\.current/);

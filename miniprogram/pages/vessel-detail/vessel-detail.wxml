@@ -43,9 +43,8 @@
           </swiper-item>
         </swiper>
         <image wx:else class="deck-plan-image" src="{{detail.deckPlans[0].image}}" mode="aspectFit" />
-        <view wx:if="{{currentDeckTitle || currentDeckBody}}" class="composer-card-body deck-plan-body">
-          <view wx:if="{{currentDeckTitle}}" class="deck-plan-name">{{currentDeckTitle}}</view>
-          <view wx:if="{{currentDeckBody}}" class="deck-plan-copy">{{currentDeckBody}}</view>
+        <view wx:if="{{currentDeckTitle}}" class="composer-card-body deck-plan-body">
+          <view class="deck-plan-name">{{currentDeckTitle}}</view>
         </view>
       </view>
     </view>

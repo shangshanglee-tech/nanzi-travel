@@ -205,7 +205,7 @@ class VesselApiTests(TestCase):
             description="公共活动空间",
             image="vessels/deck-plans/deck-7.webp",
         )
-        self.vessel.show_deck_plans = True
+        self.vessel.show_deck_plans = False
         self.vessel.save(update_fields=["show_deck_plans", "updated_at"])
         self.experience = experience
 
@@ -237,7 +237,7 @@ class VesselApiTests(TestCase):
         self.assertTrue(payload["has_sauna"])
         self.assertTrue(payload["has_executive_lounge"])
         self.assertTrue(payload["show_cabins"])
-        self.assertTrue(payload["show_deck_plans"])
+        self.assertNotIn("show_deck_plans", payload)
         self.assertEqual(
             [(block["block_type"], block["title"]) for block in payload["page_blocks"]],
             [("heading", "探索与学习"), ("card", "科学中心")],
@@ -248,7 +248,7 @@ class VesselApiTests(TestCase):
         )
         self.assertEqual(payload["deck_plans"][0]["title"], "7 层甲板")
         self.assertTrue(payload["deck_plans"][0]["image"].endswith("deck-7.webp"))
-        self.assertEqual(payload["deck_plans"][0]["description"], "公共活动空间")
+        self.assertNotIn("description", payload["deck_plans"][0])
         self.assertEqual(payload["experiences"][0]["title_zh"], "科学中心")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["official_code"], "MA")
         self.assertEqual(payload["cabin_groups"][0]["cabins"][0]["amenities"], ["迷你吧"])

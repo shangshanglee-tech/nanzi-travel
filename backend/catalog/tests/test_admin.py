@@ -180,14 +180,33 @@ class CatalogAdminTests(TestCase):
         }
 
         self.assertIn("show_cabins", editable_fields)
-        self.assertIn("show_deck_plans", editable_fields)
+        self.assertNotIn("show_deck_plans", editable_fields)
         self.assertIn("catalog/vessel-page-blocks-admin.js", vessel_admin.media._js)
+        self.assertIn("catalog/deck-plan-upload-admin.js", vessel_admin.media._js)
 
-    def test_vessel_deck_plan_editor_exposes_name_image_body_and_visibility(self):
+    def test_vessel_deck_plan_editor_exposes_only_name_and_image(self):
         self.assertEqual(
             VesselDeckPlanInline.fields,
-            ("title", "image", "description", "is_visible", "sort_order"),
+            ("title", "image", "sort_order"),
         )
+
+    def test_vessel_deck_plan_editor_shows_uploaded_preview_with_delete_control(self):
+        vessel = Vessel.objects.create(slug="deck-preview", name="甲板缩略图测试船")
+        VesselDeckPlan.objects.create(
+            vessel=vessel,
+            title="Deck 3",
+            image="vessels/deck-plans/deck-3.svg",
+        )
+        user = get_user_model().objects.create_superuser(username="deck-preview-operator", password="strong-password")
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:catalog_vessel_change", args=[vessel.pk]))
+
+        self.assertContains(response, 'data-deck-plan-upload="true"')
+        self.assertContains(response, 'data-deck-plan-preview="true"')
+        self.assertContains(response, 'data-deck-plan-delete="true"')
+        self.assertNotContains(response, 'name="deck_plans-0-description"')
+        self.assertNotContains(response, 'name="deck_plans-0-is_visible"')
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
         vessel = Vessel.objects.create(slug="admin-page-blocks", name="后台页面内容测试船")

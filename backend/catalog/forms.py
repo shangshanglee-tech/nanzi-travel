@@ -3,7 +3,7 @@ from django.db.models import Max
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from .models import Product, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
+from .models import Product, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 
 
 LIST_FIELDS = (
@@ -87,6 +87,40 @@ class AdditionalImagesPreviewField(forms.MultipleChoiceField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("required", False)
         super().__init__(*args, **kwargs)
+
+
+class DeckPlanImageWidget(forms.FileInput):
+    """Render an existing deck plan as a preview before allowing a replacement upload."""
+
+    def render(self, name, value, attrs=None, renderer=None):
+        attrs = {**self.attrs, **(attrs or {})}
+        input_id = attrs.get("id", f"id_{name}")
+        file_input = format_html(
+            '<input type="file" name="{}" accept=".svg,.png,.jpg,.jpeg,.webp" id="{}">',
+            name,
+            input_id,
+        )
+        if not value or not getattr(value, "url", None):
+            return format_html('<div data-deck-plan-upload="true">{}</div>', file_input)
+
+        return format_html(
+            '<div data-deck-plan-upload="true">'
+            '<div data-deck-plan-preview="true">'
+            '<img src="{}" alt="已上传甲板示意图">'
+            '<button type="button" data-deck-plan-delete="true">删除</button>'
+            '</div>'
+            '<div data-deck-plan-replacement="true" hidden>{}</div>'
+            '</div>',
+            value.url,
+            file_input,
+        )
+
+
+class VesselDeckPlanInlineForm(forms.ModelForm):
+    class Meta:
+        model = VesselDeckPlan
+        fields = ("title", "image", "sort_order")
+        widgets = {"image": DeckPlanImageWidget}
 
 
 class VesselPageBlockInlineForm(forms.ModelForm):

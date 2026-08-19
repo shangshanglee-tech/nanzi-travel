@@ -2,7 +2,7 @@ const {getVessel} = require("../../services/api");
 const {buildVesselDetailState} = require("./view-model");
 
 Page({
-  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: "", navCollapsed: false, navCollapseOffset: 260, deckPlanIndex: 0, currentDeckTitle: "", currentDeckBody: ""},
+  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: "", navCollapsed: false, navCollapseOffset: 260, deckPlanIndex: 0, currentDeckTitle: ""},
   onLoad(query) {
     this.slug = query.slug || "";
     this.setData({apiBaseUrl: getApp().globalData.apiBaseUrl});
@@ -30,7 +30,7 @@ Page({
   },
   setCurrentDeckPlan(index, detail) {
     const plan = (detail || this.data.detail).deckPlans[index] || {};
-    this.setData({deckPlanIndex: index, currentDeckTitle: plan.title || "", currentDeckBody: plan.description || ""});
+    this.setData({deckPlanIndex: index, currentDeckTitle: plan.title || ""});
   },
   changeDeckPlan(event) {
     this.setCurrentDeckPlan(event.detail.current);
