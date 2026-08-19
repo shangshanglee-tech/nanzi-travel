@@ -177,10 +177,12 @@ test("renders operator page blocks as a continuous information flow before optio
   assert.match(vesselMarkup, /class="deck-plan-image" src="\{\{item\.image\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /class="deck-plan-image" src="\{\{detail\.deckPlans\[0\]\.image\}\}" mode="aspectFit"/);
   assert.match(vesselMarkup, /class="composer-card-body deck-plan-body"/);
-  assert.match(vesselMarkup, /class="deck-plan-name">\{\{currentDeckPlan\.title\}\}/);
-  assert.match(vesselMarkup, /class="deck-plan-copy">\{\{currentDeckPlan\.description\}\}/);
+  assert.match(vesselMarkup, /class="deck-plan-name">\{\{currentDeckTitle\}\}/);
+  assert.match(vesselMarkup, /class="deck-plan-copy">\{\{currentDeckBody\}\}/);
   assert.match(vesselScript, /deckPlanIndex:\s*0/);
-  assert.match(vesselScript, /currentDeckPlan:/);
+  assert.match(vesselScript, /currentDeckTitle:/);
+  assert.match(vesselScript, /currentDeckBody:/);
+  assert.match(vesselScript, /setCurrentDeckPlan\(index, detail\)/);
   assert.match(vesselScript, /changeDeckPlan\(event\)/);
   assert.match(vesselScript, /event\.detail\.current/);
   assert.match(vesselStyles, /\.deck-plan-image\s*\{[^}]*height:\s*527rpx[^}]*background:\s*#fff/);
