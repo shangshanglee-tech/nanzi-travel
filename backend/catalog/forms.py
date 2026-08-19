@@ -106,7 +106,7 @@ class DeckPlanImageWidget(forms.FileInput):
         return format_html(
             '<div data-deck-plan-upload="true">'
             '<div data-deck-plan-preview="true">'
-            '<img src="{}" alt="已上传甲板示意图">'
+            '<img class="deck-plan-preview-image" src="{}" alt="已上传甲板示意图">'
             '<button type="button" data-deck-plan-delete="true">删除</button>'
             '</div>'
             '<div data-deck-plan-replacement="true" hidden>{}</div>'

@@ -205,6 +205,7 @@ class CatalogAdminTests(TestCase):
         self.assertContains(response, 'data-deck-plan-upload="true"')
         self.assertContains(response, 'data-deck-plan-preview="true"')
         self.assertContains(response, 'data-deck-plan-delete="true"')
+        self.assertContains(response, 'class="deck-plan-preview-image"')
         self.assertNotContains(response, 'name="deck_plans-0-description"')
         self.assertNotContains(response, 'name="deck_plans-0-is_visible"')
 
