@@ -33,7 +33,7 @@
 .vessel-deck-plan-inline .field-description, .vessel-deck-plan-inline .field-is_visible { display: none; }
 [data-deck-plan-upload="true"] { display: block; }
 [data-deck-plan-preview="true"] { display: flex; align-items: flex-start; gap: 12px; }
-.deck-plan-preview-image { display: block; width: 300px; height: 400px; object-fit: contain; border: 1px solid var(--hairline-color); background: #fff; }
+.deck-plan-preview-image { display: block; width: 400px; height: 300px; object-fit: contain; border: 1px solid var(--hairline-color); background: #fff; }
 [data-deck-plan-replacement="true"] { margin-top: 10px; }
 .page-block-editor__rows > .inline-related:not(.empty-form), .page-block-editor__rows > .add-row { display: none; }
 .page-block-editor__rows > .inline-related.is-editing { display: block; position: fixed; z-index: 1001; top: 8vh; right: max(24px, calc((100vw - 900px) / 2)); left: max(24px, calc((100vw - 900px) / 2)); max-height: 84vh; overflow: auto; padding: 24px; border: 0; border-radius: 8px; background: var(--body-bg); box-shadow: 0 18px 60px rgba(0, 0, 0, .28); }
