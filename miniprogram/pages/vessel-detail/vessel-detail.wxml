@@ -37,8 +37,8 @@
     <view wx:if="{{detail.deckPlans.length}}" class="page-composer deck-plans">
       <view class="composer-heading" style="{{detail.cardToneStyle}}">甲板舱位图</view>
       <view wx:for="{{detail.deckPlans}}" wx:key="image" class="composer-card deck-plan-card">
-        <image class="deck-plan-image" src="{{item.image}}" mode="widthFix" />
-        <view wx:if="{{item.title}}" class="composer-card-title" style="{{detail.cardToneStyle}}">{{item.title}}</view>
+        <image class="deck-plan-image" src="{{item.image}}" mode="aspectFit" />
+        <view wx:if="{{item.description}}" class="composer-card-body deck-plan-body">{{item.description}}</view>
       </view>
     </view>
 

@@ -200,7 +200,7 @@ class VesselDeckPlan(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField("甲板名称", max_length=160, blank=True)
-    description = models.TextField("说明", blank=True)
+    description = models.TextField("正文", blank=True)
     image = models.FileField(
         "甲板示意图",
         upload_to="vessels/deck-plans/",

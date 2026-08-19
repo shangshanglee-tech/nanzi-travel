@@ -183,10 +183,10 @@ class CatalogAdminTests(TestCase):
         self.assertIn("show_deck_plans", editable_fields)
         self.assertIn("catalog/vessel-page-blocks-admin.js", vessel_admin.media._js)
 
-    def test_vessel_deck_plan_editor_only_exposes_name_image_and_visibility(self):
+    def test_vessel_deck_plan_editor_exposes_name_image_body_and_visibility(self):
         self.assertEqual(
             VesselDeckPlanInline.fields,
-            ("title", "image", "is_visible", "sort_order"),
+            ("title", "image", "description", "is_visible", "sort_order"),
         )
 
     def test_current_vessel_change_form_includes_page_block_management_fields(self):
