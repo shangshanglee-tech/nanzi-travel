@@ -36,11 +36,16 @@
 
     <view wx:if="{{detail.deckPlans.length}}" class="page-composer deck-plans">
       <view class="composer-heading" style="{{detail.cardToneStyle}}">甲板舱位图</view>
-      <view wx:for="{{detail.deckPlans}}" wx:key="image" class="composer-card deck-plan-card">
-        <image class="deck-plan-image" src="{{item.image}}" mode="aspectFit" />
-        <view wx:if="{{item.title || item.description}}" class="composer-card-body deck-plan-body">
-          <view wx:if="{{item.title}}" class="deck-plan-name">{{item.title}}</view>
-          <view wx:if="{{item.description}}" class="deck-plan-copy">{{item.description}}</view>
+      <view class="composer-card deck-plan-card">
+        <swiper wx:if="{{detail.deckPlans.length > 1}}" class="deck-plan-swiper" current="{{deckPlanIndex}}" bindchange="changeDeckPlan" indicator-dots="{{true}}" indicator-color="rgba(0,0,0,.2)" indicator-active-color="#151515">
+          <swiper-item wx:for="{{detail.deckPlans}}" wx:key="image">
+            <image class="deck-plan-image" src="{{item.image}}" mode="aspectFit" />
+          </swiper-item>
+        </swiper>
+        <image wx:else class="deck-plan-image" src="{{detail.deckPlans[0].image}}" mode="aspectFit" />
+        <view wx:if="{{currentDeckPlan.title || currentDeckPlan.description}}" class="composer-card-body deck-plan-body">
+          <view wx:if="{{currentDeckPlan.title}}" class="deck-plan-name">{{currentDeckPlan.title}}</view>
+          <view wx:if="{{currentDeckPlan.description}}" class="deck-plan-copy">{{currentDeckPlan.description}}</view>
         </view>
       </view>
     </view>

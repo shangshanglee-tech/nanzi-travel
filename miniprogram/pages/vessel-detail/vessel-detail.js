@@ -2,7 +2,7 @@ const {getVessel} = require("../../services/api");
 const {buildVesselDetailState} = require("./view-model");
 
 Page({
-  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: "", navCollapsed: false, navCollapseOffset: 260},
+  data: {loading: true, error: "", vessel: {}, detail: {}, apiBaseUrl: "", navCollapsed: false, navCollapseOffset: 260, deckPlanIndex: 0, currentDeckPlan: {}},
   onLoad(query) {
     this.slug = query.slug || "";
     this.setData({apiBaseUrl: getApp().globalData.apiBaseUrl});
@@ -12,7 +12,8 @@ Page({
     this.setData({loading: true, error: ""});
     try {
       const vessel = await getVessel(this.slug);
-      this.setData({vessel, detail: buildVesselDetailState(vessel)});
+      const detail = buildVesselDetailState(vessel);
+      this.setData({vessel, detail, deckPlanIndex: 0, currentDeckPlan: detail.deckPlans[0] || {}});
       wx.setNavigationBarTitle({title: vessel.name});
     } catch (error) {
       this.setData({error: error.message || "加载失败，请稍后重试"});
@@ -25,6 +26,10 @@ Page({
   },
   consult() {
     wx.navigateTo({url: `/pages/contact/contact?vessel=${encodeURIComponent(this.data.vessel.name || "")}`});
+  },
+  changeDeckPlan(event) {
+    const deckPlanIndex = event.detail.current;
+    this.setData({deckPlanIndex, currentDeckPlan: this.data.detail.deckPlans[deckPlanIndex] || {}});
   },
   onPageScroll(event) {
     const navCollapsed = event.scrollTop >= this.data.navCollapseOffset;
