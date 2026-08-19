@@ -1,4 +1,6 @@
 from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.forms import modelform_factory
 from django.test import TestCase
 from django.utils import timezone
 
@@ -95,6 +97,18 @@ class VesselPageComposerTests(TestCase):
         with self.assertRaises(ValidationError) as error:
             deck_plan.full_clean()
         self.assertIn("image", error.exception.message_dict)
+
+    def test_deck_plan_accepts_an_svg_source_file(self):
+        form = modelform_factory(VesselDeckPlan, fields=("title", "image", "is_visible"))(
+            data={"title": "Deck 3", "is_visible": "on"},
+            files={"image": SimpleUploadedFile(
+                "deck-3.svg",
+                b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"></svg>',
+                content_type="image/svg+xml",
+            )},
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
 
     def test_additional_card_image_must_belong_to_a_card_on_the_same_vessel(self):
         other_vessel = Vessel.objects.create(slug="other-composer", name="另一艘测试船")

@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
+from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db import models
 from django.utils import timezone
 
@@ -201,10 +201,11 @@ class VesselDeckPlan(models.Model):
     )
     title = models.CharField("甲板名称", max_length=160, blank=True)
     description = models.TextField("说明", blank=True)
-    image = models.ImageField(
+    image = models.FileField(
         "甲板示意图",
         upload_to="vessels/deck-plans/",
         storage=build_media_storage,
+        validators=[FileExtensionValidator(allowed_extensions=["svg", "png", "jpg", "jpeg", "webp"])],
     )
     is_visible = models.BooleanField("展示", default=True)
     sort_order = models.PositiveIntegerField("排序", default=0)
