@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div class="operations-home">
+    <h1>运营后台</h1>
+
+    <section class="operations-home__section" aria-labelledby="content-configuration-title">
+      <h2 id="content-configuration-title">内容配置</h2>
+      <div class="operations-home__links">
+        {% if perms.catalog.view_product %}
+          <a href="{% url 'admin:catalog_product_changelist' %}">旅行产品</a>
+        {% endif %}
+        {% if perms.catalog.view_destination %}
+          <a href="{% url 'admin:catalog_destination_changelist' %}">目的地</a>
+        {% endif %}
+        {% if perms.catalog.view_vessel %}
+          <a href="{% url 'admin:catalog_vessel_changelist' %}">船只</a>
+        {% endif %}
+      </div>
+    </section>
+
+    {% if perms.catalog.view_sitesettings %}
+      <section class="operations-home__section" aria-labelledby="site-settings-title">
+        <h2 id="site-settings-title">站点设置</h2>
+        <div class="operations-home__links">
+          <a href="{% url 'admin:catalog_sitesettings_changelist' %}">基础设置</a>
+        </div>
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

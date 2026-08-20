@@ -67,6 +67,25 @@ class CatalogAdminTests(TestCase):
         self.assertNotContains(response, 'data-operations-nav-item="用户"')
         self.assertNotContains(response, 'data-operations-nav-item="组"')
 
+    def test_admin_home_uses_the_streamlined_operations_navigation(self):
+        user = get_user_model().objects.create_superuser(
+            username="operations-home-user",
+            password="strong-password",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:index"))
+
+        self.assertContains(response, "内容配置")
+        self.assertContains(response, "站点设置")
+        self.assertContains(response, reverse("admin:catalog_product_changelist"))
+        self.assertContains(response, reverse("admin:catalog_destination_changelist"))
+        self.assertContains(response, reverse("admin:catalog_vessel_changelist"))
+        self.assertContains(response, reverse("admin:catalog_sitesettings_changelist"))
+        self.assertNotContains(response, "最近动作")
+        self.assertNotContains(response, ">增加<")
+        self.assertNotContains(response, ">修改<")
+
     def test_vessel_editor_renders_six_tabs_without_replacing_formsets(self):
         vessel = Vessel.objects.create(slug="tabbed-editor", name="Tab 编辑测试船")
         user = get_user_model().objects.create_superuser(

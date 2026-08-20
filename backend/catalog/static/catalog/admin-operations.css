@@ -11,6 +11,14 @@
 .operations-sidebar__link:hover { background: var(--darkened-bg); color: var(--link-hover-color); }
 .operations-sidebar__link.is-active { background: var(--selected-bg); color: var(--selected-row); font-weight: 700; }
 
+.operations-home { max-width: 880px; }
+.operations-home__section { margin: 28px 0; }
+.operations-home__section h2 { margin: 0; padding: 12px 16px; background: #3f7f99; color: #fff; font-size: 16px; }
+.operations-home__links { border: 1px solid var(--hairline-color); border-top: 0; }
+.operations-home__links a { display: block; padding: 13px 16px; border-top: 1px solid var(--hairline-color); color: var(--link-fg); font-weight: 700; text-decoration: none; }
+.operations-home__links a:first-child { border-top: 0; }
+.operations-home__links a:hover { background: var(--darkened-bg); color: var(--link-hover-color); }
+
 .vessel-editor-tabs__list { display: flex; gap: 4px; margin: 0 0 20px; border-bottom: 1px solid var(--hairline-color); overflow-x: auto; }
 .vessel-editor-tabs__tab { flex: 0 0 auto; margin: 0; padding: 10px 14px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: var(--body-quiet-color); font: inherit; cursor: pointer; }
 .vessel-editor-tabs__tab:hover { color: var(--link-hover-color); }
