@@ -8,8 +8,8 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Destination
-from .operations_serializers import OperationsDestinationSerializer
+from .models import Destination, Product, Vessel
+from .operations_serializers import OperationsDestinationSerializer, OperationsProductSerializer
 
 
 class CsrfTokenView(APIView):
@@ -95,3 +95,48 @@ class DestinationDetailView(OperationsAdminView):
             return Response({"detail": "目的地不存在"}, status=status.HTTP_404_NOT_FOUND)
         destination.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ProductListCreateView(OperationsAdminView):
+    def get(self, request):
+        products = Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days")
+        return Response({"results": OperationsProductSerializer(products, many=True).data})
+
+    def post(self, request):
+        serializer = OperationsProductSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsProductSerializer(serializer.save()).data, status=status.HTTP_201_CREATED)
+
+
+class ProductDetailView(OperationsAdminView):
+    def get_object(self, pk):
+        try:
+            return Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days").get(pk=pk)
+        except Product.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        product = self.get_object(pk)
+        if product is None:
+            return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(OperationsProductSerializer(product).data)
+
+    def patch(self, request, pk):
+        product = self.get_object(pk)
+        if product is None:
+            return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsProductSerializer(product, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsProductSerializer(serializer.save()).data)
+
+    def delete(self, request, pk):
+        product = self.get_object(pk)
+        if product is None:
+            return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VesselOptionsView(OperationsAdminView):
+    def get(self, request):
+        return Response({"results": [{"id": vessel.id, "name": vessel.name} for vessel in Vessel.objects.all()]})

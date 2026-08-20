@@ -9,3 +9,4 @@ body { color: #1f1f1f; background: #f5f5f5; font-family: -apple-system, BlinkMac
 .login-page { display: grid; min-height: 100vh; padding: 24px; place-items: center; }
 .login-card { width: min(100%, 400px); box-shadow: 0 8px 28px rgb(15 23 42 / 8%); }
 .login-error { margin-bottom: 16px; }
+.nested-editor-row { padding: 16px; margin-bottom: 16px; border: 1px solid #f0f0f0; border-radius: 6px; }
