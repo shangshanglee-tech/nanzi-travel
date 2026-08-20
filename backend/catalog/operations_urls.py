@@ -25,6 +25,8 @@ from .operations_views import (
     VesselCabinGroupListCreateView,
     VesselCabinImageView,
     VesselCabinListCreateView,
+    VesselDeckPlanDetailView,
+    VesselDeckPlanListCreateView,
 )
 
 
@@ -53,4 +55,6 @@ urlpatterns = [
     path("vessels/<int:pk>/cabins/<int:cabin_id>", VesselCabinDetailView.as_view(), name="operations-vessel-cabin-detail"),
     path("vessels/<int:pk>/cabins/<int:cabin_id>/image", VesselCabinImageView.as_view(), name="operations-vessel-cabin-image"),
     path("vessels/<int:pk>/cabin-groups", VesselCabinGroupListCreateView.as_view(), name="operations-vessel-cabin-groups"),
+    path("vessels/<int:pk>/deck-plans", VesselDeckPlanListCreateView.as_view(), name="operations-vessel-deck-plans"),
+    path("vessels/<int:pk>/deck-plans/<int:deck_id>", VesselDeckPlanDetailView.as_view(), name="operations-vessel-deck-plan-detail"),
 ]

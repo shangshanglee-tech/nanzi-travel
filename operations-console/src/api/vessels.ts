@@ -14,6 +14,7 @@ export interface VesselPageBlockImage { id: number; image: string; sort_order: n
 export interface VesselPageBlock { id: number; block_type: "heading" | "card"; title: string; image: string; body: string; sort_order: number; additional_images: VesselPageBlockImage[]; }
 export interface Cabin { id: number; name: string; official_code?: string; official_name?: string; category?: string; size_sqm?: string | number | null; bed_layout?: string; view_type?: string; summary?: string; description_zh?: string; description_en?: string; max_guests?: number | null; deck?: string; amenities?: string[]; display_tags?: string[]; is_accessible: boolean; is_visible: boolean; highlights?: string[]; image?: string; sort_order: number; }
 export interface CabinGroup { id: number; slug: string; title_zh: string; title_en?: string; is_visible: boolean; sort_order: number; cabin_ids: number[]; }
+export interface DeckPlan { id: number; title: string; image: string; sort_order: number; }
 
 export const listVessels = () => operationsRequest<{ results: Vessel[] }>("vessels");
 export const getVessel = (id: string) => operationsRequest<Vessel>(`vessels/${id}`);
@@ -40,3 +41,6 @@ export const deleteCabin = (id: number, cabinId: number) => operationsRequest<vo
 export const uploadCabinImage = (id: number, cabinId: number, image: File) => { const formData = new FormData(); formData.append("image", image); return operationsRequest<Cabin>(`vessels/${id}/cabins/${cabinId}/image`, { method: "POST", body: formData }); };
 export const listCabinGroups = (id: number) => operationsRequest<{ results: CabinGroup[] }>(`vessels/${id}/cabin-groups`);
 export const createCabinGroup = (id: number, data: Omit<Partial<CabinGroup>, "id" | "sort_order">) => operationsRequest<CabinGroup>(`vessels/${id}/cabin-groups`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+export const listDeckPlans = (id: number) => operationsRequest<{ results: DeckPlan[] }>(`vessels/${id}/deck-plans`);
+export const createDeckPlan = (id: number, title: string, image: File) => { const formData = new FormData(); formData.append("title", title); formData.append("image", image); return operationsRequest<DeckPlan>(`vessels/${id}/deck-plans`, { method: "POST", body: formData }); };
+export const deleteDeckPlan = (id: number, deckId: number) => operationsRequest<void>(`vessels/${id}/deck-plans/${deckId}`, { method: "DELETE" });

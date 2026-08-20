@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from catalog.models import CabinDisplayGroup, CabinType, Vessel, VesselPageBlock
+from catalog.models import CabinDisplayGroup, CabinType, Vessel, VesselDeckPlan, VesselPageBlock
 
 
 class OperationsVesselApiTests(TestCase):
@@ -107,3 +107,15 @@ class OperationsVesselApiTests(TestCase):
         self.assertEqual(group_response.status_code, 201)
         self.assertEqual(list(CabinDisplayGroup.objects.get(pk=group_response.json()["id"]).cabins.values_list("id", flat=True)), [cabin_id])
         self.assertEqual(self.client.delete(f"/api/admin/v1/vessels/{self.vessel.pk}/cabins/{cabin_id}").status_code, 204)
+
+    def test_admin_can_manage_vessel_deck_plans(self):
+        created = self.client.post(
+            f"/api/admin/v1/vessels/{self.vessel.pk}/deck-plans",
+            data={"title": "Deck 3", "image": SimpleUploadedFile("deck-3.svg", b"<svg></svg>", content_type="image/svg+xml")},
+        )
+        self.assertEqual(created.status_code, 201)
+        deck_id = created.json()["id"]
+        self.assertEqual(created.json()["title"], "Deck 3")
+        self.assertEqual(self.client.get(f"/api/admin/v1/vessels/{self.vessel.pk}/deck-plans").json()["results"][0]["id"], deck_id)
+        self.assertEqual(self.client.delete(f"/api/admin/v1/vessels/{self.vessel.pk}/deck-plans/{deck_id}").status_code, 204)
+        self.assertFalse(VesselDeckPlan.objects.filter(pk=deck_id).exists())

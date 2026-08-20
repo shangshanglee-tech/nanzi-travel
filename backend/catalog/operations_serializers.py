@@ -16,6 +16,7 @@ from .models import (
     VesselPageBlock,
     VesselPageBlockImage,
     VesselPageBlockType,
+    VesselDeckPlan,
 )
 
 
@@ -227,3 +228,17 @@ class OperationsCabinDisplayGroupSerializer(serializers.ModelSerializer):
         model = CabinDisplayGroup
         fields = ("id", "slug", "title_zh", "title_en", "is_visible", "sort_order", "cabin_ids")
         read_only_fields = ("id", "sort_order")
+
+
+class OperationsVesselDeckPlanSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = VesselDeckPlan
+        fields = ("id", "title", "image", "sort_order")
+        read_only_fields = ("id", "image", "sort_order")
+
+    def get_image(self, deck_plan):
+        request = self.context.get("request")
+        url = deck_plan.image.url
+        return request.build_absolute_uri(url) if request else url

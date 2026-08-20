@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
+from .models import CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
@@ -18,6 +18,7 @@ from .operations_serializers import (
     OperationsVesselPageBlockSerializer,
     OperationsCabinDisplayGroupSerializer,
     OperationsCabinSerializer,
+    OperationsVesselDeckPlanSerializer,
 )
 
 
@@ -419,6 +420,41 @@ class VesselCabinGroupListCreateView(OperationsAdminView):
         last_group = vessel.cabin_groups.order_by("-sort_order", "-id").first()
         group = serializer.save(vessel=vessel, sort_order=(last_group.sort_order + 1) if last_group else 0)
         return Response(OperationsCabinDisplayGroupSerializer(group).data, status=status.HTTP_201_CREATED)
+
+
+class VesselDeckPlanListCreateView(OperationsAdminView):
+    def get_vessel(self, pk):
+        try:
+            return Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"results": OperationsVesselDeckPlanSerializer(vessel.deck_plans.all(), many=True, context={"request": request}).data})
+
+    def post(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择甲板示意图"}, status=status.HTTP_400_BAD_REQUEST)
+        last_plan = vessel.deck_plans.order_by("-sort_order", "-id").first()
+        deck_plan = VesselDeckPlan.objects.create(vessel=vessel, title=request.data.get("title", ""), image=image, sort_order=(last_plan.sort_order + 1) if last_plan else 0)
+        return Response(OperationsVesselDeckPlanSerializer(deck_plan, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class VesselDeckPlanDetailView(OperationsAdminView):
+    def delete(self, request, pk, deck_id):
+        try:
+            deck_plan = VesselDeckPlan.objects.get(pk=deck_id, vessel_id=pk)
+        except VesselDeckPlan.DoesNotExist:
+            return Response({"detail": "甲板示意图不存在"}, status=status.HTTP_404_NOT_FOUND)
+        deck_plan.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class VesselOptionsView(OperationsAdminView):
