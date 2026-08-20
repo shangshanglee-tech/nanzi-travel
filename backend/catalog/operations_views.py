@@ -8,8 +8,12 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Destination, Product, Vessel
-from .operations_serializers import OperationsDestinationSerializer, OperationsProductSerializer
+from .models import Destination, Product, ProductImage, Vessel
+from .operations_serializers import (
+    OperationsDestinationSerializer,
+    OperationsProductImageSerializer,
+    OperationsProductSerializer,
+)
 
 
 class CsrfTokenView(APIView):
@@ -99,19 +103,19 @@ class DestinationDetailView(OperationsAdminView):
 
 class ProductListCreateView(OperationsAdminView):
     def get(self, request):
-        products = Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days")
-        return Response({"results": OperationsProductSerializer(products, many=True).data})
+        products = Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days", "images")
+        return Response({"results": OperationsProductSerializer(products, many=True, context={"request": request}).data})
 
     def post(self, request):
         serializer = OperationsProductSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(OperationsProductSerializer(serializer.save()).data, status=status.HTTP_201_CREATED)
+        return Response(OperationsProductSerializer(serializer.save(), context={"request": request}).data, status=status.HTTP_201_CREATED)
 
 
 class ProductDetailView(OperationsAdminView):
     def get_object(self, pk):
         try:
-            return Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days").get(pk=pk)
+            return Product.objects.select_related("destination").prefetch_related("vessels", "departures", "itinerary_days", "images").get(pk=pk)
         except Product.DoesNotExist:
             return None
 
@@ -119,7 +123,7 @@ class ProductDetailView(OperationsAdminView):
         product = self.get_object(pk)
         if product is None:
             return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
-        return Response(OperationsProductSerializer(product).data)
+        return Response(OperationsProductSerializer(product, context={"request": request}).data)
 
     def patch(self, request, pk):
         product = self.get_object(pk)
@@ -127,13 +131,59 @@ class ProductDetailView(OperationsAdminView):
             return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
         serializer = OperationsProductSerializer(product, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
-        return Response(OperationsProductSerializer(serializer.save()).data)
+        return Response(OperationsProductSerializer(serializer.save(), context={"request": request}).data)
 
     def delete(self, request, pk):
         product = self.get_object(pk)
         if product is None:
             return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
         product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ProductHeroImageView(OperationsAdminView):
+    def post(self, request, pk):
+        try:
+            product = Product.objects.prefetch_related("images").get(pk=pk)
+        except Product.DoesNotExist:
+            return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择封面图片"}, status=status.HTTP_400_BAD_REQUEST)
+        product.hero_image = image
+        product.save(update_fields=["hero_image", "updated_at"])
+        return Response(OperationsProductSerializer(product, context={"request": request}).data)
+
+
+class ProductImageListCreateView(OperationsAdminView):
+    def post(self, request, pk):
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist:
+            return Response({"detail": "旅行产品不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择图库图片"}, status=status.HTTP_400_BAD_REQUEST)
+        last_image = product.images.order_by("-sort_order", "-id").first()
+        product_image = ProductImage.objects.create(
+            product=product,
+            image=image,
+            alt_text=request.data.get("alt_text", ""),
+            sort_order=(last_image.sort_order + 1) if last_image else 0,
+        )
+        return Response(
+            OperationsProductImageSerializer(product_image, context={"request": request}).data,
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class ProductImageDetailView(OperationsAdminView):
+    def delete(self, request, pk, image_id):
+        try:
+            image = ProductImage.objects.get(pk=image_id, product_id=pk)
+        except ProductImage.DoesNotExist:
+            return Response({"detail": "图库图片不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

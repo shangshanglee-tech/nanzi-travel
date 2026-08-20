@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from catalog.models import Destination, ItineraryDay, Product, Vessel
@@ -72,3 +73,24 @@ class OperationsProductApiTests(TestCase):
 
         self.assertEqual(self.client.delete(f"/api/admin/v1/products/{product.pk}").status_code, 204)
         self.assertFalse(Product.objects.filter(pk=product.pk).exists())
+
+    def test_admin_can_upload_hero_and_manage_gallery_images(self):
+        product = Product.objects.create(destination=self.destination, title="南极经典", slug="antarctica-classic")
+        image = SimpleUploadedFile("antarctica.webp", b"not-a-real-image", content_type="image/webp")
+
+        hero_response = self.client.post(
+            f"/api/admin/v1/products/{product.pk}/hero-image",
+            data={"image": image},
+        )
+        self.assertEqual(hero_response.status_code, 200)
+        self.assertIn("hero_image", hero_response.json())
+
+        gallery_response = self.client.post(
+            f"/api/admin/v1/products/{product.pk}/images",
+            data={"image": SimpleUploadedFile("gallery.webp", b"gallery", content_type="image/webp"), "alt_text": "南极冰山"},
+        )
+        self.assertEqual(gallery_response.status_code, 201)
+        image_id = gallery_response.json()["id"]
+        self.assertEqual(gallery_response.json()["alt_text"], "南极冰山")
+
+        self.assertEqual(self.client.delete(f"/api/admin/v1/products/{product.pk}/images/{image_id}").status_code, 204)

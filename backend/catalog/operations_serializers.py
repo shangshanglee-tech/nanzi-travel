@@ -2,7 +2,7 @@ from django.db import transaction
 from django.utils import timezone
 from rest_framework import serializers
 
-from .models import Departure, Destination, ItineraryDay, Product, ProductStatus, Vessel
+from .models import Departure, Destination, ItineraryDay, Product, ProductImage, ProductStatus, Vessel
 
 
 class OperationsDestinationSerializer(serializers.ModelSerializer):
@@ -29,11 +29,26 @@ class OperationsItineraryDaySerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "sort_order")
 
 
+class OperationsProductImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProductImage
+        fields = ("id", "image", "alt_text", "sort_order")
+
+    def get_image(self, product_image):
+        request = self.context.get("request")
+        url = product_image.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
 class OperationsProductSerializer(serializers.ModelSerializer):
     destination_id = serializers.PrimaryKeyRelatedField(queryset=Destination.objects.all(), source="destination")
     vessel_ids = serializers.PrimaryKeyRelatedField(queryset=Vessel.objects.all(), many=True, source="vessels", required=False)
     departures = OperationsDepartureSerializer(many=True, required=False)
     itinerary_days = OperationsItineraryDaySerializer(many=True, required=False)
+    hero_image = serializers.SerializerMethodField()
+    images = OperationsProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
@@ -41,8 +56,16 @@ class OperationsProductSerializer(serializers.ModelSerializer):
             "id", "title", "slug", "subtitle", "summary", "season", "duration_days", "vessel",
             "departure_city", "tags", "highlights", "included", "excluded", "suitable_for", "notices",
             "status", "sort_order", "published_at", "destination_id", "vessel_ids", "departures", "itinerary_days",
+            "hero_image", "images",
         )
         read_only_fields = ("id", "published_at")
+
+    def get_hero_image(self, product):
+        if not product.hero_image:
+            return ""
+        request = self.context.get("request")
+        url = product.hero_image.url
+        return request.build_absolute_uri(url) if request else url
 
     def _normalize_publication(self, values, instance=None):
         status = values.get("status", instance.status if instance else ProductStatus.DRAFT)
