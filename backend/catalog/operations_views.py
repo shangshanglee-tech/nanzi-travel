@@ -8,12 +8,14 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Destination, Product, ProductImage, Vessel
+from .models import Destination, Product, ProductImage, Vessel, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
     OperationsProductSerializer,
     OperationsVesselSerializer,
+    OperationsVesselPageBlockImageSerializer,
+    OperationsVesselPageBlockSerializer,
 )
 
 
@@ -228,6 +230,105 @@ class VesselCardImageView(OperationsAdminView):
         vessel.card_image = image
         vessel.save(update_fields=["card_image", "updated_at"])
         return Response(OperationsVesselSerializer(vessel, context={"request": request}).data)
+
+
+class VesselPageBlockListCreateView(OperationsAdminView):
+    def get_vessel(self, pk):
+        try:
+            return Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        blocks = vessel.page_blocks.prefetch_related("additional_images")
+        return Response({"results": OperationsVesselPageBlockSerializer(blocks, many=True, context={"request": request}).data})
+
+    def post(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsVesselPageBlockSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        if serializer.validated_data["block_type"] == VesselPageBlockType.CARD and request.FILES.get("image") is None:
+            return Response({"detail": "内容卡片必须上传图片"}, status=status.HTTP_400_BAD_REQUEST)
+        last_block = vessel.page_blocks.order_by("-sort_order", "-id").first()
+        block = serializer.save(
+            vessel=vessel,
+            image=request.FILES.get("image"),
+            sort_order=(last_block.sort_order + 1) if last_block else 0,
+        )
+        return Response(OperationsVesselPageBlockSerializer(block, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class VesselPageBlockDetailView(OperationsAdminView):
+    def get_block(self, vessel_id, block_id):
+        try:
+            return VesselPageBlock.objects.prefetch_related("additional_images").get(pk=block_id, vessel_id=vessel_id)
+        except VesselPageBlock.DoesNotExist:
+            return None
+
+    def patch(self, request, pk, block_id):
+        block = self.get_block(pk, block_id)
+        if block is None:
+            return Response({"detail": "页面内容不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsVesselPageBlockSerializer(block, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsVesselPageBlockSerializer(serializer.save(), context={"request": request}).data)
+
+    def delete(self, request, pk, block_id):
+        block = self.get_block(pk, block_id)
+        if block is None:
+            return Response({"detail": "页面内容不存在"}, status=status.HTTP_404_NOT_FOUND)
+        block.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VesselPageBlockOrderView(OperationsAdminView):
+    def patch(self, request, pk):
+        ids = request.data.get("ids", [])
+        blocks = list(VesselPageBlock.objects.filter(vessel_id=pk).order_by("id"))
+        if len(ids) != len(blocks) or set(ids) != {block.id for block in blocks}:
+            return Response({"detail": "排序内容与当前页面内容不一致"}, status=status.HTTP_400_BAD_REQUEST)
+        block_map = {block.id: block for block in blocks}
+        for order, block_id in enumerate(ids):
+            block_map[block_id].sort_order = order
+        VesselPageBlock.objects.bulk_update(blocks, ["sort_order"])
+        ordered = [block_map[block_id] for block_id in ids]
+        return Response({"results": OperationsVesselPageBlockSerializer(ordered, many=True, context={"request": request}).data})
+
+
+class VesselPageBlockImageListCreateView(OperationsAdminView):
+    def post(self, request, pk, block_id):
+        try:
+            block = VesselPageBlock.objects.get(pk=block_id, vessel_id=pk)
+        except VesselPageBlock.DoesNotExist:
+            return Response({"detail": "页面内容不存在"}, status=status.HTTP_404_NOT_FOUND)
+        if block.block_type != VesselPageBlockType.CARD:
+            return Response({"detail": "只有内容卡片可以添加额外图片"}, status=status.HTTP_400_BAD_REQUEST)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择图片"}, status=status.HTTP_400_BAD_REQUEST)
+        last_image = block.additional_images.order_by("-sort_order", "-id").first()
+        block_image = VesselPageBlockImage.objects.create(
+            vessel=block.vessel,
+            page_block=block,
+            image=image,
+            sort_order=(last_image.sort_order + 1) if last_image else 0,
+        )
+        return Response(OperationsVesselPageBlockImageSerializer(block_image, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class VesselPageBlockImageDetailView(OperationsAdminView):
+    def delete(self, request, pk, block_id, image_id):
+        try:
+            image = VesselPageBlockImage.objects.get(pk=image_id, vessel_id=pk, page_block_id=block_id)
+        except VesselPageBlockImage.DoesNotExist:
+            return Response({"detail": "额外图片不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class VesselOptionsView(OperationsAdminView):

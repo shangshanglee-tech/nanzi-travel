@@ -16,6 +16,11 @@ from .operations_views import (
     VesselCardImageView,
     VesselDetailView,
     VesselListView,
+    VesselPageBlockDetailView,
+    VesselPageBlockImageDetailView,
+    VesselPageBlockImageListCreateView,
+    VesselPageBlockListCreateView,
+    VesselPageBlockOrderView,
 )
 
 
@@ -35,4 +40,9 @@ urlpatterns = [
     path("vessels", VesselListView.as_view(), name="operations-vessels"),
     path("vessels/<int:pk>", VesselDetailView.as_view(), name="operations-vessel-detail"),
     path("vessels/<int:pk>/card-image", VesselCardImageView.as_view(), name="operations-vessel-card-image"),
+    path("vessels/<int:pk>/page-blocks", VesselPageBlockListCreateView.as_view(), name="operations-vessel-page-blocks"),
+    path("vessels/<int:pk>/page-blocks/order", VesselPageBlockOrderView.as_view(), name="operations-vessel-page-block-order"),
+    path("vessels/<int:pk>/page-blocks/<int:block_id>", VesselPageBlockDetailView.as_view(), name="operations-vessel-page-block-detail"),
+    path("vessels/<int:pk>/page-blocks/<int:block_id>/images", VesselPageBlockImageListCreateView.as_view(), name="operations-vessel-page-block-images"),
+    path("vessels/<int:pk>/page-blocks/<int:block_id>/images/<int:image_id>", VesselPageBlockImageDetailView.as_view(), name="operations-vessel-page-block-image-detail"),
 ]

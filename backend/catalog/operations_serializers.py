@@ -11,6 +11,9 @@ from .models import (
     ProductStatus,
     Vessel,
     VesselContentStatus,
+    VesselPageBlock,
+    VesselPageBlockImage,
+    VesselPageBlockType,
 )
 
 
@@ -157,3 +160,39 @@ class OperationsVesselSerializer(serializers.ModelSerializer):
         elif content_status != VesselContentStatus.PUBLISHED:
             validated_data["published_at"] = None
         return super().update(instance, validated_data)
+
+
+class OperationsVesselPageBlockImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = VesselPageBlockImage
+        fields = ("id", "image", "sort_order")
+
+    def get_image(self, block_image):
+        request = self.context.get("request")
+        url = block_image.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class OperationsVesselPageBlockSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    additional_images = OperationsVesselPageBlockImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = VesselPageBlock
+        fields = ("id", "block_type", "title", "image", "body", "sort_order", "additional_images")
+        read_only_fields = ("id", "image", "sort_order", "additional_images")
+
+    def get_image(self, block):
+        if not block.image:
+            return ""
+        request = self.context.get("request")
+        url = block.image.url
+        return request.build_absolute_uri(url) if request else url
+
+    def validate(self, attrs):
+        block_type = attrs.get("block_type", self.instance.block_type if self.instance else None)
+        if block_type == VesselPageBlockType.HEADING:
+            attrs["body"] = ""
+        return attrs

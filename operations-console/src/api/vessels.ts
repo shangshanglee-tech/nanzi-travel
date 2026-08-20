@@ -10,6 +10,8 @@ export interface VesselInput {
 }
 
 export interface Vessel extends VesselInput { id: number; card_image?: string; published_at?: string | null; }
+export interface VesselPageBlockImage { id: number; image: string; sort_order: number; }
+export interface VesselPageBlock { id: number; block_type: "heading" | "card"; title: string; image: string; body: string; sort_order: number; additional_images: VesselPageBlockImage[]; }
 
 export const listVessels = () => operationsRequest<{ results: Vessel[] }>("vessels");
 export const getVessel = (id: string) => operationsRequest<Vessel>(`vessels/${id}`);
@@ -19,3 +21,13 @@ export const uploadVesselCardImage = (id: number, image: File) => {
   formData.append("image", image);
   return operationsRequest<Vessel>(`vessels/${id}/card-image`, { method: "POST", body: formData });
 };
+export const listVesselPageBlocks = (id: number) => operationsRequest<{ results: VesselPageBlock[] }>(`vessels/${id}/page-blocks`);
+export const createVesselPageBlock = (id: number, input: Pick<VesselPageBlock, "block_type" | "title" | "body">, image?: File) => {
+  const formData = new FormData(); formData.append("block_type", input.block_type); formData.append("title", input.title); formData.append("body", input.body ?? ""); if (image) formData.append("image", image);
+  return operationsRequest<VesselPageBlock>(`vessels/${id}/page-blocks`, { method: "POST", body: formData });
+};
+export const updateVesselPageBlock = (id: number, blockId: number, input: Partial<Pick<VesselPageBlock, "block_type" | "title" | "body">>) => operationsRequest<VesselPageBlock>(`vessels/${id}/page-blocks/${blockId}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) });
+export const deleteVesselPageBlock = (id: number, blockId: number) => operationsRequest<void>(`vessels/${id}/page-blocks/${blockId}`, { method: "DELETE" });
+export const reorderVesselPageBlocks = (id: number, ids: number[]) => operationsRequest<{ results: VesselPageBlock[] }>(`vessels/${id}/page-blocks/order`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids }) });
+export const uploadVesselPageBlockImage = (id: number, blockId: number, image: File) => { const formData = new FormData(); formData.append("image", image); return operationsRequest<VesselPageBlockImage>(`vessels/${id}/page-blocks/${blockId}/images`, { method: "POST", body: formData }); };
+export const deleteVesselPageBlockImage = (id: number, blockId: number, imageId: number) => operationsRequest<void>(`vessels/${id}/page-blocks/${blockId}/images/${imageId}`, { method: "DELETE" });
