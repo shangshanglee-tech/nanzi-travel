@@ -2,6 +2,8 @@ import re
 from pathlib import Path
 
 from django.http import HttpResponse, JsonResponse
+from django.middleware.csrf import get_token
+from django.shortcuts import render
 from django.utils.cache import patch_cache_control
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -50,6 +52,14 @@ def error_response(code, message, status):
 
 def healthz(request):
     return JsonResponse({"status": "ok"})
+
+
+def operations_console(request):
+    return render(
+        request,
+        "operations/index.html",
+        {"csrf_token_value": get_token(request)},
+    )
 
 
 def build_filter_options(products):
