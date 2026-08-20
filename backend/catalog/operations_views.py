@@ -13,6 +13,7 @@ from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
     OperationsProductSerializer,
+    OperationsVesselSerializer,
 )
 
 
@@ -185,6 +186,48 @@ class ProductImageDetailView(OperationsAdminView):
             return Response({"detail": "图库图片不存在"}, status=status.HTTP_404_NOT_FOUND)
         image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VesselListView(OperationsAdminView):
+    def get(self, request):
+        vessels = Vessel.objects.all()
+        return Response({"results": OperationsVesselSerializer(vessels, many=True, context={"request": request}).data})
+
+
+class VesselDetailView(OperationsAdminView):
+    def get_object(self, pk):
+        try:
+            return Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        vessel = self.get_object(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(OperationsVesselSerializer(vessel, context={"request": request}).data)
+
+    def patch(self, request, pk):
+        vessel = self.get_object(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsVesselSerializer(vessel, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsVesselSerializer(serializer.save(), context={"request": request}).data)
+
+
+class VesselCardImageView(OperationsAdminView):
+    def post(self, request, pk):
+        try:
+            vessel = Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择卡片图"}, status=status.HTTP_400_BAD_REQUEST)
+        vessel.card_image = image
+        vessel.save(update_fields=["card_image", "updated_at"])
+        return Response(OperationsVesselSerializer(vessel, context={"request": request}).data)
 
 
 class VesselOptionsView(OperationsAdminView):

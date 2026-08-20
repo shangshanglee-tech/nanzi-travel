@@ -13,6 +13,9 @@ from .operations_views import (
     ProductImageListCreateView,
     ProductListCreateView,
     VesselOptionsView,
+    VesselCardImageView,
+    VesselDetailView,
+    VesselListView,
 )
 
 
@@ -29,4 +32,7 @@ urlpatterns = [
     path("products/<int:pk>/images", ProductImageListCreateView.as_view(), name="operations-product-images"),
     path("products/<int:pk>/images/<int:image_id>", ProductImageDetailView.as_view(), name="operations-product-image-detail"),
     path("vessel-options", VesselOptionsView.as_view(), name="operations-vessel-options"),
+    path("vessels", VesselListView.as_view(), name="operations-vessels"),
+    path("vessels/<int:pk>", VesselDetailView.as_view(), name="operations-vessel-detail"),
+    path("vessels/<int:pk>/card-image", VesselCardImageView.as_view(), name="operations-vessel-card-image"),
 ]

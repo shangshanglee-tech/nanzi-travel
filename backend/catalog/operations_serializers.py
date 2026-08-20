@@ -2,7 +2,16 @@ from django.db import transaction
 from django.utils import timezone
 from rest_framework import serializers
 
-from .models import Departure, Destination, ItineraryDay, Product, ProductImage, ProductStatus, Vessel
+from .models import (
+    Departure,
+    Destination,
+    ItineraryDay,
+    Product,
+    ProductImage,
+    ProductStatus,
+    Vessel,
+    VesselContentStatus,
+)
 
 
 class OperationsDestinationSerializer(serializers.ModelSerializer):
@@ -109,3 +118,42 @@ class OperationsProductSerializer(serializers.ModelSerializer):
         instance.save()
         self._save_nested(instance, vessels, departures, itinerary_days)
         return instance
+
+
+class OperationsVesselSerializer(serializers.ModelSerializer):
+    card_image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Vessel
+        fields = (
+            "id", "slug", "name", "official_name", "summary", "intro_zh", "operator_name",
+            "card_image", "card_tone", "capacity", "year_built", "year_refurbished",
+            "content_status", "published_at", "is_active", "show_cabins", "show_deck_plans", "sort_order",
+            "is_hybrid", "has_science_center", "has_wifi", "has_stabilization_system",
+            "restaurant_count", "bar_count", "has_fitness_center", "heated_pool_count",
+            "has_infinity_pool", "has_sauna", "has_executive_lounge",
+        )
+        read_only_fields = ("id", "card_image", "published_at")
+
+    def get_card_image(self, vessel):
+        if not vessel.card_image:
+            return ""
+        request = self.context.get("request")
+        url = vessel.card_image.url
+        return request.build_absolute_uri(url) if request else url
+
+    def validate(self, attrs):
+        content_status = attrs.get("content_status", self.instance.content_status if self.instance else VesselContentStatus.DRAFT)
+        if content_status == VesselContentStatus.PUBLISHED:
+            has_card_image = bool(self.instance and self.instance.card_image)
+            if not has_card_image:
+                raise serializers.ValidationError({"content_status": "发布前请先上传卡片图"})
+        return attrs
+
+    def update(self, instance, validated_data):
+        content_status = validated_data.get("content_status", instance.content_status)
+        if content_status == VesselContentStatus.PUBLISHED and not instance.published_at:
+            validated_data["published_at"] = timezone.now()
+        elif content_status != VesselContentStatus.PUBLISHED:
+            validated_data["published_at"] = None
+        return super().update(instance, validated_data)
