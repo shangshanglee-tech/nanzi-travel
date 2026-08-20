@@ -16,3 +16,11 @@ test("vessel editor includes a page block composer with ordered content cards", 
   assert.match(composer, /上移/);
   assert.match(composer, /额外图片/);
 });
+
+test("vessel editor includes cabins and cabin display groups", async () => {
+  const source = await readFile("src/features/vessels/VesselEditorPage.tsx", "utf8");
+  assert.match(source, /CabinEditor/);
+  const editor = await readFile("src/features/vessels/CabinEditor.tsx", "utf8");
+  assert.match(editor, /舱位展示分组/);
+  assert.match(editor, /舱型图片/);
+});

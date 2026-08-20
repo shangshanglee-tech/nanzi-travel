@@ -12,6 +12,8 @@ export interface VesselInput {
 export interface Vessel extends VesselInput { id: number; card_image?: string; published_at?: string | null; }
 export interface VesselPageBlockImage { id: number; image: string; sort_order: number; }
 export interface VesselPageBlock { id: number; block_type: "heading" | "card"; title: string; image: string; body: string; sort_order: number; additional_images: VesselPageBlockImage[]; }
+export interface Cabin { id: number; name: string; official_code?: string; official_name?: string; category?: string; size_sqm?: string | number | null; bed_layout?: string; view_type?: string; summary?: string; description_zh?: string; description_en?: string; max_guests?: number | null; deck?: string; amenities?: string[]; display_tags?: string[]; is_accessible: boolean; is_visible: boolean; highlights?: string[]; image?: string; sort_order: number; }
+export interface CabinGroup { id: number; slug: string; title_zh: string; title_en?: string; is_visible: boolean; sort_order: number; cabin_ids: number[]; }
 
 export const listVessels = () => operationsRequest<{ results: Vessel[] }>("vessels");
 export const getVessel = (id: string) => operationsRequest<Vessel>(`vessels/${id}`);
@@ -31,3 +33,10 @@ export const deleteVesselPageBlock = (id: number, blockId: number) => operations
 export const reorderVesselPageBlocks = (id: number, ids: number[]) => operationsRequest<{ results: VesselPageBlock[] }>(`vessels/${id}/page-blocks/order`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids }) });
 export const uploadVesselPageBlockImage = (id: number, blockId: number, image: File) => { const formData = new FormData(); formData.append("image", image); return operationsRequest<VesselPageBlockImage>(`vessels/${id}/page-blocks/${blockId}/images`, { method: "POST", body: formData }); };
 export const deleteVesselPageBlockImage = (id: number, blockId: number, imageId: number) => operationsRequest<void>(`vessels/${id}/page-blocks/${blockId}/images/${imageId}`, { method: "DELETE" });
+export const listCabins = (id: number) => operationsRequest<{ results: Cabin[] }>(`vessels/${id}/cabins`);
+export const createCabin = (id: number, data: Omit<Partial<Cabin>, "id" | "image" | "sort_order">) => operationsRequest<Cabin>(`vessels/${id}/cabins`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+export const updateCabin = (id: number, cabinId: number, data: Omit<Partial<Cabin>, "id" | "image" | "sort_order">) => operationsRequest<Cabin>(`vessels/${id}/cabins/${cabinId}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+export const deleteCabin = (id: number, cabinId: number) => operationsRequest<void>(`vessels/${id}/cabins/${cabinId}`, { method: "DELETE" });
+export const uploadCabinImage = (id: number, cabinId: number, image: File) => { const formData = new FormData(); formData.append("image", image); return operationsRequest<Cabin>(`vessels/${id}/cabins/${cabinId}/image`, { method: "POST", body: formData }); };
+export const listCabinGroups = (id: number) => operationsRequest<{ results: CabinGroup[] }>(`vessels/${id}/cabin-groups`);
+export const createCabinGroup = (id: number, data: Omit<Partial<CabinGroup>, "id" | "sort_order">) => operationsRequest<CabinGroup>(`vessels/${id}/cabin-groups`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });

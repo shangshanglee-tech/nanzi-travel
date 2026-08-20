@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Destination, Product, ProductImage, Vessel, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
+from .models import CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
@@ -16,6 +16,8 @@ from .operations_serializers import (
     OperationsVesselSerializer,
     OperationsVesselPageBlockImageSerializer,
     OperationsVesselPageBlockSerializer,
+    OperationsCabinDisplayGroupSerializer,
+    OperationsCabinSerializer,
 )
 
 
@@ -329,6 +331,94 @@ class VesselPageBlockImageDetailView(OperationsAdminView):
             return Response({"detail": "额外图片不存在"}, status=status.HTTP_404_NOT_FOUND)
         image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VesselCabinListCreateView(OperationsAdminView):
+    def get_vessel(self, pk):
+        try:
+            return Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"results": OperationsCabinSerializer(vessel.cabins.all(), many=True, context={"request": request}).data})
+
+    def post(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsCabinSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        last_cabin = vessel.cabins.order_by("-sort_order", "-id").first()
+        cabin = serializer.save(vessel=vessel, sort_order=(last_cabin.sort_order + 1) if last_cabin else 0)
+        return Response(OperationsCabinSerializer(cabin, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class VesselCabinDetailView(OperationsAdminView):
+    def get_cabin(self, vessel_id, cabin_id):
+        try:
+            return CabinType.objects.get(pk=cabin_id, vessel_id=vessel_id)
+        except CabinType.DoesNotExist:
+            return None
+
+    def patch(self, request, pk, cabin_id):
+        cabin = self.get_cabin(pk, cabin_id)
+        if cabin is None:
+            return Response({"detail": "舱位不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsCabinSerializer(cabin, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsCabinSerializer(serializer.save(), context={"request": request}).data)
+
+    def delete(self, request, pk, cabin_id):
+        cabin = self.get_cabin(pk, cabin_id)
+        if cabin is None:
+            return Response({"detail": "舱位不存在"}, status=status.HTTP_404_NOT_FOUND)
+        cabin.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VesselCabinImageView(OperationsAdminView):
+    def post(self, request, pk, cabin_id):
+        try:
+            cabin = CabinType.objects.get(pk=cabin_id, vessel_id=pk)
+        except CabinType.DoesNotExist:
+            return Response({"detail": "舱位不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择舱型图片"}, status=status.HTTP_400_BAD_REQUEST)
+        cabin.image = image
+        cabin.save(update_fields=["image"])
+        return Response(OperationsCabinSerializer(cabin, context={"request": request}).data)
+
+
+class VesselCabinGroupListCreateView(OperationsAdminView):
+    def get_vessel(self, pk):
+        try:
+            return Vessel.objects.get(pk=pk)
+        except Vessel.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"results": OperationsCabinDisplayGroupSerializer(vessel.cabin_groups.all(), many=True).data})
+
+    def post(self, request, pk):
+        vessel = self.get_vessel(pk)
+        if vessel is None:
+            return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsCabinDisplayGroupSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        cabins = serializer.validated_data.get("cabins", [])
+        if any(cabin.vessel_id != vessel.id for cabin in cabins):
+            return Response({"detail": "只能选择当前船只的舱位"}, status=status.HTTP_400_BAD_REQUEST)
+        last_group = vessel.cabin_groups.order_by("-sort_order", "-id").first()
+        group = serializer.save(vessel=vessel, sort_order=(last_group.sort_order + 1) if last_group else 0)
+        return Response(OperationsCabinDisplayGroupSerializer(group).data, status=status.HTTP_201_CREATED)
 
 
 class VesselOptionsView(OperationsAdminView):

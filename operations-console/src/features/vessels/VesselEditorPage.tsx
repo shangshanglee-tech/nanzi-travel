@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getVessel, updateVessel, uploadVesselCardImage, type Vessel, type VesselInput } from "../../api/vessels";
 import { PageBlockEditor } from "./PageBlockEditor";
+import { CabinEditor } from "./CabinEditor";
 
 const selectOnly: UploadProps["beforeUpload"] = () => false;
 const booleanFacts: Array<[keyof VesselInput, string]> = [
@@ -23,5 +24,6 @@ export function VesselEditorPage() {
     { key: "card", label: "首页卡片", children: <Card><Form.Item label="卡片底色" name="card_tone" rules={[{ pattern: /^#[0-9A-Fa-f]{6}$/, message: "请输入 #071A32 格式色值" }]}><Input placeholder="#071A32" /></Form.Item>{vessel.card_image ? <Image width={280} src={vessel.card_image} alt="船只卡片图" /> : <p>暂未设置卡片图。</p>}<div style={{ marginTop: 16 }}><Upload accept="image/*" showUploadList={false} beforeUpload={selectOnly} onChange={({ file }) => file.originFileObj && void uploadCard(file.originFileObj)}><Button>上传或替换卡片图</Button></Upload></div></Card> },
     { key: "facts", label: "结构化事实", children: <Card><Row gutter={16}><Col span={8}><Form.Item label="最大载客量" name="capacity"><InputNumber min={0} /></Form.Item></Col><Col span={8}><Form.Item label="建造年份" name="year_built"><InputNumber min={1800} max={2200} /></Form.Item></Col><Col span={8}><Form.Item label="翻新年份" name="year_refurbished"><InputNumber min={1800} max={2200} /></Form.Item></Col><Col span={8}><Form.Item label="餐厅数量" name="restaurant_count"><InputNumber min={0} /></Form.Item></Col><Col span={8}><Form.Item label="酒吧数量" name="bar_count"><InputNumber min={0} /></Form.Item></Col><Col span={8}><Form.Item label="恒温泳池数量" name="heated_pool_count"><InputNumber min={0} /></Form.Item></Col></Row><Row gutter={[16, 12]}>{booleanFacts.map(([key, label]) => <Col span={8} key={key}><Form.Item name={key} valuePropName="checked" noStyle><Checkbox>{label}</Checkbox></Form.Item></Col>)}</Row></Card> },
     { key: "page-content", label: "页面内容", children: <Card><PageBlockEditor vesselId={vessel.id} /></Card> },
+    { key: "cabins", label: "舱位", children: <Card><CabinEditor vesselId={vessel.id} /></Card> },
   ]} /></Form></>;
 }

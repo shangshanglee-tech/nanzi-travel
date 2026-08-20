@@ -11,6 +11,8 @@ from .models import (
     ProductStatus,
     Vessel,
     VesselContentStatus,
+    CabinDisplayGroup,
+    CabinType,
     VesselPageBlock,
     VesselPageBlockImage,
     VesselPageBlockType,
@@ -196,3 +198,32 @@ class OperationsVesselPageBlockSerializer(serializers.ModelSerializer):
         if block_type == VesselPageBlockType.HEADING:
             attrs["body"] = ""
         return attrs
+
+
+class OperationsCabinSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CabinType
+        fields = (
+            "id", "name", "official_code", "official_name", "category", "size_sqm", "bed_layout", "view_type",
+            "summary", "description_zh", "description_en", "max_guests", "deck", "amenities", "display_tags",
+            "is_accessible", "is_visible", "highlights", "image", "sort_order",
+        )
+        read_only_fields = ("id", "image", "sort_order")
+
+    def get_image(self, cabin):
+        if not cabin.image:
+            return ""
+        request = self.context.get("request")
+        url = cabin.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class OperationsCabinDisplayGroupSerializer(serializers.ModelSerializer):
+    cabin_ids = serializers.PrimaryKeyRelatedField(queryset=CabinType.objects.all(), many=True, source="cabins", required=False)
+
+    class Meta:
+        model = CabinDisplayGroup
+        fields = ("id", "slug", "title_zh", "title_en", "is_visible", "sort_order", "cabin_ids")
+        read_only_fields = ("id", "sort_order")

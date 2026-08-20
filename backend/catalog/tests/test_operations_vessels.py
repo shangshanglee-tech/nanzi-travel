@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from catalog.models import Vessel, VesselPageBlock
+from catalog.models import CabinDisplayGroup, CabinType, Vessel, VesselPageBlock
 
 
 class OperationsVesselApiTests(TestCase):
@@ -81,3 +81,29 @@ class OperationsVesselApiTests(TestCase):
         self.assertEqual(list(VesselPageBlock.objects.values_list("id", flat=True)), [card_id, heading_id])
 
         self.assertEqual(self.client.delete(f"/api/admin/v1/vessels/{self.vessel.pk}/page-blocks/{card_id}").status_code, 204)
+
+    def test_admin_can_manage_cabins_and_display_groups(self):
+        cabin_response = self.client.post(
+            f"/api/admin/v1/vessels/{self.vessel.pk}/cabins",
+            data={"name": "极地套房", "category": "套房", "size_sqm": "28.0", "max_guests": 2, "is_visible": True},
+        )
+        self.assertEqual(cabin_response.status_code, 201)
+        cabin_id = cabin_response.json()["id"]
+        self.assertEqual(cabin_response.json()["name"], "极地套房")
+
+        updated = self.client.patch(
+            f"/api/admin/v1/vessels/{self.vessel.pk}/cabins/{cabin_id}",
+            data={"summary": "带私人阳台的宽敞套房。", "display_tags": ["阳台", "套房"]},
+            content_type="application/json",
+        )
+        self.assertEqual(updated.status_code, 200)
+        self.assertEqual(updated.json()["display_tags"], ["阳台", "套房"])
+
+        group_response = self.client.post(
+            f"/api/admin/v1/vessels/{self.vessel.pk}/cabin-groups",
+            data={"slug": "suite", "title_zh": "套房", "cabin_ids": [cabin_id]},
+            content_type="application/json",
+        )
+        self.assertEqual(group_response.status_code, 201)
+        self.assertEqual(list(CabinDisplayGroup.objects.get(pk=group_response.json()["id"]).cabins.values_list("id", flat=True)), [cabin_id])
+        self.assertEqual(self.client.delete(f"/api/admin/v1/vessels/{self.vessel.pk}/cabins/{cabin_id}").status_code, 204)
