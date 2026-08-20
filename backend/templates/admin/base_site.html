@@ -10,7 +10,7 @@
   {% if not is_popup %}
     <nav id="nav-sidebar" class="operations-sidebar" aria-label="运营导航" data-operations-nav="true">
       <div class="operations-sidebar__section">
-        <div class="operations-sidebar__label">内容管理</div>
+        <div class="operations-sidebar__label">内容配置</div>
         {% if perms.catalog.view_product %}
           <a href="{% url 'admin:catalog_product_changelist' %}" class="operations-sidebar__link{% if opts.app_label == 'catalog' and opts.model_name == 'product' %} is-active{% endif %}" data-operations-nav-item="product"{% if opts.app_label == 'catalog' and opts.model_name == 'product' %} data-active="true"{% endif %}>旅行产品</a>
         {% endif %}
@@ -23,8 +23,8 @@
       </div>
       {% if perms.catalog.view_sitesettings %}
         <div class="operations-sidebar__section">
-          <div class="operations-sidebar__label">系统</div>
-          <a href="{% url 'admin:catalog_sitesettings_changelist' %}" class="operations-sidebar__link{% if opts.app_label == 'catalog' and opts.model_name == 'sitesettings' %} is-active{% endif %}" data-operations-nav-item="site-settings"{% if opts.app_label == 'catalog' and opts.model_name == 'sitesettings' %} data-active="true"{% endif %}>站点设置</a>
+          <div class="operations-sidebar__label">站点设置</div>
+          <a href="{% url 'admin:catalog_sitesettings_changelist' %}" class="operations-sidebar__link{% if opts.app_label == 'catalog' and opts.model_name == 'sitesettings' %} is-active{% endif %}" data-operations-nav-item="site-settings"{% if opts.app_label == 'catalog' and opts.model_name == 'sitesettings' %} data-active="true"{% endif %}>基础设置</a>
         </div>
       {% endif %}
     </nav>

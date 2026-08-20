@@ -56,10 +56,13 @@ class CatalogAdminTests(TestCase):
         response = self.client.get(reverse("admin:catalog_vessel_changelist"))
 
         self.assertContains(response, 'data-operations-nav="true"')
+        self.assertContains(response, "内容配置")
         self.assertContains(response, "旅行产品")
         self.assertContains(response, "目的地")
         self.assertContains(response, "船只")
         self.assertContains(response, "站点设置")
+        self.assertNotContains(response, "内容管理")
+        self.assertNotContains(response, ">系统<")
         self.assertContains(response, 'data-operations-nav-item="vessel" data-active="true"')
         self.assertNotContains(response, 'data-operations-nav-item="用户"')
         self.assertNotContains(response, 'data-operations-nav-item="组"')
