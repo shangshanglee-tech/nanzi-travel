@@ -8,6 +8,9 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .models import Destination
+from .operations_serializers import OperationsDestinationSerializer
+
 
 class CsrfTokenView(APIView):
     authentication_classes = []
@@ -49,3 +52,46 @@ class CurrentUserView(APIView):
 
     def get(self, request):
         return Response({"username": request.user.get_username()})
+
+
+class OperationsAdminView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAdminUser]
+
+
+class DestinationListCreateView(OperationsAdminView):
+    def get(self, request):
+        destinations = Destination.objects.all()
+        return Response({"results": OperationsDestinationSerializer(destinations, many=True).data})
+
+    def post(self, request):
+        serializer = OperationsDestinationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        destination = serializer.save()
+        return Response(
+            OperationsDestinationSerializer(destination).data,
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class DestinationDetailView(OperationsAdminView):
+    def get_object(self, pk):
+        try:
+            return Destination.objects.get(pk=pk)
+        except Destination.DoesNotExist:
+            return None
+
+    def patch(self, request, pk):
+        destination = self.get_object(pk)
+        if destination is None:
+            return Response({"detail": "目的地不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsDestinationSerializer(destination, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsDestinationSerializer(serializer.save()).data)
+
+    def delete(self, request, pk):
+        destination = self.get_object(pk)
+        if destination is None:
+            return Response({"detail": "目的地不存在"}, status=status.HTTP_404_NOT_FOUND)
+        destination.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

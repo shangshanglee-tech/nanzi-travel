@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { operationsRequest } from "./api/client";
 import { LoginPage } from "./features/auth/LoginPage";
+import { DestinationListPage } from "./features/destinations/DestinationListPage";
 import { OperationsLayout } from "./layout/OperationsLayout";
 
 function PlaceholderPage({ title }: { title: string }) {
@@ -26,7 +27,7 @@ export default function App() {
     <Routes>
       <Route element={<OperationsLayout />}>
         <Route path="/products" element={<PlaceholderPage title="旅行产品" />} />
-        <Route path="/destinations" element={<PlaceholderPage title="目的地" />} />
+        <Route path="/destinations" element={<DestinationListPage />} />
         <Route path="/vessels" element={<PlaceholderPage title="船只" />} />
         <Route path="*" element={<Navigate to="/products" replace />} />
       </Route>
