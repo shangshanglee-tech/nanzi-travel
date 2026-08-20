@@ -65,6 +65,13 @@ class OperationsAuthenticationTests(TestCase):
         self.assertContains(response, 'name="csrf-token"')
         self.assertIn("csrftoken", response.cookies)
 
+    def test_console_content_routes_use_the_single_page_shell(self):
+        for route in ("/products", "/destinations", "/vessels"):
+            with self.subTest(route=route):
+                response = self.client.get(route)
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, 'id="operations-console"')
+
     def test_logout_clears_management_session(self):
         self.client.force_login(self.user)
 

@@ -50,6 +50,7 @@ next-env.d.ts
 /backend/db.sqlite3
 /backend/media/
 /backend/staticfiles/
+/backend/catalog/static/catalog/operations/
 **/__pycache__/
 *.py[cod]
 *.egg-info/

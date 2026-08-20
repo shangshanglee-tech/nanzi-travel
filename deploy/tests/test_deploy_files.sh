@@ -37,7 +37,14 @@ assert "alias /var/lib/nanzi-travel/static/;" in nginx
 assert "alias /var/lib/nanzi-travel/media/;" in nginx
 admin_server = nginx.split("server {", 3)[3]
 assert "server_name admin.nanzitravel.com;" in admin_server
-assert "location = / { return 302 /admin/; }" in admin_server
+assert "location /api/" in admin_server
+assert "location / {" in admin_server
+assert "location = / { return 302 /admin/; }" not in admin_server
+
+workflow = (root / ".github/workflows/release.yml").read_text()
+assert "operations-console" in workflow
+assert "npm run build" in workflow
+assert "operations" in workflow
 
 deploy_script = (root / "deploy/scripts/deploy.sh").read_text()
 assert "staticfiles/" in deploy_script
