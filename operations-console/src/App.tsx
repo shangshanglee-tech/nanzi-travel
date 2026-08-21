@@ -9,6 +9,8 @@ import { ProductEditorPage } from "./features/products/ProductEditorPage";
 import { ProductListPage } from "./features/products/ProductListPage";
 import { VesselEditorPage } from "./features/vessels/VesselEditorPage";
 import { VesselListPage } from "./features/vessels/VesselListPage";
+import { ActivityListPage } from "./features/activities/ActivityListPage";
+import { ActivityEditorPage } from "./features/activities/ActivityEditorPage";
 import { OperationsLayout } from "./layout/OperationsLayout";
 
 function PlaceholderPage({ title }: { title: string }) {
@@ -35,7 +37,8 @@ export default function App() {
         <Route path="/destinations" element={<DestinationListPage />} />
         <Route path="/vessels" element={<VesselListPage />} />
         <Route path="/vessels/:id" element={<VesselEditorPage />} />
-        <Route path="/activities" element={<PlaceholderPage title="活动" />} />
+        <Route path="/activities" element={<ActivityListPage />} />
+        <Route path="/activities/:id" element={<ActivityEditorPage />} />
         <Route path="*" element={<Navigate to="/products" replace />} />
       </Route>
     </Routes>

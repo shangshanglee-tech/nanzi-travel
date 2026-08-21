@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
+from .models import Activity, ActivityImage, CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
@@ -19,6 +19,8 @@ from .operations_serializers import (
     OperationsCabinDisplayGroupSerializer,
     OperationsCabinSerializer,
     OperationsVesselDeckPlanSerializer,
+    OperationsActivityImageSerializer,
+    OperationsActivitySerializer,
 )
 
 
@@ -454,6 +456,84 @@ class VesselDeckPlanDetailView(OperationsAdminView):
         except VesselDeckPlan.DoesNotExist:
             return Response({"detail": "甲板示意图不存在"}, status=status.HTTP_404_NOT_FOUND)
         deck_plan.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ActivityListCreateView(OperationsAdminView):
+    def get(self, request):
+        activities = Activity.objects.select_related("destination").prefetch_related("products", "images")
+        return Response({"results": OperationsActivitySerializer(activities, many=True, context={"request": request}).data})
+
+    def post(self, request):
+        serializer = OperationsActivitySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsActivitySerializer(serializer.save(), context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class ActivityDetailView(OperationsAdminView):
+    def get_object(self, pk):
+        try:
+            return Activity.objects.select_related("destination").prefetch_related("products", "images").get(pk=pk)
+        except Activity.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        item = self.get_object(pk)
+        if item is None:
+            return Response({"detail": "活动不存在"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(OperationsActivitySerializer(item, context={"request": request}).data)
+
+    def patch(self, request, pk):
+        item = self.get_object(pk)
+        if item is None:
+            return Response({"detail": "活动不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsActivitySerializer(item, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsActivitySerializer(serializer.save(), context={"request": request}).data)
+
+    def delete(self, request, pk):
+        item = self.get_object(pk)
+        if item is None:
+            return Response({"detail": "活动不存在"}, status=status.HTTP_404_NOT_FOUND)
+        item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ActivityHeroImageView(OperationsAdminView):
+    def post(self, request, pk):
+        try:
+            item = Activity.objects.get(pk=pk)
+        except Activity.DoesNotExist:
+            return Response({"detail": "活动不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择活动主图"}, status=status.HTTP_400_BAD_REQUEST)
+        item.hero_image = image
+        item.save(update_fields=["hero_image", "updated_at"])
+        return Response(OperationsActivitySerializer(item, context={"request": request}).data)
+
+
+class ActivityImageListCreateView(OperationsAdminView):
+    def post(self, request, pk):
+        try:
+            item = Activity.objects.get(pk=pk)
+        except Activity.DoesNotExist:
+            return Response({"detail": "活动不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择活动图片"}, status=status.HTTP_400_BAD_REQUEST)
+        last_image = item.images.order_by("-sort_order", "-id").first()
+        activity_image = ActivityImage.objects.create(activity=item, image=image, alt_text=request.data.get("alt_text", ""), sort_order=(last_image.sort_order + 1) if last_image else 0)
+        return Response(OperationsActivityImageSerializer(activity_image, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class ActivityImageDetailView(OperationsAdminView):
+    def delete(self, request, pk, image_id):
+        try:
+            image = ActivityImage.objects.get(pk=image_id, activity_id=pk)
+        except ActivityImage.DoesNotExist:
+            return Response({"detail": "活动图片不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

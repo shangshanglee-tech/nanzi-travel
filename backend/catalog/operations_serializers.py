@@ -13,6 +13,8 @@ from .models import (
     VesselContentStatus,
     CabinDisplayGroup,
     CabinType,
+    Activity,
+    ActivityImage,
     VesselPageBlock,
     VesselPageBlockImage,
     VesselPageBlockType,
@@ -241,4 +243,36 @@ class OperationsVesselDeckPlanSerializer(serializers.ModelSerializer):
     def get_image(self, deck_plan):
         request = self.context.get("request")
         url = deck_plan.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class OperationsActivityImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ActivityImage
+        fields = ("id", "image", "alt_text", "sort_order")
+
+    def get_image(self, item):
+        request = self.context.get("request")
+        url = item.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class OperationsActivitySerializer(serializers.ModelSerializer):
+    destination_id = serializers.PrimaryKeyRelatedField(queryset=Destination.objects.all(), source="destination")
+    product_ids = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=True, source="products", required=False)
+    hero_image = serializers.SerializerMethodField()
+    images = OperationsActivityImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Activity
+        fields = ("id", "title", "summary", "explanation", "destination_id", "product_ids", "hero_image", "images", "status", "sort_order")
+        read_only_fields = ("id", "hero_image", "images")
+
+    def get_hero_image(self, item):
+        if not item.hero_image:
+            return ""
+        request = self.context.get("request")
+        url = item.hero_image.url
         return request.build_absolute_uri(url) if request else url

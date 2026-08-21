@@ -484,6 +484,44 @@ class ProductImage(models.Model):
         return self.alt_text or f"{self.product} 图片"
 
 
+class ActivityStatus(models.TextChoices):
+    DRAFT = "draft", "草稿"
+    PUBLISHED = "published", "已发布"
+
+
+class Activity(models.Model):
+    destination = models.ForeignKey(Destination, related_name="activities", on_delete=models.PROTECT)
+    products = models.ManyToManyField(Product, related_name="activities", blank=True)
+    title = models.CharField("活动标题", max_length=160)
+    summary = models.TextField("活动简介", blank=True)
+    explanation = models.TextField("解说文字", blank=True)
+    hero_image = models.ImageField("活动主图", upload_to="activities/heroes/", storage=build_media_storage, blank=True)
+    status = models.CharField("发布状态", max_length=16, choices=ActivityStatus.choices, default=ActivityStatus.DRAFT)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+    created_at = models.DateTimeField("创建时间", auto_now_add=True)
+    updated_at = models.DateTimeField("更新时间", auto_now=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "活动"
+        verbose_name_plural = "活动"
+
+    def __str__(self):
+        return self.title
+
+
+class ActivityImage(models.Model):
+    activity = models.ForeignKey(Activity, related_name="images", on_delete=models.CASCADE)
+    image = models.ImageField("活动图片", upload_to="activities/gallery/", storage=build_media_storage)
+    alt_text = models.CharField("图片说明", max_length=180, blank=True)
+    sort_order = models.PositiveIntegerField("排序", default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "活动图片"
+        verbose_name_plural = "活动图片"
+
+
 class EditorialCollection(models.Model):
     title = models.CharField("专题名称", max_length=120)
     slug = models.SlugField("英文标识", max_length=120, unique=True)
