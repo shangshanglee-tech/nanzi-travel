@@ -35,6 +35,7 @@ export default function App() {
         <Route path="/destinations" element={<DestinationListPage />} />
         <Route path="/vessels" element={<VesselListPage />} />
         <Route path="/vessels/:id" element={<VesselEditorPage />} />
+        <Route path="/activities" element={<PlaceholderPage title="活动" />} />
         <Route path="*" element={<Navigate to="/products" replace />} />
       </Route>
     </Routes>
