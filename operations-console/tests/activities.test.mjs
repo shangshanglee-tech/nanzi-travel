@@ -6,7 +6,9 @@ test("activity editor keeps information and images on one page", async () => {
   const source = await readFile("src/features/activities/ActivityEditorPage.tsx", "utf8");
   const editor = await readFile("src/components/RichTextEditor.tsx", "utf8");
   for (const label of ["目的地", "活动图片", "活动介绍"]) assert.match(source, new RegExp(label));
-  for (const label of ["小标题", "项目符号", "编号列表"]) assert.match(editor, new RegExp(label));
+  for (const label of ["加粗", "项目符号", "编号列表"]) assert.match(editor, new RegExp(label));
+  assert.doesNotMatch(editor, /小标题/);
+  assert.match(editor, /onPaste/);
   assert.doesNotMatch(source, /关联旅行产品/);
   assert.match(source, />取消</);
   assert.doesNotMatch(source, />返回列表</);
