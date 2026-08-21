@@ -200,6 +200,14 @@ class VesselListView(OperationsAdminView):
         vessels = Vessel.objects.all()
         return Response({"results": OperationsVesselSerializer(vessels, many=True, context={"request": request}).data})
 
+    def post(self, request):
+        serializer = OperationsVesselSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(
+            OperationsVesselSerializer(serializer.save(), context={"request": request}).data,
+            status=status.HTTP_201_CREATED,
+        )
+
 
 class VesselDetailView(OperationsAdminView):
     def get_object(self, pk):

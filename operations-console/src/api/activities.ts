@@ -1,7 +1,7 @@
 import { operationsRequest } from "./client";
 
 export interface ActivityImage { id: number; image: string; alt_text: string; sort_order: number; }
-export interface ActivityInput { title: string; summary?: string; explanation?: string; destination_id: number; product_ids?: number[]; status: "draft" | "published"; sort_order?: number; }
+export interface ActivityInput { title: string; content?: string; destination_id: number; status: "draft" | "published"; sort_order?: number; }
 export interface Activity extends ActivityInput { id: number; hero_image?: string; images?: ActivityImage[]; }
 export const listActivities = () => operationsRequest<{ results: Activity[] }>("activities");
 export const getActivity = (id: string) => operationsRequest<Activity>(`activities/${id}`);

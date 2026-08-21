@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Modal, Switch } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useEffect } from "react";
 
 import type { Destination, DestinationInput } from "../../api/destinations";
@@ -15,7 +15,7 @@ export function DestinationFormModal({ destination, open, saving, onCancel, onSa
   const [form] = Form.useForm<DestinationInput>();
 
   useEffect(() => {
-    form.setFieldsValue(destination ?? { name: "", slug: "", is_active: true, sort_order: 0 });
+    form.setFieldsValue(destination ?? { name: "", slug: "" });
   }, [destination, form, open]);
 
   return (
@@ -35,12 +35,6 @@ export function DestinationFormModal({ destination, open, saving, onCancel, onSa
         </Form.Item>
         <Form.Item label="英文标识" name="slug" rules={[{ required: true, message: "请输入英文标识" }]}>
           <Input maxLength={80} />
-        </Form.Item>
-        <Form.Item label="排序" name="sort_order">
-          <InputNumber min={0} precision={0} style={{ width: "100%" }} />
-        </Form.Item>
-        <Form.Item label="启用" name="is_active" valuePropName="checked">
-          <Switch checkedChildren="启用" unCheckedChildren="停用" />
         </Form.Item>
       </Form>
     </Modal>

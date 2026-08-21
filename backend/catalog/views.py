@@ -110,10 +110,7 @@ class HomeView(APIView):
         products = Product.objects.public().select_related("destination")[:8]
         vessels = Vessel.objects.public().prefetch_related("products")[:3]
         public_destination_ids = products.values_list("destination_id", flat=True)
-        destinations = Destination.objects.filter(
-            is_active=True,
-            id__in=public_destination_ids,
-        )
+        destinations = Destination.objects.filter(id__in=public_destination_ids)
         response = Response(
             {
                 "featured_products": ProductCardSerializer(

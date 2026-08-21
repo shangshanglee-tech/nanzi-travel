@@ -17,6 +17,7 @@ export interface CabinGroup { id: number; slug: string; title_zh: string; title_
 export interface DeckPlan { id: number; title: string; image: string; sort_order: number; }
 
 export const listVessels = () => operationsRequest<{ results: Vessel[] }>("vessels");
+export const createVessel = (data: Partial<VesselInput>) => operationsRequest<Vessel>("vessels", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
 export const getVessel = (id: string) => operationsRequest<Vessel>(`vessels/${id}`);
 export const updateVessel = (id: number, data: Partial<VesselInput>) => operationsRequest<Vessel>(`vessels/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
 export const uploadVesselCardImage = (id: number, image: File) => {

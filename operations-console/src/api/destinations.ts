@@ -4,8 +4,6 @@ export interface Destination {
   id: number;
   name: string;
   slug: string;
-  is_active: boolean;
-  sort_order: number;
 }
 
 export type DestinationInput = Omit<Destination, "id">;

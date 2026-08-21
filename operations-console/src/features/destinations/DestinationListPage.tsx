@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Card, message, Popconfirm, Space, Switch, Table, Tag, Typography } from "antd";
+import { Button, Card, message, Popconfirm, Space, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useCallback, useEffect, useState } from "react";
 
@@ -55,15 +55,6 @@ export function DestinationListPage() {
     }
   }
 
-  async function changeActive(destination: Destination, isActive: boolean) {
-    try {
-      await updateDestination(destination.id, { is_active: isActive });
-      await load();
-    } catch (error) {
-      messageApi.error(errorText(error));
-    }
-  }
-
   async function remove(destination: Destination) {
     try {
       await deleteDestination(destination.id);
@@ -77,15 +68,6 @@ export function DestinationListPage() {
   const columns: ColumnsType<Destination> = [
     { title: "目的地", dataIndex: "name" },
     { title: "英文标识", dataIndex: "slug", render: (slug) => <Typography.Text type="secondary">{slug}</Typography.Text> },
-    { title: "排序", dataIndex: "sort_order", width: 100 },
-    {
-      title: "状态",
-      dataIndex: "is_active",
-      width: 130,
-      render: (isActive: boolean, destination) => (
-        <Space size="small"><Switch checked={isActive} onChange={(value) => void changeActive(destination, value)} /><Tag color={isActive ? "green" : "default"}>{isActive ? "启用" : "停用"}</Tag></Space>
-      )
-    },
     {
       title: "操作",
       width: 160,

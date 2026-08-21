@@ -42,7 +42,7 @@ class Destination(models.Model):
     sort_order = models.PositiveIntegerField("排序", default=0)
 
     class Meta:
-        ordering = ["sort_order", "id"]
+        ordering = ["id"]
         verbose_name = "目的地"
         verbose_name_plural = "目的地"
 
@@ -490,11 +490,10 @@ class ActivityStatus(models.TextChoices):
 
 
 class Activity(models.Model):
-    destination = models.ForeignKey(Destination, related_name="activities", on_delete=models.PROTECT)
+    destination = models.ForeignKey(Destination, related_name="activities", on_delete=models.PROTECT, null=True, blank=True)
     products = models.ManyToManyField(Product, related_name="activities", blank=True)
     title = models.CharField("活动标题", max_length=160)
-    summary = models.TextField("活动简介", blank=True)
-    explanation = models.TextField("解说文字", blank=True)
+    content = models.TextField("活动介绍", blank=True)
     hero_image = models.ImageField("活动主图", upload_to="activities/heroes/", storage=build_media_storage, blank=True)
     status = models.CharField("发布状态", max_length=16, choices=ActivityStatus.choices, default=ActivityStatus.DRAFT)
     sort_order = models.PositiveIntegerField("排序", default=0)

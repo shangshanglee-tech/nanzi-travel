@@ -25,7 +25,7 @@ from .models import (
 class OperationsDestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
-        fields = ("id", "name", "slug", "is_active", "sort_order")
+        fields = ("id", "name", "slug")
 
 
 class OperationsDepartureSerializer(serializers.ModelSerializer):
@@ -62,6 +62,7 @@ class OperationsProductImageSerializer(serializers.ModelSerializer):
 class OperationsProductSerializer(serializers.ModelSerializer):
     destination_id = serializers.PrimaryKeyRelatedField(queryset=Destination.objects.all(), source="destination")
     vessel_ids = serializers.PrimaryKeyRelatedField(queryset=Vessel.objects.all(), many=True, source="vessels", required=False)
+    activity_ids = serializers.PrimaryKeyRelatedField(queryset=Activity.objects.all(), many=True, source="activities", required=False)
     departures = OperationsDepartureSerializer(many=True, required=False)
     itinerary_days = OperationsItineraryDaySerializer(many=True, required=False)
     hero_image = serializers.SerializerMethodField()
@@ -72,7 +73,7 @@ class OperationsProductSerializer(serializers.ModelSerializer):
         fields = (
             "id", "title", "slug", "subtitle", "summary", "season", "duration_days", "vessel",
             "departure_city", "tags", "highlights", "included", "excluded", "suitable_for", "notices",
-            "status", "sort_order", "published_at", "destination_id", "vessel_ids", "departures", "itinerary_days",
+            "status", "sort_order", "published_at", "destination_id", "vessel_ids", "activity_ids", "departures", "itinerary_days",
             "hero_image", "images",
         )
         read_only_fields = ("id", "published_at")
@@ -91,9 +92,11 @@ class OperationsProductSerializer(serializers.ModelSerializer):
         elif status != ProductStatus.PUBLISHED:
             values["published_at"] = None
 
-    def _save_nested(self, product, vessels, departures, itinerary_days):
+    def _save_nested(self, product, vessels, activities, departures, itinerary_days):
         if vessels is not None:
             product.vessels.set(vessels)
+        if activities is not None:
+            product.activities.set(activities)
         if departures is not None:
             product.departures.all().delete()
             Departure.objects.bulk_create(
@@ -108,23 +111,25 @@ class OperationsProductSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def create(self, validated_data):
         vessels = validated_data.pop("vessels", None)
+        activities = validated_data.pop("activities", None)
         departures = validated_data.pop("departures", None)
         itinerary_days = validated_data.pop("itinerary_days", None)
         self._normalize_publication(validated_data)
         product = Product.objects.create(**validated_data)
-        self._save_nested(product, vessels, departures, itinerary_days)
+        self._save_nested(product, vessels, activities, departures, itinerary_days)
         return product
 
     @transaction.atomic
     def update(self, instance, validated_data):
         vessels = validated_data.pop("vessels", None)
+        activities = validated_data.pop("activities", None)
         departures = validated_data.pop("departures", None)
         itinerary_days = validated_data.pop("itinerary_days", None)
         self._normalize_publication(validated_data, instance)
         for field, value in validated_data.items():
             setattr(instance, field, value)
         instance.save()
-        self._save_nested(instance, vessels, departures, itinerary_days)
+        self._save_nested(instance, vessels, activities, departures, itinerary_days)
         return instance
 
 
@@ -260,14 +265,15 @@ class OperationsActivityImageSerializer(serializers.ModelSerializer):
 
 
 class OperationsActivitySerializer(serializers.ModelSerializer):
-    destination_id = serializers.PrimaryKeyRelatedField(queryset=Destination.objects.all(), source="destination")
-    product_ids = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=True, source="products", required=False)
+    destination_id = serializers.PrimaryKeyRelatedField(
+        queryset=Destination.objects.all(), source="destination", allow_null=True, required=False
+    )
     hero_image = serializers.SerializerMethodField()
     images = OperationsActivityImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Activity
-        fields = ("id", "title", "summary", "explanation", "destination_id", "product_ids", "hero_image", "images", "status", "sort_order")
+        fields = ("id", "title", "content", "destination_id", "hero_image", "images", "status", "sort_order")
         read_only_fields = ("id", "hero_image", "images")
 
     def get_hero_image(self, item):

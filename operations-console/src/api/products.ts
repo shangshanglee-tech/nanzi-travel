@@ -7,6 +7,7 @@ export interface ProductInput {
   title: string; slug: string; subtitle?: string; summary?: string; season?: string; duration_days?: number | null;
   vessel?: string; departure_city?: string; tags?: string[]; highlights?: string[]; included?: string[]; excluded?: string[];
   suitable_for?: string[]; notices?: string[]; status: string; sort_order?: number; destination_id: number; vessel_ids?: number[];
+  activity_ids?: number[];
   departures?: ProductDeparture[]; itinerary_days?: ItineraryDay[];
 }
 export interface Product extends ProductInput { id: number; published_at?: string | null; hero_image?: string; images?: ProductImage[]; }

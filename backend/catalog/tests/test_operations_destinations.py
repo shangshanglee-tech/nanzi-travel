@@ -17,31 +17,24 @@ class OperationsDestinationApiTests(TestCase):
     def test_admin_can_create_destination(self):
         response = self.client.post(
             "/api/admin/v1/destinations",
-            data=json.dumps(
-                {"name": "北极", "slug": "arctic", "is_active": True, "sort_order": 10}
-            ),
+            data=json.dumps({"name": "北极", "slug": "arctic"}),
             content_type="application/json",
         )
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["name"], "北极")
+        self.assertNotIn("is_active", response.json())
+        self.assertNotIn("sort_order", response.json())
         self.assertTrue(Destination.objects.filter(slug="arctic").exists())
 
     def test_admin_can_list_update_and_delete_destinations(self):
-        destination = Destination.objects.create(name="南极", slug="antarctica", sort_order=20)
+        destination = Destination.objects.create(name="南极", slug="antarctica", is_active=False, sort_order=20)
 
         list_response = self.client.get("/api/admin/v1/destinations")
         self.assertEqual(list_response.status_code, 200)
         self.assertEqual(list_response.json()["results"][0]["slug"], "antarctica")
-
-        update_response = self.client.patch(
-            f"/api/admin/v1/destinations/{destination.pk}",
-            data=json.dumps({"is_active": False, "sort_order": 5}),
-            content_type="application/json",
-        )
-        self.assertEqual(update_response.status_code, 200)
-        self.assertFalse(update_response.json()["is_active"])
-        self.assertEqual(update_response.json()["sort_order"], 5)
+        self.assertNotIn("is_active", list_response.json()["results"][0])
+        self.assertNotIn("sort_order", list_response.json()["results"][0])
 
         delete_response = self.client.delete(f"/api/admin/v1/destinations/{destination.pk}")
         self.assertEqual(delete_response.status_code, 204)

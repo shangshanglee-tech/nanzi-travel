@@ -37,6 +37,16 @@ class OperationsVesselApiTests(TestCase):
         self.assertTrue(response.json()["has_science_center"])
         self.assertIsNotNone(response.json()["published_at"])
 
+    def test_admin_can_create_vessel(self):
+        response = self.client.post(
+            "/api/admin/v1/vessels",
+            data={"name": "前进号", "official_name": "MS Fridtjof Nansen", "slug": "fridtjof-nansen"},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["name"], "前进号")
+        self.assertTrue(Vessel.objects.filter(slug="fridtjof-nansen").exists())
+
     def test_admin_can_upload_vessel_card_image(self):
         response = self.client.post(
             f"/api/admin/v1/vessels/{self.vessel.pk}/card-image",
