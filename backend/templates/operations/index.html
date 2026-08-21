@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token_value }}">
     <title>小楠子爱旅行 · 运营后台</title>
-    <link rel="stylesheet" href="/static/catalog/operations/operations.css">
+    <link rel="stylesheet" href="/static/catalog/operations/operations.css?v={{ operations_bundle_version }}">
   </head>
   <body>
     <div id="operations-console"></div>
-    <script type="module" src="/static/catalog/operations/operations.js"></script>
+    <script type="module" src="/static/catalog/operations/operations.js?v={{ operations_bundle_version }}"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import render
@@ -55,10 +56,12 @@ def healthz(request):
 
 
 def operations_console(request):
+    bundle_path = Path(settings.BASE_DIR) / "catalog/static/catalog/operations/operations.js"
+    bundle_version = str(bundle_path.stat().st_mtime_ns) if bundle_path.exists() else "0"
     return render(
         request,
         "operations/index.html",
-        {"csrf_token_value": get_token(request)},
+        {"csrf_token_value": get_token(request), "operations_bundle_version": bundle_version},
     )
 
 
