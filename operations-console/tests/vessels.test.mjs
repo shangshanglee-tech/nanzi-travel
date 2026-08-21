@@ -9,6 +9,12 @@ test("vessel editor exposes core facts and card image management", async () => {
   assert.match(source, /card_tone/);
 });
 
+test("vessel list does not render card images", async () => {
+  const source = await readFile("src/features/vessels/VesselListPage.tsx", "utf8");
+  assert.doesNotMatch(source, /卡片图/);
+  assert.doesNotMatch(source, /<Image/);
+});
+
 test("vessel editor includes a page block composer with ordered content cards", async () => {
   const source = await readFile("src/features/vessels/VesselEditorPage.tsx", "utf8");
   assert.match(source, /PageBlockEditor/);
