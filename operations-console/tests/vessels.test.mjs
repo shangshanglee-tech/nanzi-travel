@@ -28,7 +28,7 @@ test("vessel editor includes cabins and cabin display groups", async () => {
   assert.match(source, /CabinEditor/);
   const editor = await readFile("src/features/vessels/CabinEditor.tsx", "utf8");
   assert.match(editor, /舱位展示分组/);
-  assert.match(editor, /舱型图片/);
+  assert.match(editor, /MediaAssetPicker/);
 });
 
 test("vessel editor includes deck plan upload and deletion", async () => {
