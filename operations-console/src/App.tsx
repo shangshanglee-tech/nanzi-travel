@@ -11,6 +11,7 @@ import { VesselEditorPage } from "./features/vessels/VesselEditorPage";
 import { VesselListPage } from "./features/vessels/VesselListPage";
 import { ActivityListPage } from "./features/activities/ActivityListPage";
 import { ActivityEditorPage } from "./features/activities/ActivityEditorPage";
+import { MediaAssetListPage } from "./features/media-assets/MediaAssetListPage";
 import { OperationsLayout } from "./layout/OperationsLayout";
 
 function PlaceholderPage({ title }: { title: string }) {
@@ -32,6 +33,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<OperationsLayout />}>
+        <Route path="/media-assets" element={<MediaAssetListPage />} />
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/products/:id" element={<ProductEditorPage />} />
         <Route path="/destinations" element={<DestinationListPage />} />

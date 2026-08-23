@@ -32,10 +32,14 @@ from .operations_views import (
     ActivityHeroImageView,
     ActivityImageDetailView,
     ActivityImageListCreateView,
+    MediaAssetListCreateView,
+    MediaAssetDetailView,
 )
 
 
 urlpatterns = [
+    path("media-assets", MediaAssetListCreateView.as_view(), name="operations-media-assets"),
+    path("media-assets/<int:pk>", MediaAssetDetailView.as_view(), name="operations-media-asset-detail"),
     path("auth/csrf", CsrfTokenView.as_view(), name="operations-csrf"),
     path("auth/login", LoginView.as_view(), name="operations-login"),
     path("auth/logout", LogoutView.as_view(), name="operations-logout"),

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
@@ -8,7 +10,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Activity, ActivityImage, CabinDisplayGroup, CabinType, Destination, Product, ProductImage, Vessel, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
+from .models import Activity, ActivityImage, CabinDisplayGroup, CabinType, Destination, MediaAsset, Product, ProductImage, Vessel, VesselDeckPlan, VesselPageBlock, VesselPageBlockImage, VesselPageBlockType
 from .operations_serializers import (
     OperationsDestinationSerializer,
     OperationsProductImageSerializer,
@@ -21,6 +23,7 @@ from .operations_serializers import (
     OperationsVesselDeckPlanSerializer,
     OperationsActivityImageSerializer,
     OperationsActivitySerializer,
+    OperationsMediaAssetSerializer,
 )
 
 
@@ -69,6 +72,45 @@ class CurrentUserView(APIView):
 class OperationsAdminView(APIView):
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAdminUser]
+
+
+def media_asset_from_request(request):
+    asset_id = request.data.get("asset_id")
+    if not asset_id:
+        return None
+    try:
+        return MediaAsset.objects.get(pk=asset_id)
+    except MediaAsset.DoesNotExist:
+        return None
+
+
+class MediaAssetListCreateView(OperationsAdminView):
+    def get(self, request):
+        query = request.query_params.get("q", "").strip()
+        assets = MediaAsset.objects.all()
+        if query:
+            assets = assets.filter(title__icontains=query)
+        return Response({"results": OperationsMediaAssetSerializer(assets, many=True, context={"request": request}).data})
+
+    def post(self, request):
+        image = request.FILES.get("image")
+        if image is None:
+            return Response({"detail": "请选择素材图片"}, status=status.HTTP_400_BAD_REQUEST)
+        tags = [tag.strip() for tag in request.data.get("tags", "").split(",") if tag.strip()]
+        title = request.data.get("title", "").strip() or Path(image.name).stem
+        asset = MediaAsset.objects.create(image=image, title=title, tags=tags)
+        return Response(OperationsMediaAssetSerializer(asset, context={"request": request}).data, status=status.HTTP_201_CREATED)
+
+
+class MediaAssetDetailView(OperationsAdminView):
+    def patch(self, request, pk):
+        try:
+            asset = MediaAsset.objects.get(pk=pk)
+        except MediaAsset.DoesNotExist:
+            return Response({"detail": "素材不存在"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OperationsMediaAssetSerializer(asset, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(OperationsMediaAssetSerializer(serializer.save(), context={"request": request}).data)
 
 
 class DestinationListCreateView(OperationsAdminView):
@@ -237,7 +279,10 @@ class VesselCardImageView(OperationsAdminView):
             vessel = Vessel.objects.get(pk=pk)
         except Vessel.DoesNotExist:
             return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
-        image = request.FILES.get("image")
+        asset = media_asset_from_request(request)
+        if request.data.get("asset_id") and asset is None:
+            return Response({"detail": "素材不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = asset.image.name if asset else request.FILES.get("image")
         if image is None:
             return Response({"detail": "请选择卡片图"}, status=status.HTTP_400_BAD_REQUEST)
         vessel.card_image = image
@@ -263,14 +308,17 @@ class VesselPageBlockListCreateView(OperationsAdminView):
         vessel = self.get_vessel(pk)
         if vessel is None:
             return Response({"detail": "船只不存在"}, status=status.HTTP_404_NOT_FOUND)
+        asset = media_asset_from_request(request)
+        if request.data.get("asset_id") and asset is None:
+            return Response({"detail": "素材不存在"}, status=status.HTTP_404_NOT_FOUND)
         serializer = OperationsVesselPageBlockSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        if serializer.validated_data["block_type"] == VesselPageBlockType.CARD and request.FILES.get("image") is None:
+        if serializer.validated_data["block_type"] == VesselPageBlockType.CARD and request.FILES.get("image") is None and asset is None:
             return Response({"detail": "内容卡片必须上传图片"}, status=status.HTTP_400_BAD_REQUEST)
         last_block = vessel.page_blocks.order_by("-sort_order", "-id").first()
         block = serializer.save(
             vessel=vessel,
-            image=request.FILES.get("image"),
+            image=asset.image.name if asset else request.FILES.get("image"),
             sort_order=(last_block.sort_order + 1) if last_block else 0,
         )
         return Response(OperationsVesselPageBlockSerializer(block, context={"request": request}).data, status=status.HTTP_201_CREATED)
@@ -321,7 +369,10 @@ class VesselPageBlockImageListCreateView(OperationsAdminView):
             return Response({"detail": "页面内容不存在"}, status=status.HTTP_404_NOT_FOUND)
         if block.block_type != VesselPageBlockType.CARD:
             return Response({"detail": "只有内容卡片可以添加额外图片"}, status=status.HTTP_400_BAD_REQUEST)
-        image = request.FILES.get("image")
+        asset = media_asset_from_request(request)
+        if request.data.get("asset_id") and asset is None:
+            return Response({"detail": "素材不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = asset.image.name if asset else request.FILES.get("image")
         if image is None:
             return Response({"detail": "请选择图片"}, status=status.HTTP_400_BAD_REQUEST)
         last_image = block.additional_images.order_by("-sort_order", "-id").first()
@@ -397,7 +448,10 @@ class VesselCabinImageView(OperationsAdminView):
             cabin = CabinType.objects.get(pk=cabin_id, vessel_id=pk)
         except CabinType.DoesNotExist:
             return Response({"detail": "舱位不存在"}, status=status.HTTP_404_NOT_FOUND)
-        image = request.FILES.get("image")
+        asset = media_asset_from_request(request)
+        if request.data.get("asset_id") and asset is None:
+            return Response({"detail": "素材不存在"}, status=status.HTTP_404_NOT_FOUND)
+        image = asset.image.name if asset else request.FILES.get("image")
         if image is None:
             return Response({"detail": "请选择舱型图片"}, status=status.HTTP_400_BAD_REQUEST)
         cabin.image = image

@@ -521,6 +521,21 @@ class ActivityImage(models.Model):
         verbose_name_plural = "活动图片"
 
 
+class MediaAsset(models.Model):
+    image = models.ImageField("素材图片", upload_to="assets/images/", storage=build_media_storage, unique=True)
+    title = models.CharField("素材名称", max_length=160, blank=True)
+    tags = models.JSONField("标签", default=list, blank=True)
+    created_at = models.DateTimeField("创建时间", auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at", "-id"]
+        verbose_name = "素材"
+        verbose_name_plural = "素材库"
+
+    def __str__(self):
+        return self.title or self.image.name
+
+
 class EditorialCollection(models.Model):
     title = models.CharField("专题名称", max_length=120)
     slug = models.SlugField("英文标识", max_length=120, unique=True)

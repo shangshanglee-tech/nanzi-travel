@@ -27,3 +27,17 @@ test("vessel list offers a new vessel action", async () => {
   assert.match(source, /新建船只/);
   assert.match(source, /\/vessels\/new/);
 });
+
+test("operations console provides a reusable media library", async () => {
+  const app = await readFile("src/App.tsx", "utf8");
+  const picker = await readFile("src/components/MediaAssetPicker.tsx", "utf8");
+  assert.match(app, /media-assets/);
+  assert.match(picker, /从素材库选择/);
+  assert.match(picker, /上传新素材/);
+  assert.match(picker, /setFile\(selected\)/);
+  const library = await readFile("src/features/media-assets/MediaAssetListPage.tsx", "utf8");
+  assert.match(library, /编辑/);
+  assert.match(library, /请先选择图片/);
+  assert.match(library, /上传失败/);
+  assert.match(library, /setFile\(selected\)/);
+});

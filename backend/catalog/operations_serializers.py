@@ -15,6 +15,7 @@ from .models import (
     CabinType,
     Activity,
     ActivityImage,
+    MediaAsset,
     VesselPageBlock,
     VesselPageBlockImage,
     VesselPageBlockType,
@@ -257,6 +258,20 @@ class OperationsActivityImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ActivityImage
         fields = ("id", "image", "alt_text", "sort_order")
+
+    def get_image(self, item):
+        request = self.context.get("request")
+        url = item.image.url
+        return request.build_absolute_uri(url) if request else url
+
+
+class OperationsMediaAssetSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MediaAsset
+        fields = ("id", "image", "title", "tags", "created_at")
+        read_only_fields = ("id", "image", "created_at")
 
     def get_image(self, item):
         request = self.context.get("request")
